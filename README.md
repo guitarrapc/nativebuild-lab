@@ -70,4 +70,22 @@ make lib
 
 ## iOS
 
+```bash
+brew tap leleliu008/fpliu
+brew install xcpkg
+```
+
+```bash
+xcpkg update
+sed -s "s|https://zlib.net/zlib-1.2.11.tar.gz|https://zlib.net/fossils/zlib-1.2.11.tar.gz|" "$HOME/.xcpkg/repos.d/official/formula/zlib.sh"
+xcpkg install zstd
+```
+
 ## Android
+
+
+## REF
+
+http://blog.fpliu.com/it/software/zstd/build-for-current-host
+http://blog.fpliu.com/project/ndk-pkg/package?name=zstd
+http://blog.fpliu.com/project/xcpkg/package?name=zstd
