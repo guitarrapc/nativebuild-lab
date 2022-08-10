@@ -93,6 +93,19 @@ make
 
 ## macOS
 
+Use make to build libzstd.a
+
+```bash
+cd zstd
+make lib
+```
+
+```bash
+% ls -l lib/libzstd.a
+-rw-r--r--  1 guitarrapc  staff  931088 Aug 10 19:10 lib/libzstd.a
+```
+
+
 ## iOS
 
 ## Android
