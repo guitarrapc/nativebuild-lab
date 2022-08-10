@@ -77,7 +77,7 @@ brew install xcpkg
 
 ```bash
 xcpkg update
-sed -s "s|https://zlib.net/zlib-1.2.11.tar.gz|https://zlib.net/fossils/zlib-1.2.11.tar.gz|" "$HOME/.xcpkg/repos.d/official/formula/zlib.sh"
+sed -s "s|https://zlib.net/zlib-1.2.11.tar.gz|https://zlib.net/fossils/zlib-1.2.11.tar.gz|" "$HOME/.xcpkg/repos.d/offical/formula/zlib.sh"
 xcpkg install zstd
 ```
 
