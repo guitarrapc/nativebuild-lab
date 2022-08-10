@@ -46,10 +46,10 @@ cmake --build ./build.d --config Release
 ```bash
 ls -l build.d/lib/Release
 total 2032
--rw-rw-r--    1 S07671   S07671      599552 Aug 10 18:19 zstd.dll
--rw-rw-r--    1 S07671   S07671       26362 Aug 10 18:19 zstd.exp
--rw-rw-r--    1 S07671   S07671       43314 Aug 10 18:19 zstd.lib
--rw-rw-r--    1 S07671   S07671     1404092 Aug 10 18:19 zstd_static.lib
+-rw-rw-r--    1 user   user      599552 Aug 10 18:19 zstd.dll
+-rw-rw-r--    1 user   user       26362 Aug 10 18:19 zstd.exp
+-rw-rw-r--    1 user   user       43314 Aug 10 18:19 zstd.lib
+-rw-rw-r--    1 user   user     1404092 Aug 10 18:19 zstd_static.lib
 ```
 
 
@@ -77,8 +77,20 @@ brew install xcpkg
 
 ```bash
 xcpkg update
-sed -e -i "s|https://zlib.net/zlib-1.2.11.tar.gz|https://zlib.net/fossils/zlib-1.2.11.tar.gz|" "$HOME/.xcpkg/repos.d/offical/formula/zlib.sh"
+sed -i '' -e "s|https://zlib.net/zlib-1.2.11.tar.gz|https://zlib.net/fossils/zlib-1.2.11.tar.gz|" "$HOME/.xcpkg/repos.d/offical/formula/zlib.sh"
 xcpkg install zstd
+```
+
+```bash
+% ls -l ~/.xcpkg/install.d/zstd/iPhoneOS/arm64/lib
+
+total 2968
+drwxr-xr-x  3 user  staff      96 Aug 10 19:46 cmake/
+-rwxr-xr-x  1 user  staff  728072 Aug 10 19:46 libzstd.1.5.2.dylib*
+lrwxr-xr-x  1 user  staff      19 Aug 10 19:46 libzstd.1.dylib@ -> libzstd.1.5.2.dylib
+-rw-r--r--  1 user  staff  789512 Aug 10 19:46 libzstd.a
+lrwxr-xr-x  1 user  staff      15 Aug 10 19:46 libzstd.dylib@ -> libzstd.1.dylib
+drwxr-xr-x  3 user  staff      96 Aug 10 19:46 pkgconfig/
 ```
 
 ## Android
