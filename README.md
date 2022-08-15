@@ -44,7 +44,7 @@ zstd-linux-aarch64.bat
 There are 2way to build.
 
 1. make
-2. cmake.
+2. cmake
 
 Primary target is make.
 
@@ -52,10 +52,10 @@ Primary target is make.
 
 ```bash
 # windows
-zstd-linux-windows.bat
+zstd-windows-x64.bat
 
 # linux
-. ./zstd-linux-windows.sh
+. ./zstd-windows-x64.sh
 ```
 
 **cmake**
