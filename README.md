@@ -8,11 +8,11 @@ git submodule update --init --recursive
 
 # zstd
 
-* Linux amd: zstd/lib (make in Docker)
-* Linux arm: [TBD]
+* Linux amd: zstd/lib (make)
+* Linux arm: zstd/lib (make aarch64build)
 * Windows: zstd/build.d/lib/Release (cmake)
-* macOS: [TBD]
-* iOS: [TBD]
+* macOS: zstd/lib (make)
+* iOS: ~/.xcpkg/install.d/zstd/iPhoneOS/arm64/lib
 * Android: [TBD]
 
 ## Linux amd
@@ -21,13 +21,23 @@ Use `make`.
 
 ```bash
 # windows
-zstd-linux.bat
+zstd-linux-amd64.bat
 
 # linux
-. ./zstd-linux.sh
+. ./zstd-linux-amd64.sh
 ```
 
 ## Linux arm
+
+Use `make`.
+
+```bash
+# windows
+zstd-linux-aarch64.bat
+
+# linux
+. ./zstd-linux-aarch64.sh
+```
 
 ## Windows
 
