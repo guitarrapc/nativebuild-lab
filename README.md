@@ -1,52 +1,37 @@
 nativebuild-lab
 
+```
+git clone https://github.com/guitarrapc/nativebuild-lab
+git submodule update --init --recursive
+```
+
+
 # zstd
 
-* Linux: /pkg/usr/local/lib (make in Docker)
+* Linux amd: zstd/lib (make in Docker)
+* Linux arm: [TBD]
 * Windows: zstd/build.d/lib/Release (cmake)
 * macOS: [TBD]
 * iOS: [TBD]
 * Android: [TBD]
 
-## Linux
+## Linux amd
 
 Use `make`.
 
 ```bash
 # windows
-docker run --rm -v "$($PWD.Path)/builder/zstd:/builder" -v "$($PWD.Path)/zstd:/src" --entrypoint /bin/sh alpine:latest "-c /builder/zstd-builder.sh"
+zstd-linux.bat
 
 # linux
-docker run -it --rm -v "$PWD/builder/zstd:/builder" -v "$PWD/zstd:/src" --entrypoint /bin/sh alpine:latest "-c /builder/zstd-builder.sh"
-
-ls zstd/lib/libzstd.a
-ls zstd/lib/libzstd.so*
+. ./zstd-linux.sh
 ```
 
-**Docker**
-
-```bash
-docker build -t zstd:latest -f builder/zstd-linux.dockerfile zstd
-docker run -i --rm --entrypoint /bin/sh zstd -c "ls -l /pkg/usr/local/lib"
-
--rw-r--r--    1 root     root       1195726 Aug 10 06:59 libzstd.a
-lrwxrwxrwx    1 root     root            16 Aug 10 06:59 libzstd.so -> libzstd.so.1.5.3
-lrwxrwxrwx    1 root     root            16 Aug 10 06:59 libzstd.so.1 -> libzstd.so.1.5.3
--rwxr-xr-x    1 root     root       1016320 Aug 10 06:59 libzstd.so.1.5.3
-drwxr-xr-x    2 root     root          4096 Aug 10 06:59 pkgconfig
-```
-
-Following will work.
-
-```bash
-cd zstd
-docker build -t zstd:latest -f contrib/docker/Dockerfile .
-echo foo | docker run -i --rm zstd | docker run -i --rm zstd zstdcat
-```
+## Linux arm
 
 ## Windows
 
-Use `cmake` to build zstd.
+Use `cmake`.
 
 Install Visual Studio 2022 `C++ Desktop Experience` package for cmake.
 
@@ -68,11 +53,11 @@ total 2032
 
 ## macOS
 
-Use `make` to build for macOS.
+Use `make`.
 
 ```bash
 cd zstd
-make lib
+make
 ```
 
 ```bash
@@ -82,6 +67,8 @@ make lib
 
 
 ## iOS
+
+use `xcpkg`.
 
 ```bash
 brew tap leleliu008/fpliu
