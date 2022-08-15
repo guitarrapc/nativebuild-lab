@@ -1,7 +1,7 @@
 #!/bin/sh
-ZSTD_VERSION=$(cd zstd && "$(git tag --points-at HEAD | tr -d '[:space:]')" && cd ..)
+ZSTD_VERSION=$(cd zstd && echo "$(git tag --points-at HEAD | tr -d '[:space:]')" && cd ..)
 GIT_ZSTD_VERSION=${ZSTD_VERSION}
-FILE_ZSTD_VERSION=$(echo "${ZSTD_VERSION}" | cut -c 1)
+FILE_ZSTD_VERSION=$(echo "${ZSTD_VERSION}" | cut -c 2-)
 OS=linux
 PLATFORM=aarch64
 
