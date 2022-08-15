@@ -10,7 +10,20 @@ nativebuild-lab
 
 ## Linux
 
-Use `make` in Docker to build zstd.
+Use `make`.
+
+```bash
+# windows
+docker run --rm -v "$($PWD.Path)/builder/zstd:/builder" -v "$($PWD.Path)/zstd:/src" --entrypoint /bin/sh alpine:latest "-c /builder/zstd-builder.sh"
+
+# linux
+docker run -it --rm -v "$PWD/builder/zstd:/builder" -v "$PWD/zstd:/src" --entrypoint /bin/sh alpine:latest "-c /builder/zstd-builder.sh"
+
+ls zstd/lib/libzstd.a
+ls zstd/lib/libzstd.so*
+```
+
+**Docker**
 
 ```bash
 docker build -t zstd:latest -f builder/zstd-linux.dockerfile zstd
