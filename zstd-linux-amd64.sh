@@ -5,10 +5,14 @@ FILE_ZSTD_VERSION=$(echo "${ZSTD_VERSION}" | cut -c 2-)
 OS=linux
 PLATFORM=amd64
 
+# build
 docker run --rm -v "$PWD/builder/zstd:/builder" -v "$PWD/zstd:/src" alpine:latest /bin/sh /builder/zstd-builder-amd64.sh
+
+# confirm
 ls zstd/lib/libzstd.a
 ls zstd/lib/libzstd.so*
 
+# copy
 mkdir -p "./pkg/zstd/${GIT_ZSTD_VERSION}/${OS}/${PLATFORM}/"
 cp ./zstd/lib/libzstd.a "./pkg/zstd/${GIT_ZSTD_VERSION}/${OS}/${PLATFORM}/."
 cp "./zstd/lib/libzstd.so.${FILE_ZSTD_VERSION}" "./pkg/zstd/${GIT_ZSTD_VERSION}/${OS}/${PLATFORM}/libzstd.so"

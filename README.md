@@ -41,7 +41,24 @@ zstd-linux-aarch64.bat
 
 ## Windows
 
-Use `cmake`.
+There are 2way to build.
+
+1. make
+2. cmake.
+
+Primary target is make.
+
+**make**
+
+```bash
+# windows
+zstd-linux-windows.bat
+
+# linux
+. ./zstd-linux-windows.sh
+```
+
+**cmake**
 
 Install Visual Studio 2022 `C++ Desktop Experience` package for cmake.
 

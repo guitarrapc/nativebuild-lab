@@ -12,6 +12,8 @@ set PLATFORM=amd64
 
 :: build
 docker run --rm -v "%cd%/builder/zstd:/builder" -v "%cd%/zstd:/src" alpine:latest /bin/bash /builder/zstd-builder-amd64.sh
+
+:: confirm
 dir zstd\lib\libzstd.a
 dir zstd\lib\libzstd.so*
 
