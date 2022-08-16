@@ -86,8 +86,8 @@ Use `make`.
 . ./zstd-darwin.sh
 ```
 
-If running mac is M1/M2, output binary will be arm64.
-If running mac is Intel or Rosetta , output binary will be amd64.
+If running mac is M1/M2, output binary will be `arm64`.
+If running mac is Intel or Rosetta , output binary will be `x86_64` (=amd64).
 
 ## iOS
 
