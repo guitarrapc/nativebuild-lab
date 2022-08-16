@@ -149,8 +149,6 @@ EOF
 }
 
 __clean
-__prepare_dependencies
-
 __find_build_toolchains "${PACKAGE_NAME}" "${TARGET}"
 __config_cmake_variables
 __create_cmake_toolchain_file | tee "${TOOLCHAIN_FILE}"
