@@ -91,7 +91,16 @@ If running mac is Intel or Rosetta , output binary will be `x86_64` (=amd64).
 
 ## iOS
 
-use `xcpkg`.
+use `cmake` or `xcpkg`.
+
+**cmake**
+
+```
+cmake zstd/build/cmake -GXcode -DCMAKE_SYSTEM_NAME=iOS
+cmake -S zstd/build/cmake -B_builds -GXcode -DCMAKE_SYSTEM_NAME=iOS "-DCMAKE_OSX_ARCHITECTURES=armv7;armv7s;arm64;i386;x86_64" -DCMAKE_OSX_DEPLOYMENT_TARGET=9.3 -DCMAKE_INSTALL_PREFIX=`pwd`/_install -DCMAKE_XCODE_ATTRIBUTE_ONLY_ACTIVE_ARCH=NO -DCMAKE_IOS_INSTALL_COMBINED=YES
+```
+
+**xcpkg**
 
 ```bash
 brew tap leleliu008/fpliu
