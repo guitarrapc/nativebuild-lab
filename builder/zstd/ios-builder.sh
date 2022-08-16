@@ -7,7 +7,12 @@ NATIVE_OS_KIND=$(uname | tr A-Z a-z) # should be darwin
 BUILD_TYPE=Release # Release or Debug
 PACKAGE_NAME=zstd
 TARGET=iPhoneOS/arm64/8.0
-WORKING_DIR="$(pwd)/builder/zstd_ios/${FILE_ZSTD_VERSION}"
+
+WORKING_DIR_BASE="$(pwd)/builder/zstd_ios/${FILE_ZSTD_VERSION}"
+WORKING_DIR_CMAKE="{$WORKING_DIR_BASE}/build/cmake"
+WORKING_DIR_BUILD="{$WORKING_DIR_BASE}/iPhoneOS/arm64"
+INSTALL_DIR="$(pwd)/tmp/iPhoneOS/arm64"
+TOOLCHAIN_FILE="$(pwd)/builder/zstd/toolchain.cmake"
 
 print() {
     printf '%b' "$*"
@@ -40,6 +45,12 @@ error() {
 die() {
     printf '%b\n' "${COLOR_RED}💔  $*${COLOR_OFF}" >&2
     exit 1
+}
+
+__clean() {
+  rm -rf "${WORKING_DIR_BASE}"
+  mkdir -p "${WORKING_DIR_CMAKE}"
+  mkdir -p "${WORKING_DIR_BUILD}"
 }
 
 # xz
@@ -180,10 +191,14 @@ EOF
 }
 
 
-mkdir "${WORKING_DIR}"
+__clean
 __download_dependencies xz
 __download_dependencies zlib
 
 __find_build_toolchains "${PACKAGE_NAME}" "${TARGET}"
 __config_cmake_variables
 __create_cmake_toolchain_file
+
+#cmake -Wno-dev -S /var/folders/hj/ht6w56yd0xj4l19j282jnf4c0000gn/T/tmp.JLcL2soG/build/cmake -B /var/folders/hj/ht6w56yd0xj4l19j282jnf4c0000gn/T/tmp.JLcL2soG/1660633136/iPhoneOS/arm64 -DCMAKE_INSTALL_PREFIX=/Users/guitarrapc/.xcpkg/install.d/zstd/iPhoneOS/arm64 -DCMAKE_TOOLCHAIN_FILE=/var/folders/hj/ht6w56yd0xj4l19j282jnf4c0000gn/T/tmp.JLcL2soG/1660633136/iPhoneOS/arm64/toolchain.cmake -DCMAKE_VERBOSE_MAKEFILE=ON -DCMAKE_COLOR_MAKEFILE=ON -DZSTD_MULTITHREAD_SUPPORT=ON -DZSTD_BUILD_TESTS=OFF -DZSTD_BUILD_CONTRIB=OFF -DZSTD_BUILD_PROGRAMS=ON -DZSTD_BUILD_STATIC=ON -DZSTD_BUILD_SHARED=ON -DZSTD_ZLIB_SUPPORT=ON -DZSTD_LZMA_SUPPORT=ON -DZSTD_LZ4_SUPPORT=OFF -DZLIB_INCLUDE_DIR=/Users/guitarrapc/.xcpkg/install.d/zlib/iPhoneOS/arm64/include -DZLIB_LIBRARY=/Users/guitarrapc/.xcpkg/install.d/zlib/iPhoneOS/arm64/lib/libz.a -DLIBLZMA_INCLUDE_DIR=/Users/guitarrapc/.xcpkg/install.d/xz/iPhoneOS/arm64/include -DLIBLZMA_LIBRARY=/Users/guitarrapc/.xcpkg/install.d/xz/iPhoneOS/arm64/lib/liblzma.a
+
+cmake -Wno-dev -S "${WORKING_DIR_CMAKE}" -B "${WORKING_DIR_BUILD}" -DCMAKE_INSTALL_PREFIX="${INSTALL_DIR}" -DCMAKE_TOOLCHAIN_FILE="${TOOLCHAIN_FILE}" -DCMAKE_VERBOSE_MAKEFILE=ON -DCMAKE_COLOR_MAKEFILE=ON -DZSTD_MULTITHREAD_SUPPORT=ON -DZSTD_BUILD_TESTS=OFF -DZSTD_BUILD_CONTRIB=OFF -DZSTD_BUILD_PROGRAMS=ON -DZSTD_BUILD_STATIC=ON -DZSTD_BUILD_SHARED=ON -DZSTD_ZLIB_SUPPORT=ON -DZSTD_LZMA_SUPPORT=ON -DZSTD_LZ4_SUPPORT=OFF -DZLIB_INCLUDE_DIR="${INSTALL_DIR}/include" -DZLIB_LIBRARY="${INSTALL_DIR}/lib/libz.a" -DLIBLZMA_INCLUDE_DIR="${INSTALL_DIR}/include" -DLIBLZMA_LIBRARY="${INSTALL_DIR}/lib/liblzma.a"
