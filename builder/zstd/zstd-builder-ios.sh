@@ -19,40 +19,19 @@ WORKING_DIR_BUILD="${WORKING_DIR_BASE}/${OS}/${PLATFORM}"
 INSTALL_DIR="$(pwd)/tmp/${OS}/${PLATFORM}"
 TOOLCHAIN_FILE="$(pwd)/builder/zstd/toolchain.cmake"
 
-ENABLE_ZLIB="true"
-ENABLE_LZMA="true"
-
-print() {
-    printf '%b' "$*"
-}
-
-echo() {
-    printf '%b\n' "$*"
-}
-
-info() {
-    printf '%b\n' "💠  $*"
-}
-
-note() {
-    printf '%b\n' "${COLOR_YELLOW}🔔  $*${COLOR_OFF}" >&2
-}
-
-warn() {
-    printf '%b\n' "${COLOR_YELLOW}🔥  $*${COLOR_OFF}" >&2
-}
-
-success() {
-    printf '%b\n' "${COLOR_GREEN}[✔] $*${COLOR_OFF}"
-}
-
-error() {
-    printf '%b\n' "${COLOR_RED}💔  $*${COLOR_OFF}" >&2
-}
+ENABLE_ZLIB="false"
+ENABLE_LZMA="false"
 
 die() {
     printf '%b\n' "${COLOR_RED}💔  $*${COLOR_OFF}" >&2
     exit 1
+}
+
+download_dependencies() {
+    # TODO: download source.
+    echo "Downloading $1"
+    PACKAGE_CCFLAGS="$PACKAGE_CCFLAGS -I/Users/guitarrapc/.xcpkg/install.d/$1/iPhoneOS/arm64/include"
+    PACKAGE_CPPGLAGS="$PACKAGE_CPPGLAGS -L/Users/guitarrapc/.xcpkg/install.d/$1/iPhoneOS/arm64/lib"
 }
 
 __clean() {
@@ -60,15 +39,13 @@ __clean() {
   mkdir -p "${WORKING_DIR_BUILD}"
 }
 
-# xz
-# zlib
-__download_dependencies() {
-    echo "Downloading $1"
-    # TODO: download source.
-
-    PACKAGE_CCFLAGS="$PACKAGE_CCFLAGS -I/Users/guitarrapc/.xcpkg/install.d/xz/iPhoneOS/arm64/include"
-    PACKAGE_CPPGLAGS="$PACKAGE_CPPGLAGS -L/Users/guitarrapc/.xcpkg/install.d/xz/iPhoneOS/arm64/lib"
-    PACKAGE_CDEFINE="__arm64__"
+__prepare_dependencies() {
+    if [[ "${ENABLE_LZMA}" == "true" ]]; then
+        download_dependencies xz
+    fi
+    if [[ "${ENABLE_ZLIB}" == "true" ]]; then
+        download_dependencies zlib
+    fi
 }
 
 # __find_build_toolchains zstd iPhoneOS/arm64/8.0
@@ -81,6 +58,8 @@ __find_build_toolchains() {
     TARGET_OS_VERS=$(printf '%s\n' "$2" | cut -d/ -f3)
     TARGET_OS_ARCH=$(printf '%s\n' "$2" | cut -d/ -f2)
     TARGET_OS_NAME_LOWER_CASE="$(echo "$TARGET_OS_NAME" | tr "[:upper:]" "[:lower:]")"
+
+    PACKAGE_CDEFINE="__arm64__"
 
     # should be "/Applications/Xcode.app/Contents/Developer"
     TOOLCHAIN_ROOT="$(xcode-select -p)"
@@ -96,7 +75,7 @@ __find_build_toolchains() {
     CXX="$TOOLCHAIN_BIND/clang++"
 
     CCFLAGS="-isysroot $SYSROOT -arch $TARGET_OS_ARCH -m${TARGET_OS_NAME_LOWER_CASE}-version-min=$TARGET_OS_VERS -Qunused-arguments -Os -pipe"
-    CPPFLAGS="-isysroot $SYSROOT -Qunused-arguments -D$PACKAGE_CDEFINE"
+    CPPFLAGS="-isysroot $SYSROOT -Qunused-arguments"
     LDFLAGS="-isysroot $SYSROOT -arch $TARGET_OS_ARCH -m${TARGET_OS_NAME_LOWER_CASE}-version-min=$TARGET_OS_VERS"
 
     if [[ "$BUILD_TYPE" == "Release" ]] ; then
@@ -221,8 +200,7 @@ fi
 }
 
 __clean
-__download_dependencies xz
-__download_dependencies zlib
+__prepare_dependencies
 
 __find_build_toolchains "${PACKAGE_NAME}" "${TARGET}"
 __config_cmake_variables
