@@ -29,8 +29,6 @@ set(CMAKE_OSX_ARCHITECTURES "arm64" CACHE STRING "")
 
 set(CMAKE_FIND_DEBUG_MODE OFF)
 
-set(CMAKE_FIND_ROOT_PATH "/Users/guitarrapc/.xcpkg/install.d/zlib/iPhoneOS/arm64;/Users/guitarrapc/.xcpkg/install.d/xz/iPhoneOS/arm64")
-
 set(CMAKE_LIBRARY_PATH "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/usr/lib")
-
+set(CMAKE_FIND_ROOT_PATH "/Users/guitarrapc/.xcpkg/install.d/zlib/iPhoneOS/arm64;/Users/guitarrapc/.xcpkg/install.d/xz/iPhoneOS/arm64;")
 set(CMAKE_IGNORE_PATH "/Users/guitarrapc/.xcpkg/install.d/xz/iPhoneOS/arm64/bin")

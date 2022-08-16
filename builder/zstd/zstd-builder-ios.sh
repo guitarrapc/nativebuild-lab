@@ -5,17 +5,22 @@ set -ex
 ZSTD_VERSION=$(cd zstd && echo "$(git tag --points-at HEAD | tr -d '[:space:]')" && cd ..)
 GIT_ZSTD_VERSION=${ZSTD_VERSION}
 FILE_ZSTD_VERSION=$(echo "${ZSTD_VERSION}" | cut -c 2-)
+OS=iPhoneOS
+PLATFORM=arm64
 
 NATIVE_OS_KIND=$(uname | tr A-Z a-z) # should be darwin
 BUILD_TYPE=Release # Release or Debug
 PACKAGE_NAME=zstd
-TARGET=iPhoneOS/arm64/8.0
+TARGET=${OS}/${PLATFORM}/8.0
 
 WORKING_DIR_BASE="$(pwd)/builder/zstd_ios/${FILE_ZSTD_VERSION}"
 WORKING_DIR_CMAKE="$(pwd)/zstd/build/cmake"
-WORKING_DIR_BUILD="${WORKING_DIR_BASE}/iPhoneOS/arm64"
-INSTALL_DIR="$(pwd)/tmp/iPhoneOS/arm64"
+WORKING_DIR_BUILD="${WORKING_DIR_BASE}/${OS}/${PLATFORM}"
+INSTALL_DIR="$(pwd)/tmp/${OS}/${PLATFORM}"
 TOOLCHAIN_FILE="$(pwd)/builder/zstd/toolchain.cmake"
+
+ENABLE_ZLIB="true"
+ENABLE_LZMA="true"
 
 print() {
     printf '%b' "$*"
@@ -143,11 +148,17 @@ __config_cmake_variables() {
 
     CMAKE_FIND_DEBUG_MODE=OFF
 
-    CMAKE_FIND_ROOT_PATH="/Users/guitarrapc/.xcpkg/install.d/zlib/iPhoneOS/arm64;/Users/guitarrapc/.xcpkg/install.d/xz/iPhoneOS/arm64"
-
     CMAKE_LIBRARY_PATH="$SYSTEM_LIBRARY_DIR"
 
+if [[ "${ENABLE_ZLIB}" == "true" ]]; then
+    CMAKE_FIND_ROOT_PATH="/Users/guitarrapc/.xcpkg/install.d/zlib/iPhoneOS/arm64;"
+fi
+
+if [[ "${ENABLE_LZMA}" == "true" ]]; then
+    CMAKE_FIND_ROOT_PATH="$CMAKE_FIND_ROOT_PATH/Users/guitarrapc/.xcpkg/install.d/xz/iPhoneOS/arm64;"
     CMAKE_IGNORE_PATH="/Users/guitarrapc/.xcpkg/install.d/xz/iPhoneOS/arm64/bin"
+fi
+
 }
 
 __create_cmake_toolchain_file() {
@@ -183,14 +194,31 @@ set(CMAKE_OSX_ARCHITECTURES "${CMAKE_OSX_ARCHITECTURES}")
 
 set(CMAKE_FIND_DEBUG_MODE $CMAKE_FIND_DEBUG_MODE)
 
-set(CMAKE_FIND_ROOT_PATH "$CMAKE_FIND_ROOT_PATH")
-
 set(CMAKE_LIBRARY_PATH "$CMAKE_LIBRARY_PATH")
+EOF
 
+if [[ "${CMAKE_FIND_ROOT_PATH}" != "" ]]; then
+  cat <<EOF
+set(CMAKE_FIND_ROOT_PATH "$CMAKE_FIND_ROOT_PATH")
+EOF
+fi
+
+if [[ "${CMAKE_IGNORE_PATH}" != "" ]]; then
+  cat <<EOF
 set(CMAKE_IGNORE_PATH "$CMAKE_IGNORE_PATH")
 EOF
+fi
 }
 
+__create_cmake_args() {
+if [[ "${ENABLE_ZLIB}" == "true" ]]; then
+  CMAKE_ARGS_ZLIB="-DZSTD_ZLIB_SUPPORT=ON -DZLIB_INCLUDE_DIR=/Users/guitarrapc/.xcpkg/install.d/zlib/iPhoneOS/arm64/include -DZLIB_LIBRARY=/Users/guitarrapc/.xcpkg/install.d/zlib/iPhoneOS/arm64/lib/libz.a"
+fi
+
+if [[ "${ENABLE_LZMA}" == "true" ]]; then
+  CMAKE_ARGS_LZMA="-DZSTD_LZMA_SUPPORT=ON -DLIBLZMA_INCLUDE_DIR=/Users/guitarrapc/.xcpkg/install.d/xz/iPhoneOS/arm64/include -DLIBLZMA_LIBRARY=/Users/guitarrapc/.xcpkg/install.d/xz/iPhoneOS/arm64/lib/liblzma.a"
+fi
+}
 
 __clean
 __download_dependencies xz
@@ -200,10 +228,22 @@ __find_build_toolchains "${PACKAGE_NAME}" "${TARGET}"
 __config_cmake_variables
 __create_cmake_toolchain_file | tee "${TOOLCHAIN_FILE}"
 
+__create_cmake_args
+
 #/opt/homebrew/bin/cmake -Wno-dev -S /var/folders/hj/ht6w56yd0xj4l19j282jnf4c0000gn/T/tmp.JLcL2soG/build/cmake -B /var/folders/hj/ht6w56yd0xj4l19j282jnf4c0000gn/T/tmp.JLcL2soG/1660633136/iPhoneOS/arm64 -DCMAKE_INSTALL_PREFIX=/Users/guitarrapc/.xcpkg/install.d/zstd/iPhoneOS/arm64 -DCMAKE_TOOLCHAIN_FILE=/var/folders/hj/ht6w56yd0xj4l19j282jnf4c0000gn/T/tmp.JLcL2soG/1660633136/iPhoneOS/arm64/toolchain.cmake -DCMAKE_VERBOSE_MAKEFILE=ON -DCMAKE_COLOR_MAKEFILE=ON -DZSTD_MULTITHREAD_SUPPORT=ON -DZSTD_BUILD_TESTS=OFF -DZSTD_BUILD_CONTRIB=OFF -DZSTD_BUILD_PROGRAMS=ON -DZSTD_BUILD_STATIC=ON -DZSTD_BUILD_SHARED=ON -DZSTD_ZLIB_SUPPORT=ON -DZSTD_LZMA_SUPPORT=ON -DZSTD_LZ4_SUPPORT=OFF -DZLIB_INCLUDE_DIR=/Users/guitarrapc/.xcpkg/install.d/zlib/iPhoneOS/arm64/include -DZLIB_LIBRARY=/Users/guitarrapc/.xcpkg/install.d/zlib/iPhoneOS/arm64/lib/libz.a -DLIBLZMA_INCLUDE_DIR=/Users/guitarrapc/.xcpkg/install.d/xz/iPhoneOS/arm64/include -DLIBLZMA_LIBRARY=/Users/guitarrapc/.xcpkg/install.d/xz/iPhoneOS/arm64/lib/liblzma.a
 #/opt/homebrew/bin/cmake --build /var/folders/hj/ht6w56yd0xj4l19j282jnf4c0000gn/T/tmp.JLcL2soG/1660633136/iPhoneOS/arm64 -- -j8
 
 pushd ${WORKING_DIR_BASE}
-cmake -Wno-dev -S "${WORKING_DIR_CMAKE}" -B "${WORKING_DIR_BUILD}" -DCMAKE_INSTALL_PREFIX="${INSTALL_DIR}" -DCMAKE_TOOLCHAIN_FILE="${TOOLCHAIN_FILE}" -DCMAKE_VERBOSE_MAKEFILE=ON -DCMAKE_COLOR_MAKEFILE=ON -DZSTD_MULTITHREAD_SUPPORT=ON -DZSTD_BUILD_TESTS=OFF -DZSTD_BUILD_CONTRIB=OFF -DZSTD_BUILD_PROGRAMS=ON -DZSTD_BUILD_STATIC=ON -DZSTD_BUILD_SHARED=ON -DZSTD_ZLIB_SUPPORT=ON -DZSTD_LZMA_SUPPORT=ON -DZSTD_LZ4_SUPPORT=OFF -DZLIB_INCLUDE_DIR=/Users/guitarrapc/.xcpkg/install.d/zlib/iPhoneOS/arm64/include -DZLIB_LIBRARY=/Users/guitarrapc/.xcpkg/install.d/zlib/iPhoneOS/arm64/lib/libz.a -DLIBLZMA_INCLUDE_DIR=/Users/guitarrapc/.xcpkg/install.d/xz/iPhoneOS/arm64/include -DLIBLZMA_LIBRARY=/Users/guitarrapc/.xcpkg/install.d/xz/iPhoneOS/arm64/lib/liblzma.a
+#cmake -Wno-dev -S "${WORKING_DIR_CMAKE}" -B "${WORKING_DIR_BUILD}" -DCMAKE_INSTALL_PREFIX="${INSTALL_DIR}" -DCMAKE_TOOLCHAIN_FILE="${TOOLCHAIN_FILE}" -DCMAKE_VERBOSE_MAKEFILE=ON -DCMAKE_COLOR_MAKEFILE=ON -DZSTD_MULTITHREAD_SUPPORT=ON -DZSTD_BUILD_TESTS=OFF -DZSTD_BUILD_CONTRIB=OFF -DZSTD_BUILD_PROGRAMS=ON -DZSTD_BUILD_STATIC=ON -DZSTD_BUILD_SHARED=ON -DZSTD_ZLIB_SUPPORT=ON -DZSTD_LZMA_SUPPORT=ON -DZSTD_LZ4_SUPPORT=OFF -DZLIB_INCLUDE_DIR=/Users/guitarrapc/.xcpkg/install.d/zlib/iPhoneOS/arm64/include -DZLIB_LIBRARY=/Users/guitarrapc/.xcpkg/install.d/zlib/iPhoneOS/arm64/lib/libz.a -DLIBLZMA_INCLUDE_DIR=/Users/guitarrapc/.xcpkg/install.d/xz/iPhoneOS/arm64/include -DLIBLZMA_LIBRARY=/Users/guitarrapc/.xcpkg/install.d/xz/iPhoneOS/arm64/lib/liblzma.a
+cmake -Wno-dev -S "${WORKING_DIR_CMAKE}" -B "${WORKING_DIR_BUILD}" -DCMAKE_INSTALL_PREFIX="${INSTALL_DIR}" -DCMAKE_TOOLCHAIN_FILE="${TOOLCHAIN_FILE}" -DCMAKE_VERBOSE_MAKEFILE=ON -DCMAKE_COLOR_MAKEFILE=ON -DZSTD_MULTITHREAD_SUPPORT=ON -DZSTD_BUILD_TESTS=OFF -DZSTD_BUILD_CONTRIB=OFF -DZSTD_BUILD_PROGRAMS=ON -DZSTD_BUILD_STATIC=ON -DZSTD_BUILD_SHARED=ON -DZSTD_LZ4_SUPPORT=OFF $CMAKE_ARGS_ZLIB $CMAKE_ARGS_LZMA
 cmake --build "${WORKING_DIR_BUILD}"  -- -j8
 popd
+
+# confirm
+ls -l "${WORKING_DIR_BUILD}/lib/libzstd.a"
+ls -l ${WORKING_DIR_BUILD}/lib/libzstd.*dylib
+
+# copy
+mkdir -p "./pkg/zstd/${GIT_ZSTD_VERSION}/${OS}/${PLATFORM}/"
+cp "${WORKING_DIR_BUILD}/lib/libzstd.a" "./pkg/zstd/${GIT_ZSTD_VERSION}/${OS}/${PLATFORM}/."
+cp "${WORKING_DIR_BUILD}/lib/libzstd.${FILE_ZSTD_VERSION}.dylib" "./pkg/zstd/${GIT_ZSTD_VERSION}/${OS}/${PLATFORM}/libzstd.dylib"
