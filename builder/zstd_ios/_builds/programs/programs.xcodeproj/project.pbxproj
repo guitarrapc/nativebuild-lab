@@ -1,0 +1,2744 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXAggregateTarget section */
+		2E3563B31ED64DD4B464CE27 /* zstdcat.1 */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 0ABC3B53E7094B769E30222F /* Build configuration list for PBXAggregateTarget "zstdcat.1" */;
+			buildPhases = (
+				B431DF390197ECABF48B6D52 /* Generate CMakeFiles/zstdcat.1 */,
+			);
+			dependencies = (
+				76F8B421A0D14BF9A9527841 /* PBXTargetDependency */,
+				F9FE51AA9181446DA64CA9F6 /* PBXTargetDependency */,
+			);
+			name = zstdcat.1;
+			productName = zstdcat.1;
+		};
+		421DDEFDBE6B4BE1B4FFC7C7 /* zstd.1 */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 89415FB7D97F42658BF8ABE3 /* Build configuration list for PBXAggregateTarget "zstd.1" */;
+			buildPhases = (
+				16266C44053989FDD051D2AE /* Generate CMakeFiles/zstd.1 */,
+			);
+			dependencies = (
+				A9F656C2EB284A67B3FAA452 /* PBXTargetDependency */,
+			);
+			name = zstd.1;
+			productName = zstd.1;
+		};
+		4CC5D2E69DAC490786280674 /* ALL_BUILD */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 56AFE7A10D45421399F0D4F1 /* Build configuration list for PBXAggregateTarget "ALL_BUILD" */;
+			buildPhases = (
+				5C04B46A88E1DD7FEC8CFEDF /* Generate CMakeFiles/ALL_BUILD */,
+			);
+			dependencies = (
+				EB4341771D79451180D3DAC3 /* PBXTargetDependency */,
+				71AAD328FABD419A80C73FEF /* PBXTargetDependency */,
+				2602F8F9EE8047DF8A012A26 /* PBXTargetDependency */,
+				7430EAF4DE274076B08FADF0 /* PBXTargetDependency */,
+				2C7324398B884476B49EC6D7 /* PBXTargetDependency */,
+				0E07B8598FE84FCC88F70621 /* PBXTargetDependency */,
+				1A47CC1EF4CC4AAB81C3DB04 /* PBXTargetDependency */,
+				FEEA618CD5F64DC38B660505 /* PBXTargetDependency */,
+				D558C3F13BB446FCAF77F07D /* PBXTargetDependency */,
+				42CC30A03B314B36AE9FD216 /* PBXTargetDependency */,
+				A5CE689DB2574E73998A7866 /* PBXTargetDependency */,
+			);
+			name = ALL_BUILD;
+			productName = ALL_BUILD;
+		};
+		6E535F4E826543458BAEE7A9 /* install */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 20EFFE216AFD481AA3D11B49 /* Build configuration list for PBXAggregateTarget "install" */;
+			buildPhases = (
+				93426DA6A4AC2C2AC9CE883C /* CMake PostBuild Rules */,
+			);
+			dependencies = (
+				1012F91527C746089D6D83D2 /* PBXTargetDependency */,
+			);
+			name = install;
+			productName = install;
+		};
+		96CD4B3937284F839207C5CC /* zstdmt */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = DB223DD12B894B9C81705928 /* Build configuration list for PBXAggregateTarget "zstdmt" */;
+			buildPhases = (
+				0857D6CFB11453A4795E1E7A /* Generate CMakeFiles/zstdmt */,
+			);
+			dependencies = (
+				DB9E9C3B5B4B44489420A353 /* PBXTargetDependency */,
+				7F970A5FB3314C539F37D7A2 /* PBXTargetDependency */,
+			);
+			name = zstdmt;
+			productName = zstdmt;
+		};
+		984C6D6B8BC94C979E4BDAE2 /* ZERO_CHECK */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 2A7D6D88054141C7AF9CD90B /* Build configuration list for PBXAggregateTarget "ZERO_CHECK" */;
+			buildPhases = (
+				A2D940004BC6106A5E07C732 /* Generate CMakeFiles/ZERO_CHECK */,
+			);
+			dependencies = (
+			);
+			name = ZERO_CHECK;
+			productName = ZERO_CHECK;
+		};
+		9DB223B239294D418905DA7A /* zstdgrep.1 */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 765EB241B2854F938E453472 /* Build configuration list for PBXAggregateTarget "zstdgrep.1" */;
+			buildPhases = (
+				90DD8FF6161CB67A227E250C /* Generate CMakeFiles/zstdgrep.1 */,
+			);
+			dependencies = (
+				EDF8F846D4054931BA19EFA3 /* PBXTargetDependency */,
+			);
+			name = zstdgrep.1;
+			productName = zstdgrep.1;
+		};
+		9E2815BBD43A4B6B8A3ED581 /* unzstd.1 */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = E319075D5C3D4CBE8EC2E719 /* Build configuration list for PBXAggregateTarget "unzstd.1" */;
+			buildPhases = (
+				8FB1BFFEE0EAE7CA81BB48E5 /* Generate CMakeFiles/unzstd.1 */,
+			);
+			dependencies = (
+				9CD2CE37B1C4479EABA0A734 /* PBXTargetDependency */,
+				34480A221C2246B58223FEAA /* PBXTargetDependency */,
+			);
+			name = unzstd.1;
+			productName = unzstd.1;
+		};
+		D6D29C76936D44DBA7313CCB /* zstdcat */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 0F44B25A9E6847B385CBD6B0 /* Build configuration list for PBXAggregateTarget "zstdcat" */;
+			buildPhases = (
+				07504E55E12A947B576117D5 /* Generate CMakeFiles/zstdcat */,
+			);
+			dependencies = (
+				B5D566F966BD418F83DB2FF6 /* PBXTargetDependency */,
+				9813D477FDF74D18BADB5E84 /* PBXTargetDependency */,
+			);
+			name = zstdcat;
+			productName = zstdcat;
+		};
+		E0383ABAC42F4E24A4217046 /* zstdless.1 */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 50E9FC98E0634757B8E75F76 /* Build configuration list for PBXAggregateTarget "zstdless.1" */;
+			buildPhases = (
+				B089363AD964B46DE1E5EEA3 /* Generate CMakeFiles/zstdless.1 */,
+			);
+			dependencies = (
+				F3B688EB4425422ABC7F3EBF /* PBXTargetDependency */,
+			);
+			name = zstdless.1;
+			productName = zstdless.1;
+		};
+		F54C291FF9474000B00C87A3 /* unzstd */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 5638F96B557047BEA7F46E6B /* Build configuration list for PBXAggregateTarget "unzstd" */;
+			buildPhases = (
+				48B5F412B35C52D6321804C3 /* Generate CMakeFiles/unzstd */,
+			);
+			dependencies = (
+				4E7214B008504914B260A62F /* PBXTargetDependency */,
+				E1B0CEFF0D774DB58373F484 /* PBXTargetDependency */,
+			);
+			name = unzstd;
+			productName = unzstd;
+		};
+/* End PBXAggregateTarget section */
+
+/* Begin PBXBuildFile section */
+		00E37FABDF6F4BFC951AA52E /* /Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/programs/benchfn.c */ = {isa = PBXBuildFile; fileRef = F650B4A64D7942C9A175D8BE /* /Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/programs/benchfn.c */; };
+		05C60997B58645F1B29F33E0 /* /Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/programs/timefn.c */ = {isa = PBXBuildFile; fileRef = 82CED345EA06438B8D4351A5 /* /Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/programs/timefn.c */; };
+		06A8C3251D124E319FA3081F /* /Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/programs/zstdcli.c */ = {isa = PBXBuildFile; fileRef = 11D129C085384ACB95F7627A /* /Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/programs/zstdcli.c */; };
+		1AE8005DF74944D9A5694AA9 /* /Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/programs/benchzstd.c */ = {isa = PBXBuildFile; fileRef = E9F8A63EA6C04553B57874F8 /* /Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/programs/benchzstd.c */; };
+		2144987F3B9B4DE381C94502 /* /Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/programs/zstdcli_trace.c */ = {isa = PBXBuildFile; fileRef = 774A332272EB49DFA3F8599A /* /Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/programs/zstdcli_trace.c */; };
+		23CD5467D1FD4240A547C81D /* /Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/programs/datagen.c */ = {isa = PBXBuildFile; fileRef = A3185A1A0C344880BA7AD071 /* /Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/programs/datagen.c */; };
+		356938731D3E408F91EDACA8 /* /Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/programs/zstdcli.c */ = {isa = PBXBuildFile; fileRef = 1C70C82D782C4C74BC6CCD86 /* /Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/programs/zstdcli.c */; };
+		398FCB1357B94B27BCBD0C43 /* /Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/programs/fileio.c */ = {isa = PBXBuildFile; fileRef = 8B8813085FE140E0BBA6A806 /* /Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/programs/fileio.c */; };
+		66957D6D8A4845338B5BF25A /* /Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/build/cmake/programs/CMakeLists.txt */ = {isa = PBXBuildFile; fileRef = 4B2191D039A74621A2786C78 /* /Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/build/cmake/programs/CMakeLists.txt */; };
+		839E310C382D4DCCA09E204F /* /Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/programs/util.c */ = {isa = PBXBuildFile; fileRef = 16D3D9D3E59042F0A4D21C9C /* /Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/programs/util.c */; };
+		84AF339364CA40D0A9CFBB37 /* /Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/programs/dibio.c */ = {isa = PBXBuildFile; fileRef = F9B98A75D4B9430683F648A7 /* /Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/programs/dibio.c */; };
+		A00DBE51FF8B42A1A44A8EC6 /* /Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/build/cmake/programs/CMakeLists.txt */ = {isa = PBXBuildFile; fileRef = 37567E33079A4511897478BA /* /Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/build/cmake/programs/CMakeLists.txt */; };
+		B10A535AC3444165AA0F5A62 /* /Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/programs/fileio.c */ = {isa = PBXBuildFile; fileRef = D19F4C427CAC47D29F872B9A /* /Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/programs/fileio.c */; };
+		BBAF9EB0D79C4447BEB290EF /* /Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs/CMakeFiles/zstd.dir/Info.plist */ = {isa = PBXBuildFile; fileRef = 27253522A59F457CBF67E9E4 /* /Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs/CMakeFiles/zstd.dir/Info.plist */; };
+		EDD5709BBD154753A648C0F0 /* /Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs/CMakeFiles/zstd-frugal.dir/Info.plist */ = {isa = PBXBuildFile; fileRef = 552744AF21704E8CB9DDF350 /* /Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs/CMakeFiles/zstd-frugal.dir/Info.plist */; };
+		FA1AB4D3460141659A614B9B /* /Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/programs/timefn.c */ = {isa = PBXBuildFile; fileRef = E55E82EE3B034119BB204949 /* /Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/programs/timefn.c */; };
+		FB95920E1E0A49CAB29472EA /* /Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/programs/util.c */ = {isa = PBXBuildFile; fileRef = E9CF75445087477C97DD50DA /* /Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/programs/util.c */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXBuildStyle section */
+		5A2E29B4543F4DE9B4E22DDC /* MinSizeRel */ = {
+			isa = PBXBuildStyle;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+			};
+			name = MinSizeRel;
+		};
+		8E1EC58A23284A829EB51FD8 /* RelWithDebInfo */ = {
+			isa = PBXBuildStyle;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+			};
+			name = RelWithDebInfo;
+		};
+		B023782DB1AA4A98834548F9 /* Debug */ = {
+			isa = PBXBuildStyle;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+			};
+			name = Debug;
+		};
+		D72FE6DE884F4694BD430A07 /* Release */ = {
+			isa = PBXBuildStyle;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+			};
+			name = Release;
+		};
+/* End PBXBuildStyle section */
+
+/* Begin PBXContainerItemProxy section */
+		05A2D04B9B9547D9B44A11B7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AE3104C75A6B4A2597D42651 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9E2815BBD43A4B6B8A3ED581;
+			remoteInfo = unzstd.1;
+		};
+		0B7449EA9B6D4AC8B9C520B0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AE3104C75A6B4A2597D42651 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 984C6D6B8BC94C979E4BDAE2;
+			remoteInfo = ZERO_CHECK;
+		};
+		1EDF622B7D124A109FA9102A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AE3104C75A6B4A2597D42651 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 66AC7CBF5E404861A5C9D7C0;
+			remoteInfo = zstd;
+		};
+		32E0BC4FDF054B6BA10ED845 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AE3104C75A6B4A2597D42651 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 421DDEFDBE6B4BE1B4FFC7C7;
+			remoteInfo = zstd.1;
+		};
+		34AD821B7BE2444D97E6E5DF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AE3104C75A6B4A2597D42651 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 883FE41AA5EC43199407603A;
+			remoteInfo = "zstd-frugal";
+		};
+		35EAD8B8FD89425F951540DA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AE3104C75A6B4A2597D42651 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 66AC7CBF5E404861A5C9D7C0;
+			remoteInfo = zstd;
+		};
+		3678680C6D214737B9F278DD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AE3104C75A6B4A2597D42651 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 984C6D6B8BC94C979E4BDAE2;
+			remoteInfo = ZERO_CHECK;
+		};
+		36F8CFC3D1AE421489A90C37 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AE3104C75A6B4A2597D42651 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 421DDEFDBE6B4BE1B4FFC7C7;
+			remoteInfo = zstd.1;
+		};
+		472EA54460724DC592B2A23E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AE3104C75A6B4A2597D42651 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 421DDEFDBE6B4BE1B4FFC7C7;
+			remoteInfo = zstd.1;
+		};
+		5159FD2D0B9A471A9C87EDFD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AE3104C75A6B4A2597D42651 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 984C6D6B8BC94C979E4BDAE2;
+			remoteInfo = ZERO_CHECK;
+		};
+		538203A3C2744819B6055CAE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AE3104C75A6B4A2597D42651 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 66AC7CBF5E404861A5C9D7C0;
+			remoteInfo = zstd;
+		};
+		57643F876BF74D788DC0EDCF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AE3104C75A6B4A2597D42651 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9DB223B239294D418905DA7A;
+			remoteInfo = zstdgrep.1;
+		};
+		672F9909708842D7B6064D6C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AE3104C75A6B4A2597D42651 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 66AC7CBF5E404861A5C9D7C0;
+			remoteInfo = zstd;
+		};
+		6ED0E08F379E4280BA98A6EE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AE3104C75A6B4A2597D42651 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 984C6D6B8BC94C979E4BDAE2;
+			remoteInfo = ZERO_CHECK;
+		};
+		89145B35E14A40909D47E798 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AE3104C75A6B4A2597D42651 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2E3563B31ED64DD4B464CE27;
+			remoteInfo = zstdcat.1;
+		};
+		8D2C5C5FDEEC4792A475C355 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AE3104C75A6B4A2597D42651 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 984C6D6B8BC94C979E4BDAE2;
+			remoteInfo = ZERO_CHECK;
+		};
+		8FCDD4A696354CE69E865076 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AE3104C75A6B4A2597D42651 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4CC5D2E69DAC490786280674;
+			remoteInfo = ALL_BUILD;
+		};
+		95E173E2141F44E6BB00BFF7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AE3104C75A6B4A2597D42651 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 984C6D6B8BC94C979E4BDAE2;
+			remoteInfo = ZERO_CHECK;
+		};
+		A68C4A2E62CB45B0B6F1D601 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AE3104C75A6B4A2597D42651 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 984C6D6B8BC94C979E4BDAE2;
+			remoteInfo = ZERO_CHECK;
+		};
+		AE8415568A4D45F59C73B1FA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AE3104C75A6B4A2597D42651 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E0383ABAC42F4E24A4217046;
+			remoteInfo = zstdless.1;
+		};
+		B8F988CA24424E9B88B3C338 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AE3104C75A6B4A2597D42651 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 984C6D6B8BC94C979E4BDAE2;
+			remoteInfo = ZERO_CHECK;
+		};
+		B945D12D32064F378CB86682 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AE3104C75A6B4A2597D42651 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D6D29C76936D44DBA7313CCB;
+			remoteInfo = zstdcat;
+		};
+		C06EEFBBF0EC431FA3E006B2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AE3104C75A6B4A2597D42651 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 96CD4B3937284F839207C5CC;
+			remoteInfo = zstdmt;
+		};
+		D66191A57EB7438E99C02B5E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AE3104C75A6B4A2597D42651 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 984C6D6B8BC94C979E4BDAE2;
+			remoteInfo = ZERO_CHECK;
+		};
+		DFEF50CED58C4D5C933B9601 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AE3104C75A6B4A2597D42651 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 984C6D6B8BC94C979E4BDAE2;
+			remoteInfo = ZERO_CHECK;
+		};
+		ECE5DFF380784936BD556C63 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AE3104C75A6B4A2597D42651 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F54C291FF9474000B00C87A3;
+			remoteInfo = unzstd;
+		};
+		F885625D021A4D56B02CC611 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AE3104C75A6B4A2597D42651 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 984C6D6B8BC94C979E4BDAE2;
+			remoteInfo = ZERO_CHECK;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		11D129C085384ACB95F7627A /* /Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/programs/zstdcli.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.c; fileEncoding = 4; name = zstdcli.c; path = "/Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/programs/zstdcli.c"; sourceTree = "<absolute>"; };
+		16D3D9D3E59042F0A4D21C9C /* /Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/programs/util.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.c; fileEncoding = 4; name = util.c; path = "/Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/programs/util.c"; sourceTree = "<absolute>"; };
+		1C70C82D782C4C74BC6CCD86 /* /Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/programs/zstdcli.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.c; fileEncoding = 4; name = zstdcli.c; path = "/Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/programs/zstdcli.c"; sourceTree = "<absolute>"; };
+		27253522A59F457CBF67E9E4 /* /Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs/CMakeFiles/zstd.dir/Info.plist */ = {isa = PBXFileReference; explicitFileType = sourcecode.text.plist; fileEncoding = 4; name = Info.plist; path = "/Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs/CMakeFiles/zstd.dir/Info.plist"; sourceTree = "<absolute>"; };
+		2E190484879E44B0A1111401 /* /Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/build/cmake/programs/CMakeLists.txt */ = {isa = PBXFileReference; explicitFileType = sourcecode.text; fileEncoding = 4; name = CMakeLists.txt; path = CMakeLists.txt; sourceTree = SOURCE_ROOT; };
+		3292CF07D65043EFBAC4FF46 /* /Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/build/cmake/programs/CMakeLists.txt */ = {isa = PBXFileReference; explicitFileType = sourcecode.text; fileEncoding = 4; name = CMakeLists.txt; path = CMakeLists.txt; sourceTree = SOURCE_ROOT; };
+		37567E33079A4511897478BA /* /Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/build/cmake/programs/CMakeLists.txt */ = {isa = PBXFileReference; explicitFileType = sourcecode.text; fileEncoding = 4; name = CMakeLists.txt; path = CMakeLists.txt; sourceTree = SOURCE_ROOT; };
+		4B2191D039A74621A2786C78 /* /Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/build/cmake/programs/CMakeLists.txt */ = {isa = PBXFileReference; explicitFileType = sourcecode.text; fileEncoding = 4; name = CMakeLists.txt; path = CMakeLists.txt; sourceTree = SOURCE_ROOT; };
+		4DE15EA38F4E4D2D898C3C32 /* /Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/build/cmake/programs/CMakeLists.txt */ = {isa = PBXFileReference; explicitFileType = sourcecode.text; fileEncoding = 4; name = CMakeLists.txt; path = CMakeLists.txt; sourceTree = SOURCE_ROOT; };
+		552744AF21704E8CB9DDF350 /* /Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs/CMakeFiles/zstd-frugal.dir/Info.plist */ = {isa = PBXFileReference; explicitFileType = sourcecode.text.plist; fileEncoding = 4; name = Info.plist; path = "/Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs/CMakeFiles/zstd-frugal.dir/Info.plist"; sourceTree = "<absolute>"; };
+		5A6A42A83E78436486B7E76D /* zstd */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; path = zstd; sourceTree = BUILT_PRODUCTS_DIR; };
+		5EBDC8DA00334481BBA899EE /* /Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/build/cmake/programs/CMakeLists.txt */ = {isa = PBXFileReference; explicitFileType = sourcecode.text; fileEncoding = 4; name = CMakeLists.txt; path = CMakeLists.txt; sourceTree = SOURCE_ROOT; };
+		774A332272EB49DFA3F8599A /* /Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/programs/zstdcli_trace.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.c; fileEncoding = 4; name = zstdcli_trace.c; path = "/Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/programs/zstdcli_trace.c"; sourceTree = "<absolute>"; };
+		7A6B688E265C46188FE38BD6 /* /Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/build/cmake/programs/CMakeLists.txt */ = {isa = PBXFileReference; explicitFileType = sourcecode.text; fileEncoding = 4; name = CMakeLists.txt; path = CMakeLists.txt; sourceTree = SOURCE_ROOT; };
+		82CED345EA06438B8D4351A5 /* /Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/programs/timefn.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.c; fileEncoding = 4; name = timefn.c; path = "/Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/programs/timefn.c"; sourceTree = "<absolute>"; };
+		8B8813085FE140E0BBA6A806 /* /Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/programs/fileio.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.c; fileEncoding = 4; name = fileio.c; path = "/Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/programs/fileio.c"; sourceTree = "<absolute>"; };
+		9424B70A893449C6922693C4 /* /Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/build/cmake/programs/CMakeLists.txt */ = {isa = PBXFileReference; explicitFileType = sourcecode.text; fileEncoding = 4; name = CMakeLists.txt; path = CMakeLists.txt; sourceTree = SOURCE_ROOT; };
+		9D84F188B1BF4707A034FB5A /* /Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/build/cmake/programs/CMakeLists.txt */ = {isa = PBXFileReference; explicitFileType = sourcecode.text; fileEncoding = 4; name = CMakeLists.txt; path = CMakeLists.txt; sourceTree = SOURCE_ROOT; };
+		A3185A1A0C344880BA7AD071 /* /Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/programs/datagen.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.c; fileEncoding = 4; name = datagen.c; path = "/Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/programs/datagen.c"; sourceTree = "<absolute>"; };
+		BC352021E4164594A738B39A /* /Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/build/cmake/programs/CMakeLists.txt */ = {isa = PBXFileReference; explicitFileType = sourcecode.text; fileEncoding = 4; name = CMakeLists.txt; path = CMakeLists.txt; sourceTree = SOURCE_ROOT; };
+		D19F4C427CAC47D29F872B9A /* /Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/programs/fileio.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.c; fileEncoding = 4; name = fileio.c; path = "/Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/programs/fileio.c"; sourceTree = "<absolute>"; };
+		DD68113903134BD680B96A10 /* zstd-frugal */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; path = "zstd-frugal"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E55E82EE3B034119BB204949 /* /Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/programs/timefn.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.c; fileEncoding = 4; name = timefn.c; path = "/Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/programs/timefn.c"; sourceTree = "<absolute>"; };
+		E7D0370ED8FF48C9B2675A09 /* /Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/build/cmake/programs/CMakeLists.txt */ = {isa = PBXFileReference; explicitFileType = sourcecode.text; fileEncoding = 4; name = CMakeLists.txt; path = CMakeLists.txt; sourceTree = SOURCE_ROOT; };
+		E9CF75445087477C97DD50DA /* /Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/programs/util.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.c; fileEncoding = 4; name = util.c; path = "/Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/programs/util.c"; sourceTree = "<absolute>"; };
+		E9F8A63EA6C04553B57874F8 /* /Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/programs/benchzstd.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.c; fileEncoding = 4; name = benchzstd.c; path = "/Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/programs/benchzstd.c"; sourceTree = "<absolute>"; };
+		F650B4A64D7942C9A175D8BE /* /Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/programs/benchfn.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.c; fileEncoding = 4; name = benchfn.c; path = "/Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/programs/benchfn.c"; sourceTree = "<absolute>"; };
+		F9B98A75D4B9430683F648A7 /* /Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/programs/dibio.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.c; fileEncoding = 4; name = dibio.c; path = "/Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/programs/dibio.c"; sourceTree = "<absolute>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		25CAA13BA82B4D098CE2AF15 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8C052A54E84C4D48B0C186CB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		0BA6572871A74D4FA328DD3C /* zstd-frugal */ = {
+			isa = PBXGroup;
+			children = (
+				D3933D5B1C4D4BF7A54028C8 /* Source Files */,
+				E28C2DFDAA3B40F6BEC7EFBD /* Resources */,
+				4B2191D039A74621A2786C78 /* /Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/build/cmake/programs/CMakeLists.txt */,
+			);
+			name = "zstd-frugal";
+			sourceTree = "<group>";
+		};
+		1A228A21426944349629C624 /* zstdcat.1 */ = {
+			isa = PBXGroup;
+			children = (
+				CFE41AD674EE4396899D4156 /* CMake Rules */,
+				BC352021E4164594A738B39A /* /Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/build/cmake/programs/CMakeLists.txt */,
+			);
+			name = zstdcat.1;
+			sourceTree = "<group>";
+		};
+		2AB5C923582A4F82AB3D3BC1 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				5A6A42A83E78436486B7E76D /* zstd */,
+				DD68113903134BD680B96A10 /* zstd-frugal */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		3C7D19D5C1BD4DE6A8D54BBB /* zstdless.1 */ = {
+			isa = PBXGroup;
+			children = (
+				8D73AB43A4BC4A37A3565173 /* CMake Rules */,
+				2E190484879E44B0A1111401 /* /Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/build/cmake/programs/CMakeLists.txt */,
+			);
+			name = zstdless.1;
+			sourceTree = "<group>";
+		};
+		45E86B6B68C541238C7A1B7E /* CMake Rules */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "CMake Rules";
+			sourceTree = "<group>";
+		};
+		51AAA67DD0FE4B02864D553C /* zstd */ = {
+			isa = PBXGroup;
+			children = (
+				99E8755B0F264B16AFA9B7DA /* Source Files */,
+				A41D48D1E52A4206B5BBCA67 /* Resources */,
+				37567E33079A4511897478BA /* /Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/build/cmake/programs/CMakeLists.txt */,
+			);
+			name = zstd;
+			sourceTree = "<group>";
+		};
+		7671A1FCA5E24E94B98491C2 /* zstdgrep.1 */ = {
+			isa = PBXGroup;
+			children = (
+				C0CBD1FA9F624831A2600CB2 /* CMake Rules */,
+				9424B70A893449C6922693C4 /* /Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/build/cmake/programs/CMakeLists.txt */,
+			);
+			name = zstdgrep.1;
+			sourceTree = "<group>";
+		};
+		7D76B0CAC94E493E9F5A5F1A /* CMake Rules */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "CMake Rules";
+			sourceTree = "<group>";
+		};
+		8C3B580245EB4ED09CB6BDDF /* CMake Rules */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "CMake Rules";
+			sourceTree = "<group>";
+		};
+		8D73AB43A4BC4A37A3565173 /* CMake Rules */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "CMake Rules";
+			sourceTree = "<group>";
+		};
+		8EF713E43D8E4659AD42506C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		99E8755B0F264B16AFA9B7DA /* Source Files */ = {
+			isa = PBXGroup;
+			children = (
+				F650B4A64D7942C9A175D8BE /* /Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/programs/benchfn.c */,
+				E9F8A63EA6C04553B57874F8 /* /Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/programs/benchzstd.c */,
+				A3185A1A0C344880BA7AD071 /* /Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/programs/datagen.c */,
+				F9B98A75D4B9430683F648A7 /* /Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/programs/dibio.c */,
+				D19F4C427CAC47D29F872B9A /* /Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/programs/fileio.c */,
+				E55E82EE3B034119BB204949 /* /Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/programs/timefn.c */,
+				16D3D9D3E59042F0A4D21C9C /* /Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/programs/util.c */,
+				11D129C085384ACB95F7627A /* /Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/programs/zstdcli.c */,
+				774A332272EB49DFA3F8599A /* /Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/programs/zstdcli_trace.c */,
+			);
+			name = "Source Files";
+			sourceTree = "<group>";
+		};
+		A41D48D1E52A4206B5BBCA67 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				27253522A59F457CBF67E9E4 /* /Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs/CMakeFiles/zstd.dir/Info.plist */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		A728744DF1CF4A7D9F309420 /* ALL_BUILD */ = {
+			isa = PBXGroup;
+			children = (
+				7D76B0CAC94E493E9F5A5F1A /* CMake Rules */,
+				5EBDC8DA00334481BBA899EE /* /Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/build/cmake/programs/CMakeLists.txt */,
+			);
+			name = ALL_BUILD;
+			sourceTree = "<group>";
+		};
+		C0CBD1FA9F624831A2600CB2 /* CMake Rules */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "CMake Rules";
+			sourceTree = "<group>";
+		};
+		C5A854C5D9DE4DE5A4F3F0DC /* CMake Rules */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "CMake Rules";
+			sourceTree = "<group>";
+		};
+		C6288BED06AF4921BA0D58A9 /* CMake Rules */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "CMake Rules";
+			sourceTree = "<group>";
+		};
+		CFE41AD674EE4396899D4156 /* CMake Rules */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "CMake Rules";
+			sourceTree = "<group>";
+		};
+		D3933D5B1C4D4BF7A54028C8 /* Source Files */ = {
+			isa = PBXGroup;
+			children = (
+				8B8813085FE140E0BBA6A806 /* /Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/programs/fileio.c */,
+				82CED345EA06438B8D4351A5 /* /Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/programs/timefn.c */,
+				E9CF75445087477C97DD50DA /* /Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/programs/util.c */,
+				1C70C82D782C4C74BC6CCD86 /* /Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/programs/zstdcli.c */,
+			);
+			name = "Source Files";
+			sourceTree = "<group>";
+		};
+		D492D45D3F46457086AB27A9 /* zstd.1 */ = {
+			isa = PBXGroup;
+			children = (
+				45E86B6B68C541238C7A1B7E /* CMake Rules */,
+				4DE15EA38F4E4D2D898C3C32 /* /Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/build/cmake/programs/CMakeLists.txt */,
+			);
+			name = zstd.1;
+			sourceTree = "<group>";
+		};
+		D9DE0A05A2EB46399C79DD13 /* zstdcat */ = {
+			isa = PBXGroup;
+			children = (
+				8C3B580245EB4ED09CB6BDDF /* CMake Rules */,
+				7A6B688E265C46188FE38BD6 /* /Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/build/cmake/programs/CMakeLists.txt */,
+			);
+			name = zstdcat;
+			sourceTree = "<group>";
+		};
+		DAF6C7D07752476D932D2DFB = {
+			isa = PBXGroup;
+			children = (
+				51AAA67DD0FE4B02864D553C /* zstd */,
+				D9DE0A05A2EB46399C79DD13 /* zstdcat */,
+				F433606AB0DD427EBB67ADE0 /* unzstd */,
+				D492D45D3F46457086AB27A9 /* zstd.1 */,
+				7671A1FCA5E24E94B98491C2 /* zstdgrep.1 */,
+				3C7D19D5C1BD4DE6A8D54BBB /* zstdless.1 */,
+				1A228A21426944349629C624 /* zstdcat.1 */,
+				F627BB744D3D4BDBA4E9EFB9 /* unzstd.1 */,
+				0BA6572871A74D4FA328DD3C /* zstd-frugal */,
+				E54C5E6C81B8490996E16E71 /* zstdmt */,
+				A728744DF1CF4A7D9F309420 /* ALL_BUILD */,
+				2AB5C923582A4F82AB3D3BC1 /* Products */,
+				8EF713E43D8E4659AD42506C /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		E28C2DFDAA3B40F6BEC7EFBD /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				552744AF21704E8CB9DDF350 /* /Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs/CMakeFiles/zstd-frugal.dir/Info.plist */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		E54C5E6C81B8490996E16E71 /* zstdmt */ = {
+			isa = PBXGroup;
+			children = (
+				C6288BED06AF4921BA0D58A9 /* CMake Rules */,
+				3292CF07D65043EFBAC4FF46 /* /Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/build/cmake/programs/CMakeLists.txt */,
+			);
+			name = zstdmt;
+			sourceTree = "<group>";
+		};
+		F433606AB0DD427EBB67ADE0 /* unzstd */ = {
+			isa = PBXGroup;
+			children = (
+				F91DE97ECE7C4F2DA17427A3 /* CMake Rules */,
+				E7D0370ED8FF48C9B2675A09 /* /Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/build/cmake/programs/CMakeLists.txt */,
+			);
+			name = unzstd;
+			sourceTree = "<group>";
+		};
+		F627BB744D3D4BDBA4E9EFB9 /* unzstd.1 */ = {
+			isa = PBXGroup;
+			children = (
+				C5A854C5D9DE4DE5A4F3F0DC /* CMake Rules */,
+				9D84F188B1BF4707A034FB5A /* /Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/build/cmake/programs/CMakeLists.txt */,
+			);
+			name = unzstd.1;
+			sourceTree = "<group>";
+		};
+		F91DE97ECE7C4F2DA17427A3 /* CMake Rules */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "CMake Rules";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		66AC7CBF5E404861A5C9D7C0 /* zstd */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3E1FC35C19F246E483DA9A6D /* Build configuration list for PBXNativeTarget "zstd" */;
+			buildPhases = (
+				D16824E51FC249989EEB61F4 /* Sources */,
+				25CAA13BA82B4D098CE2AF15 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F38A4C5D45274CAFA1D027E1 /* PBXTargetDependency */,
+			);
+			name = zstd;
+			productName = zstd;
+			productReference = 5A6A42A83E78436486B7E76D /* zstd */;
+			productType = "com.apple.product-type.application";
+		};
+		883FE41AA5EC43199407603A /* zstd-frugal */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AF26B1193B774D86A2E66209 /* Build configuration list for PBXNativeTarget "zstd-frugal" */;
+			buildPhases = (
+				E3B51C3253BA451F87BAC4DC /* Sources */,
+				8C052A54E84C4D48B0C186CB /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D4FC567B275140D18F323325 /* PBXTargetDependency */,
+			);
+			name = "zstd-frugal";
+			productName = "zstd-frugal";
+			productReference = DD68113903134BD680B96A10 /* zstd-frugal */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		AE3104C75A6B4A2597D42651 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1340;
+			};
+			buildConfigurationList = 7C2E0E19DF614321889DA379 /* Build configuration list for PBXProject "programs" */;
+			buildSettings = {
+			};
+			buildStyles = (
+				B023782DB1AA4A98834548F9 /* Debug */,
+				D72FE6DE884F4694BD430A07 /* Release */,
+				5A2E29B4543F4DE9B4E22DDC /* MinSizeRel */,
+				8E1EC58A23284A829EB51FD8 /* RelWithDebInfo */,
+			);
+			compatibilityVersion = "Xcode 3.2";
+			hasScannedForEncodings = 0;
+			mainGroup = DAF6C7D07752476D932D2DFB;
+			projectDirPath = "/Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/build/cmake/programs";
+			projectRoot = "";
+			targets = (
+				4CC5D2E69DAC490786280674 /* ALL_BUILD */,
+				984C6D6B8BC94C979E4BDAE2 /* ZERO_CHECK */,
+				6E535F4E826543458BAEE7A9 /* install */,
+				F54C291FF9474000B00C87A3 /* unzstd */,
+				9E2815BBD43A4B6B8A3ED581 /* unzstd.1 */,
+				66AC7CBF5E404861A5C9D7C0 /* zstd */,
+				883FE41AA5EC43199407603A /* zstd-frugal */,
+				421DDEFDBE6B4BE1B4FFC7C7 /* zstd.1 */,
+				D6D29C76936D44DBA7313CCB /* zstdcat */,
+				2E3563B31ED64DD4B464CE27 /* zstdcat.1 */,
+				9DB223B239294D418905DA7A /* zstdgrep.1 */,
+				E0383ABAC42F4E24A4217046 /* zstdless.1 */,
+				96CD4B3937284F839207C5CC /* zstdmt */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		07504E55E12A947B576117D5 /* Generate CMakeFiles/zstdcat */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+"/Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs/Debug${EFFECTIVE_PLATFORM_NAME}/zstd.app/zstd","/Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs/MinSizeRel${EFFECTIVE_PLATFORM_NAME}/zstd.app/zstd","/Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs/RelWithDebInfo${EFFECTIVE_PLATFORM_NAME}/zstd.app/zstd","/Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs/Release${EFFECTIVE_PLATFORM_NAME}/zstd.app/zstd"			);
+			name = "Generate CMakeFiles/zstdcat";
+			outputPaths = (
+"/Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs/CMakeFiles/zstdcat"			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -e
+if test \"$CONFIGURATION\" = \"Debug\"; then :
+  cd /Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs
+  /opt/homebrew/Cellar/cmake/3.24.0/bin/cmake -E create_symlink zstd zstdcat
+fi
+if test \"$CONFIGURATION\" = \"Release\"; then :
+  cd /Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs
+  /opt/homebrew/Cellar/cmake/3.24.0/bin/cmake -E create_symlink zstd zstdcat
+fi
+if test \"$CONFIGURATION\" = \"MinSizeRel\"; then :
+  cd /Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs
+  /opt/homebrew/Cellar/cmake/3.24.0/bin/cmake -E create_symlink zstd zstdcat
+fi
+if test \"$CONFIGURATION\" = \"RelWithDebInfo\"; then :
+  cd /Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs
+  /opt/homebrew/Cellar/cmake/3.24.0/bin/cmake -E create_symlink zstd zstdcat
+fi
+";
+			showEnvVarsInLog = 0;
+		};
+		0857D6CFB11453A4795E1E7A /* Generate CMakeFiles/zstdmt */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+"/Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs/Debug${EFFECTIVE_PLATFORM_NAME}/zstd.app/zstd","/Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs/MinSizeRel${EFFECTIVE_PLATFORM_NAME}/zstd.app/zstd","/Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs/RelWithDebInfo${EFFECTIVE_PLATFORM_NAME}/zstd.app/zstd","/Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs/Release${EFFECTIVE_PLATFORM_NAME}/zstd.app/zstd"			);
+			name = "Generate CMakeFiles/zstdmt";
+			outputPaths = (
+"/Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs/CMakeFiles/zstdmt"			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -e
+if test \"$CONFIGURATION\" = \"Debug\"; then :
+  cd /Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs
+  /opt/homebrew/Cellar/cmake/3.24.0/bin/cmake -E create_symlink zstd zstdmt
+fi
+if test \"$CONFIGURATION\" = \"Release\"; then :
+  cd /Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs
+  /opt/homebrew/Cellar/cmake/3.24.0/bin/cmake -E create_symlink zstd zstdmt
+fi
+if test \"$CONFIGURATION\" = \"MinSizeRel\"; then :
+  cd /Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs
+  /opt/homebrew/Cellar/cmake/3.24.0/bin/cmake -E create_symlink zstd zstdmt
+fi
+if test \"$CONFIGURATION\" = \"RelWithDebInfo\"; then :
+  cd /Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs
+  /opt/homebrew/Cellar/cmake/3.24.0/bin/cmake -E create_symlink zstd zstdmt
+fi
+";
+			showEnvVarsInLog = 0;
+		};
+		16266C44053989FDD051D2AE /* Generate CMakeFiles/zstd.1 */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Generate CMakeFiles/zstd.1";
+			outputPaths = (
+"/Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs/CMakeFiles/zstd.1"			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -e
+if test \"$CONFIGURATION\" = \"Debug\"; then :
+  cd /Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs
+  /opt/homebrew/Cellar/cmake/3.24.0/bin/cmake -E copy /Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/build/cmake/../../programs/zstd.1 .
+fi
+if test \"$CONFIGURATION\" = \"Release\"; then :
+  cd /Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs
+  /opt/homebrew/Cellar/cmake/3.24.0/bin/cmake -E copy /Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/build/cmake/../../programs/zstd.1 .
+fi
+if test \"$CONFIGURATION\" = \"MinSizeRel\"; then :
+  cd /Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs
+  /opt/homebrew/Cellar/cmake/3.24.0/bin/cmake -E copy /Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/build/cmake/../../programs/zstd.1 .
+fi
+if test \"$CONFIGURATION\" = \"RelWithDebInfo\"; then :
+  cd /Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs
+  /opt/homebrew/Cellar/cmake/3.24.0/bin/cmake -E copy /Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/build/cmake/../../programs/zstd.1 .
+fi
+";
+			showEnvVarsInLog = 0;
+		};
+		19BF679BB36AB9AE6CC55C45 = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# shell script goes here
+exit 0";
+			showEnvVarsInLog = 0;
+		};
+		28B0098209CA960AF8FFF107 = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# shell script goes here
+exit 0";
+			showEnvVarsInLog = 0;
+		};
+		3C0110FC8322DE7E50886E21 = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# shell script goes here
+exit 0";
+			showEnvVarsInLog = 0;
+		};
+		48B5F412B35C52D6321804C3 /* Generate CMakeFiles/unzstd */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+"/Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs/Debug${EFFECTIVE_PLATFORM_NAME}/zstd.app/zstd","/Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs/MinSizeRel${EFFECTIVE_PLATFORM_NAME}/zstd.app/zstd","/Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs/RelWithDebInfo${EFFECTIVE_PLATFORM_NAME}/zstd.app/zstd","/Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs/Release${EFFECTIVE_PLATFORM_NAME}/zstd.app/zstd"			);
+			name = "Generate CMakeFiles/unzstd";
+			outputPaths = (
+"/Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs/CMakeFiles/unzstd"			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -e
+if test \"$CONFIGURATION\" = \"Debug\"; then :
+  cd /Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs
+  /opt/homebrew/Cellar/cmake/3.24.0/bin/cmake -E create_symlink zstd unzstd
+fi
+if test \"$CONFIGURATION\" = \"Release\"; then :
+  cd /Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs
+  /opt/homebrew/Cellar/cmake/3.24.0/bin/cmake -E create_symlink zstd unzstd
+fi
+if test \"$CONFIGURATION\" = \"MinSizeRel\"; then :
+  cd /Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs
+  /opt/homebrew/Cellar/cmake/3.24.0/bin/cmake -E create_symlink zstd unzstd
+fi
+if test \"$CONFIGURATION\" = \"RelWithDebInfo\"; then :
+  cd /Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs
+  /opt/homebrew/Cellar/cmake/3.24.0/bin/cmake -E create_symlink zstd unzstd
+fi
+";
+			showEnvVarsInLog = 0;
+		};
+		5C04B46A88E1DD7FEC8CFEDF /* Generate CMakeFiles/ALL_BUILD */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Generate CMakeFiles/ALL_BUILD";
+			outputPaths = (
+"/Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs/CMakeFiles/ALL_BUILD"			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -e
+if test \"$CONFIGURATION\" = \"Debug\"; then :
+  cd /Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs
+  echo Build\\ all\\ projects
+fi
+if test \"$CONFIGURATION\" = \"Release\"; then :
+  cd /Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs
+  echo Build\\ all\\ projects
+fi
+if test \"$CONFIGURATION\" = \"MinSizeRel\"; then :
+  cd /Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs
+  echo Build\\ all\\ projects
+fi
+if test \"$CONFIGURATION\" = \"RelWithDebInfo\"; then :
+  cd /Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs
+  echo Build\\ all\\ projects
+fi
+";
+			showEnvVarsInLog = 0;
+		};
+		7B466555A5A343335C80EA20 = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# shell script goes here
+exit 0";
+			showEnvVarsInLog = 0;
+		};
+		7E5D61D480673B45A023CAE8 = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# shell script goes here
+exit 0";
+			showEnvVarsInLog = 0;
+		};
+		7F7DB2B9B5ED27C5EA894735 = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# shell script goes here
+exit 0";
+			showEnvVarsInLog = 0;
+		};
+		835C5E1B731CFC30C5254891 = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# shell script goes here
+exit 0";
+			showEnvVarsInLog = 0;
+		};
+		87AF4882E018677E2624B544 = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# shell script goes here
+exit 0";
+			showEnvVarsInLog = 0;
+		};
+		8FB1BFFEE0EAE7CA81BB48E5 /* Generate CMakeFiles/unzstd.1 */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Generate CMakeFiles/unzstd.1";
+			outputPaths = (
+"/Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs/CMakeFiles/unzstd.1"			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -e
+if test \"$CONFIGURATION\" = \"Debug\"; then :
+  cd /Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs
+  /opt/homebrew/Cellar/cmake/3.24.0/bin/cmake -E create_symlink zstd.1 unzstd.1
+fi
+if test \"$CONFIGURATION\" = \"Release\"; then :
+  cd /Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs
+  /opt/homebrew/Cellar/cmake/3.24.0/bin/cmake -E create_symlink zstd.1 unzstd.1
+fi
+if test \"$CONFIGURATION\" = \"MinSizeRel\"; then :
+  cd /Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs
+  /opt/homebrew/Cellar/cmake/3.24.0/bin/cmake -E create_symlink zstd.1 unzstd.1
+fi
+if test \"$CONFIGURATION\" = \"RelWithDebInfo\"; then :
+  cd /Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs
+  /opt/homebrew/Cellar/cmake/3.24.0/bin/cmake -E create_symlink zstd.1 unzstd.1
+fi
+";
+			showEnvVarsInLog = 0;
+		};
+		90DD8FF6161CB67A227E250C /* Generate CMakeFiles/zstdgrep.1 */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Generate CMakeFiles/zstdgrep.1";
+			outputPaths = (
+"/Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs/CMakeFiles/zstdgrep.1"			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -e
+if test \"$CONFIGURATION\" = \"Debug\"; then :
+  cd /Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs
+  /opt/homebrew/Cellar/cmake/3.24.0/bin/cmake -E copy /Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/build/cmake/../../programs/zstdgrep.1 .
+fi
+if test \"$CONFIGURATION\" = \"Release\"; then :
+  cd /Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs
+  /opt/homebrew/Cellar/cmake/3.24.0/bin/cmake -E copy /Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/build/cmake/../../programs/zstdgrep.1 .
+fi
+if test \"$CONFIGURATION\" = \"MinSizeRel\"; then :
+  cd /Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs
+  /opt/homebrew/Cellar/cmake/3.24.0/bin/cmake -E copy /Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/build/cmake/../../programs/zstdgrep.1 .
+fi
+if test \"$CONFIGURATION\" = \"RelWithDebInfo\"; then :
+  cd /Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs
+  /opt/homebrew/Cellar/cmake/3.24.0/bin/cmake -E copy /Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/build/cmake/../../programs/zstdgrep.1 .
+fi
+";
+			showEnvVarsInLog = 0;
+		};
+		93426DA6A4AC2C2AC9CE883C /* CMake PostBuild Rules */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			name = "CMake PostBuild Rules";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -e
+if test \"$CONFIGURATION\" = \"Debug\"; then :
+  cd /Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs
+  /opt/homebrew/Cellar/cmake/3.24.0/bin/cmake -DBUILD_TYPE=$CONFIGURATION -DEFFECTIVE_PLATFORM_NAME=$EFFECTIVE_PLATFORM_NAME -P cmake_install.cmake
+fi
+if test \"$CONFIGURATION\" = \"Release\"; then :
+  cd /Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs
+  /opt/homebrew/Cellar/cmake/3.24.0/bin/cmake -DBUILD_TYPE=$CONFIGURATION -DEFFECTIVE_PLATFORM_NAME=$EFFECTIVE_PLATFORM_NAME -P cmake_install.cmake
+fi
+if test \"$CONFIGURATION\" = \"MinSizeRel\"; then :
+  cd /Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs
+  /opt/homebrew/Cellar/cmake/3.24.0/bin/cmake -DBUILD_TYPE=$CONFIGURATION -DEFFECTIVE_PLATFORM_NAME=$EFFECTIVE_PLATFORM_NAME -P cmake_install.cmake
+fi
+if test \"$CONFIGURATION\" = \"RelWithDebInfo\"; then :
+  cd /Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs
+  /opt/homebrew/Cellar/cmake/3.24.0/bin/cmake -DBUILD_TYPE=$CONFIGURATION -DEFFECTIVE_PLATFORM_NAME=$EFFECTIVE_PLATFORM_NAME -P cmake_install.cmake
+fi
+";
+			showEnvVarsInLog = 0;
+		};
+		9B50530E35CC49C82C2FACCF = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# shell script goes here
+exit 0";
+			showEnvVarsInLog = 0;
+		};
+		A2D940004BC6106A5E07C732 /* Generate CMakeFiles/ZERO_CHECK */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Generate CMakeFiles/ZERO_CHECK";
+			outputPaths = (
+"/Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs/CMakeFiles/ZERO_CHECK"			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -e
+if test \"$CONFIGURATION\" = \"Debug\"; then :
+  cd /Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs
+  make -f /Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs/CMakeScripts/ReRunCMake.make
+fi
+if test \"$CONFIGURATION\" = \"Release\"; then :
+  cd /Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs
+  make -f /Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs/CMakeScripts/ReRunCMake.make
+fi
+if test \"$CONFIGURATION\" = \"MinSizeRel\"; then :
+  cd /Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs
+  make -f /Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs/CMakeScripts/ReRunCMake.make
+fi
+if test \"$CONFIGURATION\" = \"RelWithDebInfo\"; then :
+  cd /Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs
+  make -f /Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs/CMakeScripts/ReRunCMake.make
+fi
+";
+			showEnvVarsInLog = 0;
+		};
+		B089363AD964B46DE1E5EEA3 /* Generate CMakeFiles/zstdless.1 */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Generate CMakeFiles/zstdless.1";
+			outputPaths = (
+"/Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs/CMakeFiles/zstdless.1"			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -e
+if test \"$CONFIGURATION\" = \"Debug\"; then :
+  cd /Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs
+  /opt/homebrew/Cellar/cmake/3.24.0/bin/cmake -E copy /Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/build/cmake/../../programs/zstdless.1 .
+fi
+if test \"$CONFIGURATION\" = \"Release\"; then :
+  cd /Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs
+  /opt/homebrew/Cellar/cmake/3.24.0/bin/cmake -E copy /Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/build/cmake/../../programs/zstdless.1 .
+fi
+if test \"$CONFIGURATION\" = \"MinSizeRel\"; then :
+  cd /Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs
+  /opt/homebrew/Cellar/cmake/3.24.0/bin/cmake -E copy /Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/build/cmake/../../programs/zstdless.1 .
+fi
+if test \"$CONFIGURATION\" = \"RelWithDebInfo\"; then :
+  cd /Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs
+  /opt/homebrew/Cellar/cmake/3.24.0/bin/cmake -E copy /Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/build/cmake/../../programs/zstdless.1 .
+fi
+";
+			showEnvVarsInLog = 0;
+		};
+		B431DF390197ECABF48B6D52 /* Generate CMakeFiles/zstdcat.1 */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Generate CMakeFiles/zstdcat.1";
+			outputPaths = (
+"/Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs/CMakeFiles/zstdcat.1"			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -e
+if test \"$CONFIGURATION\" = \"Debug\"; then :
+  cd /Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs
+  /opt/homebrew/Cellar/cmake/3.24.0/bin/cmake -E create_symlink zstd.1 zstdcat.1
+fi
+if test \"$CONFIGURATION\" = \"Release\"; then :
+  cd /Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs
+  /opt/homebrew/Cellar/cmake/3.24.0/bin/cmake -E create_symlink zstd.1 zstdcat.1
+fi
+if test \"$CONFIGURATION\" = \"MinSizeRel\"; then :
+  cd /Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs
+  /opt/homebrew/Cellar/cmake/3.24.0/bin/cmake -E create_symlink zstd.1 zstdcat.1
+fi
+if test \"$CONFIGURATION\" = \"RelWithDebInfo\"; then :
+  cd /Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs
+  /opt/homebrew/Cellar/cmake/3.24.0/bin/cmake -E create_symlink zstd.1 zstdcat.1
+fi
+";
+			showEnvVarsInLog = 0;
+		};
+		DFEA0F1ED5027FED3625DECF = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# shell script goes here
+exit 0";
+			showEnvVarsInLog = 0;
+		};
+		F6DFF6EB1A8D54FFB4E210AB = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# shell script goes here
+exit 0";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		D16824E51FC249989EEB61F4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				00E37FABDF6F4BFC951AA52E /* /Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/programs/benchfn.c */,
+				1AE8005DF74944D9A5694AA9 /* /Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/programs/benchzstd.c */,
+				23CD5467D1FD4240A547C81D /* /Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/programs/datagen.c */,
+				84AF339364CA40D0A9CFBB37 /* /Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/programs/dibio.c */,
+				B10A535AC3444165AA0F5A62 /* /Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/programs/fileio.c */,
+				FA1AB4D3460141659A614B9B /* /Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/programs/timefn.c */,
+				839E310C382D4DCCA09E204F /* /Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/programs/util.c */,
+				06A8C3251D124E319FA3081F /* /Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/programs/zstdcli.c */,
+				2144987F3B9B4DE381C94502 /* /Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/programs/zstdcli_trace.c */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E3B51C3253BA451F87BAC4DC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				398FCB1357B94B27BCBD0C43 /* /Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/programs/fileio.c */,
+				05C60997B58645F1B29F33E0 /* /Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/programs/timefn.c */,
+				FB95920E1E0A49CAB29472EA /* /Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/programs/util.c */,
+				356938731D3E408F91EDACA8 /* /Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/programs/zstdcli.c */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		0E07B8598FE84FCC88F70621 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E0383ABAC42F4E24A4217046 /* zstdless.1 */;
+			targetProxy = AE8415568A4D45F59C73B1FA /* PBXContainerItemProxy */;
+		};
+		1012F91527C746089D6D83D2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4CC5D2E69DAC490786280674 /* ALL_BUILD */;
+			targetProxy = 8FCDD4A696354CE69E865076 /* PBXContainerItemProxy */;
+		};
+		1A47CC1EF4CC4AAB81C3DB04 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2E3563B31ED64DD4B464CE27 /* zstdcat.1 */;
+			targetProxy = 89145B35E14A40909D47E798 /* PBXContainerItemProxy */;
+		};
+		2602F8F9EE8047DF8A012A26 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F54C291FF9474000B00C87A3 /* unzstd */;
+			targetProxy = ECE5DFF380784936BD556C63 /* PBXContainerItemProxy */;
+		};
+		2C7324398B884476B49EC6D7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9DB223B239294D418905DA7A /* zstdgrep.1 */;
+			targetProxy = 57643F876BF74D788DC0EDCF /* PBXContainerItemProxy */;
+		};
+		34480A221C2246B58223FEAA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 984C6D6B8BC94C979E4BDAE2 /* ZERO_CHECK */;
+			targetProxy = A68C4A2E62CB45B0B6F1D601 /* PBXContainerItemProxy */;
+		};
+		42CC30A03B314B36AE9FD216 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 96CD4B3937284F839207C5CC /* zstdmt */;
+			targetProxy = C06EEFBBF0EC431FA3E006B2 /* PBXContainerItemProxy */;
+		};
+		4E7214B008504914B260A62F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 66AC7CBF5E404861A5C9D7C0 /* zstd */;
+			targetProxy = 35EAD8B8FD89425F951540DA /* PBXContainerItemProxy */;
+		};
+		71AAD328FABD419A80C73FEF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D6D29C76936D44DBA7313CCB /* zstdcat */;
+			targetProxy = B945D12D32064F378CB86682 /* PBXContainerItemProxy */;
+		};
+		7430EAF4DE274076B08FADF0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 421DDEFDBE6B4BE1B4FFC7C7 /* zstd.1 */;
+			targetProxy = 36F8CFC3D1AE421489A90C37 /* PBXContainerItemProxy */;
+		};
+		76F8B421A0D14BF9A9527841 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 421DDEFDBE6B4BE1B4FFC7C7 /* zstd.1 */;
+			targetProxy = 472EA54460724DC592B2A23E /* PBXContainerItemProxy */;
+		};
+		7F970A5FB3314C539F37D7A2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 984C6D6B8BC94C979E4BDAE2 /* ZERO_CHECK */;
+			targetProxy = 8D2C5C5FDEEC4792A475C355 /* PBXContainerItemProxy */;
+		};
+		9813D477FDF74D18BADB5E84 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 984C6D6B8BC94C979E4BDAE2 /* ZERO_CHECK */;
+			targetProxy = DFEF50CED58C4D5C933B9601 /* PBXContainerItemProxy */;
+		};
+		9CD2CE37B1C4479EABA0A734 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 421DDEFDBE6B4BE1B4FFC7C7 /* zstd.1 */;
+			targetProxy = 32E0BC4FDF054B6BA10ED845 /* PBXContainerItemProxy */;
+		};
+		A5CE689DB2574E73998A7866 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 984C6D6B8BC94C979E4BDAE2 /* ZERO_CHECK */;
+			targetProxy = D66191A57EB7438E99C02B5E /* PBXContainerItemProxy */;
+		};
+		A9F656C2EB284A67B3FAA452 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 984C6D6B8BC94C979E4BDAE2 /* ZERO_CHECK */;
+			targetProxy = 95E173E2141F44E6BB00BFF7 /* PBXContainerItemProxy */;
+		};
+		B5D566F966BD418F83DB2FF6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 66AC7CBF5E404861A5C9D7C0 /* zstd */;
+			targetProxy = 538203A3C2744819B6055CAE /* PBXContainerItemProxy */;
+		};
+		D4FC567B275140D18F323325 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 984C6D6B8BC94C979E4BDAE2 /* ZERO_CHECK */;
+			targetProxy = 3678680C6D214737B9F278DD /* PBXContainerItemProxy */;
+		};
+		D558C3F13BB446FCAF77F07D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 883FE41AA5EC43199407603A /* zstd-frugal */;
+			targetProxy = 34AD821B7BE2444D97E6E5DF /* PBXContainerItemProxy */;
+		};
+		DB9E9C3B5B4B44489420A353 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 66AC7CBF5E404861A5C9D7C0 /* zstd */;
+			targetProxy = 672F9909708842D7B6064D6C /* PBXContainerItemProxy */;
+		};
+		E1B0CEFF0D774DB58373F484 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 984C6D6B8BC94C979E4BDAE2 /* ZERO_CHECK */;
+			targetProxy = 6ED0E08F379E4280BA98A6EE /* PBXContainerItemProxy */;
+		};
+		EB4341771D79451180D3DAC3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 66AC7CBF5E404861A5C9D7C0 /* zstd */;
+			targetProxy = 1EDF622B7D124A109FA9102A /* PBXContainerItemProxy */;
+		};
+		EDF8F846D4054931BA19EFA3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 984C6D6B8BC94C979E4BDAE2 /* ZERO_CHECK */;
+			targetProxy = 5159FD2D0B9A471A9C87EDFD /* PBXContainerItemProxy */;
+		};
+		F38A4C5D45274CAFA1D027E1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 984C6D6B8BC94C979E4BDAE2 /* ZERO_CHECK */;
+			targetProxy = 0B7449EA9B6D4AC8B9C520B0 /* PBXContainerItemProxy */;
+		};
+		F3B688EB4425422ABC7F3EBF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 984C6D6B8BC94C979E4BDAE2 /* ZERO_CHECK */;
+			targetProxy = B8F988CA24424E9B88B3C338 /* PBXContainerItemProxy */;
+		};
+		F9FE51AA9181446DA64CA9F6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 984C6D6B8BC94C979E4BDAE2 /* ZERO_CHECK */;
+			targetProxy = F885625D021A4D56B02CC611 /* PBXContainerItemProxy */;
+		};
+		FEEA618CD5F64DC38B660505 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9E2815BBD43A4B6B8A3ED581 /* unzstd.1 */;
+			targetProxy = 05A2D04B9B9547D9B44A11B7 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		06A9441F189A429DA67B8ADE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				EXECUTABLE_PREFIX = "";
+				EXECUTABLE_SUFFIX = "";
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",ZSTD_MULTITHREAD,"'XXH_NAMESPACE=ZSTD_'","'ZSTD_LEGACY_SUPPORT=0'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = ("/Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs","/Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/build/cmake/programs","/Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/build/cmake/../../programs","/Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/build/cmake/../../lib","/Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/build/cmake/../../lib/common","/Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/build/cmake/../../lib/compress","/Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/build/cmake/../../lib/dictBuilder","$(inherited)");
+				INFOPLIST_FILE = "/Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs/CMakeFiles/zstd.dir/Info.plist";
+				INSTALL_PATH = "";
+				OTHER_CFLAGS = (" -std=c99 -Wall -Wextra -Wundef -Wshadow -Wcast-align -Wcast-qual -Wstrict-prototypes    ","$(inherited)");
+				OTHER_LDFLAGS = (" -Wl,-headerpad_max_install_names","/Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/lib/Debug${EFFECTIVE_PLATFORM_NAME}/libzstd.a","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = zstd;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = Debug;
+		};
+		06FBF42DFB834AB8B812847D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SYMROOT = "/Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs/build";
+			};
+			name = Release;
+		};
+		08E080B82C544ABAAFACF6E4 /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = ("","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ALL_BUILD;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = MinSizeRel;
+		};
+		09EC711F9B814556933364FE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = ("","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = zstdgrep.1;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = Release;
+		};
+		0D06AEF3BEBB44DAA5D7C4BB /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = ("","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = install;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = MinSizeRel;
+		};
+		1179C7E1441A4911AF599C46 /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				EXECUTABLE_PREFIX = "";
+				EXECUTABLE_SUFFIX = "";
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = s;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",ZSTD_MULTITHREAD,"'XXH_NAMESPACE=ZSTD_'","'ZSTD_LEGACY_SUPPORT=0'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = ("/Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs","/Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/build/cmake/programs","/Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/build/cmake/../../programs","/Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/build/cmake/../../lib","/Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/build/cmake/../../lib/common","/Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/build/cmake/../../lib/compress","/Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/build/cmake/../../lib/dictBuilder","$(inherited)");
+				INFOPLIST_FILE = "/Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs/CMakeFiles/zstd.dir/Info.plist";
+				INSTALL_PATH = "";
+				OTHER_CFLAGS = (" -std=c99 -Wall -Wextra -Wundef -Wshadow -Wcast-align -Wcast-qual -Wstrict-prototypes     -DNDEBUG ","$(inherited)");
+				OTHER_LDFLAGS = (" -Wl,-headerpad_max_install_names","/Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/lib/MinSizeRel${EFFECTIVE_PLATFORM_NAME}/libzstd.a","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = zstd;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = MinSizeRel;
+		};
+		11A28A515E314D4CACD896E1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SYMROOT = "/Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs/build";
+			};
+			name = Debug;
+		};
+		11AC9861D37B4EBEB981C0BA /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = ("","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = unzstd;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = RelWithDebInfo;
+		};
+		145801726E6A4CECB1115BE8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = ("","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ALL_BUILD;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = Debug;
+		};
+		1A04E17A9CC74953A8487DCF /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SYMROOT = "/Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs/build";
+			};
+			name = MinSizeRel;
+		};
+		21F93C8878734C55B45FE453 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = ("","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = zstdcat;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = Debug;
+		};
+		248A7381559146F799B19B66 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				EXECUTABLE_PREFIX = "";
+				EXECUTABLE_SUFFIX = "";
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",ZSTD_MULTITHREAD,"'XXH_NAMESPACE=ZSTD_'","'ZSTD_LEGACY_SUPPORT=0'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = ("/Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs","/Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/build/cmake/programs","/Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/build/cmake/../../programs","/Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/build/cmake/../../lib","/Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/build/cmake/../../lib/common","/Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/build/cmake/../../lib/compress","/Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/build/cmake/../../lib/dictBuilder","$(inherited)");
+				INFOPLIST_FILE = "/Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs/CMakeFiles/zstd.dir/Info.plist";
+				INSTALL_PATH = "";
+				OTHER_CFLAGS = (" -std=c99 -Wall -Wextra -Wundef -Wshadow -Wcast-align -Wcast-qual -Wstrict-prototypes     -DNDEBUG ","$(inherited)");
+				OTHER_LDFLAGS = (" -Wl,-headerpad_max_install_names","/Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/lib/Release${EFFECTIVE_PLATFORM_NAME}/libzstd.a","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = zstd;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = Release;
+		};
+		26EFF416C4F245739CE5BFED /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = ("","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = zstdgrep.1;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = MinSizeRel;
+		};
+		2CBF9C508DA24B6C8874B8F2 /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				EXECUTABLE_PREFIX = "";
+				EXECUTABLE_SUFFIX = "";
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = s;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",ZSTD_NOBENCH,ZSTD_NODICT,ZSTD_NOTRACE,"'XXH_NAMESPACE=ZSTD_'","'ZSTD_LEGACY_SUPPORT=0'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = ("/Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs","/Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/build/cmake/programs","/Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/build/cmake/../../programs","/Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/build/cmake/../../lib","/Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/build/cmake/../../lib/common","/Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/build/cmake/../../lib/compress","/Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/build/cmake/../../lib/dictBuilder","$(inherited)");
+				INFOPLIST_FILE = "/Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs/CMakeFiles/zstd-frugal.dir/Info.plist";
+				INSTALL_PATH = "";
+				OTHER_CFLAGS = (" -std=c99 -Wall -Wextra -Wundef -Wshadow -Wcast-align -Wcast-qual -Wstrict-prototypes     -DNDEBUG ","$(inherited)");
+				OTHER_LDFLAGS = (" -Wl,-headerpad_max_install_names","/Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/lib/MinSizeRel${EFFECTIVE_PLATFORM_NAME}/libzstd.a","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = "zstd-frugal";
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = MinSizeRel;
+		};
+		326C0AB8D55642A095675CEE /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = ("","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = zstdmt;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = RelWithDebInfo;
+		};
+		3B33E60D01184A56853D7568 /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = ("","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = unzstd;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = MinSizeRel;
+		};
+		3F51F7E8E192422FBA9FF651 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = ("","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = install;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = Release;
+		};
+		4DF3EDBB547348B8AF41E591 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = ("","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = unzstd.1;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = Release;
+		};
+		4DF478DF54C34ACEA34E8FDC /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = ("","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = zstdcat.1;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = MinSizeRel;
+		};
+		57A953839BD54EDBB830E860 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				EXECUTABLE_PREFIX = "";
+				EXECUTABLE_SUFFIX = "";
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",ZSTD_NOBENCH,ZSTD_NODICT,ZSTD_NOTRACE,"'XXH_NAMESPACE=ZSTD_'","'ZSTD_LEGACY_SUPPORT=0'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = ("/Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs","/Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/build/cmake/programs","/Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/build/cmake/../../programs","/Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/build/cmake/../../lib","/Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/build/cmake/../../lib/common","/Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/build/cmake/../../lib/compress","/Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/build/cmake/../../lib/dictBuilder","$(inherited)");
+				INFOPLIST_FILE = "/Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs/CMakeFiles/zstd-frugal.dir/Info.plist";
+				INSTALL_PATH = "";
+				OTHER_CFLAGS = (" -std=c99 -Wall -Wextra -Wundef -Wshadow -Wcast-align -Wcast-qual -Wstrict-prototypes    ","$(inherited)");
+				OTHER_LDFLAGS = (" -Wl,-headerpad_max_install_names","/Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/lib/Debug${EFFECTIVE_PLATFORM_NAME}/libzstd.a","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = "zstd-frugal";
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = Debug;
+		};
+		5E3C59F485BA4C119E0FE778 /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SYMROOT = "/Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs/build";
+			};
+			name = RelWithDebInfo;
+		};
+		64FE991345A046F094C3E83D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = ("","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ZERO_CHECK;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = Release;
+		};
+		7779647295AA432D88F707D9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = ("","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = zstdgrep.1;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = Debug;
+		};
+		7EACAE9A96EB42E29FC372F0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = ("","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = unzstd;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = Release;
+		};
+		87DC998189B54C549F58D26D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = ("","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = zstdcat.1;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = Debug;
+		};
+		8A85547C181D48C7A6BC4EBD /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = ("","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = unzstd.1;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = RelWithDebInfo;
+		};
+		90D6D4D7FE264E599313C1ED /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = ("","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = zstdcat;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = MinSizeRel;
+		};
+		946AEE6B311845FCBDD51F1F /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = ("","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = zstd.1;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = RelWithDebInfo;
+		};
+		9AF908EEA6AE4D1BA322A4FA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = ("","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = zstdmt;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = Debug;
+		};
+		9C202AD129E34D258ECEF149 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = ("","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ALL_BUILD;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = Release;
+		};
+		A0482ADE7F374F5A971A2289 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = ("","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = zstdless.1;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = Release;
+		};
+		A1AB09E273524BF7BD6D6292 /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = ("","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ZERO_CHECK;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = MinSizeRel;
+		};
+		A230CE1BB1B04B4A9B3AF6F9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = ("","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = zstd.1;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = Debug;
+		};
+		A6A64CB1E2D646148D28F174 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = ("","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = zstdmt;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = Release;
+		};
+		A926359DD5A747C6A2A4BD10 /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = ("","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = unzstd.1;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = MinSizeRel;
+		};
+		ADA9B108A40E49E5BAE6D5B3 /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = ("","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = zstdless.1;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = RelWithDebInfo;
+		};
+		AEF1942C1A07469E9BE68EE5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = ("","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = zstdless.1;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = Debug;
+		};
+		B1AF9D447E034194AB311825 /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = ("","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = zstdcat;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = RelWithDebInfo;
+		};
+		BD7E78CBAD7046EDA2899B15 /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				EXECUTABLE_PREFIX = "";
+				EXECUTABLE_SUFFIX = "";
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 2;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",ZSTD_MULTITHREAD,"'XXH_NAMESPACE=ZSTD_'","'ZSTD_LEGACY_SUPPORT=0'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = ("/Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs","/Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/build/cmake/programs","/Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/build/cmake/../../programs","/Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/build/cmake/../../lib","/Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/build/cmake/../../lib/common","/Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/build/cmake/../../lib/compress","/Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/build/cmake/../../lib/dictBuilder","$(inherited)");
+				INFOPLIST_FILE = "/Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs/CMakeFiles/zstd.dir/Info.plist";
+				INSTALL_PATH = "";
+				OTHER_CFLAGS = (" -std=c99 -Wall -Wextra -Wundef -Wshadow -Wcast-align -Wcast-qual -Wstrict-prototypes        -DNDEBUG ","$(inherited)");
+				OTHER_LDFLAGS = (" -Wl,-headerpad_max_install_names","/Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/lib/RelWithDebInfo${EFFECTIVE_PLATFORM_NAME}/libzstd.a","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = zstd;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = RelWithDebInfo;
+		};
+		BF6B742BED9140A3A3F656AE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = ("","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = zstdcat;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = Release;
+		};
+		C828F240D3E9405AB3C5C7AE /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = ("","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = zstd.1;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = MinSizeRel;
+		};
+		C94D022D6191497ABF6FF8F3 /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = ("","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = zstdless.1;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = MinSizeRel;
+		};
+		D9A3D6542FEB4C9F83274B15 /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = ("","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = zstdcat.1;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = RelWithDebInfo;
+		};
+		DC1B1C1E0DF84137928AA509 /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = ("","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = zstdmt;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = MinSizeRel;
+		};
+		DCBBA48FCA4048ABA03BA28D /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = ("","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = install;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = RelWithDebInfo;
+		};
+		DEE12BF0AF48412AB8C22114 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = ("","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = zstd.1;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = Release;
+		};
+		EA5C3D096E94401D9FABF3A2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = ("","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = unzstd.1;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = Debug;
+		};
+		F0A8A8C9614446869A60B10F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = ("","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = unzstd;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = Debug;
+		};
+		F4F4AB70ACBC4860A525F71A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = ("","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = zstdcat.1;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = Release;
+		};
+		F52AB469CDFA4E4E97C0BF11 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = ("","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ZERO_CHECK;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = Debug;
+		};
+		F5525EE636234683A314B798 /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = ("","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ZERO_CHECK;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = RelWithDebInfo;
+		};
+		F629F716C8B643158026180F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = ("","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = install;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = Debug;
+		};
+		F75F840184C346CD94D72698 /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = ("","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = zstdgrep.1;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = RelWithDebInfo;
+		};
+		F7BD7D6E921846469AE9DB4D /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = ("","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ALL_BUILD;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = RelWithDebInfo;
+		};
+		FB422F535FEF484D94C6B808 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				EXECUTABLE_PREFIX = "";
+				EXECUTABLE_SUFFIX = "";
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",ZSTD_NOBENCH,ZSTD_NODICT,ZSTD_NOTRACE,"'XXH_NAMESPACE=ZSTD_'","'ZSTD_LEGACY_SUPPORT=0'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = ("/Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs","/Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/build/cmake/programs","/Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/build/cmake/../../programs","/Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/build/cmake/../../lib","/Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/build/cmake/../../lib/common","/Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/build/cmake/../../lib/compress","/Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/build/cmake/../../lib/dictBuilder","$(inherited)");
+				INFOPLIST_FILE = "/Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs/CMakeFiles/zstd-frugal.dir/Info.plist";
+				INSTALL_PATH = "";
+				OTHER_CFLAGS = (" -std=c99 -Wall -Wextra -Wundef -Wshadow -Wcast-align -Wcast-qual -Wstrict-prototypes     -DNDEBUG ","$(inherited)");
+				OTHER_LDFLAGS = (" -Wl,-headerpad_max_install_names","/Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/lib/Release${EFFECTIVE_PLATFORM_NAME}/libzstd.a","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = "zstd-frugal";
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = Release;
+		};
+		FDF9EAA85913436B8E383AB2 /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				EXECUTABLE_PREFIX = "";
+				EXECUTABLE_SUFFIX = "";
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 2;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",ZSTD_NOBENCH,ZSTD_NODICT,ZSTD_NOTRACE,"'XXH_NAMESPACE=ZSTD_'","'ZSTD_LEGACY_SUPPORT=0'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = ("/Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs","/Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/build/cmake/programs","/Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/build/cmake/../../programs","/Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/build/cmake/../../lib","/Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/build/cmake/../../lib/common","/Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/build/cmake/../../lib/compress","/Users/guitarrapc/github/guitarrapc/nativebuild-lab/zstd/build/cmake/../../lib/dictBuilder","$(inherited)");
+				INFOPLIST_FILE = "/Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs/CMakeFiles/zstd-frugal.dir/Info.plist";
+				INSTALL_PATH = "";
+				OTHER_CFLAGS = (" -std=c99 -Wall -Wextra -Wundef -Wshadow -Wcast-align -Wcast-qual -Wstrict-prototypes        -DNDEBUG ","$(inherited)");
+				OTHER_LDFLAGS = (" -Wl,-headerpad_max_install_names","/Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/lib/RelWithDebInfo${EFFECTIVE_PLATFORM_NAME}/libzstd.a","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = "zstd-frugal";
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/guitarrapc/github/guitarrapc/nativebuild-lab/builder/zstd_ios/_builds/programs";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = RelWithDebInfo;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		0ABC3B53E7094B769E30222F /* Build configuration list for PBXAggregateTarget "zstdcat.1" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				87DC998189B54C549F58D26D /* Debug */,
+				F4F4AB70ACBC4860A525F71A /* Release */,
+				4DF478DF54C34ACEA34E8FDC /* MinSizeRel */,
+				D9A3D6542FEB4C9F83274B15 /* RelWithDebInfo */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		0F44B25A9E6847B385CBD6B0 /* Build configuration list for PBXAggregateTarget "zstdcat" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				21F93C8878734C55B45FE453 /* Debug */,
+				BF6B742BED9140A3A3F656AE /* Release */,
+				90D6D4D7FE264E599313C1ED /* MinSizeRel */,
+				B1AF9D447E034194AB311825 /* RelWithDebInfo */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		20EFFE216AFD481AA3D11B49 /* Build configuration list for PBXAggregateTarget "install" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F629F716C8B643158026180F /* Debug */,
+				3F51F7E8E192422FBA9FF651 /* Release */,
+				0D06AEF3BEBB44DAA5D7C4BB /* MinSizeRel */,
+				DCBBA48FCA4048ABA03BA28D /* RelWithDebInfo */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		2A7D6D88054141C7AF9CD90B /* Build configuration list for PBXAggregateTarget "ZERO_CHECK" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F52AB469CDFA4E4E97C0BF11 /* Debug */,
+				64FE991345A046F094C3E83D /* Release */,
+				A1AB09E273524BF7BD6D6292 /* MinSizeRel */,
+				F5525EE636234683A314B798 /* RelWithDebInfo */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		3E1FC35C19F246E483DA9A6D /* Build configuration list for PBXNativeTarget "zstd" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				06A9441F189A429DA67B8ADE /* Debug */,
+				248A7381559146F799B19B66 /* Release */,
+				1179C7E1441A4911AF599C46 /* MinSizeRel */,
+				BD7E78CBAD7046EDA2899B15 /* RelWithDebInfo */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		50E9FC98E0634757B8E75F76 /* Build configuration list for PBXAggregateTarget "zstdless.1" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AEF1942C1A07469E9BE68EE5 /* Debug */,
+				A0482ADE7F374F5A971A2289 /* Release */,
+				C94D022D6191497ABF6FF8F3 /* MinSizeRel */,
+				ADA9B108A40E49E5BAE6D5B3 /* RelWithDebInfo */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		5638F96B557047BEA7F46E6B /* Build configuration list for PBXAggregateTarget "unzstd" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F0A8A8C9614446869A60B10F /* Debug */,
+				7EACAE9A96EB42E29FC372F0 /* Release */,
+				3B33E60D01184A56853D7568 /* MinSizeRel */,
+				11AC9861D37B4EBEB981C0BA /* RelWithDebInfo */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		56AFE7A10D45421399F0D4F1 /* Build configuration list for PBXAggregateTarget "ALL_BUILD" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				145801726E6A4CECB1115BE8 /* Debug */,
+				9C202AD129E34D258ECEF149 /* Release */,
+				08E080B82C544ABAAFACF6E4 /* MinSizeRel */,
+				F7BD7D6E921846469AE9DB4D /* RelWithDebInfo */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		765EB241B2854F938E453472 /* Build configuration list for PBXAggregateTarget "zstdgrep.1" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7779647295AA432D88F707D9 /* Debug */,
+				09EC711F9B814556933364FE /* Release */,
+				26EFF416C4F245739CE5BFED /* MinSizeRel */,
+				F75F840184C346CD94D72698 /* RelWithDebInfo */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		7C2E0E19DF614321889DA379 /* Build configuration list for PBXProject "programs" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				11A28A515E314D4CACD896E1 /* Debug */,
+				06FBF42DFB834AB8B812847D /* Release */,
+				1A04E17A9CC74953A8487DCF /* MinSizeRel */,
+				5E3C59F485BA4C119E0FE778 /* RelWithDebInfo */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		89415FB7D97F42658BF8ABE3 /* Build configuration list for PBXAggregateTarget "zstd.1" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A230CE1BB1B04B4A9B3AF6F9 /* Debug */,
+				DEE12BF0AF48412AB8C22114 /* Release */,
+				C828F240D3E9405AB3C5C7AE /* MinSizeRel */,
+				946AEE6B311845FCBDD51F1F /* RelWithDebInfo */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		AF26B1193B774D86A2E66209 /* Build configuration list for PBXNativeTarget "zstd-frugal" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				57A953839BD54EDBB830E860 /* Debug */,
+				FB422F535FEF484D94C6B808 /* Release */,
+				2CBF9C508DA24B6C8874B8F2 /* MinSizeRel */,
+				FDF9EAA85913436B8E383AB2 /* RelWithDebInfo */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		DB223DD12B894B9C81705928 /* Build configuration list for PBXAggregateTarget "zstdmt" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9AF908EEA6AE4D1BA322A4FA /* Debug */,
+				A6A64CB1E2D646148D28F174 /* Release */,
+				DC1B1C1E0DF84137928AA509 /* MinSizeRel */,
+				326C0AB8D55642A095675CEE /* RelWithDebInfo */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		E319075D5C3D4CBE8EC2E719 /* Build configuration list for PBXAggregateTarget "unzstd.1" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EA5C3D096E94401D9FABF3A2 /* Debug */,
+				4DF3EDBB547348B8AF41E591 /* Release */,
+				A926359DD5A747C6A2A4BD10 /* MinSizeRel */,
+				8A85547C181D48C7A6BC4EBD /* RelWithDebInfo */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = AE3104C75A6B4A2597D42651 /* Project object */;
+}
