@@ -1,39 +1,64 @@
 nativebuild-lab
 
-# zstd
-
-* Linux: /pkg/usr/local/lib (make in Docker)
-* Windows: zstd/build.d/lib/Release (cmake)
-* macOS: [TBD]
-* iOS: [TBD]
-* Android: [TBD]
-
-## Linux
-
-Use `make` in Docker to build zstd.
-
-```bash
-docker build -t zstd:latest -f builder/zstd-linux.dockerfile zstd
-docker run -i --rm --entrypoint /bin/sh zstd -c "ls -l /pkg/usr/local/lib"
-
--rw-r--r--    1 root     root       1195726 Aug 10 06:59 libzstd.a
-lrwxrwxrwx    1 root     root            16 Aug 10 06:59 libzstd.so -> libzstd.so.1.5.3
-lrwxrwxrwx    1 root     root            16 Aug 10 06:59 libzstd.so.1 -> libzstd.so.1.5.3
--rwxr-xr-x    1 root     root       1016320 Aug 10 06:59 libzstd.so.1.5.3
-drwxr-xr-x    2 root     root          4096 Aug 10 06:59 pkgconfig
+```
+git clone https://github.com/guitarrapc/nativebuild-lab
+git submodule update --init --recursive
 ```
 
-Following will work.
+
+# zstd
+
+* Linux amd: zstd/lib (make)
+* Linux arm: zstd/lib (make aarch64build)
+* Windows: zstd/build.d/lib/Release (cmake)
+* macOS: zstd/lib (make)
+* iOS: ~/.xcpkg/install.d/zstd/iPhoneOS/arm64/lib
+* Android: [TBD]
+
+## Linux amd
+
+Use `make`.
 
 ```bash
-cd zstd
-docker build -t zstd:latest -f contrib/docker/Dockerfile .
-echo foo | docker run -i --rm zstd | docker run -i --rm zstd zstdcat
+# windows
+zstd-linux-amd64.bat
+
+# linux
+. ./zstd-linux-amd64.sh
+```
+
+## Linux arm
+
+Use `make`.
+
+```bash
+# windows
+zstd-linux-aarch64.bat
+
+# linux
+. ./zstd-linux-aarch64.sh
 ```
 
 ## Windows
 
-Use `cmake` to build zstd.
+There are 2way to build.
+
+1. make
+2. cmake
+
+Primary target is make.
+
+**make**
+
+```bash
+# windows
+zstd-windows-x64.bat
+
+# linux
+. ./zstd-windows-x64.sh
+```
+
+**cmake**
 
 Install Visual Studio 2022 `C++ Desktop Experience` package for cmake.
 
@@ -55,11 +80,11 @@ total 2032
 
 ## macOS
 
-Use `make` to build for macOS.
+Use `make`.
 
 ```bash
 cd zstd
-make lib
+make
 ```
 
 ```bash
@@ -69,6 +94,8 @@ make lib
 
 
 ## iOS
+
+use `xcpkg`.
 
 ```bash
 brew tap leleliu008/fpliu
