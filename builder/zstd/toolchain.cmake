@@ -1,0 +1,37 @@
+set(CMAKE_VERBOSE_MAKEFILE ON)
+set(CMAKE_COLOR_MAKEFILE   ON)
+
+set(BUILD_SHARED_LIBS ON)
+
+set(CMAKE_BUILD_TYPE  Release)
+
+set(CMAKE_SYSTEM_NAME      Darwin)
+set(CMAKE_SYSTEM_VERSION   8.0)
+set(CMAKE_SYSTEM_PROCESSOR arm64)
+
+set(CMAKE_ASM_COMPILER /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang)
+set(CMAKE_ASM_FLAGS "-arch arm64")
+
+set(CMAKE_C_COMPILER "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang")
+set(CMAKE_C_FLAGS "-isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk -arch arm64 -miphoneos-version-min=8.0 -Qunused-arguments -Os -pipe -Wl,-S -Os -DNDEBUG -I/Users/guitarrapc/.xcpkg/install.d/xz/iPhoneOS/arm64/include -I/Users/guitarrapc/.xcpkg/install.d/zlib/iPhoneOS/arm64/include -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk -Qunused-arguments -include /var/folders/hj/ht6w56yd0xj4l19j282jnf4c0000gn/T/tmp.JLcL2soG/1660633136/include.h -D__arm64__ -L/Users/guitarrapc/.xcpkg/install.d/xz/iPhoneOS/arm64/lib -L/Users/guitarrapc/.xcpkg/install.d/zlib/iPhoneOS/arm64/lib -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk -arch arm64 -miphoneos-version-min=8.0 -Wl,-S")
+
+set(CMAKE_CXX_COMPILER "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++")
+set(CMAKE_CXX_FLAGS "-isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk -arch arm64 -miphoneos-version-min=8.0 -Qunused-arguments -Os -pipe -Wl,-S -Os -DNDEBUG -I/Users/guitarrapc/.xcpkg/install.d/xz/iPhoneOS/arm64/include -I/Users/guitarrapc/.xcpkg/install.d/zlib/iPhoneOS/arm64/include -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk -Qunused-arguments -include /var/folders/hj/ht6w56yd0xj4l19j282jnf4c0000gn/T/tmp.JLcL2soG/1660633136/include.h -D__arm64__ -L/Users/guitarrapc/.xcpkg/install.d/xz/iPhoneOS/arm64/lib -L/Users/guitarrapc/.xcpkg/install.d/zlib/iPhoneOS/arm64/lib -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk -arch arm64 -miphoneos-version-min=8.0 -Wl,-S")
+
+set(CMAKE_AR     "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ar")
+set(CMAKE_NM     "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/nm")
+set(CMAKE_RANLIB "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ranlib")
+set(CMAKE_STRIP  "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/strip")
+
+set(CMAKE_OSX_SYSROOT "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk")
+
+# https://cmake.org/cmake/help/latest/variable/CMAKE_OSX_ARCHITECTURES.html
+set(CMAKE_OSX_ARCHITECTURES "arm64" CACHE STRING "")
+
+set(CMAKE_FIND_DEBUG_MODE OFF)
+
+set(CMAKE_FIND_ROOT_PATH "/Users/guitarrapc/.xcpkg/install.d/zlib/iPhoneOS/arm64;/Users/guitarrapc/.xcpkg/install.d/xz/iPhoneOS/arm64")
+
+set(CMAKE_LIBRARY_PATH "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/usr/lib")
+
+set(CMAKE_IGNORE_PATH "/Users/guitarrapc/.xcpkg/install.d/xz/iPhoneOS/arm64/bin")

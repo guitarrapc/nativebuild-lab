@@ -95,10 +95,15 @@ use `cmake` or `xcpkg`.
 
 **cmake**
 
+Install prerequisites.
+```bash
+brew install cmake ninja gsed tree
+```
+
 ```bash
 cd builder/zstd_ios
 cmake ../../zstd/build/cmake -GXcode -DCMAKE_SYSTEM_NAME=iOS
-cmake ../../zstd/build/cmake -GXcode -DCMAKE_SYSTEM_NAME=iOS -DCMAKE_INSTALL_PREFIX=`pwd`/_install -DCMAKE_IOS_INSTALL_COMBINED=YES
+cmake ../../zstd/build/cmake -B_builds -GXcode -DCMAKE_SYSTEM_NAME=iOS -DCMAKE_INSTALL_PREFIX=`pwd`/_install -DCMAKE_IOS_INSTALL_COMBINED=YES
 cmake -S ../../zstd/build/cmake -B_builds -GXcode -DCMAKE_SYSTEM_NAME=iOS "-DCMAKE_OSX_ARCHITECTURES=armv7;armv7s;arm64;i386;x86_64" -DCMAKE_OSX_DEPLOYMENT_TARGET=9.3 -DCMAKE_INSTALL_PREFIX=`pwd`/_install -DCMAKE_XCODE_ATTRIBUTE_ONLY_ACTIVE_ARCH=NO -DCMAKE_IOS_INSTALL_COMBINED=YES
 cmake --build _builds --config Release --target install
 cd ../..
