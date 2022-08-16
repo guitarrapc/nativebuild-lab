@@ -14,7 +14,9 @@ cd ..
 
 # confirm
 ls zstd/lib/libzstd.a
+ls zstd/lib/libzstd.*dylib
 
 # copy
 mkdir -p "./pkg/zstd/${GIT_ZSTD_VERSION}/${OS}/${PLATFORM}/"
 cp ./zstd/lib/libzstd.a "./pkg/zstd/${GIT_ZSTD_VERSION}/${OS}/${PLATFORM}/."
+cp "./zstd/lib/libzstd.${FILE_ZSTD_VERSION}.dylib" "./pkg/zstd/${GIT_ZSTD_VERSION}/${OS}/${PLATFORM}/libzstd.dylib"
