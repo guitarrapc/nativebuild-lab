@@ -83,15 +83,8 @@ total 2032
 Use `make`.
 
 ```bash
-cd zstd
-make
+. ./zstd-darwin-arm.sh
 ```
-
-```bash
-% ls -l lib/libzstd.a
--rw-r--r--  1 guitarrapc  staff  931088 Aug 10 19:10 lib/libzstd.a
-```
-
 
 ## iOS
 
