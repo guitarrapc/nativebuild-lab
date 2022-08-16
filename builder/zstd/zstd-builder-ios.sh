@@ -19,8 +19,8 @@ WORKING_DIR_BUILD="${WORKING_DIR_BASE}/${OS}/${PLATFORM}"
 INSTALL_DIR="$(pwd)/tmp/${OS}/${PLATFORM}"
 TOOLCHAIN_FILE="$(pwd)/builder/zstd/toolchain.cmake"
 
-ENABLE_ZLIB="false"
-ENABLE_LZMA="false"
+ENABLE_ZLIB_LIB="false"
+ENABLE_LZMA_LIB="false"
 
 die() {
     printf '%b\n' "${COLOR_RED}💔  $*${COLOR_OFF}" >&2
@@ -40,10 +40,10 @@ __clean() {
 }
 
 __prepare_dependencies() {
-    if [[ "${ENABLE_LZMA}" == "true" ]]; then
+    if [[ "${ENABLE_LZMA_LIB}" == "true" ]]; then
         download_dependencies xz
     fi
-    if [[ "${ENABLE_ZLIB}" == "true" ]]; then
+    if [[ "${ENABLE_ZLIB_LIB}" == "true" ]]; then
         download_dependencies zlib
     fi
 }
@@ -129,14 +129,14 @@ __config_cmake_variables() {
 
     CMAKE_LIBRARY_PATH="$SYSTEM_LIBRARY_DIR"
 
-if [[ "${ENABLE_ZLIB}" == "true" ]]; then
-    CMAKE_FIND_ROOT_PATH="/Users/guitarrapc/.xcpkg/install.d/zlib/iPhoneOS/arm64;"
-fi
+    if [[ "${ENABLE_ZLIB_LIB}" == "true" ]]; then
+        CMAKE_FIND_ROOT_PATH="/Users/guitarrapc/.xcpkg/install.d/zlib/iPhoneOS/arm64;"
+    fi
 
-if [[ "${ENABLE_LZMA}" == "true" ]]; then
-    CMAKE_FIND_ROOT_PATH="$CMAKE_FIND_ROOT_PATH/Users/guitarrapc/.xcpkg/install.d/xz/iPhoneOS/arm64;"
-    CMAKE_IGNORE_PATH="/Users/guitarrapc/.xcpkg/install.d/xz/iPhoneOS/arm64/bin"
-fi
+    if [[ "${ENABLE_LZMA_LIB}" == "true" ]]; then
+        CMAKE_FIND_ROOT_PATH="$CMAKE_FIND_ROOT_PATH/Users/guitarrapc/.xcpkg/install.d/xz/iPhoneOS/arm64;"
+        CMAKE_IGNORE_PATH="/Users/guitarrapc/.xcpkg/install.d/xz/iPhoneOS/arm64/bin"
+    fi
 
 }
 
@@ -190,13 +190,16 @@ fi
 }
 
 __create_cmake_args() {
-if [[ "${ENABLE_ZLIB}" == "true" ]]; then
-  CMAKE_ARGS_ZLIB="-DZSTD_ZLIB_SUPPORT=ON -DZLIB_INCLUDE_DIR=/Users/guitarrapc/.xcpkg/install.d/zlib/iPhoneOS/arm64/include -DZLIB_LIBRARY=/Users/guitarrapc/.xcpkg/install.d/zlib/iPhoneOS/arm64/lib/libz.a"
-fi
+  CMAKE_ARGS_ZLIB="-DZSTD_ZLIB_SUPPORT=ON"
+  CMAKE_ARGS_LZMA="-DZSTD_LZMA_SUPPORT=ON"
 
-if [[ "${ENABLE_LZMA}" == "true" ]]; then
-  CMAKE_ARGS_LZMA="-DZSTD_LZMA_SUPPORT=ON -DLIBLZMA_INCLUDE_DIR=/Users/guitarrapc/.xcpkg/install.d/xz/iPhoneOS/arm64/include -DLIBLZMA_LIBRARY=/Users/guitarrapc/.xcpkg/install.d/xz/iPhoneOS/arm64/lib/liblzma.a"
-fi
+  if [[ "${ENABLE_LZMA_LIB}" == "true" ]]; then
+    CMAKE_ARGS_ZLIB="$CMAKE_ARGS_ZLIB -DZLIB_INCLUDE_DIR=/Users/guitarrapc/.xcpkg/install.d/zlib/iPhoneOS/arm64/include -DZLIB_LIBRARY=/Users/guitarrapc/.xcpkg/install.d/zlib/iPhoneOS/arm64/lib/libz.a"
+  fi
+
+  if [[ "${ENABLE_LZMA_LIB}" == "true" ]]; then
+    CMAKE_ARGS_LZMA="$CMAKE_ARGS_LZMA -DLIBLZMA_INCLUDE_DIR=/Users/guitarrapc/.xcpkg/install.d/xz/iPhoneOS/arm64/include -DLIBLZMA_LIBRARY=/Users/guitarrapc/.xcpkg/install.d/xz/iPhoneOS/arm64/lib/liblzma.a"
+  fi
 }
 
 __clean
