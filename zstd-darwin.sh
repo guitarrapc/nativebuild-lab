@@ -3,10 +3,12 @@ ZSTD_VERSION=$(cd zstd && echo "$(git tag --points-at HEAD | tr -d '[:space:]')"
 GIT_ZSTD_VERSION=${ZSTD_VERSION}
 FILE_ZSTD_VERSION=$(echo "${ZSTD_VERSION}" | cut -c 2-)
 OS=darwin
-PLATFORM=arm
+PLATFORM=$(uname -m)
+if [[ "$PLATFORM" == "x86_64" ]]; then PLATFORM="amd64"; fi
 
 # build
 cd zstd
+make clean
 make
 cd ..
 

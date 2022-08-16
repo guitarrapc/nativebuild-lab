@@ -83,8 +83,11 @@ total 2032
 Use `make`.
 
 ```bash
-. ./zstd-darwin-arm.sh
+. ./zstd-darwin.sh
 ```
+
+If running mac is M1/M2, output binary will be arm64.
+If running mac is Intel or Rosetta , output binary will be amd64.
 
 ## iOS
 
