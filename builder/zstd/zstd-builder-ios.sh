@@ -19,33 +19,18 @@ WORKING_DIR_BUILD="${WORKING_DIR_BASE}/${OS}/${PLATFORM}"
 INSTALL_DIR="$(pwd)/tmp/${OS}/${PLATFORM}"
 TOOLCHAIN_FILE="$(pwd)/builder/zstd/toolchain.cmake"
 
-ENABLE_ZLIB_LIB="false"
-ENABLE_LZMA_LIB="false"
+# NOTE: zlib and lzma will found from iPhoneOS.sdk.
+# -- Found ZLIB: /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/usr/lib/libz.tbd (found version "1.2.11")
+# -- Found LibLZMA: /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/usr/lib/liblzma.tbd (found version "5.2.5")
 
 die() {
     printf '%b\n' "${COLOR_RED}💔  $*${COLOR_OFF}" >&2
     exit 1
 }
 
-download_dependencies() {
-    # TODO: download source.
-    echo "Downloading $1"
-    PACKAGE_CCFLAGS="$PACKAGE_CCFLAGS -I/Users/guitarrapc/.xcpkg/install.d/$1/iPhoneOS/arm64/include"
-    PACKAGE_CPPGLAGS="$PACKAGE_CPPGLAGS -L/Users/guitarrapc/.xcpkg/install.d/$1/iPhoneOS/arm64/lib"
-}
-
 __clean() {
   rm -rf "${WORKING_DIR_BASE}"
   mkdir -p "${WORKING_DIR_BUILD}"
-}
-
-__prepare_dependencies() {
-    if [[ "${ENABLE_LZMA_LIB}" == "true" ]]; then
-        download_dependencies xz
-    fi
-    if [[ "${ENABLE_ZLIB_LIB}" == "true" ]]; then
-        download_dependencies zlib
-    fi
 }
 
 # __find_build_toolchains zstd iPhoneOS/arm64/8.0
@@ -87,10 +72,6 @@ __find_build_toolchains() {
         CPPFLAGS="$CPPFLAGS -D$item"
     done
 
-    if [ -n "$PACKAGE_CCFLAGS" ] ; then
-        CCFLAGS="$CCFLAGS $PACKAGE_CCFLAGS"
-    fi
-
     CXXFLAGS="$CCFLAGS"
 }
 
@@ -128,16 +109,6 @@ __config_cmake_variables() {
     CMAKE_FIND_DEBUG_MODE=OFF
 
     CMAKE_LIBRARY_PATH="$SYSTEM_LIBRARY_DIR"
-
-    if [[ "${ENABLE_ZLIB_LIB}" == "true" ]]; then
-        CMAKE_FIND_ROOT_PATH="/Users/guitarrapc/.xcpkg/install.d/zlib/iPhoneOS/arm64;"
-    fi
-
-    if [[ "${ENABLE_LZMA_LIB}" == "true" ]]; then
-        CMAKE_FIND_ROOT_PATH="$CMAKE_FIND_ROOT_PATH/Users/guitarrapc/.xcpkg/install.d/xz/iPhoneOS/arm64;"
-        CMAKE_IGNORE_PATH="/Users/guitarrapc/.xcpkg/install.d/xz/iPhoneOS/arm64/bin"
-    fi
-
 }
 
 __create_cmake_toolchain_file() {
@@ -175,31 +146,6 @@ set(CMAKE_FIND_DEBUG_MODE $CMAKE_FIND_DEBUG_MODE)
 
 set(CMAKE_LIBRARY_PATH "$CMAKE_LIBRARY_PATH")
 EOF
-
-if [[ "${CMAKE_FIND_ROOT_PATH}" != "" ]]; then
-  cat <<EOF
-set(CMAKE_FIND_ROOT_PATH "$CMAKE_FIND_ROOT_PATH")
-EOF
-fi
-
-if [[ "${CMAKE_IGNORE_PATH}" != "" ]]; then
-  cat <<EOF
-set(CMAKE_IGNORE_PATH "$CMAKE_IGNORE_PATH")
-EOF
-fi
-}
-
-__create_cmake_args() {
-  CMAKE_ARGS_ZLIB="-DZSTD_ZLIB_SUPPORT=ON"
-  CMAKE_ARGS_LZMA="-DZSTD_LZMA_SUPPORT=ON"
-
-  if [[ "${ENABLE_LZMA_LIB}" == "true" ]]; then
-    CMAKE_ARGS_ZLIB="$CMAKE_ARGS_ZLIB -DZLIB_INCLUDE_DIR=/Users/guitarrapc/.xcpkg/install.d/zlib/iPhoneOS/arm64/include -DZLIB_LIBRARY=/Users/guitarrapc/.xcpkg/install.d/zlib/iPhoneOS/arm64/lib/libz.a"
-  fi
-
-  if [[ "${ENABLE_LZMA_LIB}" == "true" ]]; then
-    CMAKE_ARGS_LZMA="$CMAKE_ARGS_LZMA -DLIBLZMA_INCLUDE_DIR=/Users/guitarrapc/.xcpkg/install.d/xz/iPhoneOS/arm64/include -DLIBLZMA_LIBRARY=/Users/guitarrapc/.xcpkg/install.d/xz/iPhoneOS/arm64/lib/liblzma.a"
-  fi
 }
 
 __clean
@@ -209,13 +155,11 @@ __find_build_toolchains "${PACKAGE_NAME}" "${TARGET}"
 __config_cmake_variables
 __create_cmake_toolchain_file | tee "${TOOLCHAIN_FILE}"
 
-__create_cmake_args
-
 #/opt/homebrew/bin/cmake -Wno-dev -S /var/folders/hj/ht6w56yd0xj4l19j282jnf4c0000gn/T/tmp.JLcL2soG/build/cmake -B /var/folders/hj/ht6w56yd0xj4l19j282jnf4c0000gn/T/tmp.JLcL2soG/1660633136/iPhoneOS/arm64 -DCMAKE_INSTALL_PREFIX=/Users/guitarrapc/.xcpkg/install.d/zstd/iPhoneOS/arm64 -DCMAKE_TOOLCHAIN_FILE=/var/folders/hj/ht6w56yd0xj4l19j282jnf4c0000gn/T/tmp.JLcL2soG/1660633136/iPhoneOS/arm64/toolchain.cmake -DCMAKE_VERBOSE_MAKEFILE=ON -DCMAKE_COLOR_MAKEFILE=ON -DZSTD_MULTITHREAD_SUPPORT=ON -DZSTD_BUILD_TESTS=OFF -DZSTD_BUILD_CONTRIB=OFF -DZSTD_BUILD_PROGRAMS=ON -DZSTD_BUILD_STATIC=ON -DZSTD_BUILD_SHARED=ON -DZSTD_ZLIB_SUPPORT=ON -DZSTD_LZMA_SUPPORT=ON -DZSTD_LZ4_SUPPORT=OFF -DZLIB_INCLUDE_DIR=/Users/guitarrapc/.xcpkg/install.d/zlib/iPhoneOS/arm64/include -DZLIB_LIBRARY=/Users/guitarrapc/.xcpkg/install.d/zlib/iPhoneOS/arm64/lib/libz.a -DLIBLZMA_INCLUDE_DIR=/Users/guitarrapc/.xcpkg/install.d/xz/iPhoneOS/arm64/include -DLIBLZMA_LIBRARY=/Users/guitarrapc/.xcpkg/install.d/xz/iPhoneOS/arm64/lib/liblzma.a
 #/opt/homebrew/bin/cmake --build /var/folders/hj/ht6w56yd0xj4l19j282jnf4c0000gn/T/tmp.JLcL2soG/1660633136/iPhoneOS/arm64 -- -j8
 
 pushd ${WORKING_DIR_BASE}
-cmake -Wno-dev -S "${WORKING_DIR_CMAKE}" -B "${WORKING_DIR_BUILD}" -DCMAKE_INSTALL_PREFIX="${INSTALL_DIR}" -DCMAKE_TOOLCHAIN_FILE="${TOOLCHAIN_FILE}" -DCMAKE_VERBOSE_MAKEFILE=ON -DCMAKE_COLOR_MAKEFILE=ON -DZSTD_MULTITHREAD_SUPPORT=ON -DZSTD_BUILD_TESTS=OFF -DZSTD_BUILD_CONTRIB=OFF -DZSTD_BUILD_PROGRAMS=ON -DZSTD_BUILD_STATIC=ON -DZSTD_BUILD_SHARED=ON -DZSTD_LZ4_SUPPORT=OFF $CMAKE_ARGS_ZLIB $CMAKE_ARGS_LZMA
+cmake -Wno-dev -S "${WORKING_DIR_CMAKE}" -B "${WORKING_DIR_BUILD}" -DCMAKE_INSTALL_PREFIX="${INSTALL_DIR}" -DCMAKE_TOOLCHAIN_FILE="${TOOLCHAIN_FILE}" -DCMAKE_VERBOSE_MAKEFILE=ON -DCMAKE_COLOR_MAKEFILE=ON -DZSTD_MULTITHREAD_SUPPORT=ON -DZSTD_BUILD_TESTS=OFF -DZSTD_BUILD_CONTRIB=OFF -DZSTD_BUILD_PROGRAMS=ON -DZSTD_BUILD_STATIC=ON -DZSTD_BUILD_SHARED=ON -DZSTD_LZ4_SUPPORT=OFF -DZSTD_ZLIB_SUPPORT=ON -DZSTD_LZMA_SUPPORT=ON
 cmake --build "${WORKING_DIR_BUILD}"  -- -j8
 popd
 
