@@ -32,7 +32,7 @@ jobs:
           - target: arm64
             os: macos-latest
     env:
-      OUTPUT_DIR: artifact/ios-${{ matrix.target }}
+      OUTPUT_DIR: artifact/zstd/ios-${{ matrix.target }}
     runs-on: ${{ matrix.os }}
     timeout-minutes: 10
     steps:
@@ -57,7 +57,7 @@ jobs:
       matrix:
         target: ["x64", "arm64"]
     env:
-      OUTPUT_DIR: artifact/linux-${{ matrix.target }}
+      OUTPUT_DIR: artifact/zstd/linux-${{ matrix.target }}
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
@@ -84,7 +84,7 @@ jobs:
           - target: x64
             os: macos-latest
     env:
-      OUTPUT_DIR: artifact/osx-${{ matrix.target }}
+      OUTPUT_DIR: artifact/zstd/osx-${{ matrix.target }}
     runs-on: ${{ matrix.os }}
     timeout-minutes: 10
     steps:
@@ -109,7 +109,7 @@ jobs:
       matrix:
         target: ["x64", "x86", "arm64"]
     env:
-      OUTPUT_DIR: artifact\win-${{ matrix.target }}
+      OUTPUT_DIR: artifact\zstd\win-${{ matrix.target }}
     runs-on: windows-2022
     timeout-minutes: 10
     steps:
