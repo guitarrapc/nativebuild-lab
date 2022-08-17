@@ -21,7 +21,7 @@ on:
 # win-x64, linux-x64, osx-x64
 
 env:
-  CREATE_PR: ${{ inputs.create-pullrequest == 'true' && inputs.create-pullrequest || 'false' }}
+  CREATE_PR: ${{ github.event.inputs.create-pullrequest == 'true' && github.event.inputs.create-pullrequest || 'false' }}
 
 jobs:
   ios:
@@ -132,7 +132,7 @@ jobs:
         if: ${{ env.CREATE_PR == 'true' }}
 
   pr:
-    if: ${{ inputs.create-pullrequest == 'true' }}
+    if: ${{ github.event.inputs.create-pullrequest == 'true' }}
     needs: [ios, linux, macos, windows]
     runs-on: ubuntu-latest
     timeout-minutes: 10
