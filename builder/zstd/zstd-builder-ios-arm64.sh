@@ -8,7 +8,7 @@ BUILD_TYPE=Release # Release or Debug
 WORKING_DIR_BASE="$(pwd)/builder/zstd_ios/${FILE_ZSTD_VERSION}"
 WORKING_DIR_BUILD="${WORKING_DIR_BASE}/${OS}/${PLATFORM}"
 WORKING_DIR_CMAKE="$(pwd)/zstd/build/cmake"
-CMAKE_TOOLCHAIN_FILE="$(pwd)/builder/zstd/toolchain.cmake"
+CMAKE_TOOLCHAIN_FILE="$(pwd)/builder/zstd/ios-arm64.toolchain.cmake"
 
 # NOTE: zlib and lzma will found from iPhoneOS.sdk.
 # -- Found ZLIB: /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/usr/lib/libz.tbd (found version "1.2.11")
