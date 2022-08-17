@@ -1,3 +1,2 @@
 builder/zstd_ios/
-!builder/zstd_ios/.gitkeep
-_tmp
+_tmp/

@@ -21,6 +21,7 @@ die() {
 
 __clean() {
   rm -rf "${WORKING_DIR_BASE}"
+  mkdir -p "${WORKING_DIR_BASE}"
   mkdir -p "${WORKING_DIR_BUILD}"
 }
 
