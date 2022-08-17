@@ -30,6 +30,8 @@ jobs:
         working-directory: zstd
       - name: Build
         run: bash ./zstd-linux-${{ matrix.target }}.sh
+      - name: show generated files
+        run: git ls-files --other --modified --exclude-standard
 
   macos:
     strategy:
@@ -48,6 +50,8 @@ jobs:
         working-directory: zstd
       - name: Build
         run: bash ./zstd-darwin.sh
+      - name: show generated files
+        run: git ls-files --other --modified --exclude-standard
 
   windows:
     strategy:
@@ -67,3 +71,5 @@ jobs:
       - name: Build
         run: zstd-windows-${{ matrix.target }}-cmake.bat
         shell: cmd
+      - name: show generated files
+        run: git ls-files --other --modified --exclude-standard
