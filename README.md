@@ -20,12 +20,12 @@ git submodule update --init --recursive
 
 # zstd
 
-* [x] Linux (amd64)
+* [x] Linux (x64)
 * [x] Linux (arm64)
 * [x] Windows (x64)
 * [x] Windows (x86)
 * [x] Windows (arm64)
-* [x] macOS (amd64)
+* [x] macOS (x64)
 * [x] macOS (arm64)
 * [x] iOS
 * [ ] Android
@@ -38,10 +38,10 @@ Use `make` to build.
 
 ```bash
 # windows
-zstd-linux-amd64.bat
+zstd-linux-x64.bat
 
 # linux
-. ./zstd-linux-amd64.sh
+. ./zstd-linux-x64.sh
 ```
 
 ### Linux (ARM64)
@@ -141,7 +141,7 @@ Use `make`.
 
 > **Note**
 > If running on Mac M1/M2, output binary will be `arm64`.
-> If running on Mac Intel or Rosetta2, output binary will be `x86_64` (=amd64).
+> If running on Mac Intel or Rosetta2, output binary will be `x86_64` (== x64 == amd64).
 
 ```bash
 . ./zstd-darwin.sh

@@ -6,11 +6,11 @@ ZSTD_VERSION=$(cd zstd && echo "$(git tag --points-at HEAD | tr -d '[:space:]')"
 GIT_ZSTD_VERSION=${ZSTD_VERSION}
 FILE_ZSTD_VERSION=$(echo "${ZSTD_VERSION}" | cut -c 2-)
 OS=linux
-PLATFORM=amd64
+PLATFORM=x64
 OUTPUT_DIR=${OUTPUT_DIR:=pkg/zstd/${GIT_ZSTD_VERSION}/${OS}/${PLATFORM}/}
 
 # build
-docker run --rm -v "$PWD/builder/zstd:/builder" -v "$PWD/zstd:/src" alpine:latest /bin/sh /builder/zstd-builder-linux-amd64.sh
+docker run --rm -v "$PWD/builder/zstd:/builder" -v "$PWD/zstd:/src" alpine:latest /bin/sh /builder/zstd-builder-linux-x64.sh
 
 # confirm
 ls zstd/lib/libzstd.a
