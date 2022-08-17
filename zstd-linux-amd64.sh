@@ -7,7 +7,7 @@ GIT_ZSTD_VERSION=${ZSTD_VERSION}
 FILE_ZSTD_VERSION=$(echo "${ZSTD_VERSION}" | cut -c 2-)
 OS=linux
 PLATFORM=amd64
-OUTPUT_DIR=${OUTPUT_BASE:=pkg/zstd/${GIT_ZSTD_VERSION}/${OS}/${PLATFORM}/}
+OUTPUT_DIR=${OUTPUT_DIR:=pkg/zstd/${GIT_ZSTD_VERSION}/${OS}/${PLATFORM}/}
 
 # build
 docker run --rm -v "$PWD/builder/zstd:/builder" -v "$PWD/zstd:/src" alpine:latest /bin/sh /builder/zstd-builder-linux-amd64.sh

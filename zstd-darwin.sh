@@ -10,7 +10,7 @@ FILE_ZSTD_VERSION=$(echo "${ZSTD_VERSION}" | cut -c 2-)
 OS=darwin
 PLATFORM=$(uname -m)
 if [[ "$PLATFORM" == "x86_64" ]]; then PLATFORM="amd64"; fi
-OUTPUT_DIR=${OUTPUT_BASE:=pkg/zstd/${GIT_ZSTD_VERSION}/${OS}/${PLATFORM}/}
+OUTPUT_DIR=${OUTPUT_DIR:=pkg/zstd/${GIT_ZSTD_VERSION}/${OS}/${PLATFORM}/}
 
 # build
 cd zstd

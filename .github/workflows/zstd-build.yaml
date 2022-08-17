@@ -11,15 +11,14 @@ on:
   pull_request:
     branches: [main]
 
-env:
-  OUTPUT_BASE: artifact
-
 jobs:
   linux:
     strategy:
       fail-fast: false
       matrix:
         target: ["amd64", "arm64"]
+    env:
+      OUTPUT_DIR: artifact/linux/${{ matrix.target }}
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
@@ -32,6 +31,10 @@ jobs:
         run: bash ./zstd-linux-${{ matrix.target }}.sh
       - name: show generated files
         run: git ls-files --other --modified --exclude-standard
+      - uses: actions/upload-artifact@v3
+        with:
+          name: linux-${{ matrix.target }}.zip
+          path: ${{ env.OUTPUT_DIR }}
 
   macos:
     strategy:
@@ -40,6 +43,8 @@ jobs:
         include:
           - target: amd64
             os: macos-latest
+    env:
+      OUTPUT_DIR: artifact/darwin/${{ matrix.target }}
     runs-on: ${{ matrix.os }}
     timeout-minutes: 10
     steps:
@@ -52,12 +57,18 @@ jobs:
         run: bash ./zstd-darwin.sh
       - name: show generated files
         run: git ls-files --other --modified --exclude-standard
+      - uses: actions/upload-artifact@v3
+        with:
+          name: darwin-${{ matrix.target }}.zip
+          path: ${{ env.OUTPUT_DIR }}
 
   windows:
     strategy:
       fail-fast: false
       matrix:
         target: ["x64", "x86", "arm64"]
+    env:
+      OUTPUT_DIR: artifact\windows\${{ matrix.target }}
     runs-on: windows-2022
     timeout-minutes: 10
     steps:
@@ -73,3 +84,7 @@ jobs:
         shell: cmd
       - name: show generated files
         run: git ls-files --other --modified --exclude-standard
+      - uses: actions/upload-artifact@v3
+        with:
+          name: windows-${{ matrix.target }}.zip
+          path: ${{ env.OUTPUT_DIR }}
