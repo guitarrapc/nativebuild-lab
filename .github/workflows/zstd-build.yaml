@@ -21,7 +21,7 @@ on:
 # win-x64, linux-x64, osx-x64
 
 env:
-  CREATE_PR: ${{ inputs.create-pullrequest && inputs.create-pullrequest || 'true' }}
+  CREATE_PR: ${{ inputs.create-pullrequest == 'true' && inputs.create-pullrequest || 'true' }}
 
 jobs:
   ios:
@@ -131,8 +131,8 @@ jobs:
           path: artifact
         if: ${{ env.CREATE_PR == 'true' }}
 
-  push-artifact:
-    if: ${{ env.CREATE_PR == 'true' }}
+  pr:
+    if: ${{ inputs.create-pullrequest == 'true' }}
     needs: [ios, linux, macos, windows]
     runs-on: ubuntu-latest
     timeout-minutes: 10
@@ -141,15 +141,23 @@ jobs:
       - uses: actions/download-artifact@v3
         with:
           name: artifact
-          path: artifact
-      - name: Commit files
-        run: |
-          ls -l
-          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git config --local user.name "github-actions[bot]"
-          git commit -m "[Automated] Add zstd artifacts" -a
-      - name: Push changes
-        uses: ad-m/github-push-action@master
+          path: _tmp
+      - name: Copy to artifact
+        run: cp -R _tmp/* artifact/
+      - name: Check for modified files
+        id: git-check
+        run: echo "::set-output name=modified::$(if git diff-index --quiet HEAD --; then echo "false"; else echo "true"; fi)"
+      - if: steps.git-check.outputs.modified == 'true'
+        name: Create PullRequest
+        uses: peter-evans/create-pull-request@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: ${{ github.ref }}
+          base: "main"
+          branch: "auto/zstd_artifact"
+          author: github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>
+          committer: github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>
+          delete-branch: true
+          title: "[zstd] Update artifacts"
+          body: |
+            zstd artifacts are updated :rocket:
+          labels: |
+            automated pr
