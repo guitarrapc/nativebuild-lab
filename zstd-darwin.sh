@@ -21,6 +21,7 @@ cd ..
 # confirm
 ls zstd/lib/libzstd.a
 ls zstd/lib/libzstd.*dylib
+ls zstd/programs/zstd
 
 # copy
 mkdir -p "./${OUTPUT_BASE}/zstd/${GIT_ZSTD_VERSION}/${OS}/${PLATFORM}/"

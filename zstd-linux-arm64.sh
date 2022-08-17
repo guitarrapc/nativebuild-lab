@@ -15,7 +15,7 @@ docker run --rm -v "$PWD/builder/zstd:/builder" -v "$PWD/zstd:/src" ubuntu:22.04
 # confirm
 ls zstd/lib/libzstd.a
 ls zstd/lib/libzstd.so*
-ls zstd/zstd
+ls zstd/programs/zstd
 
 # copy
 mkdir -p "./${OUTPUT_BASE}/zstd/${GIT_ZSTD_VERSION}/${OS}/${PLATFORM}/"
