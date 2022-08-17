@@ -1,7 +1,7 @@
 name: zstd build
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
+  group: ${{ github.workflow }}-${{ github.event_name }}-${{ github.ref }}
   cancel-in-progress: true
 
 on:
@@ -143,7 +143,7 @@ jobs:
           name: artifact
           path: _tmp
       - name: Copy to artifact
-        run: cp -R _tmp/* artifact/
+        run: mkdir -p ./artifact/ && cp -fR ./_tmp/* ./artifact/
       - name: Check for modified files
         id: git-check
         run: echo "::set-output name=modified::$(if git diff-index --quiet HEAD --; then echo "false"; else echo "true"; fi)"
