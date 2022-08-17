@@ -1,4 +1,9 @@
 #!/bin/sh
+
+set -e
+
+# generate arm64 on M1/M2, amd64 on Intel or Rosetta2.
+
 ZSTD_VERSION=$(cd zstd && echo "$(git tag --points-at HEAD | tr -d '[:space:]')" && cd ..)
 GIT_ZSTD_VERSION=${ZSTD_VERSION}
 FILE_ZSTD_VERSION=$(echo "${ZSTD_VERSION}" | cut -c 2-)
