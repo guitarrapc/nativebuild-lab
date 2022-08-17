@@ -15,12 +15,47 @@ env:
   OUTPUT_BASE: artifact
 
 jobs:
-  cmake-vs2022:
-    runs-on: windows-2022
-    timeout-minutes: 10
+  linux:
     strategy:
+      fail-fast: false
+      matrix:
+        target: ["amd64", "arm64"]
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          submodules: true
+      - run: git fetch --tags
+        working-directory: zstd
+      - name: Build
+        run: bash ./zstd-linux-${{ matrix.target }}.sh
+
+  macos:
+    strategy:
+      fail-fast: false
+      matrix:
+        includes:
+          - target: amd64
+            runs-on: macos-latest
+    runs-on: ${{ matrix.runs-on }}
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          submodules: true
+      - run: git fetch --tags
+        working-directory: zstd
+      - name: Build
+        run: bash ./zstd-darwin.sh
+
+  windows:
+    strategy:
+      fail-fast: false
       matrix:
         target: ["x64", "x86", "arm64"]
+    runs-on: windows-2022
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v3
         with:
@@ -32,4 +67,3 @@ jobs:
       - name: Build
         run: zstd-windows-${{ matrix.target }}-cmake.bat
         shell: cmd
-      - run: git status
