@@ -42,7 +42,7 @@ jobs:
       - run: git fetch --tags
         working-directory: zstd
       - name: Build
-        run: bash ./builder/zstd-ios-arm64.sh
+        run: bash ./builder/zstd/zstd-ios-arm64.sh
       - name: show generated files
         run: git ls-files --other --modified --exclude-standard
       - uses: actions/upload-artifact@v3
@@ -67,7 +67,7 @@ jobs:
       - run: git fetch --tags
         working-directory: zstd
       - name: Build
-        run: bash ./builder/zstd-linux-${{ matrix.target }}.sh
+        run: bash ./builder/zstd/zstd-linux-${{ matrix.target }}.sh
       - name: show generated files
         run: git ls-files --other --modified --exclude-standard
       - uses: actions/upload-artifact@v3
@@ -94,7 +94,7 @@ jobs:
       - run: git fetch --tags
         working-directory: zstd
       - name: Build
-        run: bash ./builder/zstd-darwin.sh
+        run: bash ./builder/zstd/zstd-darwin.sh
       - name: show generated files
         run: git ls-files --other --modified --exclude-standard
       - uses: actions/upload-artifact@v3
@@ -121,7 +121,7 @@ jobs:
       - name: Add MSBuild to PATH
         uses: microsoft/setup-msbuild@v1.1
       - name: Build
-        run: builder\zstd-windows-${{ matrix.target }}-cmake.bat
+        run: builder\zstd\zstd-windows-${{ matrix.target }}-cmake.bat
         shell: cmd
       - name: show generated files
         run: git ls-files --other --modified --exclude-standard

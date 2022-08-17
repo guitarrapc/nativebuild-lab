@@ -10,7 +10,7 @@ PLATFORM=arm64
 OUTPUT_DIR=${OUTPUT_DIR:=pkg/zstd/${GIT_ZSTD_VERSION}/${OS}/${PLATFORM}/}
 
 # build
-docker run --rm -v "$PWD/builder/zstd:/builder" -v "$PWD/zstd:/src" ubuntu:22.04 /bin/sh /builder/zstd-builder-linux-arm64.sh
+docker run --rm -v "$PWD/builder/zstd/docker:/builder" -v "$PWD/zstd:/src" ubuntu:22.04 /bin/sh /builder/zstd-builder-linux-arm64.sh
 
 # confirm
 ls zstd/lib/libzstd.a
