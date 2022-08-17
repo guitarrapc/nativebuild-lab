@@ -10,7 +10,7 @@ FILE_ZSTD_VERSION=$(echo "${ZSTD_VERSION}" | cut -c 2-)
 OS=darwin
 PLATFORM=$(uname -m)
 if [[ "$PLATFORM" == "x86_64" ]]; then PLATFORM="amd64"; fi
-OUTPUT_BASE=${OUTPUT_BASE:=pkg}
+OUTPUT_DIR=${OUTPUT_BASE:=pkg/zstd/${GIT_ZSTD_VERSION}/${OS}/${PLATFORM}/}
 
 # build
 cd zstd
@@ -24,7 +24,7 @@ ls zstd/lib/libzstd.*dylib
 ls zstd/programs/zstd
 
 # copy
-mkdir -p "./${OUTPUT_BASE}/zstd/${GIT_ZSTD_VERSION}/${OS}/${PLATFORM}/"
-cp ./zstd/lib/libzstd.a "./${OUTPUT_BASE}/zstd/${GIT_ZSTD_VERSION}/${OS}/${PLATFORM}/."
-cp "./zstd/lib/libzstd.${FILE_ZSTD_VERSION}.dylib" "./${OUTPUT_BASE}/zstd/${GIT_ZSTD_VERSION}/${OS}/${PLATFORM}/libzstd.dylib"
-cp ./zstd/programs/zstd "./${OUTPUT_BASE}/zstd/${GIT_ZSTD_VERSION}/${OS}/${PLATFORM}/."
+mkdir -p "./${OUTPUT_DIR}/"
+cp ./zstd/lib/libzstd.a "./${OUTPUT_DIR}/."
+cp "./zstd/lib/libzstd.${FILE_ZSTD_VERSION}.dylib" "./${OUTPUT_DIR}/libzstd.dylib"
+cp ./zstd/programs/zstd "./${OUTPUT_DIR}/."

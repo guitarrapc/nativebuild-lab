@@ -9,7 +9,7 @@ set GIT_ZSTD_VERSION=%ZSTD_VERSION:~0,-1%
 set FILE_ZSTD_VERSION=%ZSTD_VERSION:~1,-1%
 set OS=windows
 set PLATFORM=arm64
-if not defined OUTPUT_BASE (set OUTPUT_BASE=pkg)
+if not defined OUTPUT_DIR (set OUTPUT_DIR=pkg\zstd\%GIT_ZSTD_VERSION%\%OS%\%PLATFORM%)
 
 :: build
 docker run --rm -v "%cd%/builder/zstd:/builder" -v "%cd%/zstd:/src" mstorsjo/llvm-mingw:20220802 /bin/bash /builder/zstd-builder-windows-arm64.sh
@@ -19,6 +19,6 @@ dir zstd\lib\dll\libzstd.dll
 dir zstd\programs\zstd.exe
 
 :: copy
-mkdir %OUTPUT_BASE%\zstd\%GIT_ZSTD_VERSION%\%OS%\%PLATFORM%\mingw
-cp .\zstd\lib\dll\libzstd.dll .\%OUTPUT_BASE%\zstd\%GIT_ZSTD_VERSION%\%OS%\%PLATFORM%\mingw\libzstd.dll
-cp .\zstd\programs\zstd.exe .\%OUTPUT_BASE%\zstd\%GIT_ZSTD_VERSION%\%OS%\%PLATFORM%\mingw\zstd.exe
+mkdir %OUTPUT_DIR%\mingw
+cp .\zstd\lib\dll\libzstd.dll .\%OUTPUT_DIR%\mingw\libzstd.dll
+cp .\zstd\programs\zstd.exe .\%OUTPUT_DIR%\mingw\zstd.exe

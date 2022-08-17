@@ -9,7 +9,7 @@ set GIT_ZSTD_VERSION=%ZSTD_VERSION:~0,-1%
 set FILE_ZSTD_VERSION=%ZSTD_VERSION:~1,-1%
 set OS=linux
 set PLATFORM=arm64
-if not defined OUTPUT_BASE (set OUTPUT_BASE=pkg)
+if not defined OUTPUT_DIR (set OUTPUT_DIR=pkg\zstd\%GIT_ZSTD_VERSION%\%OS%\%PLATFORM%)
 
 :: build
 docker run --rm -v "%cd%/builder/zstd:/builder" -v "%cd%/zstd:/src" ubuntu:22.04 /bin/bash /builder/zstd-builder-linux-arm64.sh
@@ -19,7 +19,7 @@ dir zstd\lib\libzstd.a
 dir zstd\lib\libzstd.so*
 
 :: copy
-mkdir %OUTPUT_BASE%\zstd\%GIT_ZSTD_VERSION%\%OS%\%PLATFORM%
-cp .\zstd\lib\libzstd.a .\%OUTPUT_BASE%\zstd\%GIT_ZSTD_VERSION%\%OS%\%PLATFORM%\libzstd.a
-cp .\zstd\lib\libzstd.so.%FILE_ZSTD_VERSION% .\%OUTPUT_BASE%\zstd\%GIT_ZSTD_VERSION%\%OS%\%PLATFORM%\libzstd.so
-cp .\zstd\programs\zstd .\%OUTPUT_BASE%\zstd\%GIT_ZSTD_VERSION%\%OS%\%PLATFORM%\zstd
+mkdir %OUTPUT_DIR%
+cp .\zstd\lib\libzstd.a .\%OUTPUT_DIR%\libzstd.a
+cp .\zstd\lib\libzstd.so.%FILE_ZSTD_VERSION% .\%OUTPUT_DIR%\libzstd.so
+cp .\zstd\programs\zstd .\%OUTPUT_DIR%\zstd

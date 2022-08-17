@@ -7,7 +7,7 @@ GIT_ZSTD_VERSION=${ZSTD_VERSION}
 FILE_ZSTD_VERSION=$(echo "${ZSTD_VERSION}" | cut -c 2-)
 OS=linux
 PLATFORM=amd64
-OUTPUT_BASE=${OUTPUT_BASE:=pkg}
+OUTPUT_DIR=${OUTPUT_BASE:=pkg/zstd/${GIT_ZSTD_VERSION}/${OS}/${PLATFORM}/}
 
 # build
 docker run --rm -v "$PWD/builder/zstd:/builder" -v "$PWD/zstd:/src" alpine:latest /bin/sh /builder/zstd-builder-linux-amd64.sh
@@ -18,7 +18,7 @@ ls zstd/lib/libzstd.so*
 ls zstd/programs/zstd
 
 # copy
-mkdir -p "./${OUTPUT_BASE}/zstd/${GIT_ZSTD_VERSION}/${OS}/${PLATFORM}/"
-cp ./zstd/lib/libzstd.a "./${OUTPUT_BASE}/zstd/${GIT_ZSTD_VERSION}/${OS}/${PLATFORM}/."
-cp "./zstd/lib/libzstd.so.${FILE_ZSTD_VERSION}" "./${OUTPUT_BASE}/zstd/${GIT_ZSTD_VERSION}/${OS}/${PLATFORM}/libzstd.so"
-cp ./zstd/programs/zstd "./${OUTPUT_BASE}/zstd/${GIT_ZSTD_VERSION}/${OS}/${PLATFORM}/."
+mkdir -p "./${OUTPUT_DIR}/"
+cp ./zstd/lib/libzstd.a "./${OUTPUT_DIR}/."
+cp "./zstd/lib/libzstd.so.${FILE_ZSTD_VERSION}" "./${OUTPUT_DIR}/libzstd.so"
+cp ./zstd/programs/zstd "./${OUTPUT_DIR}/."

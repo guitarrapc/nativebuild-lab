@@ -7,7 +7,7 @@ GIT_ZSTD_VERSION=${ZSTD_VERSION}
 FILE_ZSTD_VERSION=$(echo "${ZSTD_VERSION}" | cut -c 2-)
 OS=windows
 PLATFORM=x64
-OUTPUT_BASE=${OUTPUT_BASE:=pkg}
+OUTPUT_DIR=${OUTPUT_BASE:=pkg/zstd/${GIT_ZSTD_VERSION}/${OS}/${PLATFORM}/}
 
 # build
 # docker run --rm -v "$PWD/builder/zstd:/builder" -v "$PWD/zstd:/src" ubuntu:22.04 /bin/sh /builder/zstd-builder-windows-x64.sh
@@ -18,6 +18,6 @@ ls zstd/lib/dll/libzstd.dll
 ls zstd/programs/zstd.exe
 
 # copy
-mkdir -p "./${OUTPUT_BASE}/zstd/${GIT_ZSTD_VERSION}/${OS}/${PLATFORM}/mingw"
-cp ./zstd/lib/dll/libzstd.dll "./${OUTPUT_BASE}/zstd/${GIT_ZSTD_VERSION}/${OS}/${PLATFORM}/mingw/."
-cp "./zstd/programs/zstd.exe" "./${OUTPUT_BASE}/zstd/${GIT_ZSTD_VERSION}/${OS}/${PLATFORM}/mingw/."
+mkdir -p "./${OUTPUT_DIR}/mingw"
+cp ./zstd/lib/dll/libzstd.dll "./${OUTPUT_DIR}/mingw/."
+cp "./zstd/programs/zstd.exe" "./${OUTPUT_DIR}/mingw/."
