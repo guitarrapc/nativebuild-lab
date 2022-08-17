@@ -11,7 +11,7 @@ set OS=windows
 set PLATFORM=x64
 
 :: build
-docker run --rm -v "%cd%/builder/zstd:/builder" -v "%cd%/zstd:/src" ubuntu:22.04 /bin/bash /builder/zstd-builder-windows.sh
+docker run --rm -v "%cd%/builder/zstd:/builder" -v "%cd%/zstd:/src" ubuntu:22.04 /bin/bash /builder/zstd-builder-windows-x64.sh
 
 :: confirm
 dir zstd\lib\dll\libzstd.dll

@@ -9,7 +9,7 @@ OS=windows
 PLATFORM=x64
 
 # build
-docker run --rm -v "$PWD/builder/zstd:/builder" -v "$PWD/zstd:/src" ubuntu:22.04 /bin/sh /builder/zstd-builder-windows.sh
+docker run --rm -v "$PWD/builder/zstd:/builder" -v "$PWD/zstd:/src" ubuntu:22.04 /bin/sh /builder/zstd-builder-windows-x64.sh
 
 # confirm
 ls zstd/lib/dll/libzstd.dll

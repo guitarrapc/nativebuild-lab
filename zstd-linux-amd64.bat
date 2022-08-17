@@ -11,13 +11,15 @@ set OS=linux
 set PLATFORM=amd64
 
 :: build
-docker run --rm -v "%cd%/builder/zstd:/builder" -v "%cd%/zstd:/src" alpine:latest /bin/bash /builder/zstd-builder-linux-amd64.sh
+docker run --rm -v "%cd%/builder/zstd:/builder" -v "%cd%/zstd:/src" alpine:latest /bin/sh /builder/zstd-builder-linux-amd64.sh
 
 :: confirm
 dir zstd\lib\libzstd.a
 dir zstd\lib\libzstd.so*
+dir zstd\zstd
 
 :: copy
 mkdir pkg\zstd\%GIT_ZSTD_VERSION%\%OS%\%PLATFORM%
 cp .\zstd\lib\libzstd.a .\pkg\zstd\%GIT_ZSTD_VERSION%\%OS%\%PLATFORM%\libzstd.a
 cp .\zstd\lib\libzstd.so.%FILE_ZSTD_VERSION% .\pkg\zstd\%GIT_ZSTD_VERSION%\%OS%\%PLATFORM%\libzstd.so
+cp .\zstd\programs\zstd .\pkg\zstd\%GIT_ZSTD_VERSION%\%OS%\%PLATFORM%\zstd

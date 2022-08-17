@@ -21,3 +21,4 @@ dir zstd\lib\libzstd.so*
 mkdir pkg\zstd\%GIT_ZSTD_VERSION%\%OS%\%PLATFORM%
 cp .\zstd\lib\libzstd.a .\pkg\zstd\%GIT_ZSTD_VERSION%\%OS%\%PLATFORM%\libzstd.a
 cp .\zstd\lib\libzstd.so.%FILE_ZSTD_VERSION% .\pkg\zstd\%GIT_ZSTD_VERSION%\%OS%\%PLATFORM%\libzstd.so
+cp .\zstd\programs\zstd .\pkg\zstd\%GIT_ZSTD_VERSION%\%OS%\%PLATFORM%\zstd
