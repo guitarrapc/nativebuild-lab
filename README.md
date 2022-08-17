@@ -1,10 +1,22 @@
-nativebuild-lab
+[![zstd build](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/zstd-build.yaml/badge.svg)](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/zstd-build.yaml)
 
-```
+# nativebuild-lab
+
+This repository indicate build native binaries for following.
+
+* zstd
+* (upcoming....)
+
+# Build packages
+
+Checkout repository, then run your build.
+
+```bash
 git clone https://github.com/guitarrapc/nativebuild-lab
 git submodule update --init --recursive
-```
 
+# run your build for packages. see below instructions.
+```
 
 # zstd
 
