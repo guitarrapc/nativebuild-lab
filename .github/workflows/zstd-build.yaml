@@ -33,8 +33,8 @@ jobs:
         run: git ls-files --other --modified --exclude-standard
       - uses: actions/upload-artifact@v3
         with:
-          name: linux-${{ matrix.target }}
-          path: ${{ env.OUTPUT_DIR }}
+          name: artifact
+          path: artifact
 
   macos:
     strategy:
@@ -59,8 +59,8 @@ jobs:
         run: git ls-files --other --modified --exclude-standard
       - uses: actions/upload-artifact@v3
         with:
-          name: darwin-${{ matrix.target }}
-          path: ${{ env.OUTPUT_DIR }}
+          name: artifact
+          path: artifact
 
   windows:
     strategy:
@@ -86,5 +86,16 @@ jobs:
         run: git ls-files --other --modified --exclude-standard
       - uses: actions/upload-artifact@v3
         with:
-          name: windows-${{ matrix.target }}
-          path: ${{ env.OUTPUT_DIR }}
+          name: artifact
+          path: artifact
+
+  push-back:
+    needs: [linux, macos, windows]
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/download-artifact@v3
+        with:
+          name: artifact
+      - name: Display structure of downloaded files
+        run: ls -R
