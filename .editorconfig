@@ -11,6 +11,3 @@ trim_trailing_whitespace = true
 [*.bat]
 charset = shift-jis
 end_of_line = crlf
-
-[Makefile]
-indent_style = tab

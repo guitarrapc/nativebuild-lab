@@ -7,7 +7,7 @@ GIT_ZSTD_VERSION=${ZSTD_VERSION}
 FILE_ZSTD_VERSION=$(echo "${ZSTD_VERSION}" | cut -c 2-)
 OS=windows
 PLATFORM=x86
-OUTPUT_BASE=${OUTPUTBASE:=pkg}
+OUTPUT_BASE=${OUTPUT_BASE:=pkg}
 
 # build
 # docker run --rm -v "$PWD/builder/zstd:/builder" -v "$PWD/zstd:/src" ubuntu:22.04 /bin/sh /builder/zstd-builder-windows-x86.sh
