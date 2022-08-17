@@ -11,7 +11,7 @@ set OS=linux
 set PLATFORM=aarch64
 
 :: build
-docker run --rm -v "%cd%/builder/zstd:/builder" -v "%cd%/zstd:/src" ubuntu:22.04 /bin/bash /builder/zstd-builder-aarch64.sh
+docker run --rm -v "%cd%/builder/zstd:/builder" -v "%cd%/zstd:/src" ubuntu:22.04 /bin/bash /builder/zstd-builder-linux-aarch64.sh
 
 :: confirm
 dir zstd\lib\libzstd.a

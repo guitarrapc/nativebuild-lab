@@ -9,7 +9,7 @@ OS=linux
 PLATFORM=amd64
 
 # build
-docker run --rm -v "$PWD/builder/zstd:/builder" -v "$PWD/zstd:/src" alpine:latest /bin/sh /builder/zstd-builder-amd64.sh
+docker run --rm -v "$PWD/builder/zstd:/builder" -v "$PWD/zstd:/src" alpine:latest /bin/sh /builder/zstd-builder-linux-amd64.sh
 
 # confirm
 ls zstd/lib/libzstd.a

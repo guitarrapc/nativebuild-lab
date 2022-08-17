@@ -12,7 +12,7 @@ PACKAGE_NAME=zstd
 TARGET=${OS}/${PLATFORM}/8.0
 
 # prepare
-source ./builder/zstd/zstd-builder-ios.sh
+source ./builder/zstd/zstd-builder-ios-arm64.sh
 __clean
 __find_build_toolchains "${PACKAGE_NAME}" "${TARGET}"
 __config_cmake_variables
