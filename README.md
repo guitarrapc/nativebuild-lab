@@ -8,16 +8,21 @@ git submodule update --init --recursive
 
 # zstd
 
-* Linux amd: zstd/lib (make)
-* Linux arm: zstd/lib (make aarch64build)
-* Windows: zstd/build.d/lib/Release (cmake)
-* macOS: zstd/lib (make)
-* iOS: ~/.xcpkg/install.d/zstd/iPhoneOS/arm64/lib
-* Android: [TBD]
+* [x] Linux (amd64)
+* [x] Linux (arm64)
+* [x] Windows (x64)
+* [x] Windows (x86)
+* [x] Windows (arm64)
+* [x] macOS (amd64)
+* [x] macOS (arm64)
+* [x] iOS
+* [ ] Android
 
-## Linux amd
+## Linux
 
-Use `make`.
+Use `make` to build.
+
+### Linux (x64)
 
 ```bash
 # windows
@@ -27,7 +32,7 @@ zstd-linux-amd64.bat
 . ./zstd-linux-amd64.sh
 ```
 
-## Linux arm
+### Linux (ARM64)
 
 Use `make`.
 
@@ -46,7 +51,12 @@ There are 2way to build.
 1. make
 2. cmake
 
-Primary target is make.
+If you are runnning on Linux, use make.
+If you are runnning on Windows use cmake. you can use make with docker.
+
+> **Note**: **cmake** binaries are named `zstd*`, on the otherhand **make** binaries are `libzstd*`.
+
+### Windows (x64)
 
 **make**
 
@@ -62,19 +72,54 @@ zstd-windows-x64.bat
 
 Install Visual Studio 2022 `C++ Desktop Experience` package for cmake.
 
-```bash
-cd zstd
-cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=../usr -G "Visual Studio 17 2022" -Wno-dev -S build/cmake -B build.d
-cmake --build ./build.d --config Release
-```
+Open `x64_x86 Cross Tools Command Prompt for VS2022`.
 
 ```bash
-ls -l build.d/lib/Release
-total 2032
--rw-rw-r--    1 user   user      599552 Aug 10 18:19 zstd.dll
--rw-rw-r--    1 user   user       26362 Aug 10 18:19 zstd.exp
--rw-rw-r--    1 user   user       43314 Aug 10 18:19 zstd.lib
--rw-rw-r--    1 user   user     1404092 Aug 10 18:19 zstd_static.lib
+zstd-windows-x64-cmake.bat
+```
+
+### Windows (x86)
+
+**make**
+
+```bash
+# windows
+zstd-windows-x86.bat
+
+# linux
+. ./zstd-windows-x86.sh
+```
+
+**cmake**
+
+Install Visual Studio 2022 `C++ Desktop Experience` package for cmake.
+
+Open `x64_x86 Cross Tools Command Prompt for VS2022`.
+
+```bash
+zstd-windows-x86-cmake.bat
+```
+
+### Windows (ARM64)
+
+**make**
+
+```bash
+# windows
+zstd-windows-arm64.bat
+
+# linux
+. ./zstd-windows-arm64.sh
+```
+
+**cmake**
+
+Install Visual Studio 2022 `C++ Desktop Experience` package and `MSVC v143 - VS 2022 C++ ARM64 build tools` for cmake.
+
+Open `x64_x86 Cross Tools Command Prompt for VS2022`.
+
+```bash
+zstd-windows-arm64-cmake.bat
 ```
 
 
@@ -82,12 +127,13 @@ total 2032
 
 Use `make`.
 
+> **Note**
+> If running on Mac M1/M2, output binary will be `arm64`.
+> If running on Mac Intel or Rosetta2, output binary will be `x86_64` (=amd64).
+
 ```bash
 . ./zstd-darwin.sh
 ```
-
-If running mac is M1/M2, output binary will be `arm64`.
-If running mac is Intel or Rosetta , output binary will be `x86_64` (=amd64).
 
 ## iOS
 
