@@ -38,10 +38,10 @@ Use `make` to build.
 
 ```bash
 # windows
-zstd-linux-x64.bat
+builder\zstd-linux-x64.bat
 
 # linux
-. ./zstd-linux-x64.sh
+bash ./builder/zstd-linux-x64.sh
 ```
 
 ### Linux (ARM64)
@@ -50,10 +50,10 @@ Use `make`.
 
 ```bash
 # windows
-zstd-linux-arm64.bat
+builder\zstd-linux-arm64.bat
 
 # linux
-. ./zstd-linux-arm64.sh
+bash ./builder/zstd-linux-arm64.sh
 ```
 
 ## Windows
@@ -74,10 +74,10 @@ If you are runnning on Windows use cmake. you can use make with docker.
 
 ```bash
 # windows
-zstd-windows-x64.bat
+builder\zstd-windows-x64.bat
 
 # linux
-. ./zstd-windows-x64.sh
+bash ./builder/zstd-windows-x64.sh
 ```
 
 **cmake**
@@ -87,7 +87,7 @@ Install Visual Studio 2022 `C++ Desktop Experience` package for cmake.
 Open `x64_x86 Cross Tools Command Prompt for VS2022`.
 
 ```bash
-zstd-windows-x64-cmake.bat
+builder\zstd-windows-x64-cmake.bat
 ```
 
 ### Windows (x86)
@@ -96,10 +96,10 @@ zstd-windows-x64-cmake.bat
 
 ```bash
 # windows
-zstd-windows-x86.bat
+builder\zstd-windows-x86.bat
 
 # linux
-. ./zstd-windows-x86.sh
+bash ./builder/zstd-windows-x86.sh
 ```
 
 **cmake**
@@ -109,7 +109,7 @@ Install Visual Studio 2022 `C++ Desktop Experience` package for cmake.
 Open `x64_x86 Cross Tools Command Prompt for VS2022`.
 
 ```bash
-zstd-windows-x86-cmake.bat
+builder\zstd-windows-x86-cmake.bat
 ```
 
 ### Windows (ARM64)
@@ -118,10 +118,10 @@ zstd-windows-x86-cmake.bat
 
 ```bash
 # windows
-zstd-windows-arm64.bat
+builder\zstd-windows-arm64.bat
 
 # linux
-. ./zstd-windows-arm64.sh
+bash ./builder/zstd-windows-arm64.sh
 ```
 
 **cmake**
@@ -131,7 +131,7 @@ Install Visual Studio 2022 `C++ Desktop Experience` package and `MSVC v143 - VS 
 Open `x64_x86 Cross Tools Command Prompt for VS2022`.
 
 ```bash
-zstd-windows-arm64-cmake.bat
+builder\zstd-windows-arm64-cmake.bat
 ```
 
 
@@ -144,7 +144,7 @@ Use `make`.
 > If running on Mac Intel or Rosetta2, output binary will be `x86_64` (== x64 == amd64).
 
 ```bash
-. ./zstd-darwin.sh
+bash ./builder/zstd-darwin.sh
 ```
 
 ## iOS
@@ -159,7 +159,7 @@ brew install cmake ninja gsed tree
 ```
 
 ```bash
-. ./zstd-ios-arm64.sh
+bash ./builder/zstd-ios-arm64.sh
 ```
 
 **xcpkg**
