@@ -6,11 +6,11 @@ ZSTD_VERSION=$(cd zstd && echo "$(git tag --points-at HEAD | tr -d '[:space:]')"
 GIT_ZSTD_VERSION=${ZSTD_VERSION}
 FILE_ZSTD_VERSION=$(echo "${ZSTD_VERSION}" | cut -c 2-)
 OS=linux
-PLATFORM=aarch64
+PLATFORM=arm64
 OUTPUT_BASE=${OUTPUTBASE:=pkg}
 
 # build
-docker run --rm -v "$PWD/builder/zstd:/builder" -v "$PWD/zstd:/src" ubuntu:22.04 /bin/sh /builder/zstd-builder-linux-aarch64.sh
+docker run --rm -v "$PWD/builder/zstd:/builder" -v "$PWD/zstd:/src" ubuntu:22.04 /bin/sh /builder/zstd-builder-linux-arm64.sh
 
 # confirm
 ls zstd/lib/libzstd.a

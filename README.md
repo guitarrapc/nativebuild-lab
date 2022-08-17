@@ -38,10 +38,10 @@ Use `make`.
 
 ```bash
 # windows
-zstd-linux-aarch64.bat
+zstd-linux-arm64.bat
 
 # linux
-. ./zstd-linux-aarch64.sh
+. ./zstd-linux-arm64.sh
 ```
 
 ## Windows
