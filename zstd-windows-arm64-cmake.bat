@@ -9,6 +9,7 @@ set GIT_ZSTD_VERSION=%ZSTD_VERSION:~0,-1%
 set FILE_ZSTD_VERSION=%ZSTD_VERSION:~1,-1%
 set OS=windows
 set PLATFORM=arm64
+if not defined OUTPUT_BASE (set OUTPUT_BASE=pkg)
 
 :: build
 set BASEDIR=%cd%
@@ -24,6 +25,6 @@ dir zstd\build\cmake\build\lib\Release\zstd*
 dir zstd\build\cmake\build\programs\Release\zstd.exe
 
 :: copy
-mkdir pkg\zstd\%GIT_ZSTD_VERSION%\%OS%\%PLATFORM%
-cp zstd\build\cmake\build\lib\Release\zstd.dll .\pkg\zstd\%GIT_ZSTD_VERSION%\%OS%\%PLATFORM%\zstd.dll
-cp zstd\build\cmake\build\programs\Release\zstd.exe .\pkg\zstd\%GIT_ZSTD_VERSION%\%OS%\%PLATFORM%\zstd.exe
+mkdir %OUTPUT_BASE%\zstd\%GIT_ZSTD_VERSION%\%OS%\%PLATFORM%
+cp zstd\build\cmake\build\lib\Release\zstd.dll .\%OUTPUT_BASE%\zstd\%GIT_ZSTD_VERSION%\%OS%\%PLATFORM%\zstd.dll
+cp zstd\build\cmake\build\programs\Release\zstd.exe .\%OUTPUT_BASE%\zstd\%GIT_ZSTD_VERSION%\%OS%\%PLATFORM%\zstd.exe

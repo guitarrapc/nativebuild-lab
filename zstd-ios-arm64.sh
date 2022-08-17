@@ -7,6 +7,7 @@ GIT_ZSTD_VERSION=${ZSTD_VERSION}
 FILE_ZSTD_VERSION=$(echo "${ZSTD_VERSION}" | cut -c 2-)
 OS=iPhoneOS
 PLATFORM=arm64
+OUTPUT_BASE=${OUTPUTBASE:=pkg}
 
 PACKAGE_NAME=zstd
 TARGET=${OS}/${PLATFORM}/8.0
@@ -29,6 +30,6 @@ ls -l "${WORKING_DIR_BUILD}/lib/libzstd.a"
 ls -l ${WORKING_DIR_BUILD}/lib/libzstd.*dylib
 
 # copy
-mkdir -p "./pkg/zstd/${GIT_ZSTD_VERSION}/${OS}/${PLATFORM}/"
-cp "${WORKING_DIR_BUILD}/lib/libzstd.a" "./pkg/zstd/${GIT_ZSTD_VERSION}/${OS}/${PLATFORM}/."
-cp "${WORKING_DIR_BUILD}/lib/libzstd.${FILE_ZSTD_VERSION}.dylib" "./pkg/zstd/${GIT_ZSTD_VERSION}/${OS}/${PLATFORM}/libzstd.dylib"
+mkdir -p "./${OUTPUT_BASE}/zstd/${GIT_ZSTD_VERSION}/${OS}/${PLATFORM}/"
+cp "${WORKING_DIR_BUILD}/lib/libzstd.a" "./${OUTPUT_BASE}/zstd/${GIT_ZSTD_VERSION}/${OS}/${PLATFORM}/."
+cp "${WORKING_DIR_BUILD}/lib/libzstd.${FILE_ZSTD_VERSION}.dylib" "./${OUTPUT_BASE}/zstd/${GIT_ZSTD_VERSION}/${OS}/${PLATFORM}/libzstd.dylib"

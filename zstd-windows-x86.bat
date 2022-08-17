@@ -9,16 +9,17 @@ set GIT_ZSTD_VERSION=%ZSTD_VERSION:~0,-1%
 set FILE_ZSTD_VERSION=%ZSTD_VERSION:~1,-1%
 set OS=windows
 set PLATFORM=x86
+if not defined OUTPUT_BASE (set OUTPUT_BASE=pkg)
 
 :: build
-docker run --rm -v "%cd%/builder/zstd:/builder" -v "%cd%/zstd:/src" ubuntu:22.04 /bin/bash /builder/zstd-builder-windows-x86.sh
-::docker run --rm -v "%cd%/builder/zstd:/builder" -v "%cd%/zstd:/src" guitarrapc/ubuntu-mingw-w64:22.04.1 /bin/bash /builder/zstd-builder-windows-x86.sh
+::docker run --rm -v "%cd%/builder/zstd:/builder" -v "%cd%/zstd:/src" ubuntu:22.04 /bin/bash /builder/zstd-builder-windows-x86.sh
+docker run --rm -v "%cd%/builder/zstd:/builder" -v "%cd%/zstd:/src" guitarrapc/ubuntu-mingw-w64:22.04.1 /bin/bash /builder/zstd-builder-windows-x86.sh
 
 :: confirm
 dir zstd\lib\dll\libzstd.dll
 dir zstd\programs\zstd.exe
 
 :: copy
-mkdir pkg\zstd\%GIT_ZSTD_VERSION%\%OS%\%PLATFORM%\mingw\
-cp .\zstd\lib\dll\libzstd.dll .\pkg\zstd\%GIT_ZSTD_VERSION%\%OS%\%PLATFORM%\mingw\libzstd.dll
-cp .\zstd\programs\zstd.exe .\pkg\zstd\%GIT_ZSTD_VERSION%\%OS%\%PLATFORM%\mingw\zstd.exe
+mkdir %OUTPUT_BASE%\zstd\%GIT_ZSTD_VERSION%\%OS%\%PLATFORM%\mingw\
+cp .\zstd\lib\dll\libzstd.dll .\%OUTPUT_BASE%\zstd\%GIT_ZSTD_VERSION%\%OS%\%PLATFORM%\mingw\libzstd.dll
+cp .\zstd\programs\zstd.exe .\%OUTPUT_BASE%\zstd\%GIT_ZSTD_VERSION%\%OS%\%PLATFORM%\mingw\zstd.exe
