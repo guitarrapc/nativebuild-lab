@@ -15,39 +15,15 @@ on:
 # win-x64, linux-x64, osx-x64
 
 jobs:
-  linux:
-    strategy:
-      fail-fast: false
-      matrix:
-        target: ["x64", "arm64"]
-    env:
-      OUTPUT_DIR: artifact/linux-${{ matrix.target }}
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          submodules: true
-      - run: git fetch --tags
-        working-directory: zstd
-      - name: Build
-        run: bash ./zstd-linux-${{ matrix.target }}.sh
-      - name: show generated files
-        run: git ls-files --other --modified --exclude-standard
-      - uses: actions/upload-artifact@v3
-        with:
-          name: artifact
-          path: artifact
-
-  macos:
+  ios:
     strategy:
       fail-fast: false
       matrix:
         include:
-          - target: x64
+          - target: arm64
             os: macos-latest
     env:
-      OUTPUT_DIR: artifact/osx-${{ matrix.target }}
+      OUTPUT_DIR: artifact/ios-${{ matrix.target }}
     runs-on: ${{ matrix.os }}
     timeout-minutes: 10
     steps:
@@ -57,7 +33,7 @@ jobs:
       - run: git fetch --tags
         working-directory: zstd
       - name: Build
-        run: bash ./zstd-darwin.sh
+        run: bash ./zstd-ios-arm64.sh
       - name: show generated files
         run: git ls-files --other --modified --exclude-standard
       - uses: actions/upload-artifact@v3
@@ -65,40 +41,90 @@ jobs:
           name: artifact
           path: artifact
 
-  windows:
-    strategy:
-      fail-fast: false
-      matrix:
-        target: ["x64", "x86", "arm64"]
-    env:
-      OUTPUT_DIR: artifact\win-${{ matrix.target }}
-    runs-on: windows-2022
-    timeout-minutes: 10
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          submodules: true
-      - run: git fetch --tags
-        working-directory: zstd
-      - name: Add MSBuild to PATH
-        uses: microsoft/setup-msbuild@v1.1
-      - name: Build
-        run: zstd-windows-${{ matrix.target }}-cmake.bat
-        shell: cmd
-      - name: show generated files
-        run: git ls-files --other --modified --exclude-standard
-      - uses: actions/upload-artifact@v3
-        with:
-          name: artifact
-          path: artifact
+  # linux:
+  #   strategy:
+  #     fail-fast: false
+  #     matrix:
+  #       target: ["x64", "arm64"]
+  #   env:
+  #     OUTPUT_DIR: artifact/linux-${{ matrix.target }}
+  #   runs-on: ubuntu-latest
+  #   timeout-minutes: 10
+  #   steps:
+  #     - uses: actions/checkout@v3
+  #       with:
+  #         submodules: true
+  #     - run: git fetch --tags
+  #       working-directory: zstd
+  #     - name: Build
+  #       run: bash ./zstd-linux-${{ matrix.target }}.sh
+  #     - name: show generated files
+  #       run: git ls-files --other --modified --exclude-standard
+  #     - uses: actions/upload-artifact@v3
+  #       with:
+  #         name: artifact
+  #         path: artifact
 
-  push-back:
-    needs: [linux, macos, windows]
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/download-artifact@v3
-        with:
-          name: artifact
-          path: artifact
+  # macos:
+  #   strategy:
+  #     fail-fast: false
+  #     matrix:
+  #       include:
+  #         - target: x64
+  #           os: macos-latest
+  #   env:
+  #     OUTPUT_DIR: artifact/osx-${{ matrix.target }}
+  #   runs-on: ${{ matrix.os }}
+  #   timeout-minutes: 10
+  #   steps:
+  #     - uses: actions/checkout@v3
+  #       with:
+  #         submodules: true
+  #     - run: git fetch --tags
+  #       working-directory: zstd
+  #     - name: Build
+  #       run: bash ./zstd-darwin.sh
+  #     - name: show generated files
+  #       run: git ls-files --other --modified --exclude-standard
+  #     - uses: actions/upload-artifact@v3
+  #       with:
+  #         name: artifact
+  #         path: artifact
+
+  # windows:
+  #   strategy:
+  #     fail-fast: false
+  #     matrix:
+  #       target: ["x64", "x86", "arm64"]
+  #   env:
+  #     OUTPUT_DIR: artifact\win-${{ matrix.target }}
+  #   runs-on: windows-2022
+  #   timeout-minutes: 10
+  #   steps:
+  #     - uses: actions/checkout@v3
+  #       with:
+  #         submodules: true
+  #     - run: git fetch --tags
+  #       working-directory: zstd
+  #     - name: Add MSBuild to PATH
+  #       uses: microsoft/setup-msbuild@v1.1
+  #     - name: Build
+  #       run: zstd-windows-${{ matrix.target }}-cmake.bat
+  #       shell: cmd
+  #     - name: show generated files
+  #       run: git ls-files --other --modified --exclude-standard
+  #     - uses: actions/upload-artifact@v3
+  #       with:
+  #         name: artifact
+  #         path: artifact
+
+  # push-back:
+  #   needs: [linux, macos, windows]
+  #   runs-on: ubuntu-latest
+  #   timeout-minutes: 10
+  #   steps:
+  #     - uses: actions/checkout@v3
+  #     - uses: actions/download-artifact@v3
+  #       with:
+  #         name: artifact
+  #         path: artifact
