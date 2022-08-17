@@ -144,6 +144,10 @@ jobs:
           path: _tmp
       - name: Copy to artifact
         run: mkdir -p ./artifact/ && cp -fR ./_tmp/* ./artifact/
+      - name: git status
+        run: git status
+      - name: ls
+        run: ls -Rl ./artifact
       - name: Check for modified files
         id: git-check
         run: echo "::set-output name=modified::$(if git diff-index --quiet HEAD --; then echo "false"; else echo "true"; fi)"
