@@ -33,7 +33,7 @@ jobs:
         run: git ls-files --other --modified --exclude-standard
       - uses: actions/upload-artifact@v3
         with:
-          name: linux-${{ matrix.target }}.zip
+          name: linux-${{ matrix.target }}
           path: ${{ env.OUTPUT_DIR }}
 
   macos:
@@ -59,7 +59,7 @@ jobs:
         run: git ls-files --other --modified --exclude-standard
       - uses: actions/upload-artifact@v3
         with:
-          name: darwin-${{ matrix.target }}.zip
+          name: darwin-${{ matrix.target }}
           path: ${{ env.OUTPUT_DIR }}
 
   windows:
@@ -86,5 +86,5 @@ jobs:
         run: git ls-files --other --modified --exclude-standard
       - uses: actions/upload-artifact@v3
         with:
-          name: windows-${{ matrix.target }}.zip
+          name: windows-${{ matrix.target }}
           path: ${{ env.OUTPUT_DIR }}
