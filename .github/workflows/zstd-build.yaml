@@ -11,14 +11,17 @@ on:
   pull_request:
     branches: [main]
 
+# OUTPUT_DIR name follow to .NET RID rule. https://docs.microsoft.com/ja-jp/dotnet/core/rid-catalog
+# win-x64, linux-x64, osx-x64
+
 jobs:
   linux:
     strategy:
       fail-fast: false
       matrix:
-        target: ["amd64", "arm64"]
+        target: ["x64", "arm64"]
     env:
-      OUTPUT_DIR: artifact/linux/${{ matrix.target }}
+      OUTPUT_DIR: artifact/linux-${{ matrix.target }}
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
@@ -41,10 +44,10 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - target: amd64
+          - target: x64
             os: macos-latest
     env:
-      OUTPUT_DIR: artifact/darwin/${{ matrix.target }}
+      OUTPUT_DIR: artifact/osx-${{ matrix.target }}
     runs-on: ${{ matrix.os }}
     timeout-minutes: 10
     steps:
@@ -68,7 +71,7 @@ jobs:
       matrix:
         target: ["x64", "x86", "arm64"]
     env:
-      OUTPUT_DIR: artifact\windows\${{ matrix.target }}
+      OUTPUT_DIR: artifact\win-${{ matrix.target }}
     runs-on: windows-2022
     timeout-minutes: 10
     steps:
@@ -94,8 +97,8 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
+      - uses: actions/checkout@v3
       - uses: actions/download-artifact@v3
         with:
           name: artifact
-      - name: Display structure of downloaded files
-        run: ls -R
+          path: artifact
