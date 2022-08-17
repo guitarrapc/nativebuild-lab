@@ -19,6 +19,6 @@ dir zstd\lib\dll\libzstd.dll
 dir zstd\programs\zstd.exe
 
 :: copy
-mkdir pkg\zstd\%GIT_ZSTD_VERSION%\%OS%\%PLATFORM%
-cp .\zstd\lib\dll\libzstd.dll .\pkg\zstd\%GIT_ZSTD_VERSION%\%OS%\%PLATFORM%\libzstd.dll
-cp .\zstd\programs\zstd.exe .\pkg\zstd\%GIT_ZSTD_VERSION%\%OS%\%PLATFORM%\zstd.exe
+mkdir pkg\zstd\%GIT_ZSTD_VERSION%\%OS%\%PLATFORM%\mingw\
+cp .\zstd\lib\dll\libzstd.dll .\pkg\zstd\%GIT_ZSTD_VERSION%\%OS%\%PLATFORM%\mingw\libzstd.dll
+cp .\zstd\programs\zstd.exe .\pkg\zstd\%GIT_ZSTD_VERSION%\%OS%\%PLATFORM%\mingw\zstd.exe

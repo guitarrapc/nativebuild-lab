@@ -17,6 +17,6 @@ ls zstd/lib/dll/libzstd.dll
 ls zstd/programs/zstd.exe
 
 # copy
-mkdir -p "./pkg/zstd/${GIT_ZSTD_VERSION}/${OS}/${PLATFORM}/"
-cp ./zstd/lib/dll/libzstd.dll "./pkg/zstd/${GIT_ZSTD_VERSION}/${OS}/${PLATFORM}/."
-cp "./zstd/programs/zstd.exe" "./pkg/zstd/${GIT_ZSTD_VERSION}/${OS}/${PLATFORM}/."
+mkdir -p "./pkg/zstd/${GIT_ZSTD_VERSION}/${OS}/${PLATFORM}/mingw"
+cp ./zstd/lib/dll/libzstd.dll "./pkg/zstd/${GIT_ZSTD_VERSION}/${OS}/${PLATFORM}/mingw/."
+cp "./zstd/programs/zstd.exe" "./pkg/zstd/${GIT_ZSTD_VERSION}/${OS}/${PLATFORM}/mingw/."
