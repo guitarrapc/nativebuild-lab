@@ -35,10 +35,10 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        includes:
+        include:
           - target: amd64
-            runs-on: macos-latest
-    runs-on: ${{ matrix.runs-on }}
+            os: macos-latest
+    runs-on: ${{ matrix.os }}
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v3
