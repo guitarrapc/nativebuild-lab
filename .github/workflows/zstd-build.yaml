@@ -1,0 +1,33 @@
+name: zstd build
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+env:
+  OUTPUT_BASE: artifact
+
+jobs:
+  cmake-vs2022:
+    runs-on: windows-2022
+    timeout-minutes: 10
+    strategy:
+      matrix:
+        target: ["x64", "x86", "arm64"]
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          submodules: true
+      - name: Add MSBuild to PATH
+        uses: microsoft/setup-msbuild@v1.1
+      - name: Build
+        run: zstd-windows-${{ matrix.target }}-cmake.bat
+        shell: cmd
+      - run: git status
