@@ -12,8 +12,8 @@ set PLATFORM=x86
 if not defined OUTPUT_DIR (set OUTPUT_DIR=pkg\zstd\%GIT_ZSTD_VERSION%\%OS%\%PLATFORM%)
 
 :: build
-::docker run --rm -v "%cd%/builder/zstd/docker:/builder" -v "%cd%/zstd:/src" ubuntu:22.04 /bin/bash /builder/zstd-builder-windows-x86.sh
-docker run --rm -v "%cd%/builder/zstd/docker:/builder" -v "%cd%/zstd:/src" guitarrapc/ubuntu-mingw-w64:22.04.1 /bin/bash /builder/zstd-builder-windows-x86.sh
+::docker run --rm -v "%cd%/builder/zstd/core:/builder" -v "%cd%/zstd:/src" ubuntu:22.04 /bin/bash /builder/zstd-builder-windows-x86.sh
+docker run --rm -v "%cd%/builder/zstd/core:/builder" -v "%cd%/zstd:/src" guitarrapc/ubuntu-mingw-w64:22.04.1 /bin/bash /builder/zstd-builder-windows-x86.sh
 
 :: confirm
 dir zstd\lib\dll\libzstd.dll

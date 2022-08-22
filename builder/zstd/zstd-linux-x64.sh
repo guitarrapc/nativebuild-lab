@@ -10,7 +10,7 @@ PLATFORM=x64
 OUTPUT_DIR=${OUTPUT_DIR:=pkg/zstd/${GIT_ZSTD_VERSION}/${OS}/${PLATFORM}/}
 
 # build
-docker run --rm -v "$PWD/builder/zstd/docker:/builder" -v "$PWD/zstd:/src" alpine:latest /bin/sh /builder/zstd-builder-linux-x64.sh
+docker run --rm -v "$PWD/builder/zstd/core:/builder" -v "$PWD/zstd:/src" alpine:latest /bin/sh /builder/zstd-builder-linux-x64.sh
 
 # confirm
 ls zstd/lib/libzstd.a

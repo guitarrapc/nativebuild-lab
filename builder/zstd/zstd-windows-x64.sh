@@ -10,8 +10,8 @@ PLATFORM=x64
 OUTPUT_DIR=${OUTPUT_DIR:=pkg/zstd/${GIT_ZSTD_VERSION}/${OS}/${PLATFORM}/}
 
 # build
-# docker run --rm -v "$PWD/builder/zstd/docker:/builder" -v "$PWD/zstd:/src" ubuntu:22.04 /bin/sh /builder/zstd-builder-windows-x64.sh
-docker run --rm -v "%cd%/builder/zstd/docker:/builder" -v "%cd%/zstd:/src" guitarrapc/ubuntu-mingw-w64:22.04.1 /bin/bash /builder/zstd-builder-windows-x64.sh
+# docker run --rm -v "$PWD/builder/zstd/core:/builder" -v "$PWD/zstd:/src" ubuntu:22.04 /bin/sh /builder/zstd-builder-windows-x64.sh
+docker run --rm -v "%cd%/builder/zstd/core:/builder" -v "%cd%/zstd:/src" guitarrapc/ubuntu-mingw-w64:22.04.1 /bin/bash /builder/zstd-builder-windows-x64.sh
 
 # confirm
 ls zstd/lib/dll/libzstd.dll

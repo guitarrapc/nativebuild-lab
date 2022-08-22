@@ -10,7 +10,7 @@ PLATFORM=arm64
 OUTPUT_DIR=${OUTPUT_DIR:=pkg/zstd/${GIT_ZSTD_VERSION}/${OS}/${PLATFORM}/}
 
 # build
-docker run --rm -v "%cd%/builder/zstd/docker:/builder" -v "%cd%/zstd:/src" mstorsjo/llvm-mingw:20220802 /bin/bash /builder/zstd-builder-windows-arm64.sh
+docker run --rm -v "%cd%/builder/zstd/core:/builder" -v "%cd%/zstd:/src" mstorsjo/llvm-mingw:20220802 /bin/bash /builder/zstd-builder-windows-arm64.sh
 
 # confirm
 ls zstd/lib/dll/libzstd.dll

@@ -13,7 +13,7 @@ PACKAGE_NAME=zstd
 TARGET=iPhoneOS/arm64/8.0
 
 # prepare
-source ./builder/zstd/docker/zstd-builder-ios-arm64.sh
+source ./builder/zstd/core/zstd-builder-ios-arm64.sh
 __clean
 __find_build_toolchains "${PACKAGE_NAME}" "${TARGET}"
 __config_cmake_variables

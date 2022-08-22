@@ -12,7 +12,7 @@ set PLATFORM=arm64
 if not defined OUTPUT_DIR (set OUTPUT_DIR=pkg\zstd\%GIT_ZSTD_VERSION%\%OS%\%PLATFORM%)
 
 :: build
-docker run --rm -v "%cd%/builder/zstd/docker:/builder" -v "%cd%/zstd:/src" ubuntu:22.04 /bin/bash /builder/zstd-builder-linux-arm64.sh
+docker run --rm -v "%cd%/builder/zstd/core:/builder" -v "%cd%/zstd:/src" ubuntu:22.04 /bin/bash /builder/zstd-builder-linux-arm64.sh
 
 :: confirm
 dir zstd\lib\libzstd.a
