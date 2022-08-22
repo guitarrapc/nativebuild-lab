@@ -193,6 +193,31 @@ drwxr-xr-x  3 user  staff      96 Aug 10 19:46 pkgconfig/
 
 ## Android
 
+use `cmake`.
+
+### Android (armeabi-v7a)
+
+```bash
+ABI=armeabi-v7a bash ./builder/zstd/zstd-android.sh
+```
+
+### Android (arm64-v8a)
+
+```bash
+ABI=arm64-v8a bash ./builder/zstd/zstd-android.sh
+```
+
+### Android (x86)
+
+```bash
+ABI=x86 bash ./builder/zstd/zstd-android.sh
+```
+
+### Android (x64)
+
+```bash
+ABI=x86_64 bash ./builder/zstd/zstd-android.sh
+```
 
 ## REF
 
