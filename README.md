@@ -139,12 +139,16 @@ builder\zstd\zstd-windows-arm64-cmake.bat
 
 Use `make`.
 
-> **Note**
-> If running on Mac M1/M2, output binary will be `arm64`.
-> If running on Mac Intel or Rosetta2, output binary will be `x86_64` (== x64 == amd64).
+### macOS (x64)
 
 ```bash
-bash ./builder/zstd/zstd-darwin.sh
+bash ./builder/zstd/zstd-darwin-x64.sh
+```
+
+### macOS (ARM64)
+
+```bash
+bash ./builder/zstd/zstd-darwin-arm64.sh
 ```
 
 ## iOS
