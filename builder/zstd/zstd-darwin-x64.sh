@@ -15,7 +15,7 @@ OUTPUT_DIR=${OUTPUT_DIR:=pkg/zstd/${GIT_ZSTD_VERSION}/${OS}/${PLATFORM}/}
 cd zstd
 make clean
 # make CFLAGS="-target x86_64-apple-macos10.12"
-make CFLAGS="-target x86_64-apple-macos10.12" lib # github action alrady include x86_64 LZ4/LZMA and failed on arm64
+make CFLAGS="-target x86_64-apple-macos10.12 -Werror -O3" lib # github action alrady include x86_64 LZ4/LZMA and failed on arm64
 cd ..
 
 # confirm
