@@ -91,6 +91,9 @@ jobs:
           submodules: true
       - run: git fetch --tags
         working-directory: zstd
+      # host runner is x86_64 and cannot link x86_64 `lz4` & `lzma` to arm64 build
+      - run: brew uninstall --ignore-dependencies lz4 xz
+        if: ${{ matrix.target == 'arm64' }}
       - name: Build
         run: bash ./builder/zstd/zstd-darwin-${{ matrix.target }}.sh
       - name: show generated files

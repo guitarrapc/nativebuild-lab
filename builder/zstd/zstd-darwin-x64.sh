@@ -11,22 +11,19 @@ OS=darwin
 PLATFORM=x64
 OUTPUT_DIR=${OUTPUT_DIR:=pkg/zstd/${GIT_ZSTD_VERSION}/${OS}/${PLATFORM}/}
 
-# require `lib` on github ations. github action alrady include x86_64 LZ4/LZMA and failed on arm64.
-LIB_ARG=$(if [[ -z "$CI" && "$CI" == "true" ]]; then echo "lib"; else echo ""; fi)
-
 # build
 cd zstd
 make clean
-make CFLAGS="-target x86_64-apple-macos10.12 -Werror -O3" $LIB_ARG
+make CFLAGS="-target x86_64-apple-macos10.12 -Werror -O3"
 cd ..
 
 # confirm
 ls zstd/lib/libzstd.a
 ls zstd/lib/libzstd.*dylib
-if [[ "$LIB_ARG" == "" ]]; then ls zstd/programs/zstd; fi
+ls zstd/programs/zstd
 
 # copy
 mkdir -p "./${OUTPUT_DIR}/"
 cp ./zstd/lib/libzstd.a "./${OUTPUT_DIR}/."
 cp "./zstd/lib/libzstd.${FILE_ZSTD_VERSION}.dylib" "./${OUTPUT_DIR}/libzstd.dylib"
-if [[ "$LIB_ARG" == "" ]]; then cp ./zstd/programs/zstd "./${OUTPUT_DIR}/."; fi
+cp ./zstd/programs/zstd "./${OUTPUT_DIR}/."
