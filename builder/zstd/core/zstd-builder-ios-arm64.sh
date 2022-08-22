@@ -13,6 +13,20 @@ CMAKE_TOOLCHAIN_FILE="$(pwd)/builder/zstd/ios-arm64.toolchain.cmake"
 # -- Found ZLIB: /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/usr/lib/libz.tbd (found version "1.2.11")
 # -- Found LibLZMA: /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/usr/lib/liblzma.tbd (found version "5.2.5")
 
+COLOR_RED='\033[0;31m'          # Red
+COLOR_GREEN='\033[0;32m'        # Green
+COLOR_YELLOW='\033[0;33m'       # Yellow
+COLOR_BLUE='\033[0;94m'         # Blue
+COLOR_PURPLE='\033[0;35m'       # Purple
+COLOR_OFF='\033[0m'             # Reset
+
+step() {
+    STEP_NUM=$(expr ${STEP_NUM-0} + 1)
+    STEP_MESSAGE="$@"
+    printf '%s\n'
+    printf '%b\n' "${COLOR_PURPLE}=>> STEP ${STEP_NUM} : ${STEP_MESSAGE} ${COLOR_OFF}"
+}
+
 die() {
   printf '%b\n' "${COLOR_RED}💔  $*${COLOR_OFF}" >&2
   exit 1
@@ -25,6 +39,8 @@ __clean() {
 
 # __find_build_toolchains zstd iPhoneOS/arm64/8.0
 __find_build_toolchains() {
+  step "Find build toolchains."
+
   if [ "$NATIVE_OS_KIND" != 'darwin' ] ; then
     die "this software can only be run on macOS."
   fi
@@ -66,6 +82,8 @@ __find_build_toolchains() {
 }
 
 __config_cmake_variables() {
+  step "Config cmake variables."
+
   CMAKE_VERBOSE_MAKEFILE=ON
   CMAKE_COLOR_MAKEFILE=ON
 
@@ -102,6 +120,8 @@ __config_cmake_variables() {
 }
 
 __create_cmake_toolchain_file() {
+  step "Create toolchain file."
+
   cat <<EOF | tee "${CMAKE_TOOLCHAIN_FILE}"
 set(CMAKE_VERBOSE_MAKEFILE $CMAKE_VERBOSE_MAKEFILE)
 set(CMAKE_COLOR_MAKEFILE   $CMAKE_COLOR_MAKEFILE)
