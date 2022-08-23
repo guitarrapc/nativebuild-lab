@@ -34,7 +34,7 @@ git submodule update --init --recursive
 
 Use `make` to build.
 
-### Linux (x64)
+### Linux (amd64)
 
 ```bash
 # windows
@@ -44,7 +44,7 @@ builder\zstd\zstd-linux-x64.bat
 bash ./builder/zstd/zstd-linux-x64.sh
 ```
 
-### Linux (ARM64)
+### Linux (aarch64)
 
 Use `make`.
 
@@ -112,7 +112,7 @@ Open `x64_x86 Cross Tools Command Prompt for VS2022`.
 builder\zstd\zstd-windows-x86-cmake.bat
 ```
 
-### Windows (ARM64)
+### Windows (arm64)
 
 **make**
 
@@ -139,13 +139,13 @@ builder\zstd\zstd-windows-arm64-cmake.bat
 
 Use `make`.
 
-### macOS (x64)
+### macOS (x86_64)
 
 ```bash
 bash ./builder/zstd/zstd-darwin-x64.sh
 ```
 
-### macOS (ARM64)
+### macOS (arm64)
 
 ```bash
 bash ./builder/zstd/zstd-darwin-arm64.sh
@@ -200,13 +200,13 @@ use `cmake`.
 ### Android (armeabi-v7a)
 
 ```bash
-bash ./builder/zstd/zstd-android-arm64-v8a.sh
+bash ./builder/zstd/zstd-android-arm.sh
 ```
 
 ### Android (arm64-v8a)
 
 ```bash
-bash ./builder/zstd/zstd-android-arm64-v8a.sh
+bash ./builder/zstd/zstd-android-arm64.sh
 ```
 
 ### Android (x86)
@@ -215,10 +215,10 @@ bash ./builder/zstd/zstd-android-arm64-v8a.sh
 bash ./builder/zstd/zstd-android-x86.sh
 ```
 
-### Android (x64)
+### Android (x86_64)
 
 ```bash
-bash ./builder/zstd/zstd-android-x86_64.sh
+bash ./builder/zstd/zstd-android-x64.sh
 ```
 
 ## REF
