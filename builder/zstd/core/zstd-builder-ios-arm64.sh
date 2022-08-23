@@ -2,11 +2,11 @@
 
 set -eu
 
-NATIVE_OS_KIND=$(uname | tr A-Z a-z) # should be darwin
+NATIVE_OS_KIND=$(uname | tr "[:upper:]" "[:lower:]") # should be darwin
 BUILD_TYPE=Release # Release or Debug
 
-WORKING_DIR_CMAKE="$(pwd)/zstd/build/cmake"
-WORKING_DIR_BUILD="${WORKING_DIR_CMAKE}/build"
+CMAKE_DIR="$(pwd)/zstd/build/cmake"
+BUILD_DIR="${CMAKE_DIR}/build"
 CMAKE_TOOLCHAIN_FILE="$(pwd)/builder/zstd/ios-arm64.toolchain.cmake"
 
 # NOTE: zlib and lzma will found from iPhoneOS.sdk.
@@ -21,20 +21,29 @@ COLOR_PURPLE='\033[0;35m'       # Purple
 COLOR_OFF='\033[0m'             # Reset
 
 step() {
-    STEP_NUM=$(expr ${STEP_NUM-0} + 1)
-    STEP_MESSAGE="$@"
-    printf '%s\n'
+    STEP_NUM=$((${STEP_NUM-0} + 1))
+    STEP_MESSAGE="$*"
+    printf '\n'
     printf '%b\n' "${COLOR_PURPLE}=>> STEP ${STEP_NUM} : ${STEP_MESSAGE} ${COLOR_OFF}"
-}
 
+    unset STEP2_NUM # reset
+}
+step2() {
+    STEP2_NUM=$((${STEP2_NUM-0} + 1))
+    STEP2_MESSAGE="$*"
+    printf '\n'
+    printf '%b\n' "${COLOR_BLUE}>>> STEP ${STEP_NUM}.${STEP2_NUM} : ${STEP2_MESSAGE} ${COLOR_OFF}"
+}
 die() {
   printf '%b\n' "${COLOR_RED}💔  $*${COLOR_OFF}" >&2
   exit 1
 }
 
 __clean() {
-  rm -rf "${WORKING_DIR_BUILD}"
-  mkdir -p "${WORKING_DIR_BUILD}"
+  step "clean working space."
+
+  rm -rf "${BUILD_DIR}"
+  mkdir -p "${BUILD_DIR}"
 }
 
 # __find_build_toolchains zstd iPhoneOS/arm64/8.0
