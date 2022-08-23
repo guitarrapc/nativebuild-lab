@@ -164,6 +164,13 @@ jobs:
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v3
+        with:
+          submodules: true
+      - run: git fetch --tags
+        working-directory: zstd
+      - run: echo "::set-output name=value::$(git tag --points-at HEAD | tr -d '[:space:]')"
+        id: zstd-version
+        working-directory: zstd
       - uses: actions/download-artifact@v3
         with:
           name: artifact
@@ -182,6 +189,8 @@ jobs:
           author: github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>
           committer: github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>
           delete-branch: true
-          title: "[zstd] Update artifacts"
+          title: "[zstd] Update artifacts ${{ steps.zstd-version.outputs.value }}"
+          body: |
+            Update zstd artifacts for ${{ steps.zstd-version.outputs.value }} 🚀
           labels: |
             automated pr
