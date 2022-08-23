@@ -336,7 +336,7 @@ __install_zstd() {
 
   # create directory
   rm -rf "${BUILD_DIR:=/src/build/cmake/build}"
-  mkdir "${BUILD_DIR}"
+  mkdir -p "${BUILD_DIR}"
 
   # build
   cd "${BUILD_DIR}"

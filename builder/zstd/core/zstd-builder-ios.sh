@@ -41,13 +41,6 @@ die() {
   exit 1
 }
 
-__clean() {
-  step "clean working space."
-
-  rm -rf "${BUILD_DIR}"
-  mkdir -p "${BUILD_DIR}"
-}
-
 # __find_build_toolchains iPhoneOS/arm64/8.0
 find_build_toolchains() {
   step2 "Find build toolchains."
@@ -170,7 +163,7 @@ config_cmake_variables() {
   CMAKE_LIBRARY_PATH="$SYSTEM_LIBRARY_DIR"
 }
 
-create_CMAKE_TOOLCHAIN() {
+create_cmake_toolchain() {
   step2 "Create cmake toolchain file."
 
   cat <<EOF | tee "${CMAKE_TOOLCHAIN}"
@@ -219,12 +212,14 @@ __install_zstd() {
 
   find_build_toolchains
   print_build_toolchains
+
+  # cmake toolchain
   config_cmake_variables
-  create_CMAKE_TOOLCHAIN
+  create_cmake_toolchain
 
   # create directory
   rm -rf "${BUILD_DIR:=/src/build/cmake/build}"
-  mkdir "${BUILD_DIR}"
+  mkdir -p "${BUILD_DIR}"
 
   # build
   pushd "${BUILD_DIR}" > /dev/null 2>&1
@@ -255,5 +250,4 @@ __install_zstd() {
   unset PACKAGE_INCLUDES
 }
 
-__clean
 __install_zstd
