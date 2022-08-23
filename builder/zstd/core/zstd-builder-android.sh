@@ -70,7 +70,7 @@ __install_android_ndk() {
 
   if [[ ! -d "${ANDROID_NDK_HOME}/build/cmake" ]]; then
     curl --retry 20 --retry-delay 30 -Lks -o "${TMP_SOURCE_DIR}/${ANDROID_NDK}.zip" "${ANDROID_URL}"
-    unzip -q ${TMP_SOURCE_DIR}/${ANDROID_NDK}.zip -d "${ROOT_PATH}/"
+    unzip -q ${TMP_SOURCE_DIR}/${ANDROID_NDK}.zip -d "/root/"
   fi
 }
 
