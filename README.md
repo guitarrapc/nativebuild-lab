@@ -7,6 +7,17 @@ This repository indicate build native binaries for following.
 * zstd
 * (upcoming....)
 
+
+# Basic policy
+
+This repository will introduce following policy to build native binaries.
+
+* Linux: Use package's standard build. If nothing prefered then use `make` when available.
+* Windows: Use package's standard build. If nothing prefered then use `VC++` (w/CMake) when available. Alternative is `mingw-w64` on Docker.
+* macOS: Use package's standard build. If nothing prefered then use `make` when available.
+* iOS: Use CMake to build.
+* Android: Use CMake to build.
+
 # Build packages
 
 Checkout repository, then run your build.
@@ -20,15 +31,22 @@ git submodule update --init --recursive
 
 # zstd
 
-* [x] Linux (x64)
-* [x] Linux (arm64)
-* [x] Windows (x64)
-* [x] Windows (x86)
-* [x] Windows (arm64)
-* [x] macOS (x64)
-* [x] macOS (arm64)
-* [x] iOS
-* [x] Android
+Building [zstd](https://github.com/facebook/zstd) for following environment.
+
+OS | Architecture | Build Env| Builder | Build Script | CI
+---- | ---- | ---- | ---- | ---- | ----
+Linux   | arm64 | Docker | make | [builder/zstd/core](https://github.com/guitarrapc/nativebuild-lab/tree/main/builder/zstd/core) | [GitHub Actions](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/zstd-build.yaml)
+Linux   | x64   | Docker | make | [builder/zstd/core](https://github.com/guitarrapc/nativebuild-lab/tree/main/builder/zstd/core) | [GitHub Actions](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/zstd-build.yaml)
+Windows | arm64 | Windows (alt. Docker) | VC++ (alt. mingw-w64) | [builder/zstd/core](https://github.com/guitarrapc/nativebuild-lab/tree/main/builder/zstd/core) | [GitHub Actions](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/zstd-build.yaml)
+Windows | x64   | Windows (alt. Docker) | VC++ (alt. mingw-w64) | [builder/zstd/core](https://github.com/guitarrapc/nativebuild-lab/tree/main/builder/zstd/core) | [GitHub Actions](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/zstd-build.yaml)
+Windows | x86   | Windows (alt. Docker) | VC++ (alt. mingw-w64) | [builder/zstd/core](https://github.com/guitarrapc/nativebuild-lab/tree/main/builder/zstd/core) | [GitHub Actions](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/zstd-build.yaml)
+macOS   | arm64 | Intel Mac, Apple Silicon Mac | make | [builder/zstd/core](https://github.com/guitarrapc/nativebuild-lab/tree/main/builder/zstd/core) | [GitHub Actions](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/zstd-build.yaml)
+macOS   | x64   | Intel Mac, Apple Silicon Mac | make | [builder/zstd/core](https://github.com/guitarrapc/nativebuild-lab/tree/main/builder/zstd/core) | [GitHub Actions](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/zstd-build.yaml)
+iOS     | arm64 | Intel Mac, Apple Silicon Mac | make | [builder/zstd/core](https://github.com/guitarrapc/nativebuild-lab/tree/main/builder/zstd/core) | [GitHub Actions](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/zstd-build.yaml)
+Android | armeabi-v7a | Docker | CMake | [builder/zstd/core](https://github.com/guitarrapc/nativebuild-lab/tree/main/builder/zstd/core) | [GitHub Actions](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/zstd-build.yaml)
+Android | arm64-v8a   | Docker | CMake | [builder/zstd/core](https://github.com/guitarrapc/nativebuild-lab/tree/main/builder/zstd/core) | [GitHub Actions](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/zstd-build.yaml)
+Android | x86         | Docker | CMake | [builder/zstd/core](https://github.com/guitarrapc/nativebuild-lab/tree/main/builder/zstd/core) | [GitHub Actions](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/zstd-build.yaml)
+Android | x86_64      | Docker | CMake | [builder/zstd/core](https://github.com/guitarrapc/nativebuild-lab/tree/main/builder/zstd/core) | [GitHub Actions](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/zstd-build.yaml)
 
 ## Linux
 
@@ -221,8 +239,25 @@ bash ./builder/zstd/zstd-android-x86.sh
 bash ./builder/zstd/zstd-android-x64.sh
 ```
 
-## REF
+# REF
 
-http://blog.fpliu.com/it/software/zstd/build-for-current-host
-http://blog.fpliu.com/project/ndk-pkg/package?name=zstd
-http://blog.fpliu.com/project/xcpkg/package?name=zstd
+## CMake
+
+**Basics**
+
+* CMake Windows: [Visual Studio 17 2022 — CMake 3\.24\.1 Documentation](https://cmake.org/cmake/help/latest/generator/Visual%20Studio%2017%202022.html)
+
+**Native Platform**
+
+* CMake Android: [CMake  \|  Android NDK  \|  Android Developers](https://developer.android.com/ndk/guides/cmake?hl=ja)
+* CMake iOS: [cmake\-toolchains\(7\) — CMake 3\.24\.1 Documentation](https://cmake.org/cmake/help/latest/manual/cmake-toolchains.7.html#cross-compiling-for-ios-tvos-or-watchos)
+
+Other way to build.
+
+* Android CMake build: [leleliu008/ndk\-pkg](https://github.com/leleliu008/ndk-pkg)
+* iOS Cmake build: [leleliu008/xcpkg](https://github.com/leleliu008/xcpkg)
+
+## mingw-w64
+
+* Linux mingw-w64 amd64 build: [Downloads \- MinGW\-w64](https://www.mingw-w64.org/downloads/)
+* Linux mingw-w64 arm64 build: [mstorsjo/llvm\-mingw](https://github.com/mstorsjo/llvm-mingw)
