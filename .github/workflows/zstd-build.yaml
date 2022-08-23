@@ -20,9 +20,6 @@ on:
 # OUTPUT_DIR name follow to .NET RID rule. https://docs.microsoft.com/ja-jp/dotnet/core/rid-catalog
 # win-x64, linux-x64, osx-x64
 
-env:
-  CREATE_PR: ${{ github.event.inputs.create-pullrequest == 'true' && github.event.inputs.create-pullrequest || 'false' }}
-
 jobs:
   android:
     strategy:
@@ -47,7 +44,7 @@ jobs:
         with:
           name: artifact
           path: artifact
-        if: ${{ env.CREATE_PR == 'true' }}
+        if: ${{ inputs.create-pullrequest == true }}
 
   ios:
     strategy:
@@ -74,7 +71,7 @@ jobs:
         with:
           name: artifact
           path: artifact
-        if: ${{ env.CREATE_PR == 'true' }}
+        if: ${{ inputs.create-pullrequest == true }}
 
   linux:
     strategy:
@@ -99,7 +96,7 @@ jobs:
         with:
           name: artifact
           path: artifact
-        if: ${{ env.CREATE_PR == 'true' }}
+        if: ${{ inputs.create-pullrequest == true }}
 
   macos:
     strategy:
@@ -127,7 +124,7 @@ jobs:
         with:
           name: artifact
           path: artifact
-        if: ${{ env.CREATE_PR == 'true' }}
+        if: ${{ inputs.create-pullrequest == true }}
 
   windows:
     strategy:
@@ -155,10 +152,10 @@ jobs:
         with:
           name: artifact
           path: artifact
-        if: ${{ env.CREATE_PR == 'true' }}
+        if: ${{ inputs.create-pullrequest == true }}
 
   pr:
-    if: ${{ github.event.inputs.create-pullrequest == 'true' }}
+    if: ${{ inputs.create-pullrequest == true }}
     needs: [android, ios, linux, macos, windows]
     env:
       ARTIFACT_PATH: ./artifact/
