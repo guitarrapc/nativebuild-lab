@@ -7,8 +7,34 @@ This repository indicate build native binaries for following.
 * zstd
 * (upcoming....)
 
-<!-- START doctoc -->
-<!-- END doctoc -->
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**
+
+- [Basic policy](#basic-policy)
+- [Build packages](#build-packages)
+- [zstd](#zstd)
+  - [Linux](#linux)
+    - [Linux (amd64)](#linux-amd64)
+    - [Linux (aarch64)](#linux-aarch64)
+  - [Windows](#windows)
+    - [Windows (x64)](#windows-x64)
+    - [Windows (x86)](#windows-x86)
+    - [Windows (arm64)](#windows-arm64)
+  - [macOS](#macos)
+    - [macOS (x86_64)](#macos-x86_64)
+    - [macOS (arm64)](#macos-arm64)
+  - [iOS](#ios)
+  - [Android](#android)
+    - [Android (armeabi-v7a)](#android-armeabi-v7a)
+    - [Android (arm64-v8a)](#android-arm64-v8a)
+    - [Android (x86)](#android-x86)
+    - [Android (x86_64)](#android-x86_64)
+- [REF](#ref)
+  - [CMake](#cmake)
+  - [mingw-w64](#mingw-w64)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 # Basic policy
 
