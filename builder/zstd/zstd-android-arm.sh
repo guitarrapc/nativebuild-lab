@@ -21,5 +21,5 @@ ls zstd/build/cmake/build/programs/zstd
 # copy
 mkdir -p "./${OUTPUT_DIR}/"
 cp ./zstd/build/cmake/build/lib/libzstd.a "./${OUTPUT_DIR}/."
-cp "./zstd/build/cmake/build/lib/libzstd.so.${FILE_ZSTD_VERSION}" "./${OUTPUT_DIR}/libzstd.so"
+cp "./zstd/build/cmake/build/lib/libzstd.so" "./${OUTPUT_DIR}/libzstd.so"
 cp ./zstd/build/cmake/build/programs/zstd "./${OUTPUT_DIR}/."
