@@ -11,7 +11,7 @@ PLATFORM=arm
 OUTPUT_DIR=${OUTPUT_DIR:=pkg/zstd/${GIT_ZSTD_VERSION}/${OS}/${PLATFORM}/}
 
 # build
-docker run --rm -v "%cd%/builder/zstd/core:/builder" -v "%cd%/zstd:/src" -e "ABI=$ABI" ubuntu:22.04 /bin/bash /builder/zstd-builder-android.sh
+docker run --rm -v "$PWD/builder/zstd/core:/builder" -v "$PWD/zstd:/src" -e "ABI=$ABI" ubuntu:22.04 /bin/bash /builder/zstd-builder-android.sh
 
 # confirm
 ls zstd/build/cmake/build/lib/libzstd.a

@@ -28,7 +28,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        target: ["x86_64", "x64", "arm", "arm64"]
+        target: ["x86", "x64", "arm", "arm64"]
     env:
       OUTPUT_DIR: artifact/zstd/ios-${{ matrix.target }}
     runs-on: ubuntu-latest
