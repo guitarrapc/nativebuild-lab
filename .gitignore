@@ -1,4 +1,2 @@
 builder/zstd_ios/
-builder/.ndk-pkg
-builder/.m2
 _tmp/
