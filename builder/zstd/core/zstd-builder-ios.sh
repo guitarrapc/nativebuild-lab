@@ -66,7 +66,7 @@ find_build_toolchains() {
   SYSROOT="$TOOLCHAIN_ROOT/Platforms/${TARGET_OS_NAME}.platform/Developer/SDKs/${TARGET_OS_NAME}.sdk"
   SYSTEM_LIBRARY_DIR="$SYSROOT/usr/lib"
 
-  ZSTD_INSTALL_DIR="${INSTALL_DIR}/zstd/${ABI}"
+  ZSTD_INSTALL_DIR="${INSTALL_DIR}/zstd/${IOS_ARCH}"
 
   CMAKE_TOOLCHAIN="$(pwd)/builder/zstd/ios-arm64.toolchain.cmake"
 
