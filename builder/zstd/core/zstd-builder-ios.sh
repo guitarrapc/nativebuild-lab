@@ -9,7 +9,7 @@ IOS_VERSION=${IOS_VERSION:=8.0}
 IOS_ARCH=${IOS_ARCH:=arm64}
 TARGET="iPhoneOS/${IOS_ARCH}/${IOS_VERSION}"
 
-INSTALL_DIR="$(pwd)/zstd/build/cmake/ios"
+INSTALL_DIR="zstd/build/cmake/build/ios"
 
 # NOTE: zlib and lzma will found from iPhoneOS.sdk.
 # -- Found ZLIB: /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/usr/lib/libz.tbd (found version "1.2.11")
