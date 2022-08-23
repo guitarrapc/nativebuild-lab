@@ -28,7 +28,7 @@ git submodule update --init --recursive
 * [x] macOS (x64)
 * [x] macOS (arm64)
 * [x] iOS
-* [ ] Android
+* [x] Android
 
 ## Linux
 
@@ -168,6 +168,8 @@ bash ./builder/zstd/zstd-ios-arm64.sh
 
 **xcpkg**
 
+Install [xcpkg](https://github.com/leleliu008/xcpkg).
+
 ```bash
 brew tap leleliu008/fpliu
 brew install xcpkg
@@ -198,25 +200,25 @@ use `cmake`.
 ### Android (armeabi-v7a)
 
 ```bash
-ABI=armeabi-v7a bash ./builder/zstd/zstd-android.sh
+bash ./builder/zstd/zstd-android-arm64-v8a.sh
 ```
 
 ### Android (arm64-v8a)
 
 ```bash
-ABI=arm64-v8a bash ./builder/zstd/zstd-android.sh
+bash ./builder/zstd/zstd-android-arm64-v8a.sh
 ```
 
 ### Android (x86)
 
 ```bash
-ABI=x86 bash ./builder/zstd/zstd-android.sh
+bash ./builder/zstd/zstd-android-x86.sh
 ```
 
 ### Android (x64)
 
 ```bash
-ABI=x86_64 bash ./builder/zstd/zstd-android.sh
+bash ./builder/zstd/zstd-android-x86_64.sh
 ```
 
 ## REF
