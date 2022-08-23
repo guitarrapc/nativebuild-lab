@@ -7,6 +7,8 @@ This repository indicate build native binaries for following.
 * zstd
 * (upcoming....)
 
+<!-- START doctoc -->
+<!-- END doctoc -->
 
 # Basic policy
 
