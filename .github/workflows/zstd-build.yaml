@@ -159,7 +159,9 @@ jobs:
 
   pr:
     if: ${{ github.event.inputs.create-pullrequest == 'true' }}
-    needs: [ios, linux, macos, windows]
+    needs: [android, ios, linux, macos, windows]
+    env:
+      ARTIFACT_PATH: ./artifact/
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
@@ -176,7 +178,10 @@ jobs:
           name: artifact
           path: _tmp
       - name: Copy to artifact
-        run: mkdir -p ./artifact/ && cp -fR ./_tmp/* ./artifact/
+        run: |
+          rm -rf ${{ env.ARTIFACT_PATH }}
+          mkdir -p ${{ env.ARTIFACT_PATH }}
+          cp -fR ./_tmp/* ${{ env.ARTIFACT_PATH }}
       - name: Check for modified files
         id: git-check
         run: echo "::set-output name=modified::$(if [[ "$(git status --porcelain=v1 2>/dev/null | wc -l)" == "0" ]]; then echo "false"; else echo "true"; fi)"
