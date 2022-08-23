@@ -122,6 +122,7 @@ find_build_toolchains() {
     die "this software can only be run on linux."
   fi
 
+  TOOLCHAIN_BIND="${ANDROID_NDK_HOME}/toolchains/llvm/prebuilt/linux-x86_64/bin/"
   SYSROOT="${ANDROID_NDK_HOME}/toolchains/llvm/prebuilt/linux-x86_64/sysroot"
   SYSTEM_LIBRARY_DIR="${SYSROOT}/usr/lib/${SYSTEM_LIB_ARCH}-linux-${CC_ABI}/${ANDROID_PLATFORM}"
 
@@ -131,12 +132,12 @@ find_build_toolchains() {
 
   CMAKE_TOOLCHAIN="${ANDROID_NDK_HOME}/build/cmake/android.toolchain.cmake"
 
-  CC="${ANDROID_NDK_HOME}/toolchains/llvm/prebuilt/linux-x86_64/bin/${ABI_SHORT}-linux-${CC_ABI}${ANDROID_PLATFORM}-clang"
-  CXX="${ANDROID_NDK_HOME}/toolchains/llvm/prebuilt/linux-x86_64/bin/${ABI_SHORT}-linux-${CC_ABI}${ANDROID_PLATFORM}-clang++"
-  CPP="${ANDROID_NDK_HOME}/toolchains/llvm/prebuilt/linux-x86_64/bin/${ABI_SHORT}-linux-${CC_ABI}${ANDROID_PLATFORM}-clang -E"
-  AR="${ANDROID_NDK_HOME}/toolchains/llvm/prebuilt/linux-x86_64/bin/llvm-ar"
-  RANLIB="${ANDROID_NDK_HOME}/toolchains/llvm/prebuilt/linux-x86_64/bin/llvm-ranlib"
-  STRIP="${ANDROID_NDK_HOME}/toolchains/llvm/prebuilt/linux-x86_64/bin/llvm-strip"
+  CC="${TOOLCHAIN_BIND}/${ABI_SHORT}-linux-${CC_ABI}${ANDROID_PLATFORM}-clang"
+  CXX="${TOOLCHAIN_BIND}/${ABI_SHORT}-linux-${CC_ABI}${ANDROID_PLATFORM}-clang++"
+  CPP="${TOOLCHAIN_BIND}/${ABI_SHORT}-linux-${CC_ABI}${ANDROID_PLATFORM}-clang -E"
+  AR="${TOOLCHAIN_BIND}/llvm-ar"
+  RANLIB="${TOOLCHAIN_BIND}/llvm-ranlib"
+  STRIP="${TOOLCHAIN_BIND}/llvm-strip"
 
   CCFLAGS="--sysroot ${SYSROOT} -Qunused-arguments -fPIC -Wl,--as-needed"
   CPPFLAGS="--sysroot ${SYSROOT} -Qunused-arguments -I${ANDROID_NDK_HOME}/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/${SYSTEM_LIB_ARCH}-linux-${CC_ABI}"
@@ -172,6 +173,7 @@ print_build_toolchains() {
 
            SYSROOT = ${SYSROOT}
 SYSTEM_LIBRARY_DIR = ${SYSTEM_LIBRARY_DIR}
+    TOOLCHAIN_BIND = ${TOOLCHAIN_BIND}
 
    CMAKE_TOOLCHAIN = ${CMAKE_TOOLCHAIN}
                 CC = ${CC}
@@ -337,45 +339,45 @@ __install_zstd() {
   mkdir "${BUILD_DIR}"
 
   # build
-  cd ${BUILD_DIR}
-  /usr/bin/cmake \
-    -DCMAKE_TOOLCHAIN_FILE="${CMAKE_TOOLCHAIN}" \
-    -DANDROID_ABI="${ABI}" \
-    -DANDROID_PLATFORM=${ANDROID_PLATFORM} \
-    -Wno-dev \
-    -DCMAKE_EXPORT_COMPILE_COMMANDS=OFF \
-    -DBUILD_TESTING=OFF \
-    -DCMAKE_BUILD_TYPE="${BUILD_TYPE}" \
-    -DCMAKE_VERBOSE_MAKEFILE=ON \
-    -DCMAKE_COLOR_MAKEFILE=ON \
-    -DCMAKE_SYSTEM_PROCESSOR="${SYSTEM_PROCESSOR}" \
-    -DCMAKE_FIND_ROOT_PATH="${ZLIB_INSTALL_DIR};${XZ_INSTALL_DIR}" \
-    -DCMAKE_LIBRARY_PATH="${SYSTEM_LIBRARY_DIR}" \
-    -DCMAKE_IGNORE_PATH="${XZ_INSTALL_DIR}/bin" \
-    -DCMAKE_INSTALL_PREFIX="${ZSTD_INSTALL_DIR}" \
-    -DCMAKE_C_FLAGS="${CCFLAGS} ${CPPFLAGS} ${LDFLAGS}" \
-    -DCMAKE_CXX_FLAGS="${CXXFLAGS} ${CPPFLAGS} ${LDFLAGS}" \
-    -DBUILD_SHARED_LIBS=ON \
-    -DANDROID_TOOLCHAIN=clang \
-    -DANDROID_ARM_NEON=TRUE \
-    -DANDROID_STL=c++_shared \
-    -DANDROID_PLATFORM=21 \
-    -DANDROID_USE_LEGACY_TOOLCHAIN_FILE=OFF \
-    -DNDK_CCACHE=/usr/bin/ccache \
-    -S "${CMAKE_DIR}" \
-    -B "${BUILD_DIR}" \
-    -DZSTD_MULTITHREAD_SUPPORT=ON \
-    -DZSTD_BUILD_TESTS=OFF \
-    -DZSTD_BUILD_CONTRIB=OFF \
-    -DZSTD_BUILD_PROGRAMS=ON \
-    -DZSTD_BUILD_STATIC=ON \
-    -DZSTD_BUILD_SHARED=ON \
-    -DZSTD_ZLIB_SUPPORT=ON \
-    -DZSTD_LZMA_SUPPORT=ON \
-    -DZSTD_LZ4_SUPPORT=OFF
+  cd "${BUILD_DIR}"
+    /usr/bin/cmake \
+      -DCMAKE_TOOLCHAIN_FILE="${CMAKE_TOOLCHAIN}" \
+      -DANDROID_ABI="${ABI}" \
+      -DANDROID_PLATFORM=${ANDROID_PLATFORM} \
+      -Wno-dev \
+      -DCMAKE_EXPORT_COMPILE_COMMANDS=OFF \
+      -DBUILD_TESTING=OFF \
+      -DCMAKE_BUILD_TYPE="${BUILD_TYPE}" \
+      -DCMAKE_VERBOSE_MAKEFILE=ON \
+      -DCMAKE_COLOR_MAKEFILE=ON \
+      -DCMAKE_SYSTEM_PROCESSOR="${SYSTEM_PROCESSOR}" \
+      -DCMAKE_FIND_ROOT_PATH="${ZLIB_INSTALL_DIR};${XZ_INSTALL_DIR}" \
+      -DCMAKE_LIBRARY_PATH="${SYSTEM_LIBRARY_DIR}" \
+      -DCMAKE_IGNORE_PATH="${XZ_INSTALL_DIR}/bin" \
+      -DCMAKE_INSTALL_PREFIX="${ZSTD_INSTALL_DIR}" \
+      -DCMAKE_C_FLAGS="${CCFLAGS} ${CPPFLAGS} ${LDFLAGS}" \
+      -DCMAKE_CXX_FLAGS="${CXXFLAGS} ${CPPFLAGS} ${LDFLAGS}" \
+      -DBUILD_SHARED_LIBS=ON \
+      -DANDROID_TOOLCHAIN=clang \
+      -DANDROID_ARM_NEON=TRUE \
+      -DANDROID_STL=c++_shared \
+      -DANDROID_PLATFORM=21 \
+      -DANDROID_USE_LEGACY_TOOLCHAIN_FILE=OFF \
+      -DNDK_CCACHE=/usr/bin/ccache \
+      -S "${CMAKE_DIR}" \
+      -B "${BUILD_DIR}" \
+      -DZSTD_MULTITHREAD_SUPPORT=ON \
+      -DZSTD_BUILD_TESTS=OFF \
+      -DZSTD_BUILD_CONTRIB=OFF \
+      -DZSTD_BUILD_PROGRAMS=ON \
+      -DZSTD_BUILD_STATIC=ON \
+      -DZSTD_BUILD_SHARED=ON \
+      -DZSTD_ZLIB_SUPPORT=ON \
+      -DZSTD_LZMA_SUPPORT=ON \
+      -DZSTD_LZ4_SUPPORT=OFF
 
-  /usr/bin/cmake --build "${BUILD_DIR}" -- -j8
-  /usr/bin/cmake --install "${BUILD_DIR}"
+    /usr/bin/cmake --build "${BUILD_DIR}" -- -j8
+    /usr/bin/cmake --install "${BUILD_DIR}"
 
   # cleanup
   unset BUILD_DIR
