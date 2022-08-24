@@ -27,7 +27,7 @@ jobs:
       matrix:
         target: ["x86", "x64", "arm", "arm64"]
     env:
-      OUTPUT_DIR: _out/zstd/android-${{ matrix.target }}
+      OUTPUT_DIR: _out/android-${{ matrix.target }}
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
@@ -54,7 +54,7 @@ jobs:
           - target: arm64
             os: macos-latest
     env:
-      OUTPUT_DIR: _out/zstd/ios-${{ matrix.target }}
+      OUTPUT_DIR: _out/ios-${{ matrix.target }}
     runs-on: ${{ matrix.os }}
     timeout-minutes: 10
     steps:
@@ -79,7 +79,7 @@ jobs:
       matrix:
         target: ["x64", "arm64"]
     env:
-      OUTPUT_DIR: _out/zstd/linux-${{ matrix.target }}
+      OUTPUT_DIR: _out/linux-${{ matrix.target }}
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
@@ -104,7 +104,7 @@ jobs:
       matrix:
         target: ["x64", "arm64"]
     env:
-      OUTPUT_DIR: _out/zstd/osx-${{ matrix.target }}
+      OUTPUT_DIR: _out/osx-${{ matrix.target }}
     runs-on: macos-latest
     timeout-minutes: 10
     steps:
@@ -113,7 +113,7 @@ jobs:
           submodules: true
       - run: git fetch --tags
         working-directory: zstd
-      # host runner is x86_64 and cannot link x86_64 `lz4` & `lzma` to arm64 build
+      # host runner is x86_64 and cannot link x86_64 `zlib` & `lzma` to arm64 build
       - run: brew uninstall --ignore-dependencies lz4 xz
         if: ${{ matrix.target == 'arm64' }}
       - name: Build
@@ -132,7 +132,7 @@ jobs:
       matrix:
         target: ["x64", "x86", "arm64"]
     env:
-      OUTPUT_DIR: _out\zstd\win-${{ matrix.target }}
+      OUTPUT_DIR: _out\win-${{ matrix.target }}
     runs-on: windows-2022
     timeout-minutes: 10
     steps:
@@ -161,7 +161,7 @@ jobs:
       matrix:
         target: ["x64", "x86", "arm64"]
     env:
-      OUTPUT_DIR: _out\zstd\win-${{ matrix.target }}
+      OUTPUT_DIR: _out\win-${{ matrix.target }}
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
@@ -179,7 +179,7 @@ jobs:
     if: ${{ inputs.create-pullrequest == true }}
     needs: [android, ios, linux, macos, windows]
     env:
-      ARTIFACT_PATH: ./artifact/
+      ARTIFACT_PATH: ./artifact/zstd
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
