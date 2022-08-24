@@ -11,8 +11,8 @@ This repository indicate build native binaries for following.
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 **Table of Contents**
 
-- [Basic policy](#basic-policy)
-- [Build packages](#build-packages)
+- [Build policy](#build-policy)
+- [Getting started](#getting-started)
 - [zstd](#zstd)
   - [Linux](#linux)
     - [Linux (amd64)](#linux-amd64)
