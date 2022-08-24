@@ -5,6 +5,7 @@
 This repository indicate build native binaries for following.
 
 * zstd
+* lz4
 * (upcoming....)
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
