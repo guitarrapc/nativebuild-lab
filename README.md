@@ -293,7 +293,7 @@ Building [lz4](https://github.com/lz4/lz4) for following environment.
 
 ## Android
 
-use `cmake`.
+use `make`.
 
 ### Android (armeabi-v7a)
 
