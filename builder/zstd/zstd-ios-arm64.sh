@@ -1,14 +1,14 @@
 #!/bin/bash
-
 set -e
 
-source ./builder/zstd/settings.sh
+SCRIPT_DIR=$(cd $(dirname $0); pwd)
+source ./$SCRIPT_DIR/settings.sh
 OS=ios
 PLATFORM=arm64
 OUTPUT_DIR=${OUTPUT_DIR:=pkg/${SRC_DIR}/${GIT_VERSION}/${OS}/${PLATFORM}/}
 
 # build
-bash ./builder/$SRC_DIR/core/zstd-builder-ios.sh
+bash ./builder/$SRC_DIR/core/builder-ios.sh
 
 # confirm
 ls -l $SRC_DIR/build/cmake/build/lib/$LIBNAME.a

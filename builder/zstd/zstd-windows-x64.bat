@@ -1,14 +1,15 @@
-:: run on cmd
+@echo OFF
 SETLOCAL ENABLEDELAYEDEXPANSION
 
-call builder/zstd/settings.bat
+set SCRIPT_DIR=%~dp0
+call %SCRIPT_DIR%/settings.bat
 set OS=windows
 set PLATFORM=x64
 if not defined OUTPUT_DIR (set OUTPUT_DIR=pkg\%SRC_DIR%\%GIT_VERSION%\%OS%\%PLATFORM%)
 
 :: build
-::docker run --rm -v "%cd%/builder/%SRC_DIR%/core:/builder" -v "%cd%/%SRC_DIR%:/src" ubuntu:22.04 /bin/bash /builder/zstd-builder-windows-x64.sh
-docker run --rm -v "%cd%/builder/%SRC_DIR%/core:/builder" -v "%cd%/%SRC_DIR%:/src" guitarrapc/ubuntu-mingw-w64:22.04.1 /bin/bash /builder/zstd-builder-windows-x64.sh
+::docker run --rm -v "%SCRIPT_DIR%/core:/builder" -v "%cd%/%SRC_DIR%:/src" ubuntu:22.04 /bin/bash /builder/builder-windows-x64.sh
+docker run --rm -v "%SCRIPT_DIR%/core:/builder" -v "%cd%/%SRC_DIR%:/src" guitarrapc/ubuntu-mingw-w64:22.04.1 /bin/bash /builder/builder-windows-x64.sh
 
 :: confirm
 dir %SRC_DIR%\lib\dll\%LIBNAME%.dll

@@ -1,14 +1,15 @@
-:: run on cmd
+@echo OFF
 SETLOCAL ENABLEDELAYEDEXPANSION
 
-call builder/zstd/settings.bat
+set SCRIPT_DIR=%~dp0
+call %SCRIPT_DIR%/settings.bat
 set OS=windows
 set ARCH=x64
 set PLATFORM=x64
 if not defined OUTPUT_DIR (set OUTPUT_DIR=pkg\%SRC_DIR%\%GIT_VERSION%\%OS%\%PLATFORM%)
 
 :: build
-call builder\%SRC_DIR%\core\zstd-builder-windows-cmake.bat
+call builder\%SRC_DIR%\core\builder-windows-cmake.bat
 if %ERRORLEVEL% == 1 exit /b 1
 
 :: confirm

@@ -1,14 +1,15 @@
 #!/bin/bash
 set -e
 
-source ./builder/zstd/settings.sh
+SCRIPT_DIR=$(cd $(dirname $0); pwd)
+source ./$SCRIPT_DIR/settings.sh
 OS=windows
 PLATFORM=x86
 OUTPUT_DIR=${OUTPUT_DIR:=pkg/${SRC_DIR}/${GIT_VERSION}/${OS}/${PLATFORM}/}
 
 # build
-docker run --rm -v "$PWD/builder/$SRC_DIR/core:/builder" -v "$PWD/$SRC_DIR:/src" ubuntu:22.04 /bin/sh /builder/zstd-builder-windows-x86.sh
-# docker run --rm -v "$PWD/builder/$SRC_DIR/core:/builder" -v "$PWD/$SRC_DIR:/src" guitarrapc/ubuntu-mingw-w64:22.04.1 /bin/bash /builder/zstd-builder-windows-x86.sh
+docker run --rm -v "$SCRIPT_DIR/core:/builder" -v "$PWD/$SRC_DIR:/src" ubuntu:22.04 /bin/sh /builder/builder-windows-x86.sh
+# docker run --rm -v "$SCRIPT_DIR/core:/builder" -v "$PWD/$SRC_DIR:/src" guitarrapc/ubuntu-mingw-w64:22.04.1 /bin/bash /builder/builder-windows-x86.sh
 
 # confirm
 ls $SRC_DIR/lib/dll/$LIBNAME.dll

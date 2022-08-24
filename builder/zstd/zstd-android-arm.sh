@@ -1,14 +1,15 @@
 #!/bin/bash
 set -e
 
-source ./builder/zstd/settings.sh
+SCRIPT_DIR=$(cd $(dirname $0); pwd)
+source ./$SCRIPT_DIR/settings.sh
 OS=android
 ABI=armeabi-v7a
 PLATFORM=arm
 OUTPUT_DIR=${OUTPUT_DIR:=pkg/${SRC_DIR}/${GIT_VERSION}/${OS}/${PLATFORM}/}
 
 # build
-docker run --rm -v "$PWD/builder/$SRC_DIR/core:/builder" -v "$PWD/$SRC_DIR:/src" -e "ABI=$ABI" ubuntu:22.04 /bin/bash /builder/zstd-builder-android.sh
+docker run --rm -v "$SCRIPT_DIR/core:/builder" -v "$PWD/$SRC_DIR:/src" -e "ABI=$ABI" ubuntu:22.04 /bin/bash /builder/builder-android.sh
 
 # confirm
 ls $SRC_DIR/build/cmake/build/lib/$LIBNAME.a

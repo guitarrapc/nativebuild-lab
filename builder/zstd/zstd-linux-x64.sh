@@ -1,13 +1,14 @@
 #!/bin/bash
 set -e
 
-source ./builder/zstd/settings.sh
+SCRIPT_DIR=$(cd $(dirname $0); pwd)
+source ./$SCRIPT_DIR/settings.sh
 OS=linux
 PLATFORM=x64
 OUTPUT_DIR=${OUTPUT_DIR:=pkg/${SRC_DIR}/${GIT_VERSION}/${OS}/${PLATFORM}/}
 
 # build
-docker run --rm -v "$PWD/builder/$SRC_DIR/core:/builder" -v "$PWD/$SRC_DIR:/src" alpine:latest /bin/sh /builder/zstd-builder-linux-x64.sh
+docker run --rm -v "$SCRIPT_DIR/core:/builder" -v "$PWD/$SRC_DIR:/src" alpine:latest /bin/sh /builder/builder-linux-x64.sh
 
 # confirm
 ls $SRC_DIR/lib/$LIBNAME.a
