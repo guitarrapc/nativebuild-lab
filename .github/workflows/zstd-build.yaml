@@ -144,7 +144,7 @@ jobs:
       - name: Add MSBuild to PATH
         uses: microsoft/setup-msbuild@v1.1
       - name: Build
-        run: builder\zstd\zstd-windows-${{ matrix.target }}-cmake.bat
+        run: builder\zstd\zstd-windows-${{ matrix.target }}.bat
         shell: cmd
       - name: show generated files
         run: git ls-files --other --modified --exclude-standard
@@ -171,7 +171,7 @@ jobs:
       - run: git fetch --tags
         working-directory: zstd
       - name: Build
-        run: bash builder/zstd/zstd-windows-${{ matrix.target }}.sh
+        run: bash builder/zstd/zstd-windows-${{ matrix.target }}-mingw.sh
       - name: show generated files
         run: git ls-files --other --modified --exclude-standard
 

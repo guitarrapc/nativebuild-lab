@@ -190,77 +190,67 @@ bash ./builder/zstd/zstd-darwin-arm64.sh
 
 There are 2way to build.
 
-1. make
-2. cmake
+1. cmake (primary)
+2. make
 
 **cmake** binaries are named `zstd*`, on the otherhand **make** binaries are `libzstd*`.
 
-> **Note**: If you are runnning on Linux or macOS, use `make`. If you are runnning on Windows use `cmake`.
+> **Note**: Use `cmake` when runnning Windows. Use `make` when runnning Linux or macOS.
+
+> **Note**: `cmake` requires Windows Host to build. Also install Visual Studio 2022 `C++ Desktop Experience` package and `MSVC v143 - VS 2022 C++ ARM64 build tools` for cmake. Use `x64_x86 Cross Tools Command Prompt for VS2022`.
 
 ### Windows (x64)
+
+**cmake**
+
+```bash
+builder\zstd\zstd-windows-x64.bat
+```
 
 **make**
 
 ```bash
 # windows
-builder\zstd\zstd-windows-x64.bat
+builder\zstd\zstd-windows-x64-mingw.bat
 
 # linux
-bash ./builder/zstd/zstd-windows-x64.sh
-```
-
-**cmake**
-
-Install Visual Studio 2022 `C++ Desktop Experience` package for cmake.
-
-Open `x64_x86 Cross Tools Command Prompt for VS2022`.
-
-```bash
-builder\zstd\zstd-windows-x64-cmake.bat
+bash ./builder/zstd/zstd-windows-x64-mingw.sh
 ```
 
 ### Windows (x86)
 
+**cmake**
+
+```bash
+builder\zstd\zstd-windows-x86.bat
+```
+
 **make**
 
 ```bash
 # windows
-builder\zstd\zstd-windows-x86.bat
+builder\zstd\zstd-windows-x86-mingw.bat
 
 # linux
-bash ./builder/zstd/zstd-windows-x86.sh
-```
-
-**cmake**
-
-Install Visual Studio 2022 `C++ Desktop Experience` package for cmake.
-
-Open `x64_x86 Cross Tools Command Prompt for VS2022`.
-
-```bash
-builder\zstd\zstd-windows-x86-cmake.bat
+bash ./builder/zstd/zstd-windows-x86-mingw.sh
 ```
 
 ### Windows (arm64)
 
+**cmake**
+
+```bash
+builder\zstd\zstd-windows-arm64.bat
+```
+
 **make**
 
 ```bash
 # windows
-builder\zstd\zstd-windows-arm64.bat
+builder\zstd\zstd-windows-arm64-mingw.bat
 
 # linux
-bash ./builder/zstd/zstd-windows-arm64.sh
-```
-
-**cmake**
-
-Install Visual Studio 2022 `C++ Desktop Experience` package and `MSVC v143 - VS 2022 C++ ARM64 build tools` for cmake.
-
-Open `x64_x86 Cross Tools Command Prompt for VS2022`.
-
-```bash
-builder\zstd\zstd-windows-arm64-cmake.bat
+bash ./builder/zstd/zstd-windows-arm64-mingw.sh
 ```
 
 # lz4
@@ -273,7 +263,23 @@ Building [lz4](https://github.com/lz4/lz4) for following environment.
 
 ## iOS
 
-[TBD]
+use `make` or `xcpkg`.
+
+> **Note**: You must use macOS to build.
+
+### iOS (arm64)
+
+**make**
+
+Install prerequisites.
+
+```bash
+brew install make
+```
+
+```bash
+bash ./builder/lz4/lz4-ios-arm64.sh
+```
 
 ## Linux
 
@@ -321,7 +327,30 @@ bash ./builder/lz4/lz4-darwin-arm64.sh
 
 ## Windows
 
-[TBD]
+Use `cmake`.
+
+**cmake** binaries are named `lz4*`.
+
+> **Note**: `cmake` requires Windows Host to build. Also install Visual Studio 2022 `C++ Desktop Experience` package and `MSVC v143 - VS 2022 C++ ARM64 build tools` for cmake. Use `x64_x86 Cross Tools Command Prompt for VS2022`.
+
+### Windows (x64)
+
+```bash
+builder\lz4\lz4-windows-x64.bat
+```
+
+
+### Windows (x86)
+
+```bash
+builder\lz4\lz4-windows-x86.bat
+```
+
+### Windows (arm64)
+
+```bash
+builder\lz4\lz4-windows-arm64.bat
+```
 
 # REF
 
