@@ -20,6 +20,7 @@ This repository indicate build native binaries for following.
     - [Android (x86)](#android-x86)
     - [Android (x86_64)](#android-x86_64)
   - [iOS](#ios)
+    - [iOS (arm64)](#ios-arm64)
   - [Linux](#linux)
     - [Linux (amd64)](#linux-amd64)
     - [Linux (aarch64)](#linux-aarch64)
