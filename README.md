@@ -199,7 +199,7 @@ There are 2way to build.
 
 **cmake** binaries are named `zstd*`, on the otherhand **make** binaries are `libzstd*`.
 
-> **Note**: You must use macOS for `cmake`. Use `make` (=mingw) when using Linux or macOS.
+> **Note**: You must use Windows for `cmake`. Use `make` (=mingw) when using Linux or macOS.
 
 > **Note**: `cmake` requires Windows Host to build. Also install Visual Studio 2022 `C++ Desktop Experience` package and `MSVC v143 - VS 2022 C++ ARM64 build tools` for cmake
 
