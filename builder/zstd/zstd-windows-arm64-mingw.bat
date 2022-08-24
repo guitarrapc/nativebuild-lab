@@ -8,7 +8,7 @@ set PLATFORM=arm64
 if not defined OUTPUT_DIR (set OUTPUT_DIR=pkg\%SRC_DIR%\%GIT_VERSION%\%OS%\%PLATFORM%)
 
 :: build
-docker run --rm -v "%SCRIPT_DIR%/core:/builder" -v "%cd%/%SRC_DIR%:/src" mstorsjo/llvm-mingw:20220802 /bin/bash /builder/builder-windows-arm64.sh
+docker run --rm -v "%SCRIPT_DIR%/core:/builder" -v "%cd%/%SRC_DIR%:/src" mstorsjo/llvm-mingw:20220802 /bin/bash /builder/builder-windows-arm64-mingw.sh
 
 :: confirm
 dir %SRC_DIR%\lib\dll\%LIBNAME%.dll
