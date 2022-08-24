@@ -83,6 +83,49 @@ Windows | arm64 | Windows <br/>Docker | CMake <br/>mingw-w64 | [builder/zstd/cor
 Windows | x64   | Windows <br/>Docker | CMake <br/>mingw-w64 | [builder/zstd/core](https://github.com/guitarrapc/nativebuild-lab/tree/main/builder/zstd/core) | [GitHub Actions](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/zstd-build.yaml)
 Windows | x86   | Windows <br/>Docker | CMake <br/>mingw-w64 | [builder/zstd/core](https://github.com/guitarrapc/nativebuild-lab/tree/main/builder/zstd/core) | [GitHub Actions](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/zstd-build.yaml)
 
+## Android
+
+use `cmake`.
+
+### Android (armeabi-v7a)
+
+```bash
+bash ./builder/zstd/zstd-android-arm.sh
+```
+
+### Android (arm64-v8a)
+
+```bash
+bash ./builder/zstd/zstd-android-arm64.sh
+```
+
+### Android (x86)
+
+```bash
+bash ./builder/zstd/zstd-android-x86.sh
+```
+
+### Android (x86_64)
+
+```bash
+bash ./builder/zstd/zstd-android-x64.sh
+```
+
+## iOS
+
+use `cmake` or `xcpkg`.
+
+**cmake**
+
+Install prerequisites.
+```bash
+brew install cmake ninja gsed tree
+```
+
+```bash
+bash ./builder/zstd/zstd-ios-arm64.sh
+```
+
 ## Linux
 
 Use `make` to build.
@@ -107,6 +150,22 @@ builder\zstd\zstd-linux-arm64.bat
 
 # linux
 bash ./builder/zstd/zstd-linux-arm64.sh
+```
+
+## macOS
+
+Use `make`.
+
+### macOS (x86_64)
+
+```bash
+bash ./builder/zstd/zstd-darwin-x64.sh
+```
+
+### macOS (arm64)
+
+```bash
+bash ./builder/zstd/zstd-darwin-arm64.sh
 ```
 
 ## Windows
@@ -187,94 +246,18 @@ Open `x64_x86 Cross Tools Command Prompt for VS2022`.
 builder\zstd\zstd-windows-arm64-cmake.bat
 ```
 
+# lz4
 
-## macOS
+Building [lz4](https://github.com/lz4/lz4) for following environment.
 
-Use `make`.
-
-### macOS (x86_64)
-
-```bash
-bash ./builder/zstd/zstd-darwin-x64.sh
-```
-
-### macOS (arm64)
-
-```bash
-bash ./builder/zstd/zstd-darwin-arm64.sh
-```
-
-## iOS
-
-use `cmake` or `xcpkg`.
-
-**cmake**
-
-Install prerequisites.
-```bash
-brew install cmake ninja gsed tree
-```
-
-```bash
-bash ./builder/zstd/zstd-ios-arm64.sh
-```
-
-**xcpkg**
-
-Install [xcpkg](https://github.com/leleliu008/xcpkg).
-
-```bash
-brew tap leleliu008/fpliu
-brew install xcpkg
-```
-
-```bash
-xcpkg update
-sed -i '' -e "s|https://zlib.net/zlib-1.2.11.tar.gz|https://zlib.net/fossils/zlib-1.2.11.tar.gz|" "$HOME/.xcpkg/repos.d/offical/formula/zlib.sh"
-xcpkg install zstd
-```
-
-```bash
-% ls -l ~/.xcpkg/install.d/zstd/iPhoneOS/arm64/lib
-
-total 2968
-drwxr-xr-x  3 user  staff      96 Aug 10 19:46 cmake/
--rwxr-xr-x  1 user  staff  728072 Aug 10 19:46 libzstd.1.5.2.dylib*
-lrwxr-xr-x  1 user  staff      19 Aug 10 19:46 libzstd.1.dylib@ -> libzstd.1.5.2.dylib
--rw-r--r--  1 user  staff  789512 Aug 10 19:46 libzstd.a
-lrwxr-xr-x  1 user  staff      15 Aug 10 19:46 libzstd.dylib@ -> libzstd.1.dylib
-drwxr-xr-x  3 user  staff      96 Aug 10 19:46 pkgconfig/
-```
 
 ## Android
 
-use `cmake`.
+[TBD]
 
-### Android (armeabi-v7a)
+## iOS
 
-```bash
-bash ./builder/zstd/zstd-android-arm.sh
-```
-
-### Android (arm64-v8a)
-
-```bash
-bash ./builder/zstd/zstd-android-arm64.sh
-```
-
-### Android (x86)
-
-```bash
-bash ./builder/zstd/zstd-android-x86.sh
-```
-
-### Android (x86_64)
-
-```bash
-bash ./builder/zstd/zstd-android-x64.sh
-```
-
-# lz4
+[TBD]
 
 ## Linux
 
@@ -301,6 +284,14 @@ builder\lz4\lz4-linux-arm64.bat
 # linux
 bash ./builder/lz4/lz4-linux-arm64.sh
 ```
+
+## macOS
+
+[TBD]
+
+## Windows
+
+[TBD]
 
 # REF
 
