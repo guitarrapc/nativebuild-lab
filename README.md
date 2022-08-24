@@ -301,7 +301,21 @@ bash ./builder/lz4/lz4-linux-arm64.sh
 
 ## macOS
 
-[TBD]
+Use `make`.
+
+> **Note**: You must use macOS to build.
+
+### macOS (x86_64)
+
+```bash
+bash ./builder/lz4/lz4-darwin-x64.sh
+```
+
+### macOS (arm64)
+
+```bash
+bash ./builder/lz4/lz4-darwin-arm64.sh
+```
 
 ## Windows
 
