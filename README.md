@@ -54,8 +54,8 @@ This repository build with following policy.
 * Linux: Use package's standard build. If nothing prefered then use `make` when available.
 * Windows: Use package's standard build. If nothing prefered then use `CMake` (w/VC++) when available. Alternative is `mingw-w64` on Docker.
 * macOS: Use package's standard build. If nothing prefered then use `make` when available.
-* iOS: Use CMake to build.
-* Android: Use CMake to build.
+* iOS: Use package's standard build. If nothing prefered then use `CMake` when availble.
+* Android: Use `CMake` to build.
 
 # Getting started
 
