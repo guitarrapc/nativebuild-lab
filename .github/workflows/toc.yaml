@@ -12,3 +12,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: technote-space/toc-generator@v4
+        with:
+          COMMIT_NAME: github-actions[bot]
+          COMMIT_EMAIL: github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>
