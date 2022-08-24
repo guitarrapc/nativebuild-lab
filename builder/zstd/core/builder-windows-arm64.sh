@@ -1,4 +1,6 @@
 #!/bin/sh
+set -eu
+
 # use https://github.com/mstorsjo/llvm-mingw for ARM64 support.
 # see: https://github.com/facebook/zstd/issues/2072
 apt-get update

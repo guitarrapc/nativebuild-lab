@@ -1,4 +1,6 @@
 #!/bin/sh
+set -eu
+
 # see: https://github.com/facebook/zstd/issues/2072
 apt-get update
 apt-get install -yq --no-install-suggests --no-install-recommends make gcc libc-dev sudo mingw-w64
