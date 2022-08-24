@@ -2,7 +2,7 @@
 set -e
 
 SCRIPT_DIR=$(cd $(dirname $0); pwd)
-source ./$SCRIPT_DIR/settings.sh
+source $SCRIPT_DIR/settings.sh
 OS=ios
 PLATFORM=arm64
 OUTPUT_DIR=${OUTPUT_DIR:=pkg/${SRC_DIR}/${GIT_VERSION}/${OS}/${PLATFORM}/}

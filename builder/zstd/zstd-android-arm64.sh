@@ -2,7 +2,7 @@
 set -e
 
 SCRIPT_DIR=$(cd $(dirname $0); pwd)
-source ./$SCRIPT_DIR/settings.sh
+source $SCRIPT_DIR/settings.sh
 OS=android
 ABI=arm64-v8a
 PLATFORM=arm64
