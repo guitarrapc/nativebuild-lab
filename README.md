@@ -199,9 +199,9 @@ There are 2way to build.
 
 **cmake** binaries are named `zstd*`, on the otherhand **make** binaries are `libzstd*`.
 
-> **Note**: Use `cmake` when runnning Windows. Use `make` when runnning Linux or macOS.
+> **Note**: You must use macOS for `cmake`. Use `make` (=mingw) when using Linux or macOS.
 
-> **Note**: `cmake` requires Windows Host to build. Also install Visual Studio 2022 `C++ Desktop Experience` package and `MSVC v143 - VS 2022 C++ ARM64 build tools` for cmake. Use `x64_x86 Cross Tools Command Prompt for VS2022`.
+> **Note**: `cmake` requires Windows Host to build. Also install Visual Studio 2022 `C++ Desktop Experience` package and `MSVC v143 - VS 2022 C++ ARM64 build tools` for cmake
 
 ### Windows (x64)
 
@@ -335,14 +335,15 @@ Use `cmake`.
 
 **cmake** binaries are named `lz4*`.
 
-> **Note**: `cmake` requires Windows Host to build. Also install Visual Studio 2022 `C++ Desktop Experience` package and `MSVC v143 - VS 2022 C++ ARM64 build tools` for cmake. Use `x64_x86 Cross Tools Command Prompt for VS2022`.
+> **Note**: You must use Windows to build.
+
+> **Note**: `cmake` requires Windows Host to build. Also install Visual Studio 2022 `C++ Desktop Experience` package and `MSVC v143 - VS 2022 C++ ARM64 build tools` for cmake.
 
 ### Windows (x64)
 
 ```bash
 builder\lz4\lz4-windows-x64.bat
 ```
-
 
 ### Windows (x86)
 
