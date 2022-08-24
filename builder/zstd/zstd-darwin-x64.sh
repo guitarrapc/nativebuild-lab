@@ -8,10 +8,7 @@ PLATFORM=x64
 OUTPUT_DIR=${OUTPUT_DIR:=pkg/${SRC_DIR}/${GIT_VERSION}/${OS}/${PLATFORM}/}
 
 # build
-cd $SRC_DIR
-make clean
-make CFLAGS="-target x86_64-apple-macos10.12 -Werror -O3"
-cd ..
+. $SCRIPT_DIR/core/builder-darwin-x64.sh
 
 # confirm
 ls $SRC_DIR/lib/$LIBNAME.a

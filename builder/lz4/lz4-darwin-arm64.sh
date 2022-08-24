@@ -8,10 +8,7 @@ PLATFORM=arm64
 OUTPUT_DIR=${OUTPUT_DIR:=pkg/${SRC_DIR}/${GIT_VERSION}/${OS}/${PLATFORM}/}
 
 # build
-cd $SRC_DIR
-make clean
-make CFLAGS="-target arm64-apple-macos11 -Werror -O3"
-cd ..
+. $SCRIPT_DIR/core/builder-darwin-arm64.sh
 
 # confirm
 ls $SRC_DIR/lib/$LIBNAME.a
