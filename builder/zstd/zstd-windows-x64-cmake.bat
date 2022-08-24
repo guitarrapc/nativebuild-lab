@@ -9,7 +9,7 @@ set PLATFORM=x64
 if not defined OUTPUT_DIR (set OUTPUT_DIR=pkg\%SRC_DIR%\%GIT_VERSION%\%OS%\%PLATFORM%)
 
 :: build
-call builder\%SRC_DIR%\core\builder-windows-cmake.bat
+call %SCRIPT_DIR%\core\builder-windows-cmake.bat
 if %ERRORLEVEL% == 1 exit /b 1
 
 :: confirm
