@@ -13,7 +13,8 @@ set PLATFORM=x86
 if not defined OUTPUT_DIR (set OUTPUT_DIR=pkg\zstd\%GIT_ZSTD_VERSION%\%OS%\%PLATFORM%)
 
 :: build
-builder\zstd\core\zstd-builder-windows-cmake.bat
+call builder\zstd\core\zstd-builder-windows-cmake.bat
+if %ERRORLEVEL% == 1 exit /b 1
 
 :: confirm
 dir zstd\build\cmake\build\lib\Release\zstd*
