@@ -123,9 +123,14 @@ bash ./builder/zstd/zstd-android-x64.sh
 
 use `cmake` or `xcpkg`.
 
+> **Note**: You must use macOS to build.
+
+### iOS (arm64)
+
 **cmake**
 
 Install prerequisites.
+
 ```bash
 brew install cmake ninja gsed tree
 ```
@@ -164,6 +169,8 @@ bash ./builder/zstd/zstd-linux-arm64.sh
 
 Use `make`.
 
+> **Note**: You must use macOS to build.
+
 ### macOS (x86_64)
 
 ```bash
@@ -183,10 +190,9 @@ There are 2way to build.
 1. make
 2. cmake
 
-If you are runnning on Linux, use make.
-If you are runnning on Windows use cmake. you can use make with docker.
+**cmake** binaries are named `zstd*`, on the otherhand **make** binaries are `libzstd*`.
 
-> **Note**: **cmake** binaries are named `zstd*`, on the otherhand **make** binaries are `libzstd*`.
+> **Note**: If you are runnning on Linux or macOS, use `make`. If you are runnning on Windows use `cmake`.
 
 ### Windows (x64)
 
@@ -257,7 +263,6 @@ builder\zstd\zstd-windows-arm64-cmake.bat
 # lz4
 
 Building [lz4](https://github.com/lz4/lz4) for following environment.
-
 
 ## Android
 
