@@ -19,5 +19,5 @@ ls $SRC_DIR/build/cmake/build/programs/$EXENAME
 # copy
 mkdir -p "./${OUTPUT_DIR}/"
 cp ./$SRC_DIR/build/cmake/build/lib/$LIBNAME.a "./${OUTPUT_DIR}/."
-cp "./$SRC_DIR/build/cmake/build/lib/$LIBNAME.so" "./${OUTPUT_DIR}/$LIBNAME.so"
+cp ./$SRC_DIR/build/cmake/build/lib/$LIBNAME.so "./${OUTPUT_DIR}/$LIBNAME.so"
 cp ./$SRC_DIR/build/cmake/build/programs/$EXENAME "./${OUTPUT_DIR}/."

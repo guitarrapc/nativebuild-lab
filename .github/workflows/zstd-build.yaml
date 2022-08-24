@@ -18,7 +18,7 @@ on:
     branches: [main]
 
 # OUTPUT_DIR name follow to .NET RID rule. https://docs.microsoft.com/ja-jp/dotnet/core/rid-catalog
-# win-x64, linux-x64, osx-x64
+# android-x64, ios-arm64, linux-x64, osx-x64, win-x64
 
 jobs:
   android:

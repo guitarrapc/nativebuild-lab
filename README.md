@@ -79,9 +79,9 @@ git submodule update --init --recursive
 > * Linux and Windows can build without macOS & iOS platform.
 > * macOS can build for all platform.
 
-# zstd
+# Summary
 
-Building [zstd](https://github.com/facebook/zstd) for following environment.
+## zstd
 
 OS | Architecture | Build Env| Builder | Build Script | CI
 ---- | ---- | ---- | ---- | ---- | ----
@@ -97,6 +97,28 @@ macOS   | x64   | Intel Mac <br/>Apple Silicon Mac | make | [builder/zstd/core](
 Windows | arm64 | Windows <br/>Docker | CMake <br/>mingw-w64 | [builder/zstd/core](https://github.com/guitarrapc/nativebuild-lab/tree/main/builder/zstd/core) | [GitHub Actions](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/zstd-build.yaml)
 Windows | x64   | Windows <br/>Docker | CMake <br/>mingw-w64 | [builder/zstd/core](https://github.com/guitarrapc/nativebuild-lab/tree/main/builder/zstd/core) | [GitHub Actions](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/zstd-build.yaml)
 Windows | x86   | Windows <br/>Docker | CMake <br/>mingw-w64 | [builder/zstd/core](https://github.com/guitarrapc/nativebuild-lab/tree/main/builder/zstd/core) | [GitHub Actions](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/zstd-build.yaml)
+
+## lz4
+
+OS | Architecture | Build Env| Builder | Build Script | CI
+---- | ---- | ---- | ---- | ---- | ----
+Android | armeabi-v7a | Docker | CMake | [builder/lz4/core](https://github.com/guitarrapc/nativebuild-lab/tree/main/builder/lz4/core) | [GitHub Actions](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/lz4-build.yaml)
+Android | arm64-v8a   | Docker | CMake | [builder/lz4/core](https://github.com/guitarrapc/nativebuild-lab/tree/main/builder/lz4/core) | [GitHub Actions](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/lz4-build.yaml)
+Android | x86         | Docker | CMake | [builder/lz4/core](https://github.com/guitarrapc/nativebuild-lab/tree/main/builder/lz4/core) | [GitHub Actions](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/lz4-build.yaml)
+Android | x86_64      | Docker | CMake | [builder/lz4/core](https://github.com/guitarrapc/nativebuild-lab/tree/main/builder/lz4/core) | [GitHub Actions](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/lz4-build.yaml)
+iOS     | arm64 | Intel Mac <br/>Apple Silicon Mac | make | [builder/lz4/core](https://github.com/guitarrapc/nativebuild-lab/tree/main/builder/lz4/core) | [GitHub Actions](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/lz4-build.yaml)
+Linux   | arm64 | Docker | make | [builder/lz4/core](https://github.com/guitarrapc/nativebuild-lab/tree/main/builder/lz4/core) | [GitHub Actions](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/lz4-build.yaml)
+Linux   | x64   | Docker | make | [builder/lz4/core](https://github.com/guitarrapc/nativebuild-lab/tree/main/builder/lz4/core) | [GitHub Actions](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/lz4-build.yaml)
+macOS   | arm64 | Intel Mac <br/>Apple Silicon Mac | make | [builder/lz4/core](https://github.com/guitarrapc/nativebuild-lab/tree/main/builder/lz4/core) | [GitHub Actions](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/lz4-build.yaml)
+macOS   | x64   | Intel Mac <br/>Apple Silicon Mac | make | [builder/lz4/core](https://github.com/guitarrapc/nativebuild-lab/tree/main/builder/lz4/core) | [GitHub Actions](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/lz4-build.yaml)
+Windows | arm64 | Windows | CMake | [builder/lz4/core](https://github.com/guitarrapc/nativebuild-lab/tree/main/builder/lz4/core) | [GitHub Actions](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/lz4-build.yaml)
+Windows | x64   | Windows | CMake | [builder/lz4/core](https://github.com/guitarrapc/nativebuild-lab/tree/main/builder/lz4/core) | [GitHub Actions](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/lz4-build.yaml)
+Windows | x86   | Windows | CMake | [builder/lz4/core](https://github.com/guitarrapc/nativebuild-lab/tree/main/builder/lz4/core) | [GitHub Actions](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/lz4-build.yaml)
+
+
+# zstd
+
+Building [zstd](https://github.com/facebook/zstd) for following environment.
 
 ## Android
 
@@ -263,7 +285,32 @@ Building [lz4](https://github.com/lz4/lz4) for following environment.
 
 ## Android
 
-[TBD]
+use `cmake`.
+
+### Android (armeabi-v7a)
+
+```bash
+bash ./builder/lz4/lz4-android-arm.sh
+```
+
+### Android (arm64-v8a)
+
+```bash
+bash ./builder/lz4/lz4-android-arm64.sh
+```
+
+### Android (x86)
+
+```bash
+bash ./builder/lz4/lz4-android-x86.sh
+```
+
+### Android (x86_64)
+
+```bash
+bash ./builder/lz4/lz4-android-x64.sh
+```
+
 
 ## iOS
 
