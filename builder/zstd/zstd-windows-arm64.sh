@@ -1,22 +1,19 @@
-#!/bin/sh
-
+#!/bin/bash
 set -e
 
-ZSTD_VERSION=$(cd zstd && echo "$(git tag --points-at HEAD | tr -d '[:space:]')" && cd ..)
-GIT_ZSTD_VERSION=${ZSTD_VERSION}
-FILE_ZSTD_VERSION=$(echo "${ZSTD_VERSION}" | cut -c 2-)
+source ./builder/$SRC_DIR/settings.sh
 OS=windows
 PLATFORM=arm64
-OUTPUT_DIR=${OUTPUT_DIR:=pkg/zstd/${GIT_ZSTD_VERSION}/${OS}/${PLATFORM}/}
+OUTPUT_DIR=${OUTPUT_DIR:=pkg/${SRC_DIR}/${GIT_VERSION}/${OS}/${PLATFORM}/}
 
 # build
-docker run --rm -v "$PWD/builder/zstd/core:/builder" -v "$PWD/zstd:/src" mstorsjo/llvm-mingw:20220802 /bin/bash /builder/zstd-builder-windows-arm64.sh
+docker run --rm -v "$PWD/builder/$SRC_DIR/core:/builder" -v "$PWD/$SRC_DIR:/src" mstorsjo/llvm-mingw:20220802 /bin/bash /builder/zstd-builder-windows-arm64.sh
 
 # confirm
-ls zstd/lib/dll/libzstd.dll
-ls zstd/programs/zstd.exe
+ls $SRC_DIR/lib/dll/$LIBNAME.dll
+ls $SRC_DIR/programs/$EXENAME.exe
 
 # copy
 mkdir -p "./${OUTPUT_DIR}/mingw"
-cp ./zstd/lib/dll/libzstd.dll "./${OUTPUT_DIR}/mingw/."
-cp "./zstd/programs/zstd.exe" "./${OUTPUT_DIR}/mingw/."
+cp ./$SRC_DIR/lib/dll/$LIBNAME.dll "./${OUTPUT_DIR}/mingw/."
+cp "./$SRC_DIR/programs/$EXENAME.exe" "./${OUTPUT_DIR}/mingw/."

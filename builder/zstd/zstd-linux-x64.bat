@@ -1,26 +1,21 @@
 :: run on cmd
 SETLOCAL ENABLEDELAYEDEXPANSION
-cd zstd
-FOR /F "tokens=* USEBACKQ" %%F IN (`git tag --points-at HEAD`) DO ( SET ZSTD_VERSION=%%F )
-cd ..
-:: 'v1.5.2 ' -> 'v1.5.2'
-set GIT_ZSTD_VERSION=%ZSTD_VERSION:~0,-1%
-:: 'v1.5.2 ' -> '1.5.2'
-set FILE_ZSTD_VERSION=%ZSTD_VERSION:~1,-1%
+
+call builder/zstd/settings.bat
 set OS=linux
 set PLATFORM=x64
-if not defined OUTPUT_DIR (set OUTPUT_DIR=pkg\zstd\%GIT_ZSTD_VERSION%\%OS%\%PLATFORM%)
+if not defined OUTPUT_DIR (set OUTPUT_DIR=pkg\%SRC_DIR%\%GIT_VERSION%\%OS%\%PLATFORM%)
 
 :: build
-docker run --rm -v "%cd%/builder/zstd/core:/builder" -v "%cd%/zstd:/src" alpine:latest /bin/sh /builder/zstd-builder-linux-x64.sh
+docker run --rm -v "%cd%/builder/%SRC_DIR%/core:/builder" -v "%cd%/%SRC_DIR%:/src" alpine:latest /bin/sh /builder/zstd-builder-linux-x64.sh
 
 :: confirm
-dir zstd\lib\libzstd.a
-dir zstd\lib\libzstd.so*
-dir zstd\zstd
+dir %SRC_DIR%\lib\%LIBNAME%.a
+dir %SRC_DIR%\lib\%LIBNAME%.so*
+dir %SRC_DIR%\%EXENAME%
 
 :: copy
 mkdir %OUTPUT_DIR%
-cp .\zstd\lib\libzstd.a .\%OUTPUT_DIR%\libzstd.a
-cp .\zstd\lib\libzstd.so.%FILE_ZSTD_VERSION% .\%OUTPUT_DIR%\libzstd.so
-cp .\zstd\programs\zstd .\%OUTPUT_DIR%\zstd
+cp .\%SRC_DIR%\lib\%LIBNAME%.a .\%OUTPUT_DIR%\%LIBNAME%.a
+cp .\%SRC_DIR%\lib\%LIBNAME%.so.%FILE_VERSION% .\%OUTPUT_DIR%\%LIBNAME%.so
+cp .\%SRC_DIR%\programs\%EXENAME% .\%OUTPUT_DIR%\%EXENAME%
