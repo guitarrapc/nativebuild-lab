@@ -8,7 +8,7 @@ IOS_VERSION=${IOS_VERSION:=8.0}
 IOS_ARCH=${IOS_ARCH:=arm64}
 TARGET="iPhoneOS/${IOS_ARCH}/${IOS_VERSION}"
 
-INSTALL_DIR="$(pwd)/zstd/build/cmake/build/ios"
+INSTALL_DIR="$(pwd)/${SRC_DIR}/build/cmake/build/ios"
 
 # NOTE: zlib and lzma will found from iPhoneOS.sdk.
 # -- Found ZLIB: /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/usr/lib/libz.tbd (found version "1.2.11")
@@ -67,7 +67,7 @@ find_build_toolchains() {
 
   ZSTD_INSTALL_DIR="${INSTALL_DIR}/${IOS_ARCH}"
 
-  CMAKE_TOOLCHAIN="$(pwd)/builder/zstd/ios-arm64.toolchain.cmake"
+  CMAKE_TOOLCHAIN="$(pwd)/builder/${SRC_DIR}/ios-arm64.toolchain.cmake"
 
   CC="$TOOLCHAIN_BIND/clang"
   CXX="$TOOLCHAIN_BIND/clang++"
@@ -205,7 +205,7 @@ __install_zstd() {
   step "Install zstd."
 
   # variables
-  CMAKE_DIR="$(pwd)/zstd/build/cmake"
+  CMAKE_DIR="$(pwd)/${SRC_DIR}/build/cmake"
   BUILD_DIR="${CMAKE_DIR}/build"
   PACKAGE_INCLUDES=""
 

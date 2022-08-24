@@ -8,7 +8,7 @@ PLATFORM=arm64
 OUTPUT_DIR=${OUTPUT_DIR:=pkg/${SRC_DIR}/${GIT_VERSION}/${OS}/${PLATFORM}/}
 
 # build
-bash ./builder/$SRC_DIR/core/builder-ios.sh
+. ./builder/$SRC_DIR/core/builder-ios.sh
 
 # confirm
 ls -l $SRC_DIR/build/cmake/build/lib/$LIBNAME.a
