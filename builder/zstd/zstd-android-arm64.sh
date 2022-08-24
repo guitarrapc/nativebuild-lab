@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-source ./builder/$SRC_DIR/settings.sh
+source ./builder/zstd/settings.sh
 OS=android
 ABI=arm64-v8a
 PLATFORM=arm64

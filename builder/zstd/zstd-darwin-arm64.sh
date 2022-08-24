@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-source ./builder/$SRC_DIR/settings.sh
+source ./builder/zstd/settings.sh
 OS=darwin
 PLATFORM=arm64
 OUTPUT_DIR=${OUTPUT_DIR:=pkg/${SRC_DIR}/${GIT_VERSION}/${OS}/${PLATFORM}/}
