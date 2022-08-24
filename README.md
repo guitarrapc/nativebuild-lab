@@ -38,6 +38,8 @@ This repository indicate build native binaries for following.
     - [Linux (amd64)](#linux-amd64-1)
     - [Linux (aarch64)](#linux-aarch64-1)
   - [macOS](#macos-1)
+    - [macOS (x86_64)](#macos-x86_64-1)
+    - [macOS (arm64)](#macos-arm64-1)
   - [Windows](#windows-1)
 - [REF](#ref)
   - [CMake](#cmake)
