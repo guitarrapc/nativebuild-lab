@@ -274,6 +274,34 @@ bash ./builder/zstd/zstd-android-x86.sh
 bash ./builder/zstd/zstd-android-x64.sh
 ```
 
+# lz4
+
+## Linux
+
+Use `make` to build.
+
+### Linux (amd64)
+
+```bash
+# windows
+builder\lz4\lz4-linux-x64.bat
+
+# linux
+bash ./builder/lz4/lz4-linux-x64.sh
+```
+
+### Linux (aarch64)
+
+Use `make`.
+
+```bash
+# windows
+builder\lz4\lz4-linux-arm64.bat
+
+# linux
+bash ./builder/lz4/lz4-linux-arm64.sh
+```
+
 # REF
 
 ## CMake
