@@ -40,7 +40,6 @@ die() {
   exit 1
 }
 
-# __find_build_toolchains iPhoneOS/arm64/8.0
 find_build_toolchains() {
   step2 "Find build toolchains."
 
@@ -53,7 +52,7 @@ find_build_toolchains() {
   TARGET_OS_ARCH=$(printf '%s\n' "${TARGET}" | cut -d/ -f2)
   TARGET_OS_NAME_LOWER_CASE="$(echo "$TARGET_OS_NAME" | tr "[:upper:]" "[:lower:]")"
 
-  PACKAGE_CDEFINE="__arm64__"
+  PACKAGE_CDEFINE="__${IOS_ARCH}__"
 
   # should be "/Applications/Xcode.app/Contents/Developer"
   TOOLCHAIN_ROOT="$(xcode-select -p)"
@@ -67,7 +66,7 @@ find_build_toolchains() {
 
   ZSTD_INSTALL_DIR="${INSTALL_DIR}/${IOS_ARCH}"
 
-  CMAKE_TOOLCHAIN="$(pwd)/builder/${SRC_DIR}/ios-arm64.toolchain.cmake"
+  CMAKE_TOOLCHAIN="${BUILD_DIR}/ios-${IOS_ARCH}.toolchain.cmake"
 
   CC="$TOOLCHAIN_BIND/clang"
   CXX="$TOOLCHAIN_BIND/clang++"
@@ -136,10 +135,10 @@ config_cmake_variables() {
 
   CMAKE_SYSTEM_NAME=Darwin
   CMAKE_SYSTEM_VERSION=8.0
-  CMAKE_SYSTEM_PROCESSOR=arm64
+  CMAKE_SYSTEM_PROCESSOR=${IOS_ARCH}
 
   CMAKE_ASM_COMPILER="$CC"
-  CMAKE_ASM_FLAGS="-arch arm64"
+  CMAKE_ASM_FLAGS="-arch ${IOS_ARCH}"
 
   CMAKE_C_COMPILER="$CC"
   CMAKE_C_FLAGS="$CCFLAGS $CPPFLAGS $LDFLAGS"
