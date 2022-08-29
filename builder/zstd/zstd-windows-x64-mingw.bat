@@ -2,7 +2,7 @@
 SETLOCAL ENABLEDELAYEDEXPANSION
 
 set SCRIPT_DIR=%~dp0
-call %SCRIPT_DIR%/settings.bat
+call %SCRIPT_DIR%\settings.bat
 set OS=windows
 set PLATFORM=x64
 if not defined OUTPUT_DIR (set OUTPUT_DIR=pkg\%SRC_DIR%\%GIT_VERSION%\%OS%\%PLATFORM%)

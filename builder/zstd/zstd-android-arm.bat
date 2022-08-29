@@ -2,7 +2,7 @@
 SETLOCAL ENABLEDELAYEDEXPANSION
 
 set SCRIPT_DIR=%~dp0
-call %SCRIPT_DIR%/settings.bat
+call %SCRIPT_DIR%\settings.bat
 set OS=android
 set ABI=armeabi-v7a
 set PLATFORM=arm
