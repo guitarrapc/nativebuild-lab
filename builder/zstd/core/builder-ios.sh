@@ -9,8 +9,8 @@ IOS_ARCH=${IOS_ARCH:=arm64}
 TARGET="iPhoneOS/${IOS_ARCH}/${IOS_VERSION}"
 
 CMAKE_DIR="$(pwd)/${SRC_DIR}/build/cmake"
-BUILD_DIR="${CMAKE_DIR}/build/${IOS_ARCH}"
-INSTALL_DIR="${BUILD_DIR}/install"
+BUILD_DIR="${CMAKE_DIR}/build/"
+INSTALL_DIR="${BUILD_DIR}/install/${IOS_ARCH}"
 
 # NOTE: zlib and lzma will found from iPhoneOS.sdk.
 # -- Found ZLIB: /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/usr/lib/libz.tbd (found version "1.2.11")
@@ -42,9 +42,15 @@ die() {
   exit 1
 }
 run() {
-    COMMAND="$*"
-    printf '%b\n' "${COLOR_PURPLE}==>${COLOR_OFF}${COLOR_GREEN} ${COMMAND} ${COLOR_OFF}"
-    eval "${COMMAND}"
+  # caller should use \"\" instead of "" when you need keep argument double quotes.
+  printf '%b\n' "${COLOR_PURPLE}==>${COLOR_OFF}${COLOR_GREEN}$*${COLOR_OFF}"
+  eval "$*"
+}
+
+__clean() {
+  step "clean working space."
+  run rm -rf "${BUILD_DIR}"
+  run mkdir -p "${INSTALL_DIR}"
 }
 
 find_build_toolchains() {
@@ -71,10 +77,9 @@ find_build_toolchains() {
   SYSROOT="$TOOLCHAIN_ROOT/Platforms/${TARGET_OS_NAME}.platform/Developer/SDKs/${TARGET_OS_NAME}.sdk"
   SYSTEM_LIBRARY_DIR="$SYSROOT/usr/lib"
 
-  ZSTD_INSTALL_DIR="${INSTALL_DIR}/${IOS_ARCH}"
-
   CMAKE_TOOLCHAIN="${BUILD_DIR}/toolchain.cmake"
 
+  AR="${TOOLCHAIN_BIND}/ar"
   CC="$TOOLCHAIN_BIND/clang"
   CXX="$TOOLCHAIN_BIND/clang++"
 
@@ -117,6 +122,7 @@ SYSTEM_LIBRARY_DIR = ${SYSTEM_LIBRARY_DIR}
    CMAKE_TOOLCHAIN = ${CMAKE_TOOLCHAIN}
                 CC = ${CC}
                CXX = ${CXX}
+                AR = ${AR}
 
            CCFLAGS = ${CCFLAGS}
           CPPFLAGS = ${CPPFLAGS}
@@ -124,8 +130,6 @@ SYSTEM_LIBRARY_DIR = ${SYSTEM_LIBRARY_DIR}
            LDFLAGS = ${LDFLAGS}
 
        INSTALL_DIR = ${INSTALL_DIR}
-
-  ZSTD_INSTALL_DIR = ${ZSTD_INSTALL_DIR}
 EOF
 
 }
@@ -216,10 +220,6 @@ __install_zstd() {
   find_build_toolchains
   print_build_toolchains
 
-  # create directory
-  run rm -rf "${BUILD_DIR:=/src/build/cmake/build}"
-  run mkdir -p "${BUILD_DIR}"
-
   # cmake toolchain
   config_cmake_variables
   create_cmake_toolchain
@@ -230,7 +230,7 @@ __install_zstd() {
       -Wno-dev \
       -S "${CMAKE_DIR}" \
       -B "${BUILD_DIR}" \
-      -DCMAKE_INSTALL_PREFIX="${ZSTD_INSTALL_DIR}" \
+      -DCMAKE_INSTALL_PREFIX="${INSTALL_DIR}" \
       -DCMAKE_TOOLCHAIN_FILE="${CMAKE_TOOLCHAIN}" \
       -DCMAKE_VERBOSE_MAKEFILE=ON \
       -DCMAKE_COLOR_MAKEFILE=ON \
@@ -253,4 +253,5 @@ __install_zstd() {
   unset PACKAGE_INCLUDES
 }
 
+__clean
 __install_zstd
