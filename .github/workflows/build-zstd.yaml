@@ -1,4 +1,4 @@
-name: zstd build
+name: Build zstd
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.event_name }}-${{ github.ref }}
