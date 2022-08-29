@@ -1,4 +1,4 @@
-[![zstd build](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/zstd-build.yaml/badge.svg)](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/zstd-build.yaml)
+[![Build lz4](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/build-lz4.yaml/badge.svg)](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/build-lz4.yaml) [![Build zstd](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/build-zstd.yaml/badge.svg)](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/build-zstd.yaml)
 
 # nativebuild-lab
 
