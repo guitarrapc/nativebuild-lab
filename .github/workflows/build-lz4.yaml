@@ -20,6 +20,9 @@ on:
 # OUTPUT_DIR name follow to .NET RID rule. https://docs.microsoft.com/ja-jp/dotnet/core/rid-catalog
 # android-x64, ios-arm64, linux-x64, osx-x64, win-x64
 
+env:
+  app: lz4
+
 jobs:
   android:
     strategy:
@@ -35,9 +38,9 @@ jobs:
         with:
           submodules: true
       - run: git fetch --tags
-        working-directory: lz4
+        working-directory: ${{ env.app }}
       - name: Build
-        run: bash ./builder/lz4/lz4-android-${{ matrix.target }}.sh
+        run: bash ./builder/${{ env.app }}/${{ env.app }}-android-${{ matrix.target }}.sh
       - name: show generated files
         run: git ls-files --other --modified --exclude-standard
       - uses: actions/upload-artifact@v3
@@ -62,9 +65,9 @@ jobs:
         with:
           submodules: true
       - run: git fetch --tags
-        working-directory: lz4
+        working-directory: ${{ env.app }}
       - name: Build
-        run: bash ./builder/lz4/lz4-ios-arm64.sh
+        run: bash ./builder/${{ env.app }}/${{ env.app }}-ios-arm64.sh
       - name: show generated files
         run: git ls-files --other --modified --exclude-standard
       - uses: actions/upload-artifact@v3
@@ -87,9 +90,9 @@ jobs:
         with:
           submodules: true
       - run: git fetch --tags
-        working-directory: lz4
+        working-directory: ${{ env.app }}
       - name: Build
-        run: bash ./builder/lz4/lz4-linux-${{ matrix.target }}.sh
+        run: bash ./builder/${{ env.app }}/${{ env.app }}-linux-${{ matrix.target }}.sh
       - name: show generated files
         run: git ls-files --other --modified --exclude-standard
       - uses: actions/upload-artifact@v3
@@ -112,12 +115,12 @@ jobs:
         with:
           submodules: true
       - run: git fetch --tags
-        working-directory: lz4
-      # host runner is x86_64 and cannot link x86_64 `lz4` & `lzma` to arm64 build
+        working-directory: ${{ env.app }}
+      # host runner is x86_64 and cannot link x86_64 `zlib` & `lzma` to arm64 build
       - run: brew uninstall --ignore-dependencies lz4 xz
         if: ${{ matrix.target == 'arm64' }}
       - name: Build
-        run: bash ./builder/lz4/lz4-darwin-${{ matrix.target }}.sh
+        run: bash ./builder/${{ env.app }}/${{ env.app }}-darwin-${{ matrix.target }}.sh
       - name: show generated files
         run: git ls-files --other --modified --exclude-standard
       - uses: actions/upload-artifact@v3
@@ -140,11 +143,11 @@ jobs:
         with:
           submodules: true
       - run: git fetch --tags
-        working-directory: lz4
+        working-directory: ${{ env.app }}
       - name: Add MSBuild to PATH
         uses: microsoft/setup-msbuild@v1.1
       - name: Build
-        run: builder\lz4\lz4-windows-${{ matrix.target }}.bat
+        run: builder\${{ env.app }}\${{ env.app }}-windows-${{ matrix.target }}.bat
         shell: cmd
       - name: show generated files
         run: git ls-files --other --modified --exclude-standard
@@ -157,8 +160,6 @@ jobs:
   pr:
     if: ${{ inputs.create-pullrequest == true }}
     needs: [android, ios, linux, macos, windows]
-    env:
-      ARTIFACT_PATH: ./artifact/lz4
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
@@ -166,19 +167,19 @@ jobs:
         with:
           submodules: true
       - run: git fetch --tags
-        working-directory: lz4
+        working-directory: ${{ env.app }}
       - run: echo "::set-output name=value::$(git tag --points-at HEAD | tr -d '[:space:]')"
-        id: lz4-version
-        working-directory: lz4
+        id: version
+        working-directory: ${{ env.app }}
       - uses: actions/download-artifact@v3
         with:
           name: artifact
           path: _tmp
       - name: Copy to artifact
         run: |
-          rm -rf ${{ env.ARTIFACT_PATH }}
-          mkdir -p ${{ env.ARTIFACT_PATH }}
-          cp -fR ./_tmp/* ${{ env.ARTIFACT_PATH }}
+          rm -rf ./artifact/${{ env.app }}
+          mkdir -p ./artifact/${{ env.app }}
+          cp -fR ./_tmp/* ./artifact/${{ env.app }}
       - name: Check for modified files
         id: git-check
         run: echo "::set-output name=modified::$(if [[ "$(git status --porcelain=v1 2>/dev/null | wc -l)" == "0" ]]; then echo "false"; else echo "true"; fi)"
@@ -187,12 +188,12 @@ jobs:
         uses: peter-evans/create-pull-request@v4
         with:
           base: "main"
-          branch: "auto/lz4_tmp"
+          branch: "auto/${{ env.app }}_tmp"
           author: github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>
           committer: github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>
           delete-branch: true
-          title: "[lz4] Update artifacts ${{ steps.lz4-version.outputs.value }}"
+          title: "[${{ env.app }}] Update artifacts ${{ steps.version.outputs.value }}"
           body: |
-            Update lz4 artifacts for ${{ steps.lz4-version.outputs.value }} 🚀
+            Update ${{ env.app }} artifacts for ${{ steps.version.outputs.value }} 🚀
           labels: |
             automated pr
