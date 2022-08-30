@@ -2,6 +2,9 @@ set SRC_DIR=mbedtls
 set LIBNAME_CRYPTO=libmbedcrypto
 set LIBNAME_TLS=libmbedtls
 set LIBNAME_X509=libmbedx509
+set WIN_LIBNAME_CRYPTO=mbedcrypto
+set WIN_LIBNAME_TLS=mbedtls
+set WIN_LIBNAME_X509=mbedx509
 
 cd %SRC_DIR%
   FOR /F "tokens=* USEBACKQ" %%F IN (`git tag --points-at HEAD`) DO (SET VERSION=%%F)
