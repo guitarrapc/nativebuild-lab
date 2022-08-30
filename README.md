@@ -6,6 +6,7 @@ This repository indicate build native binaries for following.
 
 * zstd
 * lz4
+* mbedtls
 * (upcoming....)
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
@@ -122,7 +123,6 @@ macOS   | x64   | Intel Mac <br/>Apple Silicon Mac | make | [builder/lz4/core](h
 Windows | arm64 | Windows | CMake | [builder/lz4/core](https://github.com/guitarrapc/nativebuild-lab/tree/main/builder/lz4/core) | [GitHub Actions](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/lz4-build.yaml)
 Windows | x64   | Windows | CMake | [builder/lz4/core](https://github.com/guitarrapc/nativebuild-lab/tree/main/builder/lz4/core) | [GitHub Actions](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/lz4-build.yaml)
 Windows | x86   | Windows | CMake | [builder/lz4/core](https://github.com/guitarrapc/nativebuild-lab/tree/main/builder/lz4/core) | [GitHub Actions](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/lz4-build.yaml)
-
 
 # zstd
 
@@ -411,6 +411,26 @@ builder\lz4\lz4-windows-x86.bat
 ```bash
 builder\lz4\lz4-windows-arm64.bat
 ```
+
+
+# mbedtls
+
+Building [mbedtls](https://github.com/Mbed-TLS/mbedtls#make) for following environment.
+
+## Linux
+
+Use `make` to build.
+
+### Linux (amd64)
+
+```bash
+# windows
+builder\mbedtls\mbedtls-linux-x64.bat
+
+# linux
+bash ./builder/mbedtls/mbedtls-linux-x64.sh
+```
+
 
 # REF
 
