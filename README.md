@@ -417,6 +417,26 @@ builder\lz4\lz4-windows-arm64.bat
 
 Building [mbedtls](https://github.com/Mbed-TLS/mbedtls#make) for following environment.
 
+## (Notice) Patch
+
+We need patch to build Shared Lib with export symbol on Windows.
+Please apply following patch before build. (Run patch on git shell)
+
+> **Note**: This patch also contains `mbedtls_wrapper.c` to access from other Programing language through Shared Lib.
+
+```bash
+cd mbedtls
+patch -p1 < ../builder/mbedtls/windows.patch
+```
+
+TIPS. To create patch, spply changes to submodule then run following command.
+
+```bash
+cd mbedtls
+git add -N .
+git diff > ../builder/mbedtls/windows.patch
+```
+
 ## Linux
 
 Use `make` to build.

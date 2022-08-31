@@ -14,4 +14,5 @@ pushd %BUILD_DIR%
   cmake -DCMAKE_BUILD_TYPE=Release -DUSE_SHARED_MBEDTLS_LIBRARY=On -G "Visual Studio 17 2022" -A %ARCH% ..\..\
   cmake --build . --config Release --target mbedtls_static
   cmake --build . --config Release --target mbedtls
+  cmake --build . --config Release
 popd
