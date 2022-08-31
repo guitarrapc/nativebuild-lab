@@ -1,8 +1,13 @@
 #!/bin/bash
 set -eu
 
-cd $SRC_DIR
-  make clean
-  # target arm64-apple-macos11 cause following warning "was built for newer macOS version (12.0) than being linked (11.0)"
-  make SHARED=1 CFLAGS="-target arm64-apple-macos12 -Werror -O2"
+BUILD_DIR=$SRC_DIR/cmake/build.dir
+rm -rf $BUILD_DIR
+mkdir -p $BUILD_DIR
+
+cd $BUILD_DIR
+  cmake -DCMAKE_BUILD_TYPE=Release -DUSE_SHARED_MBEDTLS_LIBRARY=On -DCMAKE_APPLE_SILICON_PROCESSOR=ARM64 ../../
+  cmake --build . --config Release --target mbedtls_static
+  cmake --build . --config Release --target mbedtls
+  cmake --build . --config Release
 cd ..
