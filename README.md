@@ -451,6 +451,33 @@ builder\mbedtls\mbedtls-linux-x64.bat
 bash ./builder/mbedtls/mbedtls-linux-x64.sh
 ```
 
+## Windows
+
+Use `cmake`.
+
+**cmake** binaries are named `mbed*`.
+
+> **Note**: You must use Windows to build.
+
+> **Note**: `cmake` requires Windows Host to build. Also install Visual Studio 2022 `C++ Desktop Experience` package and `MSVC v143 - VS 2022 C++ ARM64 build tools` for cmake.
+
+### Windows (x64)
+
+```bash
+builder\mbedtls\mbedtls-windows-x64.bat
+```
+
+### Windows (x86)
+
+```bash
+builder\mbedtls\mbedtls-windows-x86.bat
+```
+
+### Windows (arm64)
+
+```bash
+builder\mbedtls\mbedtls-windows-arm64.bat
+```
 
 # REF
 
