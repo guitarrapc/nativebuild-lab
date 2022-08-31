@@ -451,6 +451,24 @@ builder\mbedtls\mbedtls-linux-x64.bat
 bash ./builder/mbedtls/mbedtls-linux-x64.sh
 ```
 
+## macOS
+
+Use `cmake`.
+
+> **Note**: You must use macOS to build.
+
+### macOS (x86_64)
+
+```bash
+bash ./builder/mbedtls/mbedtls-darwin-x64.sh
+```
+
+### macOS (arm64)
+
+```bash
+bash ./builder/mbedtls/mbedtls-darwin-arm64.sh
+```
+
 ## Windows
 
 Use `cmake`.
