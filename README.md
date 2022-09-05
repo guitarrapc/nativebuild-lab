@@ -6,6 +6,7 @@ This repository indicate build native binaries for following.
 
 * zstd
 * lz4
+* mbedtls
 * (upcoming....)
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
@@ -123,6 +124,22 @@ Windows | arm64 | Windows | CMake | [builder/lz4/core](https://github.com/guitar
 Windows | x64   | Windows | CMake | [builder/lz4/core](https://github.com/guitarrapc/nativebuild-lab/tree/main/builder/lz4/core) | [GitHub Actions](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/lz4-build.yaml)
 Windows | x86   | Windows | CMake | [builder/lz4/core](https://github.com/guitarrapc/nativebuild-lab/tree/main/builder/lz4/core) | [GitHub Actions](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/lz4-build.yaml)
 
+## mbedtls
+
+OS | Architecture | Build Env| Builder | Build Script | CI
+---- | ---- | ---- | ---- | ---- | ----
+Android | armeabi-v7a | Docker | CMake | [builder/mbedtls/core](https://github.com/guitarrapc/nativebuild-lab/tree/main/builder/mbedtls/core) | [GitHub Actions](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/mbedtls-build.yaml)
+Android | arm64-v8a   | Docker | CMake | [builder/mbedtls/core](https://github.com/guitarrapc/nativebuild-lab/tree/main/builder/mbedtls/core) | [GitHub Actions](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/mbedtls-build.yaml)
+Android | x86         | Docker | CMake | [builder/mbedtls/core](https://github.com/guitarrapc/nativebuild-lab/tree/main/builder/mbedtls/core) | [GitHub Actions](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/mbedtls-build.yaml)
+Android | x86_64      | Docker | CMake | [builder/mbedtls/core](https://github.com/guitarrapc/nativebuild-lab/tree/main/builder/mbedtls/core) | [GitHub Actions](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/mbedtls-build.yaml)
+iOS     | arm64 | Intel Mac <br/>Apple Silicon Mac | CMake | [builder/mbedtls/core](https://github.com/guitarrapc/nativebuild-lab/tree/main/builder/mbedtls/core) | [GitHub Actions](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/mbedtls-build.yaml)
+Linux   | arm64 | Docker | make | [builder/mbedtls/core](https://github.com/guitarrapc/nativebuild-lab/tree/main/builder/mbedtls/core) | [GitHub Actions](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/mbedtls-build.yaml)
+Linux   | x64   | Docker | make | [builder/mbedtls/core](https://github.com/guitarrapc/nativebuild-lab/tree/main/builder/mbedtls/core) | [GitHub Actions](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/mbedtls-build.yaml)
+macOS   | arm64 | Intel Mac <br/>Apple Silicon Mac | CMake | [builder/mbedtls/core](https://github.com/guitarrapc/nativebuild-lab/tree/main/builder/mbedtls/core) | [GitHub Actions](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/mbedtls-build.yaml)
+macOS   | x64   | Intel Mac <br/>Apple Silicon Mac | CMake | [builder/mbedtls/core](https://github.com/guitarrapc/nativebuild-lab/tree/main/builder/mbedtls/core) | [GitHub Actions](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/mbedtls-build.yaml)
+Windows | arm64 | Windows | CMake | [builder/mbedtls/core](https://github.com/guitarrapc/nativebuild-lab/tree/main/builder/mbedtls/core) | [GitHub Actions](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/mbedtls-build.yaml)
+Windows | x64   | Windows | CMake | [builder/mbedtls/core](https://github.com/guitarrapc/nativebuild-lab/tree/main/builder/mbedtls/core) | [GitHub Actions](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/mbedtls-build.yaml)
+Windows | x86   | Windows | CMake | [builder/mbedtls/core](https://github.com/guitarrapc/nativebuild-lab/tree/main/builder/mbedtls/core) | [GitHub Actions](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/mbedtls-build.yaml)
 
 # zstd
 
@@ -319,7 +336,6 @@ bash ./builder/lz4/lz4-android-x86.sh
 bash ./builder/lz4/lz4-android-x64.sh
 ```
 
-
 ## iOS
 
 use `make` or `xcpkg`.
@@ -410,6 +426,139 @@ builder\lz4\lz4-windows-x86.bat
 
 ```bash
 builder\lz4\lz4-windows-arm64.bat
+```
+
+
+# mbedtls
+
+Building [mbedtls](https://github.com/Mbed-TLS/mbedtls#make) for following environment.
+
+**(Notice) Patch**
+
+We need patch to build Shared Lib with export symbol on Windows.
+Please apply following patch before build. (Run patch on git shell)
+
+> **Note**: This patch also contains `mbedtls_wrapper.c` to access from other Programing language through Shared Lib.
+
+```bash
+cd mbedtls
+patch -p1 < ../builder/mbedtls/windows.patch
+```
+
+TIPS. To create patch, spply changes to submodule then run following command.
+
+```bash
+cd mbedtls
+git add -N .
+git diff > ../builder/mbedtls/windows.patch
+```
+
+## Android
+
+use `make`.
+
+### Android (armeabi-v7a)
+
+```bash
+bash ./builder/mbedtls/mbedtls-android-arm.sh
+```
+
+### Android (arm64-v8a)
+
+```bash
+bash ./builder/mbedtls/mbedtls-android-arm64.sh
+```
+
+### Android (x86)
+
+```bash
+bash ./builder/mbedtls/mbedtls-android-x86.sh
+```
+
+### Android (x86_64)
+
+```bash
+bash ./builder/mbedtls/mbedtls-android-x64.sh
+```
+
+## iOS
+
+use `make`.
+
+> **Note**: You must use macOS to build.
+
+### iOS (arm64)
+
+**make**
+
+Install prerequisites.
+
+```bash
+brew install make
+```
+
+```bash
+bash ./builder/mbedtls/mbedtls-ios-arm64.sh
+```
+
+## Linux
+
+Use `make` to build.
+
+### Linux (amd64)
+
+```bash
+# windows
+builder\mbedtls\mbedtls-linux-x64.bat
+
+# linux
+bash ./builder/mbedtls/mbedtls-linux-x64.sh
+```
+
+## macOS
+
+Use `cmake`.
+
+> **Note**: You must use macOS to build.
+
+### macOS (x86_64)
+
+```bash
+bash ./builder/mbedtls/mbedtls-darwin-x64.sh
+```
+
+### macOS (arm64)
+
+```bash
+bash ./builder/mbedtls/mbedtls-darwin-arm64.sh
+```
+
+## Windows
+
+Use `cmake`.
+
+**cmake** binaries are named `mbed*`.
+
+> **Note**: You must use Windows to build.
+
+> **Note**: `cmake` requires Windows Host to build. Also install Visual Studio 2022 `C++ Desktop Experience` package and `MSVC v143 - VS 2022 C++ ARM64 build tools` for cmake.
+
+### Windows (x64)
+
+```bash
+builder\mbedtls\mbedtls-windows-x64.bat
+```
+
+### Windows (x86)
+
+```bash
+builder\mbedtls\mbedtls-windows-x86.bat
+```
+
+### Windows (arm64)
+
+```bash
+builder\mbedtls\mbedtls-windows-arm64.bat
 ```
 
 # REF
