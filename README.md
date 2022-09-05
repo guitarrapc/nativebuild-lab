@@ -4,9 +4,9 @@
 
 This repository indicate build native binaries for following.
 
-* zstd
 * lz4
 * mbedtls
+* zstd
 * (upcoming....)
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
@@ -73,219 +73,56 @@ git submodule update --init --recursive
 
 # Summary
 
-## zstd
-
-OS | Architecture | Build Env| Builder | Build Script | CI
----- | ---- | ---- | ---- | ---- | ----
-Android | armeabi-v7a | Docker | CMake | [builder/zstd/core](https://github.com/guitarrapc/nativebuild-lab/tree/main/builder/zstd/core) | [GitHub Actions](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/zstd-build.yaml)
-Android | arm64-v8a   | Docker | CMake | [builder/zstd/core](https://github.com/guitarrapc/nativebuild-lab/tree/main/builder/zstd/core) | [GitHub Actions](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/zstd-build.yaml)
-Android | x86         | Docker | CMake | [builder/zstd/core](https://github.com/guitarrapc/nativebuild-lab/tree/main/builder/zstd/core) | [GitHub Actions](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/zstd-build.yaml)
-Android | x86_64      | Docker | CMake | [builder/zstd/core](https://github.com/guitarrapc/nativebuild-lab/tree/main/builder/zstd/core) | [GitHub Actions](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/zstd-build.yaml)
-iOS     | arm64 | Intel Mac <br/>Apple Silicon Mac | CMake | [builder/zstd/core](https://github.com/guitarrapc/nativebuild-lab/tree/main/builder/zstd/core) | [GitHub Actions](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/zstd-build.yaml)
-Linux   | arm64 | Docker | make | [builder/zstd/core](https://github.com/guitarrapc/nativebuild-lab/tree/main/builder/zstd/core) | [GitHub Actions](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/zstd-build.yaml)
-Linux   | x64   | Docker | make | [builder/zstd/core](https://github.com/guitarrapc/nativebuild-lab/tree/main/builder/zstd/core) | [GitHub Actions](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/zstd-build.yaml)
-macOS   | arm64 | Intel Mac <br/>Apple Silicon Mac | make | [builder/zstd/core](https://github.com/guitarrapc/nativebuild-lab/tree/main/builder/zstd/core) | [GitHub Actions](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/zstd-build.yaml)
-macOS   | x64   | Intel Mac <br/>Apple Silicon Mac | make | [builder/zstd/core](https://github.com/guitarrapc/nativebuild-lab/tree/main/builder/zstd/core) | [GitHub Actions](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/zstd-build.yaml)
-Windows | arm64 | Windows <br/>Docker | CMake <br/>mingw-w64 | [builder/zstd/core](https://github.com/guitarrapc/nativebuild-lab/tree/main/builder/zstd/core) | [GitHub Actions](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/zstd-build.yaml)
-Windows | x64   | Windows <br/>Docker | CMake <br/>mingw-w64 | [builder/zstd/core](https://github.com/guitarrapc/nativebuild-lab/tree/main/builder/zstd/core) | [GitHub Actions](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/zstd-build.yaml)
-Windows | x86   | Windows <br/>Docker | CMake <br/>mingw-w64 | [builder/zstd/core](https://github.com/guitarrapc/nativebuild-lab/tree/main/builder/zstd/core) | [GitHub Actions](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/zstd-build.yaml)
-
 ## lz4
 
 OS | Architecture | Build Env| Builder | Build Script | CI
 ---- | ---- | ---- | ---- | ---- | ----
-Android | armeabi-v7a | Docker | make | [builder/lz4/core](https://github.com/guitarrapc/nativebuild-lab/tree/main/builder/lz4/core) | [GitHub Actions](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/lz4-build.yaml)
-Android | arm64-v8a   | Docker | make | [builder/lz4/core](https://github.com/guitarrapc/nativebuild-lab/tree/main/builder/lz4/core) | [GitHub Actions](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/lz4-build.yaml)
-Android | x86         | Docker | make | [builder/lz4/core](https://github.com/guitarrapc/nativebuild-lab/tree/main/builder/lz4/core) | [GitHub Actions](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/lz4-build.yaml)
-Android | x86_64      | Docker | make | [builder/lz4/core](https://github.com/guitarrapc/nativebuild-lab/tree/main/builder/lz4/core) | [GitHub Actions](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/lz4-build.yaml)
-iOS     | arm64 | Intel Mac <br/>Apple Silicon Mac | make | [builder/lz4/core](https://github.com/guitarrapc/nativebuild-lab/tree/main/builder/lz4/core) | [GitHub Actions](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/lz4-build.yaml)
-Linux   | arm64 | Docker | make | [builder/lz4/core](https://github.com/guitarrapc/nativebuild-lab/tree/main/builder/lz4/core) | [GitHub Actions](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/lz4-build.yaml)
-Linux   | x64   | Docker | make | [builder/lz4/core](https://github.com/guitarrapc/nativebuild-lab/tree/main/builder/lz4/core) | [GitHub Actions](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/lz4-build.yaml)
-macOS   | arm64 | Intel Mac <br/>Apple Silicon Mac | make | [builder/lz4/core](https://github.com/guitarrapc/nativebuild-lab/tree/main/builder/lz4/core) | [GitHub Actions](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/lz4-build.yaml)
-macOS   | x64   | Intel Mac <br/>Apple Silicon Mac | make | [builder/lz4/core](https://github.com/guitarrapc/nativebuild-lab/tree/main/builder/lz4/core) | [GitHub Actions](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/lz4-build.yaml)
-Windows | arm64 | Windows | CMake | [builder/lz4/core](https://github.com/guitarrapc/nativebuild-lab/tree/main/builder/lz4/core) | [GitHub Actions](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/lz4-build.yaml)
-Windows | x64   | Windows | CMake | [builder/lz4/core](https://github.com/guitarrapc/nativebuild-lab/tree/main/builder/lz4/core) | [GitHub Actions](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/lz4-build.yaml)
-Windows | x86   | Windows | CMake | [builder/lz4/core](https://github.com/guitarrapc/nativebuild-lab/tree/main/builder/lz4/core) | [GitHub Actions](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/lz4-build.yaml)
+Android | armeabi-v7a | Docker | make | [builder/lz4/core](https://github.com/guitarrapc/nativebuild-lab/tree/main/builder/lz4/core) | [GitHub Actions](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/build-lz4.yaml)
+Android | arm64-v8a   | Docker | make | [builder/lz4/core](https://github.com/guitarrapc/nativebuild-lab/tree/main/builder/lz4/core) | [GitHub Actions](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/build-lz4.yaml)
+Android | x86         | Docker | make | [builder/lz4/core](https://github.com/guitarrapc/nativebuild-lab/tree/main/builder/lz4/core) | [GitHub Actions](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/build-lz4.yaml)
+Android | x86_64      | Docker | make | [builder/lz4/core](https://github.com/guitarrapc/nativebuild-lab/tree/main/builder/lz4/core) | [GitHub Actions](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/build-lz4.yaml)
+iOS     | arm64 | Intel Mac <br/>Apple Silicon Mac | make | [builder/lz4/core](https://github.com/guitarrapc/nativebuild-lab/tree/main/builder/lz4/core) | [GitHub Actions](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/build-lz4.yaml)
+Linux   | arm64 | Docker | make | [builder/lz4/core](https://github.com/guitarrapc/nativebuild-lab/tree/main/builder/lz4/core) | [GitHub Actions](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/build-lz4.yaml)
+Linux   | x64   | Docker | make | [builder/lz4/core](https://github.com/guitarrapc/nativebuild-lab/tree/main/builder/lz4/core) | [GitHub Actions](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/build-lz4.yaml)
+macOS   | arm64 | Intel Mac <br/>Apple Silicon Mac | make | [builder/lz4/core](https://github.com/guitarrapc/nativebuild-lab/tree/main/builder/lz4/core) | [GitHub Actions](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/build-lz4.yaml)
+macOS   | x64   | Intel Mac <br/>Apple Silicon Mac | make | [builder/lz4/core](https://github.com/guitarrapc/nativebuild-lab/tree/main/builder/lz4/core) | [GitHub Actions](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/build-lz4.yaml)
+Windows | arm64 | Windows | CMake | [builder/lz4/core](https://github.com/guitarrapc/nativebuild-lab/tree/main/builder/lz4/core) | [GitHub Actions](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/build-lz4.yaml)
+Windows | x64   | Windows | CMake | [builder/lz4/core](https://github.com/guitarrapc/nativebuild-lab/tree/main/builder/lz4/core) | [GitHub Actions](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/build-lz4.yaml)
+Windows | x86   | Windows | CMake | [builder/lz4/core](https://github.com/guitarrapc/nativebuild-lab/tree/main/builder/lz4/core) | [GitHub Actions](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/build-lz4.yaml)
 
 ## mbedtls
 
 OS | Architecture | Build Env| Builder | Build Script | CI
 ---- | ---- | ---- | ---- | ---- | ----
-Android | armeabi-v7a | Docker | CMake | [builder/mbedtls/core](https://github.com/guitarrapc/nativebuild-lab/tree/main/builder/mbedtls/core) | [GitHub Actions](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/mbedtls-build.yaml)
-Android | arm64-v8a   | Docker | CMake | [builder/mbedtls/core](https://github.com/guitarrapc/nativebuild-lab/tree/main/builder/mbedtls/core) | [GitHub Actions](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/mbedtls-build.yaml)
-Android | x86         | Docker | CMake | [builder/mbedtls/core](https://github.com/guitarrapc/nativebuild-lab/tree/main/builder/mbedtls/core) | [GitHub Actions](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/mbedtls-build.yaml)
-Android | x86_64      | Docker | CMake | [builder/mbedtls/core](https://github.com/guitarrapc/nativebuild-lab/tree/main/builder/mbedtls/core) | [GitHub Actions](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/mbedtls-build.yaml)
-iOS     | arm64 | Intel Mac <br/>Apple Silicon Mac | CMake | [builder/mbedtls/core](https://github.com/guitarrapc/nativebuild-lab/tree/main/builder/mbedtls/core) | [GitHub Actions](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/mbedtls-build.yaml)
-Linux   | arm64 | Docker | make | [builder/mbedtls/core](https://github.com/guitarrapc/nativebuild-lab/tree/main/builder/mbedtls/core) | [GitHub Actions](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/mbedtls-build.yaml)
-Linux   | x64   | Docker | make | [builder/mbedtls/core](https://github.com/guitarrapc/nativebuild-lab/tree/main/builder/mbedtls/core) | [GitHub Actions](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/mbedtls-build.yaml)
-macOS   | arm64 | Intel Mac <br/>Apple Silicon Mac | CMake | [builder/mbedtls/core](https://github.com/guitarrapc/nativebuild-lab/tree/main/builder/mbedtls/core) | [GitHub Actions](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/mbedtls-build.yaml)
-macOS   | x64   | Intel Mac <br/>Apple Silicon Mac | CMake | [builder/mbedtls/core](https://github.com/guitarrapc/nativebuild-lab/tree/main/builder/mbedtls/core) | [GitHub Actions](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/mbedtls-build.yaml)
-Windows | arm64 | Windows | CMake | [builder/mbedtls/core](https://github.com/guitarrapc/nativebuild-lab/tree/main/builder/mbedtls/core) | [GitHub Actions](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/mbedtls-build.yaml)
-Windows | x64   | Windows | CMake | [builder/mbedtls/core](https://github.com/guitarrapc/nativebuild-lab/tree/main/builder/mbedtls/core) | [GitHub Actions](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/mbedtls-build.yaml)
-Windows | x86   | Windows | CMake | [builder/mbedtls/core](https://github.com/guitarrapc/nativebuild-lab/tree/main/builder/mbedtls/core) | [GitHub Actions](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/mbedtls-build.yaml)
+Android | armeabi-v7a | Docker | CMake | [builder/mbedtls/core](https://github.com/guitarrapc/nativebuild-lab/tree/main/builder/mbedtls/core) | [GitHub Actions](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/build-mbedtls.yaml)
+Android | arm64-v8a   | Docker | CMake | [builder/mbedtls/core](https://github.com/guitarrapc/nativebuild-lab/tree/main/builder/mbedtls/core) | [GitHub Actions](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/build-mbedtls.yaml)
+Android | x86         | Docker | CMake | [builder/mbedtls/core](https://github.com/guitarrapc/nativebuild-lab/tree/main/builder/mbedtls/core) | [GitHub Actions](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/build-mbedtls.yaml)
+Android | x86_64      | Docker | CMake | [builder/mbedtls/core](https://github.com/guitarrapc/nativebuild-lab/tree/main/builder/mbedtls/core) | [GitHub Actions](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/build-mbedtls.yaml)
+iOS     | arm64 | Intel Mac <br/>Apple Silicon Mac | CMake | [builder/mbedtls/core](https://github.com/guitarrapc/nativebuild-lab/tree/main/builder/mbedtls/core) | [GitHub Actions](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/build-mbedtls.yaml)
+Linux   | arm64 | Docker | make | [builder/mbedtls/core](https://github.com/guitarrapc/nativebuild-lab/tree/main/builder/mbedtls/core) | [GitHub Actions](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/build-mbedtls.yaml)
+Linux   | x64   | Docker | make | [builder/mbedtls/core](https://github.com/guitarrapc/nativebuild-lab/tree/main/builder/mbedtls/core) | [GitHub Actions](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/build-mbedtls.yaml)
+macOS   | arm64 | Intel Mac <br/>Apple Silicon Mac | CMake | [builder/mbedtls/core](https://github.com/guitarrapc/nativebuild-lab/tree/main/builder/mbedtls/core) | [GitHub Actions](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/build-mbedtls.yaml)
+macOS   | x64   | Intel Mac <br/>Apple Silicon Mac | CMake | [builder/mbedtls/core](https://github.com/guitarrapc/nativebuild-lab/tree/main/builder/mbedtls/core) | [GitHub Actions](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/build-mbedtls.yaml)
+Windows | arm64 | Windows | CMake | [builder/mbedtls/core](https://github.com/guitarrapc/nativebuild-lab/tree/main/builder/mbedtls/core) | [GitHub Actions](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/build-mbedtls.yaml)
+Windows | x64   | Windows | CMake | [builder/mbedtls/core](https://github.com/guitarrapc/nativebuild-lab/tree/main/builder/mbedtls/core) | [GitHub Actions](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/build-mbedtls.yaml)
+Windows | x86   | Windows | CMake | [builder/mbedtls/core](https://github.com/guitarrapc/nativebuild-lab/tree/main/builder/mbedtls/core) | [GitHub Actions](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/build-mbedtls.yaml)
 
-# zstd
+## zstd
 
-Building [zstd](https://github.com/facebook/zstd) for following environment.
-
-## Android
-
-use `cmake`.
-
-### Android (armeabi-v7a)
-
-```bash
-bash ./builder/zstd/zstd-android-arm.sh
-```
-
-### Android (arm64-v8a)
-
-```bash
-bash ./builder/zstd/zstd-android-arm64.sh
-```
-
-### Android (x86)
-
-```bash
-bash ./builder/zstd/zstd-android-x86.sh
-```
-
-### Android (x86_64)
-
-```bash
-bash ./builder/zstd/zstd-android-x64.sh
-```
-
-## iOS
-
-use `cmake` or `xcpkg`.
-
-> **Note**: You must use macOS to build.
-
-### iOS (arm64)
-
-**cmake**
-
-Install prerequisites.
-
-```bash
-brew install cmake ninja gsed tree
-```
-
-```bash
-bash ./builder/zstd/zstd-ios-arm64.sh
-```
-
-## Linux
-
-Use `make` to build.
-
-### Linux (amd64)
-
-```bash
-# windows
-builder\zstd\zstd-linux-x64.bat
-
-# linux
-bash ./builder/zstd/zstd-linux-x64.sh
-```
-
-### Linux (aarch64)
-
-Use `make`.
-
-```bash
-# windows
-builder\zstd\zstd-linux-arm64.bat
-
-# linux
-bash ./builder/zstd/zstd-linux-arm64.sh
-```
-
-## macOS
-
-Use `make`.
-
-> **Note**: You must use macOS to build.
-
-### macOS (x86_64)
-
-```bash
-bash ./builder/zstd/zstd-darwin-x64.sh
-```
-
-### macOS (arm64)
-
-```bash
-bash ./builder/zstd/zstd-darwin-arm64.sh
-```
-
-## Windows
-
-There are 2way to build.
-
-1. cmake (primary)
-2. make
-
-**cmake** binaries are named `zstd*`, on the otherhand **make** binaries are `libzstd*`.
-
-> **Note**: You must use Windows for `cmake`. Use `make` (=mingw) when using Linux or macOS.
-
-> **Note**: `cmake` requires Windows Host to build. Also install Visual Studio 2022 `C++ Desktop Experience` package and `MSVC v143 - VS 2022 C++ ARM64 build tools` for cmake
-
-### Windows (x64)
-
-**cmake**
-
-```bash
-builder\zstd\zstd-windows-x64.bat
-```
-
-**make**
-
-```bash
-# windows
-builder\zstd\zstd-windows-x64-mingw.bat
-
-# linux
-bash ./builder/zstd/zstd-windows-x64-mingw.sh
-```
-
-### Windows (x86)
-
-**cmake**
-
-```bash
-builder\zstd\zstd-windows-x86.bat
-```
-
-**make**
-
-```bash
-# windows
-builder\zstd\zstd-windows-x86-mingw.bat
-
-# linux
-bash ./builder/zstd/zstd-windows-x86-mingw.sh
-```
-
-### Windows (arm64)
-
-**cmake**
-
-```bash
-builder\zstd\zstd-windows-arm64.bat
-```
-
-**make**
-
-```bash
-# windows
-builder\zstd\zstd-windows-arm64-mingw.bat
-
-# linux
-bash ./builder/zstd/zstd-windows-arm64-mingw.sh
-```
+OS | Architecture | Build Env| Builder | Build Script | CI
+---- | ---- | ---- | ---- | ---- | ----
+Android | armeabi-v7a | Docker | CMake | [builder/zstd/core](https://github.com/guitarrapc/nativebuild-lab/tree/main/builder/zstd/core) | [GitHub Actions](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/build-zstd.yaml)
+Android | arm64-v8a   | Docker | CMake | [builder/zstd/core](https://github.com/guitarrapc/nativebuild-lab/tree/main/builder/zstd/core) | [GitHub Actions](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/build-zstd.yaml)
+Android | x86         | Docker | CMake | [builder/zstd/core](https://github.com/guitarrapc/nativebuild-lab/tree/main/builder/zstd/core) | [GitHub Actions](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/build-zstd.yaml)
+Android | x86_64      | Docker | CMake | [builder/zstd/core](https://github.com/guitarrapc/nativebuild-lab/tree/main/builder/zstd/core) | [GitHub Actions](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/build-zstd.yaml)
+iOS     | arm64 | Intel Mac <br/>Apple Silicon Mac | CMake | [builder/zstd/core](https://github.com/guitarrapc/nativebuild-lab/tree/main/builder/zstd/core) | [GitHub Actions](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/build-zstd.yaml)
+Linux   | arm64 | Docker | make | [builder/zstd/core](https://github.com/guitarrapc/nativebuild-lab/tree/main/builder/zstd/core) | [GitHub Actions](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/build-zstd.yaml)
+Linux   | x64   | Docker | make | [builder/zstd/core](https://github.com/guitarrapc/nativebuild-lab/tree/main/builder/zstd/core) | [GitHub Actions](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/build-zstd.yaml)
+macOS   | arm64 | Intel Mac <br/>Apple Silicon Mac | make | [builder/zstd/core](https://github.com/guitarrapc/nativebuild-lab/tree/main/builder/zstd/core) | [GitHub Actions](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/build-zstd.yaml)
+macOS   | x64   | Intel Mac <br/>Apple Silicon Mac | make | [builder/zstd/core](https://github.com/guitarrapc/nativebuild-lab/tree/main/builder/zstd/core) | [GitHub Actions](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/build-zstd.yaml)
+Windows | arm64 | Windows <br/>Docker | CMake <br/>mingw-w64 | [builder/zstd/core](https://github.com/guitarrapc/nativebuild-lab/tree/main/builder/zstd/core) | [GitHub Actions](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/build-zstd.yaml)
+Windows | x64   | Windows <br/>Docker | CMake <br/>mingw-w64 | [builder/zstd/core](https://github.com/guitarrapc/nativebuild-lab/tree/main/builder/zstd/core) | [GitHub Actions](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/build-zstd.yaml)
+Windows | x86   | Windows <br/>Docker | CMake <br/>mingw-w64 | [builder/zstd/core](https://github.com/guitarrapc/nativebuild-lab/tree/main/builder/zstd/core) | [GitHub Actions](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/build-zstd.yaml)
 
 # lz4
 
@@ -542,6 +379,169 @@ builder\mbedtls\mbedtls-windows-x86.bat
 
 ```bash
 builder\mbedtls\mbedtls-windows-arm64.bat
+```
+
+# zstd
+
+Building [zstd](https://github.com/facebook/zstd) for following environment.
+
+## Android
+
+use `cmake`.
+
+### Android (armeabi-v7a)
+
+```bash
+bash ./builder/zstd/zstd-android-arm.sh
+```
+
+### Android (arm64-v8a)
+
+```bash
+bash ./builder/zstd/zstd-android-arm64.sh
+```
+
+### Android (x86)
+
+```bash
+bash ./builder/zstd/zstd-android-x86.sh
+```
+
+### Android (x86_64)
+
+```bash
+bash ./builder/zstd/zstd-android-x64.sh
+```
+
+## iOS
+
+use `cmake` or `xcpkg`.
+
+> **Note**: You must use macOS to build.
+
+### iOS (arm64)
+
+**cmake**
+
+Install prerequisites.
+
+```bash
+brew install cmake ninja gsed tree
+```
+
+```bash
+bash ./builder/zstd/zstd-ios-arm64.sh
+```
+
+## Linux
+
+Use `make` to build.
+
+### Linux (amd64)
+
+```bash
+# windows
+builder\zstd\zstd-linux-x64.bat
+
+# linux
+bash ./builder/zstd/zstd-linux-x64.sh
+```
+
+### Linux (aarch64)
+
+Use `make`.
+
+```bash
+# windows
+builder\zstd\zstd-linux-arm64.bat
+
+# linux
+bash ./builder/zstd/zstd-linux-arm64.sh
+```
+
+## macOS
+
+Use `make`.
+
+> **Note**: You must use macOS to build.
+
+### macOS (x86_64)
+
+```bash
+bash ./builder/zstd/zstd-darwin-x64.sh
+```
+
+### macOS (arm64)
+
+```bash
+bash ./builder/zstd/zstd-darwin-arm64.sh
+```
+
+## Windows
+
+There are 2way to build.
+
+1. cmake (primary)
+2. make
+
+**cmake** binaries are named `zstd*`, on the otherhand **make** binaries are `libzstd*`.
+
+> **Note**: You must use Windows for `cmake`. Use `make` (=mingw) when using Linux or macOS.
+
+> **Note**: `cmake` requires Windows Host to build. Also install Visual Studio 2022 `C++ Desktop Experience` package and `MSVC v143 - VS 2022 C++ ARM64 build tools` for cmake
+
+### Windows (x64)
+
+**cmake**
+
+```bash
+builder\zstd\zstd-windows-x64.bat
+```
+
+**make**
+
+```bash
+# windows
+builder\zstd\zstd-windows-x64-mingw.bat
+
+# linux
+bash ./builder/zstd/zstd-windows-x64-mingw.sh
+```
+
+### Windows (x86)
+
+**cmake**
+
+```bash
+builder\zstd\zstd-windows-x86.bat
+```
+
+**make**
+
+```bash
+# windows
+builder\zstd\zstd-windows-x86-mingw.bat
+
+# linux
+bash ./builder/zstd/zstd-windows-x86-mingw.sh
+```
+
+### Windows (arm64)
+
+**cmake**
+
+```bash
+builder\zstd\zstd-windows-arm64.bat
+```
+
+**make**
+
+```bash
+# windows
+builder\zstd\zstd-windows-arm64-mingw.bat
+
+# linux
+bash ./builder/zstd/zstd-windows-arm64-mingw.sh
 ```
 
 # REF
