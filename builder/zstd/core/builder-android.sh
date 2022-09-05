@@ -144,7 +144,7 @@ find_build_toolchains() {
   STRIP="${TOOLCHAIN_BIND}/llvm-strip"
 
   CCFLAGS="--sysroot ${SYSROOT} -Qunused-arguments -fPIC -Wl,--as-needed"
-  CPPFLAGS="--sysroot ${SYSROOT} -Qunused-arguments -I${ANDROID_NDK_HOME}/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/${SYSTEM_LIB_ARCH}-linux-${CC_ABI}"
+  CPPFLAGS="--sysroot ${SYSROOT} -Qunused-arguments -I${SYSROOT}/usr/include/${SYSTEM_LIB_ARCH}-linux-${CC_ABI}"
   LDFLAGS="--sysroot ${SYSROOT} -L${SYSTEM_LIBRARY_DIR} -Wl,--as-needed"
 
   for item in $PACKAGE_INCLUDES; do
