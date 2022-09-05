@@ -184,7 +184,7 @@ EOF
 
 }
 
-__install_lz4() {
+__install() {
   step "Install lz4."
 
   # variables
@@ -214,4 +214,4 @@ __clean
 __install_required_packages
 __install_android_ndk
 __find_abi_kind
-__install_lz4
+__install

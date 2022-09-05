@@ -227,15 +227,13 @@ __install_lib_zlib() {
   # cmake
   cd ${SRC_DIR}
   run /usr/bin/cmake \
-    -DCMAKE_TOOLCHAIN_FILE="${CMAKE_TOOLCHAIN}" \
-    -DANDROID_ABI="${ABI}" \
-    -DANDROID_PLATFORM="${ANDROID_PLATFORM}" \
     -Wno-dev \
     -DCMAKE_EXPORT_COMPILE_COMMANDS=OFF \
     -DBUILD_TESTING=OFF \
     -DCMAKE_BUILD_TYPE="${BUILD_TYPE}" \
     -DCMAKE_VERBOSE_MAKEFILE=ON \
     -DCMAKE_COLOR_MAKEFILE=ON \
+    -DCMAKE_TOOLCHAIN_FILE="${CMAKE_TOOLCHAIN}" \
     -DCMAKE_SYSTEM_PROCESSOR="${SYSTEM_PROCESSOR}" \
     -DCMAKE_FIND_ROOT_PATH='' \
     -DCMAKE_LIBRARY_PATH="${SYSTEM_LIBRARY_DIR}" \
@@ -247,6 +245,8 @@ __install_lib_zlib() {
     -DANDROID_TOOLCHAIN=clang \
     -DANDROID_ARM_NEON=TRUE \
     -DANDROID_STL=c++_shared \
+    -DANDROID_ABI="${ABI}" \
+    -DANDROID_PLATFORM="${ANDROID_PLATFORM}" \
     -DANDROID_USE_LEGACY_TOOLCHAIN_FILE=OFF \
     -DNDK_CCACHE=/usr/bin/ccache \
     -S "${SRC_DIR}" \
@@ -327,7 +327,7 @@ __install_lib_xz() {
   unset PACKAGE_INCLUDES
 }
 
-__install_zstd() {
+__install() {
   step "Install zstd."
 
   # variables
@@ -345,15 +345,13 @@ __install_zstd() {
   # build
   cd "${BUILD_DIR}"
     run /usr/bin/cmake \
-      -DCMAKE_TOOLCHAIN_FILE=\"${CMAKE_TOOLCHAIN}\" \
-      -DANDROID_ABI="${ABI}" \
-      -DANDROID_PLATFORM="${ANDROID_PLATFORM}" \
       -Wno-dev \
       -DCMAKE_EXPORT_COMPILE_COMMANDS=OFF \
       -DBUILD_TESTING=OFF \
       -DCMAKE_BUILD_TYPE="${BUILD_TYPE}" \
       -DCMAKE_VERBOSE_MAKEFILE=ON \
       -DCMAKE_COLOR_MAKEFILE=ON \
+      -DCMAKE_TOOLCHAIN_FILE=\"${CMAKE_TOOLCHAIN}\" \
       -DCMAKE_SYSTEM_PROCESSOR="${SYSTEM_PROCESSOR}" \
       -DCMAKE_FIND_ROOT_PATH=\"${ZLIB_INSTALL_DIR}\;${XZ_INSTALL_DIR}\" \
       -DCMAKE_LIBRARY_PATH=\"${SYSTEM_LIBRARY_DIR}\" \
@@ -365,6 +363,8 @@ __install_zstd() {
       -DANDROID_TOOLCHAIN=clang \
       -DANDROID_ARM_NEON=TRUE \
       -DANDROID_STL=c++_shared \
+      -DANDROID_ABI="${ABI}" \
+      -DANDROID_PLATFORM="${ANDROID_PLATFORM}" \
       -DANDROID_USE_LEGACY_TOOLCHAIN_FILE=OFF \
       -DNDK_CCACHE=/usr/bin/ccache \
       -S \"${CMAKE_DIR}\" \
@@ -393,4 +393,4 @@ __install_android_ndk
 __find_abi_kind
 __install_lib_zlib
 __install_lib_xz
-__install_zstd
+__install
