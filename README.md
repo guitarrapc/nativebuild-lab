@@ -319,7 +319,6 @@ bash ./builder/lz4/lz4-android-x86.sh
 bash ./builder/lz4/lz4-android-x64.sh
 ```
 
-
 ## iOS
 
 use `make` or `xcpkg`.
@@ -417,7 +416,7 @@ builder\lz4\lz4-windows-arm64.bat
 
 Building [mbedtls](https://github.com/Mbed-TLS/mbedtls#make) for following environment.
 
-## (Notice) Patch
+**(Notice) Patch**
 
 We need patch to build Shared Lib with export symbol on Windows.
 Please apply following patch before build. (Run patch on git shell)
@@ -435,6 +434,54 @@ TIPS. To create patch, spply changes to submodule then run following command.
 cd mbedtls
 git add -N .
 git diff > ../builder/mbedtls/windows.patch
+```
+
+## Android
+
+use `make`.
+
+### Android (armeabi-v7a)
+
+```bash
+bash ./builder/mbedtls/mbedtls-android-arm.sh
+```
+
+### Android (arm64-v8a)
+
+```bash
+bash ./builder/mbedtls/mbedtls-android-arm64.sh
+```
+
+### Android (x86)
+
+```bash
+bash ./builder/mbedtls/mbedtls-android-x86.sh
+```
+
+### Android (x86_64)
+
+```bash
+bash ./builder/mbedtls/mbedtls-android-x64.sh
+```
+
+## iOS
+
+use `make`.
+
+> **Note**: You must use macOS to build.
+
+### iOS (arm64)
+
+**make**
+
+Install prerequisites.
+
+```bash
+brew install make
+```
+
+```bash
+bash ./builder/mbedtls/mbedtls-ios-arm64.sh
 ```
 
 ## Linux
