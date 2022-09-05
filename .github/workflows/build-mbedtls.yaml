@@ -116,9 +116,6 @@ jobs:
           submodules: true
       - run: git fetch --tags
         working-directory: ${{ env.app }}
-      # host runner is x86_64 and cannot link x86_64 `zlib` & `lzma` to arm64 build
-      - run: brew uninstall --ignore-dependencies lz4 xz
-        if: ${{ matrix.target == 'arm64' }}
       - name: Build
         run: bash ./builder/${{ env.app }}/${{ env.app }}-darwin-${{ matrix.target }}.sh
       - name: show generated files
@@ -156,27 +153,6 @@ jobs:
           name: artifact
           path: _out
         if: ${{ inputs.create-pullrequest == true }}
-
-  # no upload.
-  windows-mingw:
-    strategy:
-      fail-fast: false
-      matrix:
-        target: ["x64", "x86", "arm64"]
-    env:
-      OUTPUT_DIR: _out\win-${{ matrix.target }}
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          submodules: true
-      - run: git fetch --tags
-        working-directory: ${{ env.app }}
-      - name: Build
-        run: bash builder/${{ env.app }}/${{ env.app }}-windows-${{ matrix.target }}-mingw.sh
-      - name: show generated files
-        run: git ls-files --other --modified --exclude-standard
 
   pr:
     if: ${{ inputs.create-pullrequest == true }}
