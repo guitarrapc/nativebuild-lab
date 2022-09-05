@@ -13,5 +13,6 @@ jobs:
     steps:
       - uses: technote-space/toc-generator@v4
         with:
+          MAX_HEADER_LEVEL: 2
           COMMIT_NAME: github-actions[bot]
           COMMIT_EMAIL: 41898282+github-actions[bot]@users.noreply.github.com
