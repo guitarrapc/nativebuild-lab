@@ -124,6 +124,23 @@ Windows | arm64 | Windows | CMake | [builder/lz4/core](https://github.com/guitar
 Windows | x64   | Windows | CMake | [builder/lz4/core](https://github.com/guitarrapc/nativebuild-lab/tree/main/builder/lz4/core) | [GitHub Actions](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/lz4-build.yaml)
 Windows | x86   | Windows | CMake | [builder/lz4/core](https://github.com/guitarrapc/nativebuild-lab/tree/main/builder/lz4/core) | [GitHub Actions](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/lz4-build.yaml)
 
+## mbedtls
+
+OS | Architecture | Build Env| Builder | Build Script | CI
+---- | ---- | ---- | ---- | ---- | ----
+Android | armeabi-v7a | Docker | CMake | [builder/mbedtls/core](https://github.com/guitarrapc/nativebuild-lab/tree/main/builder/mbedtls/core) | [GitHub Actions](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/mbedtls-build.yaml)
+Android | arm64-v8a   | Docker | CMake | [builder/mbedtls/core](https://github.com/guitarrapc/nativebuild-lab/tree/main/builder/mbedtls/core) | [GitHub Actions](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/mbedtls-build.yaml)
+Android | x86         | Docker | CMake | [builder/mbedtls/core](https://github.com/guitarrapc/nativebuild-lab/tree/main/builder/mbedtls/core) | [GitHub Actions](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/mbedtls-build.yaml)
+Android | x86_64      | Docker | CMake | [builder/mbedtls/core](https://github.com/guitarrapc/nativebuild-lab/tree/main/builder/mbedtls/core) | [GitHub Actions](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/mbedtls-build.yaml)
+iOS     | arm64 | Intel Mac <br/>Apple Silicon Mac | CMake | [builder/mbedtls/core](https://github.com/guitarrapc/nativebuild-lab/tree/main/builder/mbedtls/core) | [GitHub Actions](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/mbedtls-build.yaml)
+Linux   | arm64 | Docker | make | [builder/mbedtls/core](https://github.com/guitarrapc/nativebuild-lab/tree/main/builder/mbedtls/core) | [GitHub Actions](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/mbedtls-build.yaml)
+Linux   | x64   | Docker | make | [builder/mbedtls/core](https://github.com/guitarrapc/nativebuild-lab/tree/main/builder/mbedtls/core) | [GitHub Actions](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/mbedtls-build.yaml)
+macOS   | arm64 | Intel Mac <br/>Apple Silicon Mac | CMake | [builder/mbedtls/core](https://github.com/guitarrapc/nativebuild-lab/tree/main/builder/mbedtls/core) | [GitHub Actions](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/mbedtls-build.yaml)
+macOS   | x64   | Intel Mac <br/>Apple Silicon Mac | CMake | [builder/mbedtls/core](https://github.com/guitarrapc/nativebuild-lab/tree/main/builder/mbedtls/core) | [GitHub Actions](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/mbedtls-build.yaml)
+Windows | arm64 | Windows | CMake | [builder/mbedtls/core](https://github.com/guitarrapc/nativebuild-lab/tree/main/builder/mbedtls/core) | [GitHub Actions](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/mbedtls-build.yaml)
+Windows | x64   | Windows | CMake | [builder/mbedtls/core](https://github.com/guitarrapc/nativebuild-lab/tree/main/builder/mbedtls/core) | [GitHub Actions](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/mbedtls-build.yaml)
+Windows | x86   | Windows | CMake | [builder/mbedtls/core](https://github.com/guitarrapc/nativebuild-lab/tree/main/builder/mbedtls/core) | [GitHub Actions](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/mbedtls-build.yaml)
+
 # zstd
 
 Building [zstd](https://github.com/facebook/zstd) for following environment.
