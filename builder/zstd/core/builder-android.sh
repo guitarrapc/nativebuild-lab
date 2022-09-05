@@ -365,7 +365,6 @@ __install_zstd() {
       -DANDROID_TOOLCHAIN=clang \
       -DANDROID_ARM_NEON=TRUE \
       -DANDROID_STL=c++_shared \
-      -DANDROID_PLATFORM=21 \
       -DANDROID_USE_LEGACY_TOOLCHAIN_FILE=OFF \
       -DNDK_CCACHE=/usr/bin/ccache \
       -S \"${CMAKE_DIR}\" \
