@@ -11,8 +11,12 @@ mkdir %BUILD_DIR%
 
 :: build
 pushd %BUILD_DIR%
-  cmake -DCMAKE_BUILD_TYPE=Release -DUSE_SHARED_MBEDTLS_LIBRARY=On -G "Visual Studio 17 2022" -A %ARCH% ..\..\
-  cmake --build . --config Release --target mbedtls_static
-  cmake --build . --config Release --target mbedtls
+  cmake -DCMAKE_BUILD_TYPE=Release -DMBEDTLS_TARGET_PREFIX="%PREFIX%" -DUSE_SHARED_MBEDTLS_LIBRARY=On -G "Visual Studio 17 2022" -A %ARCH% ..\..\
+  cmake --build . --config Release --target "%PREFIX%mbedcrypto_static"
+  cmake --build . --config Release --target "%PREFIX%mbedx509_static"
+  cmake --build . --config Release --target "%PREFIX%mbedtls_static"
+  cmake --build . --config Release --target "%PREFIX%mbedcrypto"
+  cmake --build . --config Release --target "%PREFIX%mbedx509"
+  cmake --build . --config Release --target "%PREFIX%mbedtls"
   cmake --build . --config Release
 popd
