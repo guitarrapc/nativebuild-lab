@@ -9,7 +9,7 @@ set PLATFORM=arm64
 if not defined OUTPUT_DIR (set OUTPUT_DIR=pkg\%SRC_DIR%\%GIT_VERSION%\%OS%\%PLATFORM%)
 
 :: build
-docker run --rm -v "%SCRIPT_DIR%/core:/builder" -v "%cd%/%SRC_DIR%:/src" -e "ABI=%ABI%" ubuntu:22.04 /bin/bash /builder/builder-android.sh
+docker run --rm -v "%SCRIPT_DIR%/core:/builder" -v "%cd%/%SRC_DIR%:/src" -e "ABI=%ABI%" -e "PREFIX=%PREFIX%" ubuntu:22.04 /bin/bash /builder/builder-android.sh
 
 :: confirm
 dir %SRC_DIR%\cmake\build.dir\library\%LIBNAME_CRYPTO%.a

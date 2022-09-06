@@ -2,9 +2,10 @@
 set -eu
 
 SRC_DIR=mbedtls
-LIBNAME_CRYPTO=libmbedcrypto
-LIBNAME_TLS=libmbedtls
-LIBNAME_X509=libmbedx509
+PREFIX=${PREFIX:=""}
+LIBNAME_CRYPTO=lib${PREFIX}mbedcrypto
+LIBNAME_TLS=lib${PREFIX}mbedtls
+LIBNAME_X509=lib${PREFIX}mbedx509
 
 VERSION=$(cd $SRC_DIR && echo "$(git tag --points-at HEAD -l -n0 | grep "v" | tr -d '[:space:]')" && cd ..)
 GIT_VERSION=${VERSION}

@@ -316,7 +316,8 @@ __install() {
       -DINSTALL_MBEDTLS_HEADERS=ON \
       -DENABLE_PROGRAMS=ON \
       -DENABLE_TESTING=OFF \
-      -DENABLE_ZLIB_SUPPORT=ON
+      -DENABLE_ZLIB_SUPPORT=ON \
+      -DMBEDTLS_TARGET_PREFIX="${PREFIX:=""}"
 
     run /usr/bin/cmake --build "${BUILD_DIR}" -- -j8
     run /usr/bin/cmake --install "${BUILD_DIR}"

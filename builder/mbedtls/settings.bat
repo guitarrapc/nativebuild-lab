@@ -1,8 +1,8 @@
 set SRC_DIR=mbedtls
-set LIBNAME_CRYPTO=libmbedcrypto
-set LIBNAME_TLS=libmbedtls
-set LIBNAME_X509=libmbedx509
 if not defined PREFIX (set PREFIX=)
+set LIBNAME_CRYPTO=lib%PREFIX%mbedcrypto
+set LIBNAME_TLS=lib%PREFIX%mbedtls
+set LIBNAME_X509=lib%PREFIX%mbedx509
 set WIN_LIBNAME_CRYPTO=%PREFIX%mbedcrypto
 set WIN_LIBNAME_TLS=%PREFIX%mbedtls
 set WIN_LIBNAME_X509=%PREFIX%mbedx509
