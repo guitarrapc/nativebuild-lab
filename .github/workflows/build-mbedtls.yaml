@@ -43,12 +43,6 @@ jobs:
           submodules: true
       - run: git fetch --tags
         working-directory: ${{ env.app }}
-      - name: Patch wrapper class
-        run: |
-          if [[ -f ../builder/mbedtls/windows.patch ]]; then
-            patch -p1 < ../builder/mbedtls/windows.patch
-          fi
-        working-directory: ${{ env.app }}
       - name: Build
         run: bash ./builder/${{ env.app }}/${{ env.app }}-android-${{ matrix.target }}.sh
       - name: show generated files
@@ -76,12 +70,6 @@ jobs:
           submodules: true
       - run: git fetch --tags
         working-directory: ${{ env.app }}
-      - name: Patch wrapper class
-        run: |
-          if [[ -f ../builder/mbedtls/windows.patch ]]; then
-            patch -p1 < ../builder/mbedtls/windows.patch
-          fi
-        working-directory: ${{ env.app }}
       - name: Build
         run: bash ./builder/${{ env.app }}/${{ env.app }}-ios-arm64.sh
       - name: show generated files
@@ -106,12 +94,6 @@ jobs:
         with:
           submodules: true
       - run: git fetch --tags
-        working-directory: ${{ env.app }}
-      - name: Patch wrapper class
-        run: |
-          if [[ -f ../builder/mbedtls/windows.patch ]]; then
-            patch -p1 < ../builder/mbedtls/windows.patch
-          fi
         working-directory: ${{ env.app }}
       - name: Build
         run: bash ./builder/${{ env.app }}/${{ env.app }}-linux-${{ matrix.target }}.sh
@@ -138,12 +120,6 @@ jobs:
           submodules: true
       - run: git fetch --tags
         working-directory: ${{ env.app }}
-      - name: Patch wrapper class
-        run: |
-          if [[ -f ../builder/mbedtls/windows.patch ]]; then
-            patch -p1 < ../builder/mbedtls/windows.patch
-          fi
-        working-directory: ${{ env.app }}
       - name: Build
         run: bash ./builder/${{ env.app }}/${{ env.app }}-darwin-${{ matrix.target }}.sh
       - name: show generated files
@@ -168,12 +144,6 @@ jobs:
         with:
           submodules: true
       - run: git fetch --tags
-        working-directory: ${{ env.app }}
-      - name: Patch wrapper class
-        run: |
-          if [[ -f ../builder/mbedtls/windows.patch ]]; then
-            patch -p1 < ../builder/mbedtls/windows.patch
-          fi
         working-directory: ${{ env.app }}
       - name: Add MSBuild to PATH
         uses: microsoft/setup-msbuild@v1.1
