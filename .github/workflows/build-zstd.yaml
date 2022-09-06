@@ -57,12 +57,10 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        include:
-          - target: arm64
-            os: macos-latest
+        target: [arm64]
     env:
       OUTPUT_DIR: _out/ios-${{ matrix.target }}
-    runs-on: ${{ matrix.os }}
+    runs-on: macos-latest
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v3
