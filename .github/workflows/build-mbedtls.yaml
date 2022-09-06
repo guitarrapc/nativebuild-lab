@@ -32,9 +32,17 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        target: ["x86", "x64", "arm", "arm64"]
+        includes:
+          - [target: "x86", patch: ""]
+          - [target: "x64", patch: ""]
+          - [target: "arm", patch: ""]
+          - [target: "arm64", patch: ""]
+          - [target: "x86", patch: "-patched"]
+          - [target: "x64", patch: "-patched"]
+          - [target: "arm", patch: "-patched"]
+          - [target: "arm64", patch: "-patched"]
     env:
-      OUTPUT_DIR: _out/android-${{ matrix.target }}
+      OUTPUT_DIR: _out/android-${{ matrix.target }}${{ matrix.patch }}
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
@@ -43,6 +51,10 @@ jobs:
           submodules: true
       - run: git fetch --tags
         working-directory: ${{ env.app }}
+      - name: Patch wrapper class
+        run: if [[ -f ../builder/mbedtls/wrapper.patch ]]; then patch -p1 < ../builder/mbedtls/wrapper.patch; fi
+        working-directory: ${{ env.app }}
+        if: ${{ matrix.patch != '' }}
       - name: Build
         run: bash ./builder/${{ env.app }}/${{ env.app }}-android-${{ matrix.target }}.sh
       - name: show generated files
@@ -57,12 +69,12 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        include:
-          - target: arm64
-            os: macos-latest
+        includes:
+          - [target: "arm64", patch: ""]
+          - [target: "arm64", patch: "-patched"]
     env:
-      OUTPUT_DIR: _out/ios-${{ matrix.target }}
-    runs-on: ${{ matrix.os }}
+      OUTPUT_DIR: _out/ios-${{ matrix.target }}${{ matrix.patch }}
+    runs-on: macos-latest
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v3
@@ -70,6 +82,10 @@ jobs:
           submodules: true
       - run: git fetch --tags
         working-directory: ${{ env.app }}
+      - name: Patch wrapper class
+        run: if [[ -f ../builder/mbedtls/wrapper.patch ]]; then patch -p1 < ../builder/mbedtls/wrapper.patch; fi
+        working-directory: ${{ env.app }}
+        if: ${{ matrix.patch != '' }}
       - name: Build
         run: bash ./builder/${{ env.app }}/${{ env.app }}-ios-arm64.sh
       - name: show generated files
@@ -84,9 +100,13 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        target: ["x64", "arm64"]
+        includes:
+          - [target: "x64", patch: ""]
+          - [target: "arm64", patch: ""]
+          - [target: "x64", patch: "-patched"]
+          - [target: "arm64", patch: "-patched"]
     env:
-      OUTPUT_DIR: _out/linux-${{ matrix.target }}
+      OUTPUT_DIR: _out/linux-${{ matrix.target }}${{ matrix.patch }}
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
@@ -95,6 +115,10 @@ jobs:
           submodules: true
       - run: git fetch --tags
         working-directory: ${{ env.app }}
+      - name: Patch wrapper class
+        run: if [[ -f ../builder/mbedtls/wrapper.patch ]]; then patch -p1 < ../builder/mbedtls/wrapper.patch; fi
+        working-directory: ${{ env.app }}
+        if: ${{ matrix.patch != '' }}
       - name: Build
         run: bash ./builder/${{ env.app }}/${{ env.app }}-linux-${{ matrix.target }}.sh
       - name: show generated files
@@ -109,9 +133,13 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        target: ["x64", "arm64"]
+        includes:
+          - [target: "x64", patch: ""]
+          - [target: "arm64", patch: ""]
+          - [target: "x64", patch: "-patched"]
+          - [target: "arm64", patch: "-patched"]
     env:
-      OUTPUT_DIR: _out/osx-${{ matrix.target }}
+      OUTPUT_DIR: _out/osx-${{ matrix.target }}${{ matrix.patch }}
     runs-on: macos-latest
     timeout-minutes: 10
     steps:
@@ -120,6 +148,10 @@ jobs:
           submodules: true
       - run: git fetch --tags
         working-directory: ${{ env.app }}
+      - name: Patch wrapper class
+        run: if [[ -f ../builder/mbedtls/wrapper.patch ]]; then patch -p1 < ../builder/mbedtls/wrapper.patch; fi
+        working-directory: ${{ env.app }}
+        if: ${{ matrix.patch != '' }}
       - name: Build
         run: bash ./builder/${{ env.app }}/${{ env.app }}-darwin-${{ matrix.target }}.sh
       - name: show generated files
@@ -134,9 +166,15 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        target: ["x64", "x86", "arm64"]
+        includes:
+          - [target: "x64", patch: ""]
+          - [target: "x86", patch: ""]
+          - [target: "arm64", patch: ""]
+          - [target: "x64", patch: "-patched"]
+          - [target: "x86", patch: "-patched"]
+          - [target: "arm64", patch: "-patched"]
     env:
-      OUTPUT_DIR: _out\win-${{ matrix.target }}
+      OUTPUT_DIR: _out\win-${{ matrix.target }}${{ matrix.patch }}
     runs-on: windows-2022
     timeout-minutes: 10
     steps:
@@ -145,6 +183,16 @@ jobs:
           submodules: true
       - run: git fetch --tags
         working-directory: ${{ env.app }}
+      - name: Patch wrapper class
+        run: IF EXIST "..\builder\mbedtls\patch\wrapper.patch" git apply --ignore-space-change --ignore-whitespace --whitespace=nowarn ..\builder\mbedtls\patch\wrapper.patch
+        working-directory: ${{ env.app }}
+        shell: cmd
+        if: ${{ matrix.patch != '' }}
+      - name: Patch Windows shared symbol output
+        run: IF EXIST "..\builder\mbedtls\patch\wrapper.patch" git apply --ignore-space-change --ignore-whitespace --whitespace=nowarn ..\builder\mbedtls\patch\windows.patch
+        working-directory: ${{ env.app }}
+        shell: cmd
+        if: ${{ matrix.patch != '' }}
       - name: Add MSBuild to PATH
         uses: microsoft/setup-msbuild@v1.1
       - name: Build
