@@ -2,6 +2,9 @@
 set -eu
 
 SRC_DIR=mbedtls
+MAKE_LIB=${SRC_DIR}\library
+CMAKE_LIB=${SRC_DIR}\cmake\build.dir\library\Release
+
 PREFIX=${PREFIX:=""}
 LIBNAME_CRYPTO=lib${PREFIX}mbedcrypto
 LIBNAME_TLS=lib${PREFIX}mbedtls

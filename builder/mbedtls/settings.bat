@@ -1,4 +1,7 @@
 set SRC_DIR=mbedtls
+set MAKE_LIB=%SRC_DIR%\library
+set CMAKE_LIB=%SRC_DIR%\cmake\build.dir\library\Release
+
 if not defined PREFIX (set PREFIX=)
 set LIBNAME_CRYPTO=lib%PREFIX%mbedcrypto
 set LIBNAME_TLS=lib%PREFIX%mbedtls
