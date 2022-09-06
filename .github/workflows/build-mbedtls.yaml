@@ -32,15 +32,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        includes:
-          - [target: "x86", patch: ""]
-          - [target: "x64", patch: ""]
-          - [target: "arm", patch: ""]
-          - [target: "arm64", patch: ""]
-          - [target: "x86", patch: "-patched"]
-          - [target: "x64", patch: "-patched"]
-          - [target: "arm", patch: "-patched"]
-          - [target: "arm64", patch: "-patched"]
+        target: ["x86", "x64", "arm", "arm64"]
+        patch: ["", "-patch"]
     env:
       OUTPUT_DIR: _out/android-${{ matrix.target }}${{ matrix.patch }}
     runs-on: ubuntu-latest
@@ -69,9 +62,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        includes:
-          - [target: "arm64", patch: ""]
-          - [target: "arm64", patch: "-patched"]
+        target: ["arm64"]
+        patch: ["", "-patch"]
     env:
       OUTPUT_DIR: _out/ios-${{ matrix.target }}${{ matrix.patch }}
     runs-on: macos-latest
@@ -100,11 +92,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        includes:
-          - [target: "x64", patch: ""]
-          - [target: "arm64", patch: ""]
-          - [target: "x64", patch: "-patched"]
-          - [target: "arm64", patch: "-patched"]
+        target: ["x64", "arm64"]
+        patch: ["", "-patch"]
     env:
       OUTPUT_DIR: _out/linux-${{ matrix.target }}${{ matrix.patch }}
     runs-on: ubuntu-latest
@@ -133,11 +122,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        includes:
-          - [target: "x64", patch: ""]
-          - [target: "arm64", patch: ""]
-          - [target: "x64", patch: "-patched"]
-          - [target: "arm64", patch: "-patched"]
+        target: ["x64", "arm64"]
+        patch: ["", "-patch"]
     env:
       OUTPUT_DIR: _out/osx-${{ matrix.target }}${{ matrix.patch }}
     runs-on: macos-latest
@@ -166,13 +152,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        includes:
-          - [target: "x64", patch: ""]
-          - [target: "x86", patch: ""]
-          - [target: "arm64", patch: ""]
-          - [target: "x64", patch: "-patched"]
-          - [target: "x86", patch: "-patched"]
-          - [target: "arm64", patch: "-patched"]
+        target: ["x64", "x86", "arm64"]
+        patch: ["", "-patch"]
     env:
       OUTPUT_DIR: _out\win-${{ matrix.target }}${{ matrix.patch }}
     runs-on: windows-2022
