@@ -172,7 +172,7 @@ jobs:
           submodules: true
       - run: git fetch --tags
         working-directory: ${{ env.app }}
-      - run: echo "::set-output name=value::$(git tag --points-at HEAD | tr -d '[:space:]')"
+      - run: echo "::set-output name=value::$(git tag --points-at HEAD -l -n0 | grep "v" | tr -d '[:space:]')"
         id: version
         working-directory: ${{ env.app }}
       - uses: actions/download-artifact@v3
