@@ -248,21 +248,22 @@ builder\lz4\lz4-windows-x86.bat
 builder\lz4\lz4-windows-arm64.bat
 ```
 
-
 # mbedtls
 
 Building [mbedtls](https://github.com/Mbed-TLS/mbedtls#make) for following environment.
 
-**(Notice) Patch**
+<hr/>
+
+**(Notice) Windows Patch**
 
 We need patch to build Shared Lib with export symbol on Windows.
 Please apply following patch before build. (Run patch on git shell)
 
-> **Note**: This patch also contains `mbedtls_wrapper.c` to access from other Programing language through Shared Lib.
+> **Note**: This patch contains `__declspec` to access from other Programing language through Windows Shared Lib, dll.
 
 ```bash
 cd mbedtls
-patch -p1 < ../builder/mbedtls/windows.patch
+patch -p1 < ../builder/mbedtls/patch/windows.patch
 ```
 
 TIPS. To create patch, spply changes to submodule then run following command.
@@ -270,7 +271,29 @@ TIPS. To create patch, spply changes to submodule then run following command.
 ```bash
 cd mbedtls
 git add -N .
-git diff > ../builder/mbedtls/windows.patch
+git diff > ../builder/mbedtls/patch/windows.patch
+```
+
+<hr/>
+
+**(Notice) Wrapper Patch**
+
+We need patch to add wrapper class.
+Please apply following patch before build. (Run patch on git shell)
+
+> **Note**: This patch contains `mbedtls_wrapper.c` to access from other Programing language through Shared Lib.
+
+```bash
+cd mbedtls
+patch -p1 < ../builder/mbedtls/patch/wrapper.patch
+```
+
+TIPS. To create patch, spply changes to submodule then run following command.
+
+```bash
+cd mbedtls
+git add -N .
+git diff > ../builder/mbedtls/patch/wrapper.patch
 ```
 
 ## Android
