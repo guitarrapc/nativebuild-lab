@@ -33,14 +33,14 @@ jobs:
       fail-fast: false
       matrix:
         includes:
-          - [name: "x64-no-path", target: "x86", patch: ""]
-          - [name: "x86-no-path", target: "x64", patch: ""]
-          - [name: "arm-no-path", target: "arm", patch: ""]
-          - [name: "arm64-no-path", target: "arm64", patch: ""]
-          - [name: "x86-patch", target: "x86", patch: "-patched"]
-          - [name: "x64-patch", target: "x64", patch: "-patched"]
-          - [name: "arm-patch", target: "arm", patch: "-patched"]
-          - [name: "arm64-patch", target: "arm64", patch: "-patched"]
+          - [target: "x86", patch: ""]
+          - [target: "x64", patch: ""]
+          - [target: "arm", patch: ""]
+          - [target: "arm64", patch: ""]
+          - [target: "x86", patch: "-patched"]
+          - [target: "x64", patch: "-patched"]
+          - [target: "arm", patch: "-patched"]
+          - [target: "arm64", patch: "-patched"]
     env:
       OUTPUT_DIR: _out/android-${{ matrix.target }}${{ matrix.patch }}
     runs-on: ubuntu-latest
@@ -70,8 +70,8 @@ jobs:
       fail-fast: false
       matrix:
         includes:
-          - [name: "arm64-no-patch", target: "arm64", patch: ""]
-          - [name: "arm64-patch", target: "arm64", patch: "-patched"]
+          - [target: "arm64", patch: ""]
+          - [target: "arm64", patch: "-patched"]
     env:
       OUTPUT_DIR: _out/ios-${{ matrix.target }}${{ matrix.patch }}
     runs-on: macos-latest
@@ -101,10 +101,10 @@ jobs:
       fail-fast: false
       matrix:
         includes:
-          - [name: "x64-no-patch", target: "x64", patch: ""]
-          - [name: "arm64-no-patch", target: "arm64", patch: ""]
-          - [name: "x64-patch", target: "x64", patch: "-patched"]
-          - [name: "arm64-patch", target: "arm64", patch: "-patched"]
+          - [target: "x64", patch: ""]
+          - [target: "arm64", patch: ""]
+          - [target: "x64", patch: "-patched"]
+          - [target: "arm64", patch: "-patched"]
     env:
       OUTPUT_DIR: _out/linux-${{ matrix.target }}${{ matrix.patch }}
     runs-on: ubuntu-latest
@@ -134,10 +134,10 @@ jobs:
       fail-fast: false
       matrix:
         includes:
-          - [name: "x64-no-patch", target: "x64", patch: ""]
-          - [name: "arm64-no-patch", target: "arm64", patch: ""]
-          - [name: "x64-patch", target: "x64", patch: "-patched"]
-          - [name: "arm64-patch", target: "arm64", patch: "-patched"]
+          - [target: "x64", patch: ""]
+          - [target: "arm64", patch: ""]
+          - [target: "x64", patch: "-patched"]
+          - [target: "arm64", patch: "-patched"]
     env:
       OUTPUT_DIR: _out/osx-${{ matrix.target }}${{ matrix.patch }}
     runs-on: macos-latest
@@ -167,12 +167,12 @@ jobs:
       fail-fast: false
       matrix:
         includes:
-          - [name: "x64-no-patch", target: "x64", patch: ""]
-          - [name: "x86-no-patch", target: "x86", patch: ""]
-          - [name: "arm64-no-patch", target: "arm64", patch: ""]
-          - [name: "x64-patch", target: "x64", patch: "-patched"]
-          - [name: "x86-patch", target: "x86", patch: "-patched"]
-          - [name: "arm64-patch", target: "arm64", patch: "-patched"]
+          - [target: "x64", patch: ""]
+          - [target: "x86", patch: ""]
+          - [target: "arm64", patch: ""]
+          - [target: "x64", patch: "-patched"]
+          - [target: "x86", patch: "-patched"]
+          - [target: "arm64", patch: "-patched"]
     env:
       OUTPUT_DIR: _out\win-${{ matrix.target }}${{ matrix.patch }}
     runs-on: windows-2022
