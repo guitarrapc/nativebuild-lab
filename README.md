@@ -296,6 +296,27 @@ git add -N .
 git diff > ../builder/mbedtls/patch/wrapper.patch
 ```
 
+<hr/>
+
+**(Notice) Prefix Patch**
+
+We need patch to prefix support.
+https://github.com/Mbed-TLS/mbedtls/pull/3407 supports mbedtls to output shared lib with prefix, however missing static output.
+Therefore static build will failed to reference `<prefix>mbedcrypto` on building mbedx509.
+
+```bash
+cd mbedtls
+patch -p1 < ../builder/mbedtls/patch/wrapper.patch
+```
+
+TIPS. To create patch, spply changes to submodule then run following command.
+
+```bash
+cd mbedtls
+git add -N .
+git diff > ../builder/mbedtls/patch/prefix.patch
+```
+
 ## Android
 
 use `make`.
