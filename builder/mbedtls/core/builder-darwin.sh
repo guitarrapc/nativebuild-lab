@@ -17,7 +17,7 @@ pushd $BUILD_DIR
 popd
 
 # generate file test
-if ! file "$(readlink -f ${BUILD_DIR}/library/Release/lib${PREFIX}mbedcrypto.dylib)" | grep "64-bit $ARCH"; then
+if ! file "$(readlink ${BUILD_DIR}/library/Release/lib${PREFIX}mbedcrypto.dylib)" | grep "64-bit $ARCH"; then
   echo "file generation arch not desired."
   exit 1
 fi
