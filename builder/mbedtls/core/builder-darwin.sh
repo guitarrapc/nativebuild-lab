@@ -17,7 +17,7 @@ pushd $BUILD_DIR
 popd
 
 # generate file test
-if ! file "$(readlink -f ${BUILD_DIR}/library/lib${PREFIX}mbedcrypto.dylib)" | grep -i "$ARCH"; then
+if ! file "${BUILD_DIR}/library/$(readlink ${BUILD_DIR}/library/lib${PREFIX}mbedcrypto.dylib)" | grep -i "$IOS_ARCH"; then
   echo "file generation arch not desired."
   exit 1
 fi
