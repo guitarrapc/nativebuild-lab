@@ -10,7 +10,10 @@ if not defined OUTPUT_DIR (set OUTPUT_DIR=pkg\%SRC_DIR%\%GIT_VERSION%\%OS%\%PLAT
 
 :: build
 call %SCRIPT_DIR%\core\builder-windows.bat
-if %ERRORLEVEL% == 1 exit /b 1
+if errorlevel 1 (
+  echo build failed.
+  exit /b %errorlevel%
+)
 
 :: confirm
 dir %SRC_DIR%\build\cmake\build\Release\%EXENAME%*
