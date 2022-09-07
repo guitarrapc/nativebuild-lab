@@ -2,7 +2,7 @@
 set -eu
 
 apt-get update
-apt-get install -yq --no-install-suggests --no-install-recommends make gcc libc-dev cmake
+apt-get install -yq --no-install-suggests --no-install-recommends make gcc libc-dev cmake file
 apt-get install -yq --no-install-suggests --no-install-recommends python3 perl python3-pip
 apt-get install -yq --no-install-suggests --no-install-recommends gcc-aarch64-linux-gnu g++-aarch64-linux-gnu
 pip3 install jinja2
@@ -31,3 +31,9 @@ cd $BUILD_DIR
   cmake --build . --config Release --target "${PREFIX}mbedx509"
   cmake --build . --config Release --target "${PREFIX}mbedtls"
   cmake --build . --config Release
+
+# generate file test
+if ! file "$(readlink -f $BUILD_DIR/library/Release/lib${PREFIX}mbedcrypto.so)" | grep "ARM aarch64"; then
+  echo "file generation arch not desired."
+  exit 1
+fi
