@@ -6,6 +6,7 @@ source $SCRIPT_DIR/settings.sh
 OS=darwin
 PLATFORM=x64
 ARCH=x86_64
+TARGET=x86_64-apple-macos10.12
 OUTPUT_DIR=${OUTPUT_DIR:=pkg/${SRC_DIR}/${GIT_VERSION}/${OS}/${PLATFORM}/}
 
 # build

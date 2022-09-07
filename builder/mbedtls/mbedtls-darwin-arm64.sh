@@ -6,6 +6,7 @@ source $SCRIPT_DIR/settings.sh
 OS=darwin
 PLATFORM=arm64
 ARCH=arm64
+TARGET=arm64-apple-macos11
 OUTPUT_DIR=${OUTPUT_DIR:=pkg/${SRC_DIR}/${GIT_VERSION}/${OS}/${PLATFORM}/}
 
 # build
