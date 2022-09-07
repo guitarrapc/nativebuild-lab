@@ -95,21 +95,25 @@ __find_abi_kind() {
         SYSTEM_PROCESSOR=armv7-a
         ABI_SHORT=armv7a
         SYSTEM_LIB_ARCH=arm
+        BINARY_ARCH=ARM
         CC_ABI=androideabi;;
     "arm64-v8a")
         SYSTEM_PROCESSOR=aarch64
         ABI_SHORT=aarch64
         SYSTEM_LIB_ARCH=aarch64
+        BINARY_ARCH="ARM aarch64"
         CC_ABI=android;;
     "x86")
         SYSTEM_PROCESSOR=i686
         ABI_SHORT=i686
         SYSTEM_LIB_ARCH=i686
+        BINARY_ARCH=x86-64
         CC_ABI=android;;
     "x86_64")
         SYSTEM_PROCESSOR=x86_64
         ABI_SHORT=x86_64
         SYSTEM_LIB_ARCH=x86_64
+        BINARY_ARCH="Intel 80386"
         CC_ABI=android;;
     *)
         die "${ABI} is out of range."
@@ -321,6 +325,12 @@ __install() {
 
     run /usr/bin/cmake --build "${BUILD_DIR}" -- -j8
     run /usr/bin/cmake --install "${BUILD_DIR}"
+
+  # generate file test
+  if ! file "$(readlink -f ${BUILD_DIR}/library/Release/lib${PREFIX}mbedcrypto.so)" | grep "$BINARY_ARCH,"; then
+    echo "file generation arch not desired."
+    exit 1
+  fi
 
   # cleanup
   unset BUILD_DIR

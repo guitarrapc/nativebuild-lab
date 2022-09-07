@@ -249,6 +249,12 @@ __install_zstd() {
     run cmake --install "${BUILD_DIR}"
   popd > /dev/null 2>&1
 
+  # generate file test
+  if ! file "$(readlink -f ${BUILD_DIR}/library/Release/lib${PREFIX}mbedcrypto.dylib)" | grep "64-bit arm64"; then
+    echo "file generation arch not desired."
+    exit 1
+  fi
+
   # cleanup
   unset BUILD_DIR
   unset PACKAGE_INCLUDES
