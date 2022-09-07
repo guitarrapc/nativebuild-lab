@@ -6,7 +6,7 @@ rm -rf $BUILD_DIR
 mkdir -p $BUILD_DIR
 
 pushd $BUILD_DIR
-  cmake -DCMAKE_BUILD_TYPE=Release -DMBEDTLS_TARGET_PREFIX="$PREFIX" -DUSE_SHARED_MBEDTLS_LIBRARY=On -DCMAKE_APPLE_SILICON_PROCESSOR="$ARCH" ../../
+  cmake -DCMAKE_BUILD_TYPE=Release -DMBEDTLS_TARGET_PREFIX="$PREFIX" -DUSE_SHARED_MBEDTLS_LIBRARY=On -DCMAKE_OSX_ARCHITECTURES="$ARCH" ../../
   cmake --build . --config Release --target "${PREFIX}mbedcrypto_static"
   cmake --build . --config Release --target "${PREFIX}mbedx509_static"
   cmake --build . --config Release --target "${PREFIX}mbedtls_static"

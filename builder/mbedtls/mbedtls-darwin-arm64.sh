@@ -5,7 +5,7 @@ SCRIPT_DIR=$(cd $(dirname $0); pwd)
 source $SCRIPT_DIR/settings.sh
 OS=darwin
 PLATFORM=arm64
-ARCH=ARM64
+ARCH=arm64
 OUTPUT_DIR=${OUTPUT_DIR:=pkg/${SRC_DIR}/${GIT_VERSION}/${OS}/${PLATFORM}/}
 
 # build
