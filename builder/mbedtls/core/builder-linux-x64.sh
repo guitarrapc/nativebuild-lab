@@ -5,7 +5,6 @@ apk --no-cache add make gcc libc-dev cmake
 apk --no-cache add python3 perl py3-pip
 pip3 install jinja2
 
-PREFIX="custom_"
 SRC_DIR="/src"
 BUILD_DIR=$SRC_DIR/cmake/build.dir
 rm -rf $BUILD_DIR

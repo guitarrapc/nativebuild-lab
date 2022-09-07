@@ -1,11 +1,10 @@
-#!/bin/sh
+#!/bin/bash
 set -eu
 
 apt-get update
 apt-get install -yq --no-install-suggests --no-install-recommends make gcc libc-dev cmake
 apt-get install -yq --no-install-suggests --no-install-recommends python3 perl python3-pip
-apt-get install -yq --no-install-suggests --no-install-recommends gnutls-bin doxygen graphviz
-apt-get install -yq --no-install-suggests --no-install-recommends gcc-aarch64-linux-gnu
+apt-get install -yq --no-install-suggests --no-install-recommends gcc-aarch64-linux-gnu g++-aarch64-linux-gnu
 pip3 install jinja2
 
 SRC_DIR="/src"
@@ -15,9 +14,12 @@ mkdir -p $BUILD_DIR
 
 CMAKE_TOOLCHAIN=$BUILD_DIR/toolchain.cmake
 cat <<EOF | tee "${CMAKE_TOOLCHAIN}"
-  set(CMAKE_SYSTEM_NAME Linux)
-  set(CMAKE_SYSTEM_PROCESSOR "arm64")
+  set(CMAKE_SYSTEM_NAME "Linux")
   set(CMAKE_C_COMPILER /usr/bin/aarch64-linux-gnu-gcc)
+  set(CMAKE_SYSTEM_PROCESSOR "aarch64")
+  set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY Release)
+  set(CMAKE_LIBRARY_OUTPUT_DIRECTORY Release)
+  set(CMAKE_RUNTIME_OUTPUT_DIRECTORY Release)
 EOF
 
 cd $BUILD_DIR
