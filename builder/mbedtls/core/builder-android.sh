@@ -328,6 +328,7 @@ __install() {
 
   # generate file test
   if ! file "$(readlink -f ${BUILD_DIR}/library/lib${PREFIX}mbedcrypto.so)" | grep "$BINARY_ARCH,"; then
+    file "$(readlink -f ${BUILD_DIR}/library/lib${PREFIX}mbedcrypto.so)"
     echo "file generation arch not desired."
     exit 1
   fi
