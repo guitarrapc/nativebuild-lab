@@ -63,7 +63,7 @@ __install_required_packages() {
 
   run apt-get update
   run apt-get install -yq --no-install-suggests --no-install-recommends build-essential pkg-config curl libssl-dev zlib1g-dev
-  run apt-get install -yq --no-install-suggests --no-install-recommends unzip cmake ccache
+  run apt-get install -yq --no-install-suggests --no-install-recommends unzip cmake ccache file
 }
 
 __install_android_ndk() {
