@@ -13,9 +13,6 @@ mkdir -p $BUILD_DIR
 CMAKE_TOOLCHAIN=$BUILD_DIR/toolchain.cmake
 cat <<EOF | tee "${CMAKE_TOOLCHAIN}"
   set(CMAKE_SYSTEM_NAME "Linux")
-  set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY Release)
-  set(CMAKE_LIBRARY_OUTPUT_DIRECTORY Release)
-  set(CMAKE_RUNTIME_OUTPUT_DIRECTORY Release)
 EOF
 
 cd $BUILD_DIR
@@ -29,7 +26,7 @@ cd $BUILD_DIR
   cmake --build . --config Release
 
 # generate file test
-if ! file "$(readlink -f $BUILD_DIR/library/Release/lib${PREFIX}mbedcrypto.so)" | grep "x86-64"; then
+if ! file "$(readlink -f $BUILD_DIR/library/lib${PREFIX}mbedcrypto.so)" | grep "x86-64"; then
   echo "file generation arch not desired."
   exit 1
 fi

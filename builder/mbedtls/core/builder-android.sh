@@ -327,7 +327,7 @@ __install() {
     run /usr/bin/cmake --install "${BUILD_DIR}"
 
   # generate file test
-  if ! file "$(readlink -f ${BUILD_DIR}/library/Release/lib${PREFIX}mbedcrypto.so)" | grep "$BINARY_ARCH,"; then
+  if ! file "$(readlink -f ${BUILD_DIR}/library/lib${PREFIX}mbedcrypto.so)" | grep "$BINARY_ARCH,"; then
     echo "file generation arch not desired."
     exit 1
   fi
