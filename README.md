@@ -40,6 +40,7 @@ This repository indicate build native binaries for following.
 - [REF](#ref)
   - [CMake](#cmake)
   - [mingw-w64](#mingw-w64)
+  - [Rename Shared Lib after build](#rename-shared-lib-after-build)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
