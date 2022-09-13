@@ -9,7 +9,7 @@ SRCFILES := $(sort $(wildcard *.c))
 
 CC ?= gcc # use `gcc`, instead of `cc`
 CPPFLAGS += -DXXH_NAMESPACE=$(SHARED_NAMESPACE)
-CFLAGS ?= -O3 -Wall -Wextra # automatically use this flag when build .c
+CFLAGS ?= -O3 -Werror -Wall -Wextra # automatically use this flag when build .c
 FLAGS    = $(CFLAGS) $(CPPFLAGS) $(LDFLAGS)
 
 .PHONY: lib
@@ -31,6 +31,10 @@ libso: $(LIBFIBOSO)
 $(LIBFIBOSO): $(SRCFILES)
 	@echo compiling dynamic library
 	$(CC) $(FLAGS) -shared $^ -fPIC -fvisibility=hidden -o $@
+
+.PHONY: debug
+debug:
+	@echo WINBASED $(WINDRES), TARGET_OS $(TARGET_OS) POSIX_ENV $(POSIX_ENV)
 
 .PHONY: clean
 clean:

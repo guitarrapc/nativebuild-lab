@@ -22,9 +22,6 @@ LIBDIR = lib
 PRGDIR = programs
 EXPDIR = examples
 
-CC ?= gcc # use `gcc`, instead of `cc`
-CFLAGS ?= -O3 -Werror -Wall -Wextra # automatically use this flag when build .c
-
 .PHONY: default
 default: lib
 
@@ -42,6 +39,10 @@ program:
 .PHONY: example
 example:
 	$(MAKE) -C $(EXPDIR) $@
+
+.PHONY: debug
+debug:
+	$(MAKE) -C $(LIBDIR) $@
 
 .PHONY: clean
 clean:
