@@ -610,3 +610,15 @@ Other way to build.
 
 * Linux mingw-w64 amd64 build: [Downloads \- MinGW\-w64](https://www.mingw-w64.org/downloads/)
 * Linux mingw-w64 arm64 build: [mstorsjo/llvm\-mingw](https://github.com/mstorsjo/llvm-mingw)
+
+## Rename Shared Lib after build
+
+**.so**
+
+[linux \- How to rename a shared library to avoid same\-name conflict? \- Stack Overflow](https://stackoverflow.com/questions/19739828/how-to-rename-a-shared-library-to-avoid-same-name-conflict)
+
+**.dylib**
+
+When link .dylib and create staticlib .a, use `install_name_tool -id libmylib.dylib libmylib.dylib` if required.
+
+> [macos \- Why can't I rename a shared library after it's been built? \- Stack Overflow](https://stackoverflow.com/questions/42877686/why-cant-i-rename-a-shared-library-after-its-been-built)
