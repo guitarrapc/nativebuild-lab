@@ -41,8 +41,17 @@ cmake .. -G"Visual Studio 17 2022"
 cmake --build .
 ```
 
-```
+Windows
+
+```bash
 builder\fibo\windows-arm64.bat
 builder\fibo\windows-x64.bat
 builder\fibo\windows-x86.bat
+```
+
+Linux
+
+```bash
+builder/fibo/linux-arm64.bat
+builder/fibo/linux-x64.bat
 ```

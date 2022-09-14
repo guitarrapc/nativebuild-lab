@@ -1,0 +1,123 @@
+name: Build lz4
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event_name }}-${{ github.ref }}
+  cancel-in-progress: true
+
+on:
+  workflow_dispatch:
+    inputs:
+      create-pullrequest:
+        description: true to craete PR for artifacts.
+        required: true
+        type: boolean
+        default: false
+  push:
+    branches: [main]
+    paths-ignore:
+      - "*.md"
+  pull_request:
+    branches: [main]
+    paths-ignore:
+      - "*.md"
+
+# OUTPUT_DIR name follow to .NET RID rule. https://docs.microsoft.com/ja-jp/dotnet/core/rid-catalog
+# android-x64, ios-arm64, linux-x64, osx-x64, win-x64
+
+env:
+  app: lz4
+
+jobs:
+  linux:
+    strategy:
+      fail-fast: false
+      matrix:
+        target: ["x64", "arm64"]
+    env:
+      OUTPUT_DIR: _out/linux-${{ matrix.target }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          submodules: true
+      - run: git fetch --tags
+        working-directory: ${{ env.app }}
+      - name: Build
+        run: bash ./builder/${{ env.app }}/${{ env.app }}-linux-${{ matrix.target }}.sh
+      - name: show generated files
+        run: git ls-files --other --modified --exclude-standard
+      - uses: actions/upload-artifact@v3
+        with:
+          name: artifact
+          path: _out
+        if: ${{ inputs.create-pullrequest == true }}
+
+  windows:
+    strategy:
+      fail-fast: false
+      matrix:
+        target: ["x64", "x86", "arm64"]
+    env:
+      OUTPUT_DIR: _out\win-${{ matrix.target }}
+    runs-on: windows-2022
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          submodules: true
+      - run: git fetch --tags
+        working-directory: ${{ env.app }}
+      - name: Add MSBuild to PATH
+        uses: microsoft/setup-msbuild@v1.1
+      - name: Build
+        run: builder\${{ env.app }}\${{ env.app }}-windows-${{ matrix.target }}.bat
+        shell: cmd
+      - name: show generated files
+        run: git ls-files --other --modified --exclude-standard
+      - uses: actions/upload-artifact@v3
+        with:
+          name: artifact
+          path: _out
+        if: ${{ inputs.create-pullrequest == true }}
+
+  pr:
+    if: ${{ inputs.create-pullrequest == true }}
+    needs: [android, ios, linux, macos, windows]
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          submodules: true
+      - run: git fetch --tags
+        working-directory: ${{ env.app }}
+      - run: echo "::set-output name=value::$(git tag --points-at HEAD -l -n0 | grep "v" | tr -d '[:space:]')"
+        id: version
+        working-directory: ${{ env.app }}
+      - uses: actions/download-artifact@v3
+        with:
+          name: artifact
+          path: _tmp
+      - name: Copy to artifact
+        run: |
+          rm -rf ./artifact/${{ env.app }}
+          mkdir -p ./artifact/${{ env.app }}
+          cp -fR ./_tmp/* ./artifact/${{ env.app }}
+      - name: Check for modified files
+        id: git-check
+        run: echo "::set-output name=modified::$(if [[ "$(git status --porcelain=v1 2>/dev/null | wc -l)" == "0" ]]; then echo "false"; else echo "true"; fi)"
+      - if: steps.git-check.outputs.modified == 'true'
+        name: Create PullRequest
+        uses: peter-evans/create-pull-request@v4
+        with:
+          base: "main"
+          branch: "auto/${{ env.app }}_tmp"
+          author: github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>
+          committer: github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>
+          delete-branch: true
+          title: "[${{ env.app }}] Update artifacts ${{ steps.version.outputs.value }}"
+          body: |
+            Update ${{ env.app }} artifacts for ${{ steps.version.outputs.value }} 🚀
+          labels: |
+            automated pr
