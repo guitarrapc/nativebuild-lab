@@ -1,5 +1,5 @@
 #!/bin/bash
-set -ex
+set -e
 
 SCRIPT_DIR=$(cd $(dirname $0); pwd)
 source $SCRIPT_DIR/settings.sh

@@ -1,5 +1,5 @@
 #!/bin/bash
-set -eu
+set -eux
 
 apt-get update
 apt-get install -yq --no-install-suggests --no-install-recommends make gcc libc-dev cmake file
@@ -10,7 +10,6 @@ BUILD_DIR=$SRC_DIR/build/cmake/build
 rm -rf $BUILD_DIR
 mkdir -p $BUILD_DIR
 
-ls /src
 CMAKE_TOOLCHAIN=$BUILD_DIR/toolchain.cmake
 cat <<EOF | tee "${CMAKE_TOOLCHAIN}"
   set(CMAKE_SYSTEM_NAME "Linux")
