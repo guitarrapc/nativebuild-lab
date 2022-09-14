@@ -40,3 +40,9 @@ cd examples\build
 cmake .. -G"Visual Studio 17 2022"
 cmake --build .
 ```
+
+```
+builder\fibo\windows-arm64.bat
+builder\fibo\windows-x64.bat
+builder\fibo\windows-x86.bat
+```
