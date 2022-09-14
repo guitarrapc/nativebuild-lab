@@ -1,5 +1,5 @@
 #!/bin/sh
-set -eux
+set -eu
 
 apk --no-cache add make gcc libc-dev cmake file
 
@@ -8,6 +8,7 @@ BUILD_DIR=$SRC_DIR/build/cmake/build
 rm -rf $BUILD_DIR
 mkdir -p $BUILD_DIR
 
+ls /src
 cd $BUILD_DIR
   cmake ..
   cmake --build . --config Release
