@@ -17,4 +17,4 @@ ls $CMAKE_LIB/*.so*
 # copy
 mkdir -p "./${OUTPUT_DIR}/"
 cp "./$CMAKE_LIB/$LIBNAME.a" "./${OUTPUT_DIR}/."
-cp "./$CMAKE_LIB/$LIBNAME.${FILE_VERSION}.so" "./${OUTPUT_DIR}/$LIBNAME.so"
+cp "./$CMAKE_LIB/$LIBNAME.so.${FILE_VERSION}" "./${OUTPUT_DIR}/$LIBNAME.so"
