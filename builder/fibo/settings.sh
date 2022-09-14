@@ -1,16 +1,14 @@
 #!/bin/bash
 set -eu
 
-SRC_DIR=mbedtls
-MAKE_LIB=${SRC_DIR}/library
-CMAKE_LIB=${SRC_DIR}/cmake/build.dir/library
+SRC_DIR=fibo
+MAKE_LIB=${SRC_DIR}/lib
+CMAKE_LIB=${SRC_DIR}/build/cmake/build
 
 PREFIX=${PREFIX:=""}
-LIBNAME_CRYPTO=lib${PREFIX}mbedcrypto
-LIBNAME_TLS=lib${PREFIX}mbedtls
-LIBNAME_X509=lib${PREFIX}mbedx509
+LIBNAME=lib${PREFIX}fibo
 
-VERSION=$(cd $SRC_DIR && echo "$(git tag --points-at HEAD -l -n0 | grep "v" | tr -d '[:space:]')" && cd ..)
+VERSION=v1.0.0
 GIT_VERSION=${VERSION}
 # 'v1.5.2 ' -> '1.5.2'
 FILE_VERSION=$(echo "${VERSION}" | cut -c 2-)

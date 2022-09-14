@@ -3,7 +3,7 @@ if(NOT FIBO_VERSION_STRING)
   set(FIBO_VERSION_MAJOR "1")
 endif()
 
-cmake_minimum_required(VERSION 3.24)
+cmake_minimum_required(VERSION 3.5)
 project(fibo
   VERSION ${FIBO_VERSION_STRING}
   LANGUAGES C
@@ -59,7 +59,7 @@ if(BUILD_STATIC_LIBS)
   POSITION_INDEPENDENT_CODE ${FIBO_POSITION_INDEPENDENT_LIB})
 endif()
 
-# fibo, .exe
+# fibocli, .exe
 if(BUILD_PROGRAM)
   add_executable(fibocli ${FIBO_CLI_SOURCES})
   set_target_properties(fibocli PROPERTIES OUTPUT_NAME fibocli)
