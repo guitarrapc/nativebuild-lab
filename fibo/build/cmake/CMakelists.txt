@@ -35,7 +35,7 @@ else()
   list(APPEND FIBO_CLI_SOURCES ${FIBO_SOURCES})
 endif()
 
-# libfibo.a,.lib
+# libfibo.so,.dll,.dylib
 if (NOT FIBO_LIB_NAME)
   set(FIBO_LIB_NAME fibo)
 endif()
@@ -43,11 +43,15 @@ if(BUILD_SHARED_LIBS)
   add_library(fibo_shared SHARED ${FIBO_SOURCES})
   set_target_properties(fibo_shared PROPERTIES
   OUTPUT_NAME ${FIBO_LIB_NAME}
-  SOVERSION "${LZ4_VERSION_MAJOR}"
-  VERSION "${LZ4_VERSION_STRING}")
+  SOVERSION "${FIBO_VERSION_MAJOR}"
+  VERSION "${FIBO_VERSION_STRING}")
+  # export method symbol for Windows .dll. It enable C# to dllimport signature.
+  if(MSVC)
+    target_compile_definitions(fibo_shared PRIVATE FIBO_DLL_EXPORT=1)
+  endif()
 endif()
 
-# libfibo.so,.dll,.dylib
+# libfibo.a,.lib
 if(BUILD_STATIC_LIBS)
   add_library(fibo_static STATIC ${FIBO_SOURCES})
   set_target_properties(fibo_static PROPERTIES

@@ -12,9 +12,9 @@ extern "C" {
 #    define FIBOLIB_VISIBILITY
 #  endif
 #endif
-#if defined(FIBO_DLL_EXPORT) && (FIBO_DLL_EXPORT==1)
+#if defined(FIBO_DLL_EXPORT)
 #  define FIBOLIB_API __declspec(dllexport) FIBOLIB_VISIBILITY
-#elif defined(FIBO_DLL_IMPORT) && (FIBO_DLL_IMPORT==1)
+#elif defined(FIBO_DLL_IMPORT)
 #  define FIBOLIB_API __declspec(dllimport) FIBOLIB_VISIBILITY /* It isn't required but allows to generate better code, saving a function pointer load from the IAT and an indirect jump.*/
 #else
 #  define FIBOLIB_API FIBOLIB_VISIBILITY

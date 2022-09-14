@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include "fibo.h"
 
+#define FIBO_DLL_IMPORT
+
 static void help(const char* command)
 {
     printf("CLI program to calculate fibonacci numbers.\n");
