@@ -40,10 +40,6 @@ jobs:
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v3
-        with:
-          submodules: true
-      - run: git fetch --tags
-        working-directory: ${{ env.app }}
       - name: Build
         run: bash ./builder/${{ env.app }}/linux-${{ matrix.target }}.sh
       - name: show generated files
@@ -65,10 +61,6 @@ jobs:
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v3
-        with:
-          submodules: true
-      - run: git fetch --tags
-        working-directory: ${{ env.app }}
       - name: Add MSBuild to PATH
         uses: microsoft/setup-msbuild@v1.1
       - name: Build
