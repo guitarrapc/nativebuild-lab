@@ -1,5 +1,5 @@
 #!/bin/sh
-set -eux
+set -eu
 
 apk --no-cache add make gcc libc-dev cmake file
 
@@ -9,7 +9,7 @@ rm -rf $BUILD_DIR
 mkdir -p $BUILD_DIR
 
 cd $BUILD_DIR
-  cmake ..
+  cmake -DCMAKE_BUILD_TYPE=Release ..
   cmake --build . --config Release
 
 # generate file test
