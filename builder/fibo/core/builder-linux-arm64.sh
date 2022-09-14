@@ -1,5 +1,5 @@
 #!/bin/bash
-set -eu
+set -eux
 
 apt-get update
 apt-get install -yq --no-install-suggests --no-install-recommends make gcc libc-dev cmake file
@@ -18,7 +18,7 @@ cat <<EOF | tee "${CMAKE_TOOLCHAIN}"
 EOF
 
 cd $BUILD_DIR
-  cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_TOOLCHAIN_FILE="$CMAKE_TOOLCHAIN" ..
+  cmake -DCMAKE_TOOLCHAIN_FILE="$CMAKE_TOOLCHAIN" ..
   cmake --build . --config Release
 
 # generate file test
