@@ -25,7 +25,8 @@ on:
 # android-x64, ios-arm64, linux-x64, osx-x64, win-x64
 
 env:
-  app: lz4
+  app: fibo
+  version: "1.0.0"
 
 jobs:
   linux:
@@ -44,7 +45,7 @@ jobs:
       - run: git fetch --tags
         working-directory: ${{ env.app }}
       - name: Build
-        run: bash ./builder/${{ env.app }}/${{ env.app }}-linux-${{ matrix.target }}.sh
+        run: bash ./builder/${{ env.app }}/linux-${{ matrix.target }}.sh
       - name: show generated files
         run: git ls-files --other --modified --exclude-standard
       - uses: actions/upload-artifact@v3
@@ -71,7 +72,7 @@ jobs:
       - name: Add MSBuild to PATH
         uses: microsoft/setup-msbuild@v1.1
       - name: Build
-        run: builder\${{ env.app }}\${{ env.app }}-windows-${{ matrix.target }}.bat
+        run: builder\${{ env.app }}\windows-${{ matrix.target }}.bat
         shell: cmd
       - name: show generated files
         run: git ls-files --other --modified --exclude-standard
@@ -88,13 +89,6 @@ jobs:
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v3
-        with:
-          submodules: true
-      - run: git fetch --tags
-        working-directory: ${{ env.app }}
-      - run: echo "::set-output name=value::$(git tag --points-at HEAD -l -n0 | grep "v" | tr -d '[:space:]')"
-        id: version
-        working-directory: ${{ env.app }}
       - uses: actions/download-artifact@v3
         with:
           name: artifact
@@ -116,8 +110,8 @@ jobs:
           author: github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>
           committer: github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>
           delete-branch: true
-          title: "[${{ env.app }}] Update artifacts ${{ steps.version.outputs.value }}"
+          title: "[${{ env.app }}] Update artifacts ${{ env.version }}"
           body: |
-            Update ${{ env.app }} artifacts for ${{ steps.version.outputs.value }} 🚀
+            Update ${{ env.app }} artifacts for ${{ env.version }} 🚀
           labels: |
             automated pr
