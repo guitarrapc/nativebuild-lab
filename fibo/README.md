@@ -29,3 +29,14 @@ Use `all` to build all.
 make clean
 make all
 ```
+
+## CMake
+
+```bash
+# Windows
+rmdir /Q /S examples\build
+mkdir examples\build
+cd examples\build
+cmake .. -G"Visual Studio 17 2022"
+cmake --build .
+```
