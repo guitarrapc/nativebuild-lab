@@ -1,5 +1,6 @@
 #include <stdio.h>
 
+// __cplusplus enabled when compile with g++
 #if defined (__cplusplus)
 extern "C" {
 #endif
