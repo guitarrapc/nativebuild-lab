@@ -1,4 +1,4 @@
-name: Build lz4
+name: Build fibo
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.event_name }}-${{ github.ref }}
@@ -83,7 +83,7 @@ jobs:
 
   pr:
     if: ${{ inputs.create-pullrequest == true }}
-    needs: [android, ios, linux, macos, windows]
+    needs: [linux, windows]
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
