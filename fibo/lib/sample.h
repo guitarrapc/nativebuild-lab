@@ -1,6 +1,12 @@
 #include <stdio.h>
 
-// __cplusplus enabled when compile with g++
+typedef struct
+{
+    float value;
+    int num;
+} sample_data_t;
+
+// __cplusplus enabled when compile with g++, to avoid name mangling via C++ compiler.
 #if defined (__cplusplus)
 extern "C" {
 #endif
@@ -15,12 +21,15 @@ extern "C" {
 #if defined(DLL_EXPORT)
 #  define FIBOLIB_API __declspec(dllexport) FIBOLIB_VISIBILITY
 #elif defined(DLL_IMPORT)
-#  define FIBOLIB_API __declspec(dllimport) FIBOLIB_VISIBILITY /* It isn't required but allows to generate better code, saving a function pointer load from the IAT and an indirect jump.*/
+#  define FIBOLIB_API __declspec(dllimport) FIBOLIB_VISIBILITY
 #else
 #  define FIBOLIB_API FIBOLIB_VISIBILITY
 #endif
 
-FIBOLIB_API int fibo(int n);
+FIBOLIB_API void get_sample_data(sample_data_t *output, sample_data_t *input);
+
+// This function won't export on DLL.
+int echo_no_export(int n);
 
 #if defined (__cplusplus)
 }

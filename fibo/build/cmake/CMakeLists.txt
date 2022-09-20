@@ -24,6 +24,8 @@ option(BUILD_PROGRAM "Build program" ON)
 # sources
 include_directories("${FIBO_LIB_SOURCE_DIR}")
 set(FIBO_SOURCES
+  "${FIBO_LIB_SOURCE_DIR}/sample.h"
+  "${FIBO_LIB_SOURCE_DIR}/sample.c"
   "${FIBO_LIB_SOURCE_DIR}/fibo.c"
   "${FIBO_LIB_SOURCE_DIR}/fibo.h")
 set(FIBO_CLI_SOURCES
@@ -47,7 +49,7 @@ if(BUILD_SHARED_LIBS)
   VERSION "${FIBO_VERSION_STRING}")
   # export method symbol for Windows .dll. It enable C# to dllimport signature.
   if(MSVC)
-    target_compile_definitions(fibo_shared PRIVATE FIBO_DLL_EXPORT=1)
+    target_compile_definitions(fibo_shared PRIVATE DLL_EXPORT=1)
   endif()
 endif()
 
