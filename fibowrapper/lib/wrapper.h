@@ -20,7 +20,7 @@ extern "C" {
 #  define WRAPPERLIB_API WRAPPERLIB_VISIBILITY
 #endif
 
-WRAPPERLIB_API int wrapper(int n);
+WRAPPERLIB_API int my_fibo(int n);
 
 #if defined (__cplusplus)
 }

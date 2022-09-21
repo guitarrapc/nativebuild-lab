@@ -2,7 +2,7 @@
 #include "fibo.h"
 #include "wrapper.h"
 
-int wrapper(int n)
+int my_fibo(int n)
 {
     return fibo(n);
 }

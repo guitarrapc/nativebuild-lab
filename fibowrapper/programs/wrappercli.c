@@ -36,7 +36,7 @@ int main(int argc, const char** argv)
         return 1;
     }
 
-    int result = wrapper(n);
+    int result = my_fibo(n);
     printf("%d\n", result);
     return 0;
 }

@@ -36,14 +36,6 @@ lib:
 program:
 	$(MAKE) -C $(PRGDIR) $@
 
-.PHONY: example
-example:
-	$(MAKE) -C $(EXPDIR) $@
-
-.PHONY: debug
-debug:
-	$(MAKE) -C $(LIBDIR) $@
-
 .PHONY: clean
 clean:
 	$(MAKE) -C $(LIBDIR) $@

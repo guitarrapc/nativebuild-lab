@@ -94,7 +94,7 @@ public static class WrapperCaller
     var lib = "";
     if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
     {
-      //lib = @"C:\git\guitarrapc\nativebuild-lab\pkg\fibowrapper\v1.0.0\windows\x64\fibo.dll";
+      throw new NotSupportedException("Run VS Debug on WSL");
     }
     else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
     {
@@ -104,14 +104,14 @@ public static class WrapperCaller
     {
       if (NativeLibrary.TryLoad(lib, out handleLib))
       {
-        // wrapper (これだけ呼べてほしい)
+        // my_fibo (これだけ呼べてほしい) -> 呼べてしまう
         {
-          var fibo = Marshal.GetDelegateForFunctionPointer<WrapperNative.wrapper>(NativeLibrary.GetExport(handleLib, "wrapper"));
+          var fibo = Marshal.GetDelegateForFunctionPointer<WrapperNative.my_fibo>(NativeLibrary.GetExport(handleLib, "my_fibo"));
           var result = fibo.Invoke((IntPtr)10);
-          Console.WriteLine($"wrapper: result {result};");
+          Console.WriteLine($"my_fibo: result {result};");
         }
 
-        // fibo (呼ばれてほしくない)
+        // fibo (呼ばれてほしくない) -> 呼べてしまう
         {
           var fibo = Marshal.GetDelegateForFunctionPointer<FiboNative.fibo>(NativeLibrary.GetExport(handleLib, "fibo"));
           var result = fibo.Invoke((IntPtr)10);
@@ -132,7 +132,7 @@ public static class WrapperCaller
 unsafe class WrapperNative
 {
   [UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet = CharSet.Unicode)]
-  public delegate int wrapper(IntPtr n);
+  public delegate int my_fibo(IntPtr n);
 }
 
 unsafe class FiboNative
