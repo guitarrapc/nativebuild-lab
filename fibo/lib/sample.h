@@ -26,7 +26,8 @@ extern "C" {
 #  define FIBOLIB_API FIBOLIB_VISIBILITY
 #endif
 
-FIBOLIB_API void get_sample_data(sample_data_t *output, sample_data_t *input);
+FIBOLIB_API void get_sample_data(sample_data_t *output);
+FIBOLIB_API void set_sample_data(sample_data_t *output, sample_data_t *input);
 
 // This function won't export on DLL.
 int echo_no_export(int n);
