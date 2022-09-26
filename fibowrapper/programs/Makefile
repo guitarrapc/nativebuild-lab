@@ -1,6 +1,5 @@
 # specify link lib
 LIBDIR   := ../lib
-LIBVER_SRC := $(LIBDIR)/fibo.h
 # include implementation
 LIBFILES  = $(wildcard $(LIBDIR)/*.c)
 # concat all files
@@ -10,8 +9,8 @@ OBJFILES  = $(SRCFILES:.c=.o)
 SHARED_NAMESPACE ?= LIBWRAPPER_
 EXT ?=
 
-CC ?= gcc # use `gcc`, instead of `cc`
-CPPFLAGS += -I$(LIBDIR) -DXXH_NAMESPACE=$(SHARED_NAMESPACE)
+CC = gcc # use `gcc`, instead of `cc`
+CPPFLAGS += -I$(LIBDIR)
 CFLAGS ?= -O3 -Wall -Wextra # automatically use this flag when build .c
 FLAGS     = $(CFLAGS) $(CPPFLAGS) $(LDFLAGS)
 

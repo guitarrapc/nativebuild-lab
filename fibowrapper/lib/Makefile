@@ -4,12 +4,11 @@
 
 LIBWRAPPERA ?= libwrapper.a
 LIBWRAPPERSO ?= libwrapper.so
-SHARED_NAMESPACE ?= LIBWRAPPER_
 SRCFILES := $(sort $(wildcard *.c))
 
-CC ?= gcc # use `gcc`, instead of `cc`
-CPPFLAGS += -DXXH_NAMESPACE=$(SHARED_NAMESPACE)
-CFLAGS ?= -O3 -Werror -Wall -Wextra # automatically use this flag when build .c
+CC = gcc # use `gcc`, instead of `cc`
+CPPFLAGS +=
+CFLAGS ?= -O3 -W -Werror -Wall -Wextra # automatically use this flag when build .c
 FLAGS    = $(CFLAGS) $(CPPFLAGS) $(LDFLAGS)
 
 .PHONY: lib
