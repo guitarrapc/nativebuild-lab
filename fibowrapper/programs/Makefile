@@ -20,7 +20,7 @@ program: wrapper
 
 .PHONY: wrapper
 wrapper: $(OBJFILES)
-	$(CC) $(FLAGS) $(OBJFILES) -o $@$(EXT) -L . -lfibo
+	$(CC) $(FLAGS) $(OBJFILES) -o $@$(EXT) -L . -lfiboedit
 
 .PHONY: clean
 clean:

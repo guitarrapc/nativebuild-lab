@@ -56,5 +56,4 @@ dkms.conf
 
 
 # fibo
-fibo
-hello
+wrapper

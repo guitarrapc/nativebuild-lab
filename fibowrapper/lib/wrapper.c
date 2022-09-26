@@ -4,5 +4,5 @@
 
 int my_fibo(int n)
 {
-    return fibo(n);
+    return _fibo(n);
 }
