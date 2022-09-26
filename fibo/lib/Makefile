@@ -7,8 +7,8 @@ LIBFIBOSO ?= libfibo.so
 SHARED_NAMESPACE ?= LIBFIBO_
 SRCFILES := $(sort $(wildcard *.c))
 
-CC ?= gcc # use `gcc`, instead of `cc`
-CPPFLAGS += -DXXH_NAMESPACE=$(SHARED_NAMESPACE)
+CC = gcc # use `gcc`, instead of `cc`
+CPPFLAGS +=
 CFLAGS ?= -O3 -Werror -Wall -Wextra # automatically use this flag when build .c
 FLAGS    = $(CFLAGS) $(CPPFLAGS) $(LDFLAGS)
 
