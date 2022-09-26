@@ -597,6 +597,10 @@ bash ./builder/zstd/zstd-windows-arm64-mingw.sh
 
 * CMake Windows: [Visual Studio 17 2022 — CMake 3\.24\.1 Documentation](https://cmake.org/cmake/help/latest/generator/Visual%20Studio%2017%202022.html)
 
+**CheatSheet**
+
+* [cmake チートシート \- Qoosky](https://www.qoosky.io/techs/814fda555d)
+
 **Native Platform**
 
 * CMake Android: [CMake  \|  Android NDK  \|  Android Developers](https://developer.android.com/ndk/guides/cmake?hl=ja)
