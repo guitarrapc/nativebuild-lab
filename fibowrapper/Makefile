@@ -23,24 +23,21 @@ PRGDIR = programs
 EXPDIR = examples
 
 .PHONY: default
-default: depend lib
+default: lib
 
 .PHONY: all
-all: depend lib program
-
-.PHONY: depend
-depend:
-	cp -f ../fibo/lib/libfibo.a ./lib/.
-	objconv -fELF -nu+ ./lib/libfibo.a ./lib/libfiboedit.a
-	cp -f ../fibo/lib/libfibo.a ./programs/.
-	objconv -fELF -nu+ ./programs/libfibo.a ./programs/libfiboedit.a
+all: lib program
 
 .PHONY: lib
 lib:
+	cp -f ../fibo/lib/libfibo.a ./lib/.
+	objconv -fELF -nu+ ./lib/libfibo.a ./lib/libfiboedit.a
 	$(MAKE) -C $(LIBDIR) $@
 
 .PHONY: program
 program:
+	cp -f ../fibo/lib/libfibo.a ./programs/.
+	objconv -fELF -nu+ ./programs/libfibo.a ./programs/libfiboedit.a
 	$(MAKE) -C $(PRGDIR) $@
 
 .PHONY: clean

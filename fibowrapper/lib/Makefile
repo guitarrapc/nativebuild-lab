@@ -20,7 +20,7 @@ liba: $(LIBWRAPPERA)
 .PHONY: $(LIBWRAPPERA)
 $(LIBWRAPPERA): $(SRCFILES)
 	@echo compiling static library
-	$(COMPILE.c) $^ -L . -lfiboedit
+	$(COMPILE.c) -L . -lfiboedit $^
 	$(AR) rcs $@ *.o
 
 .PHONY: libso
@@ -29,7 +29,7 @@ libso: $(LIBWRAPPERSO)
 .PHONY: $(LIBWRAPPERSO)
 $(LIBWRAPPERSO): $(SRCFILES)
 	@echo compiling dynamic library
-	$(CC) $(FLAGS) -shared $^ -fPIC -fvisibility=hidden -o $@ -L . -lfiboedit
+	$(CC) $(FLAGS) -shared -fPIC -fvisibility=hidden -o $@ -L . -lfiboedit $^
 
 .PHONY: debug
 debug:
