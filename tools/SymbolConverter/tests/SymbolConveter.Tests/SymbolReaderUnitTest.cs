@@ -38,8 +38,8 @@ public class SymbolReaderUnitTest
         void foo();
            int mbedtls_ssl_write_client_hello( mbedtls_ssl_context *ssl );
 
-        FIBOLIB_API void get_sample_data(sample_data_t *output);
-          FIBOLIB_API int fibo(int n);
+        FIBOLIB_API void natoka_hogemoge(sample_data_t *output);
+          FIBOLIB_API int fugafuga(int n);
 
         mbedtls_ssl_mode_t mbedtls_ssl_get_mode_from_transform(
                 const mbedtls_ssl_transform *transform );        
@@ -82,8 +82,8 @@ public class SymbolReaderUnitTest
     [Theory]
     [InlineData(@"void foo();", "foo", PREFIX + "foo")]
     [InlineData(@"   int mbedtls_ssl_write_client_hello( mbedtls_ssl_context *ssl );", "mbedtls_ssl_write_client_hello", PREFIX + "mbedtls_ssl_write_client_hello")]
-    [InlineData(@"FIBOLIB_API void get_sample_data(sample_data_t *output);", "get_sample_data", PREFIX + "get_sample_data")]
-    [InlineData(@"  FIBOLIB_API int fibo(int n);", "fibo", PREFIX + "fibo")]
+    [InlineData(@"FIBOLIB_API void natoka_hogemoge(sample_data_t *output);", "natoka_hogemoge", PREFIX + "natoka_hogemoge")]
+    [InlineData(@"  FIBOLIB_API int fugafuga(int n);", "fugafuga", PREFIX + "fugafuga")]
     [InlineData(@"mbedtls_ssl_mode_t mbedtls_ssl_get_mode_from_transform(;        ", "mbedtls_ssl_get_mode_from_transform", PREFIX + "mbedtls_ssl_get_mode_from_transform")]
     [InlineData(@"    mbedtls_mpi_uint mbedtls_mpi_core_mla( mbedtls_mpi_uint *d, size_t d_len ,", "mbedtls_mpi_core_mla", PREFIX + "mbedtls_mpi_core_mla")]
     public void ReadMethodTest(string define, string expectedSymbol, string expectedRenamedSymbol)
