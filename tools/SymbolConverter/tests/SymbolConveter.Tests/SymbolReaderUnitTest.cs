@@ -1,5 +1,3 @@
-using FluentAssertions;
-
 namespace SymbolConveter.Tests;
 
 public class SymbolReaderUnitTest

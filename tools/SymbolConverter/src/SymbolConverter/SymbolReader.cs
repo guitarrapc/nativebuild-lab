@@ -1,6 +1,8 @@
 using System.Text.RegularExpressions;
 using System.Text;
 
+namespace SymbolConverter;
+
 public class SymbolReader
 {
     public IReadOnlyList<SymbolInfo?> Read(DetectionType detectionType, string[] content, Func<string, string> RenameExpression, string? file = null)

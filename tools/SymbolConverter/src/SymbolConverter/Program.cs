@@ -1,3 +1,5 @@
+using SymbolConverter;
+
 var app = ConsoleApp.Create(args);
 app.AddCommands<SymbolApp>();
 app.Run();

@@ -1,4 +1,6 @@
-﻿public class SymbolWriter
+namespace SymbolConverter;
+
+public class SymbolWriter
 {
     public string ReplaceSymbol(string content, IReadOnlyList<SymbolInfo?> symbols)
     {
