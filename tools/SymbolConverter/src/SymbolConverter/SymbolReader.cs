@@ -3,16 +3,21 @@ using System.Text;
 
 public class SymbolReader
 {
-    public IReadOnlyList<SymbolInfo?> Read(DetectionType detectionType, string[] content, Func<string, string> RenameExpression)
+    public IReadOnlyList<SymbolInfo?> Read(DetectionType detectionType, string[] content, Func<string, string> RenameExpression, string? file = null)
     {
+        var metadata = new Dictionary<string, string>
+        {
+            { "file", file ?? "" },
+        };
         return detectionType switch
         {
-            DetectionType.Method => ReadMethodInfo(content, RenameExpression),
-            DetectionType.Typedef => ReadTypedefInfo(content, RenameExpression),
+            DetectionType.Method => ReadMethodInfo(content, RenameExpression, metadata),
+            DetectionType.Typedef => ReadTypedefInfo(content, RenameExpression, metadata),
             _ => throw new NotSupportedException(),
         };
     }
-    private IReadOnlyList<SymbolInfo?> ReadMethodInfo(string[] content, Func<string, string> RenameExpression)
+
+    private IReadOnlyList<SymbolInfo?> ReadMethodInfo(string[] content, Func<string, string> RenameExpression, Dictionary<string, string> metadata)
     {
         const string delimiter = "(";
         // `foo bar(`
@@ -34,13 +39,11 @@ public class SymbolReader
                     var line = match.Groups[0].Value;
                     var type = match.Groups["type"].Value;
                     var method = match.Groups["method"].Value;
+                    metadata.TryAdd("ReturnType", type);
                     return new SymbolInfo(line, DetectionType.Method, delimiter, method)
                     {
                         RenamedSymbol = RenameExpression.Invoke(method),
-                        Metadata = new Dictionary<string, string>
-                          {
-                        {"ReturnType", type},
-                          },
+                        Metadata = metadata,
                     };
                 }
                 else
@@ -55,7 +58,7 @@ public class SymbolReader
         return methods;
     }
 
-    private IReadOnlyList<SymbolInfo?> ReadTypedefInfo(string[] content, Func<string, string> RenameExpression)
+    private IReadOnlyList<SymbolInfo?> ReadTypedefInfo(string[] content, Func<string, string> RenameExpression, Dictionary<string, string> metadata)
     {
         const string delimiter = ";";
         // `typedef uint64_t foo;`
@@ -100,9 +103,7 @@ public class SymbolReader
                     return new SymbolInfo(line, DetectionType.Typedef, delimiter, typeName)
                     {
                         RenamedSymbol = RenameExpression.Invoke(typeName),
-                        Metadata = new Dictionary<string, string>
-                        {
-                        },
+                        Metadata = metadata,
                     };
                 }
                 else
@@ -115,9 +116,7 @@ public class SymbolReader
                         return new SymbolInfo(line, DetectionType.Typedef, delimiter, typeName)
                         {
                             RenamedSymbol = RenameExpression.Invoke(typeName),
-                            Metadata = new Dictionary<string, string>
-                            {
-                            },
+                            Metadata = metadata,
                         };
                     }
                     else
