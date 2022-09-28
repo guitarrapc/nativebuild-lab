@@ -1,4 +1,5 @@
 using SymbolConverter;
+using System.IO;
 
 var app = ConsoleApp.Create(args);
 app.AddCommands<SymbolApp>();
@@ -6,7 +7,7 @@ app.Run();
 
 public class SymbolApp : ConsoleAppBase
 {
-    [Command("list")]
+    [Command("list", "List symbols from header files (.h)")]
     public async Task List(
         [Option("header-path", "Directory path contains header files.")]string headerPath)
     {
@@ -30,7 +31,7 @@ public class SymbolApp : ConsoleAppBase
         }
     }
 
-    [Command("prefix")]
+    [Command("prefix", "Add prefix to header and implemataion files.")]
     public async Task Prefix(
         [Option("header-path", "Directory path contains header files.")] string headerPath,
         [Option("prefix", "Prefix to add.")] string prefix,
@@ -45,9 +46,17 @@ public class SymbolApp : ConsoleAppBase
 
         var list = await SymbolOperation.ListAsync(headerPath, prefix);
 
+        // header
         Console.WriteLine($@"Source directory: {headerPath}");
         Console.WriteLine();
-        await SymbolOperation.ReplaceAsync(implPath, list, dryrun);
+        var headerFiles = Directory.EnumerateFiles(headerPath, "*.h", new EnumerationOptions { RecurseSubdirectories = true });
+        await SymbolOperation.ReplaceAsync(headerFiles, list, dryrun);
+
+        // impl
+        Console.WriteLine($@"Source directory: {implPath}");
+        Console.WriteLine();
+        var implFiles = Directory.EnumerateFiles(implPath, "*.c", new EnumerationOptions { RecurseSubdirectories = true });
+        await SymbolOperation.ReplaceAsync(implFiles, list, dryrun);
     }
 }
 
@@ -78,11 +87,10 @@ public static class SymbolOperation
         return list;
     }
 
-    public static async Task ReplaceAsync(string implPath, IReadOnlyList<SymbolInfo?> symbols, bool dryrun)
+    public static async Task ReplaceAsync(IEnumerable<string> files, IReadOnlyList<SymbolInfo?> symbols, bool dryrun)
     {
-        var impleFiles = Directory.EnumerateFiles(implPath, "*.c", new EnumerationOptions { RecurseSubdirectories = true });
         var writer = new SymbolWriter();
-        foreach (var file in impleFiles)
+        foreach (var file in files)
         {
             var content = await File.ReadAllTextAsync(file);
             var result = writer.ReplaceSymbol(content, symbols.Select(x => x).ToArray());
