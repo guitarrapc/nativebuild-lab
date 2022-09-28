@@ -1,0 +1,23 @@
+{
+  "profiles": {
+    "SymbolConverter": {
+      "commandName": "Project"
+    },
+    "list(fibo)": {
+      "commandName": "Project",
+      "commandLineArgs": "list --header-path C:\\git\\guitarrapc\\nativebuild-lab\\fibo\\lib"
+    },
+    "prefix(fibo)": {
+      "commandName": "Project",
+      "commandLineArgs": "prefix --header-path C:\\git\\guitarrapc\\nativebuild-lab\\fibo\\lib --prefix prefixdazo_ --dryrun true"
+    },
+    "list(mbedtls)": {
+      "commandName": "Project",
+      "commandLineArgs": "list --header-path C:\\git\\guitarrapc\\nativebuild-lab\\mbedtls\\library"
+    },
+    "prefix(mbedtls)": {
+      "commandName": "Project",
+      "commandLineArgs": "prefix --header-path C:\\git\\guitarrapc\\nativebuild-lab\\mbedtls\\library --prefix prefixdazo_ --dryrun true"
+    }
+  }
+}

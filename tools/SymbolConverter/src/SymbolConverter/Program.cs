@@ -1,11 +1,3 @@
-//args = new[] { "list", "--header-path", @"C:\git\guitarrapc\nativebuild-lab\fibo\lib", };
-args = new[] {
-    "prefix",
-    "--header-path", @"C:\git\guitarrapc\nativebuild-lab\fibo\lib",
-    "--impl-path", @"C:\git\guitarrapc\nativebuild-lab\fibo\lib",
-    "--prefix", @"prefixdazo_",
-    "--dryrun", "true",
-};
 var app = ConsoleApp.Create(args);
 app.AddCommands<SymbolApp>();
 app.Run();
@@ -39,11 +31,16 @@ public class SymbolApp : ConsoleAppBase
     [Command("prefix")]
     public async Task Prefix(
         [Option("header-path", "Directory path contains header files.")] string headerPath,
-        [Option("impl-path", "Directory path contains implementaion files.")] string implPath,
         [Option("prefix", "Prefix to add.")] string prefix,
+        [Option("impl-path", "Directory path contains implementaion files. (Default: Use headerPath)")] string implPath = "",
         [Option("dryrun", "True to dry-run. false to apply changes.")] bool dryrun = true
     )
     {
+        if (string.IsNullOrEmpty(implPath))
+        {
+            implPath = headerPath;
+        }
+
         var list = await SymbolOperation.ListAsync(headerPath, prefix);
 
         Console.WriteLine($@"Source directory: {headerPath}");
