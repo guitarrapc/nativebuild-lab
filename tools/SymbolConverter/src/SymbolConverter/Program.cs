@@ -85,18 +85,30 @@ public static class SymbolOperation
         foreach (var file in impleFiles)
         {
             var content = await File.ReadAllTextAsync(file);
-            content = writer.ReplaceSymbol(content, symbols.Select(x => x).ToArray());
+            var result = writer.ReplaceSymbol(content, symbols.Select(x => x).ToArray());
 
-            Console.WriteLine("--------------");
-            Console.WriteLine(file);
-            Console.WriteLine("--------------");
+            var changed = !content.Equals(result);
             if (dryrun)
             {
-                Console.WriteLine(content);
+                if (changed)
+                {
+                    Console.WriteLine("--------------");
+                    Console.WriteLine($"{file} (changed: {changed})");
+                    Console.WriteLine("--------------");
+                    Console.WriteLine(result);
+                }
+                else
+                {
+                    Console.WriteLine($"{file} (changed: {changed})");
+                }
             }
             else
             {
-                File.WriteAllText(file, content);
+                Console.WriteLine($"{file} (changed: {changed})");
+                if (changed)
+                {
+                    File.WriteAllText(file, result);
+                }
             }
         }
     }
