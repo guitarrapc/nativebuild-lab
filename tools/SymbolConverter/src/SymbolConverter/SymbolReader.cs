@@ -27,6 +27,8 @@ public class SymbolReader
         var regex = new Regex($@"\b(?<type>\w+?)\s+(?<method>\w+?)\{delimiter}.*$", RegexOptions.Compiled);
         //content.Dump(path);
 
+        // TODO: 数字のシンボル拾ってしまっている
+        // TODO: defined を拾ってしまっている
         var methods = content
             .Select(x => x.TrimStart()) // ` void foo()` -> `void foo()`
             .Where(x => !string.IsNullOrWhiteSpace(x)) // empty line
