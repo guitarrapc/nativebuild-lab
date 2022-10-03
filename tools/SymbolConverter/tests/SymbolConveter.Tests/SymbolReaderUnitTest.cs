@@ -52,6 +52,11 @@ mbedtls_ssl_mode_t mbedtls_ssl_get_mode_from_transform(
 // mbedtls_ssl_mode_t should_be_ignopre_method(
         const mbedtls_ssl_transform *transform );
 
+/*
+ * GCM multiplication: c = a times b in GF(2^128)
+ * Based on [CLMUL-WP] algorithms 1 (with equation 27) and 5.
+ */
+
 #ifndef FIBOLIB_VISIBILITY
 #  if defined(__GNUC__) && (__GNUC__ >= 4)
 #    define FIBOLIB_VISIBILITY __attribute__ ((visibility (""default"")))
@@ -60,10 +65,83 @@ mbedtls_ssl_mode_t mbedtls_ssl_get_mode_from_transform(
 #  endif
 #endif
 
-/*
- * GCM multiplication: c = a times b in GF(2^128)
- * Based on [CLMUL-WP] algorithms 1 (with equation 27) and 5.
- */
+    #define MBEDTLS_BYTES_TO_T_UINT_8( a, b, c, d, e, f, g, h ) \
+        MBEDTLS_BYTES_TO_T_UINT_4( a, b, c, d ),                \
+        MBEDTLS_BYTES_TO_T_UINT_4( e, f, g, h )
+
+    #define MBEDTLS_BYTES_TO_T_UINT_8( a, b, c, d, e, f, g, h )   \
+        ( (mbedtls_mpi_uint) (a) <<  0 ) |                        \
+        ( (mbedtls_mpi_uint) (b) <<  8 ) |                        \
+        ( (mbedtls_mpi_uint) (c) << 16 ) |                        \
+        ( (mbedtls_mpi_uint) (d) << 24 ) |                        \
+        ( (mbedtls_mpi_uint) (e) << 32 ) |                        \
+        ( (mbedtls_mpi_uint) (f) << 40 ) |                        \
+        ( (mbedtls_mpi_uint) (g) << 48 ) |                        \
+        ( (mbedtls_mpi_uint) (h) << 56 )
+
+    #define MULADDC_X8_CORE                         \
+        ""movd     %%ecx,     %%mm1      \n\t""   \
+        ""movd     %%ebx,     %%mm0      \n\t""   \
+        ""movd     (%%edi),   %%mm3      \n\t""   \
+        ""paddq    %%mm3,     %%mm1      \n\t""   \
+        ""movd     (%%esi),   %%mm2      \n\t""   \
+        ""pmuludq  %%mm0,     %%mm2      \n\t""   \
+        ""movd     4(%%esi),  %%mm4      \n\t""   \
+        ""pmuludq  %%mm0,     %%mm4      \n\t""   \
+        ""movd     8(%%esi),  %%mm6      \n\t""   \
+        ""pmuludq  %%mm0,     %%mm6      \n\t""   \
+        ""movd     12(%%esi), %%mm7      \n\t""   \
+        ""pmuludq  %%mm0,     %%mm7      \n\t""   \
+        ""paddq    %%mm2,     %%mm1      \n\t""   \
+        ""movd     4(%%edi),  %%mm3      \n\t""   \
+        ""paddq    %%mm4,     %%mm3      \n\t""   \
+        ""movd     8(%%edi),  %%mm5      \n\t""   \
+        ""paddq    %%mm6,     %%mm5      \n\t""   \
+        ""movd     12(%%edi), %%mm4      \n\t""   \
+        ""paddq    %%mm4,     %%mm7      \n\t""   \
+        ""movd     %%mm1,     (%%edi)    \n\t""   \
+        ""movd     16(%%esi), %%mm2      \n\t""   \
+        ""pmuludq  %%mm0,     %%mm2      \n\t""   \
+        ""psrlq    $32,       %%mm1      \n\t""   \
+        ""movd     20(%%esi), %%mm4      \n\t""   \
+        ""pmuludq  %%mm0,     %%mm4      \n\t""   \
+        ""paddq    %%mm3,     %%mm1      \n\t""   \
+        ""movd     24(%%esi), %%mm6      \n\t""   \
+        ""pmuludq  %%mm0,     %%mm6      \n\t""   \
+        ""movd     %%mm1,     4(%%edi)   \n\t""   \
+        ""psrlq    $32,       %%mm1      \n\t""   \
+        ""movd     28(%%esi), %%mm3      \n\t""   \
+        ""pmuludq  %%mm0,     %%mm3      \n\t""   \
+        ""paddq    %%mm5,     %%mm1      \n\t""   \
+        ""movd     16(%%edi), %%mm5      \n\t""   \
+        ""paddq    %%mm5,     %%mm2      \n\t""   \
+        ""movd     %%mm1,     8(%%edi)   \n\t""   \
+        ""psrlq    $32,       %%mm1      \n\t""   \
+        ""paddq    %%mm7,     %%mm1      \n\t""   \
+        ""movd     20(%%edi), %%mm5      \n\t""   \
+        ""paddq    %%mm5,     %%mm4      \n\t""   \
+        ""movd     %%mm1,     12(%%edi)  \n\t""   \
+        ""psrlq    $32,       %%mm1      \n\t""   \
+        ""paddq    %%mm2,     %%mm1      \n\t""   \
+        ""movd     24(%%edi), %%mm5      \n\t""   \
+        ""paddq    %%mm5,     %%mm6      \n\t""   \
+        ""movd     %%mm1,     16(%%edi)  \n\t""   \
+        ""psrlq    $32,       %%mm1      \n\t""   \
+        ""paddq    %%mm4,     %%mm1      \n\t""   \
+        ""movd     28(%%edi), %%mm5      \n\t""   \
+        ""paddq    %%mm5,     %%mm3      \n\t""   \
+        ""movd     %%mm1,     20(%%edi)  \n\t""   \
+        ""psrlq    $32,       %%mm1      \n\t""   \
+        ""paddq    %%mm6,     %%mm1      \n\t""   \
+        ""movd     %%mm1,     24(%%edi)  \n\t""   \
+        ""psrlq    $32,       %%mm1      \n\t""   \
+        ""paddq    %%mm3,     %%mm1      \n\t""   \
+        ""movd     %%mm1,     28(%%edi)  \n\t""   \
+        ""addl     $32,       %%edi      \n\t""   \
+        ""addl     $32,       %%esi      \n\t""   \
+        ""psrlq    $32,       %%mm1      \n\t""   \
+        ""movd     %%mm1,     %%ecx      \n\t""
+
 ".SplitNewLine();
 
         var reader = new SymbolReader();
@@ -93,7 +171,7 @@ mbedtls_ssl_mode_t mbedtls_ssl_get_mode_from_transform(
     [InlineData(@"    mbedtls_mpi_uint mbedtls_mpi_core_mla( mbedtls_mpi_uint *d, size_t d_len ,", "mbedtls_mpi_core_mla", PREFIX + "mbedtls_mpi_core_mla")]
     public void ReadMethodTest(string define, string expectedSymbol, string expectedRenamedSymbol)
     {
-        var content = new[] { define };
+        var content = define.SplitNewLine();
         var reader = new SymbolReader();
         var actuals = reader.Read(DetectionType.Method, content, s => PREFIX + s);
 
@@ -118,7 +196,7 @@ mbedtls_ssl_mode_t mbedtls_ssl_get_mode_from_transform(
      */")]
     public void ReadMethodCommentTest(string define)
     {
-        var content = new[] { define };
+        var content = define.SplitNewLine();
         var reader = new SymbolReader();
         var actuals = reader.Read(DetectionType.Method, content, s => PREFIX + s);
 
@@ -138,7 +216,7 @@ mbedtls_ssl_mode_t mbedtls_ssl_get_mode_from_transform(
     [InlineData(@"#endif")]
     public void ReadMethodInvalidTest(string define)
     {
-        var content = new[] { define };
+        var content = define.SplitNewLine();
         var reader = new SymbolReader();
         var actuals = reader.Read(DetectionType.Method, content, s => PREFIX + s);
 
@@ -156,12 +234,96 @@ mbedtls_ssl_mode_t mbedtls_ssl_get_mode_from_transform(
         } mbedtls_ssl_mode_t;")]
     public void ReadMethodCannotReadTypedefTest(string define)
     {
-        var content = new[] { define };
+        var content = define.SplitNewLine();
         var reader = new SymbolReader();
         var actuals = reader.Read(DetectionType.Method, content, s => PREFIX + s);
 
         actuals.Should().BeEmpty();
     }
+    [Theory]
+    [InlineData(@"#define MBEDTLS_BYTES_TO_T_UINT_8( a, b, c, d, e, f, g, h ) \
+        MBEDTLS_BYTES_TO_T_UINT_4( a, b, c, d ),                \
+        MBEDTLS_BYTES_TO_T_UINT_4( e, f, g, h )")]
+    [InlineData(@"#define MBEDTLS_BYTES_TO_T_UINT_8( a, b, c, d, e, f, g, h )   \
+        ( (mbedtls_mpi_uint) (a) <<  0 ) |                        \
+        ( (mbedtls_mpi_uint) (b) <<  8 ) |                        \
+        ( (mbedtls_mpi_uint) (c) << 16 ) |                        \
+        ( (mbedtls_mpi_uint) (d) << 24 ) |                        \
+        ( (mbedtls_mpi_uint) (e) << 32 ) |                        \
+        ( (mbedtls_mpi_uint) (f) << 40 ) |                        \
+        ( (mbedtls_mpi_uint) (g) << 48 ) |                        \
+        ( (mbedtls_mpi_uint) (h) << 56 )")]
+    [InlineData(@"    #define MULADDC_X8_CORE                         \
+        ""movd     %%ecx,     %%mm1      \n\t""   \
+        ""movd     %%ebx,     %%mm0      \n\t""   \
+        ""movd     (%%edi),   %%mm3      \n\t""   \
+        ""paddq    %%mm3,     %%mm1      \n\t""   \
+        ""movd     (%%esi),   %%mm2      \n\t""   \
+        ""pmuludq  %%mm0,     %%mm2      \n\t""   \
+        ""movd     4(%%esi),  %%mm4      \n\t""   \
+        ""pmuludq  %%mm0,     %%mm4      \n\t""   \
+        ""movd     8(%%esi),  %%mm6      \n\t""   \
+        ""pmuludq  %%mm0,     %%mm6      \n\t""   \
+        ""movd     12(%%esi), %%mm7      \n\t""   \
+        ""pmuludq  %%mm0,     %%mm7      \n\t""   \
+        ""paddq    %%mm2,     %%mm1      \n\t""   \
+        ""movd     4(%%edi),  %%mm3      \n\t""   \
+        ""paddq    %%mm4,     %%mm3      \n\t""   \
+        ""movd     8(%%edi),  %%mm5      \n\t""   \
+        ""paddq    %%mm6,     %%mm5      \n\t""   \
+        ""movd     12(%%edi), %%mm4      \n\t""   \
+        ""paddq    %%mm4,     %%mm7      \n\t""   \
+        ""movd     %%mm1,     (%%edi)    \n\t""   \
+        ""movd     16(%%esi), %%mm2      \n\t""   \
+        ""pmuludq  %%mm0,     %%mm2      \n\t""   \
+        ""psrlq    $32,       %%mm1      \n\t""   \
+        ""movd     20(%%esi), %%mm4      \n\t""   \
+        ""pmuludq  %%mm0,     %%mm4      \n\t""   \
+        ""paddq    %%mm3,     %%mm1      \n\t""   \
+        ""movd     24(%%esi), %%mm6      \n\t""   \
+        ""pmuludq  %%mm0,     %%mm6      \n\t""   \
+        ""movd     %%mm1,     4(%%edi)   \n\t""   \
+        ""psrlq    $32,       %%mm1      \n\t""   \
+        ""movd     28(%%esi), %%mm3      \n\t""   \
+        ""pmuludq  %%mm0,     %%mm3      \n\t""   \
+        ""paddq    %%mm5,     %%mm1      \n\t""   \
+        ""movd     16(%%edi), %%mm5      \n\t""   \
+        ""paddq    %%mm5,     %%mm2      \n\t""   \
+        ""movd     %%mm1,     8(%%edi)   \n\t""   \
+        ""psrlq    $32,       %%mm1      \n\t""   \
+        ""paddq    %%mm7,     %%mm1      \n\t""   \
+        ""movd     20(%%edi), %%mm5      \n\t""   \
+        ""paddq    %%mm5,     %%mm4      \n\t""   \
+        ""movd     %%mm1,     12(%%edi)  \n\t""   \
+        ""psrlq    $32,       %%mm1      \n\t""   \
+        ""paddq    %%mm2,     %%mm1      \n\t""   \
+        ""movd     24(%%edi), %%mm5      \n\t""   \
+        ""paddq    %%mm5,     %%mm6      \n\t""   \
+        ""movd     %%mm1,     16(%%edi)  \n\t""   \
+        ""psrlq    $32,       %%mm1      \n\t""   \
+        ""paddq    %%mm4,     %%mm1      \n\t""   \
+        ""movd     28(%%edi), %%mm5      \n\t""   \
+        ""paddq    %%mm5,     %%mm3      \n\t""   \
+        ""movd     %%mm1,     20(%%edi)  \n\t""   \
+        ""psrlq    $32,       %%mm1      \n\t""   \
+        ""paddq    %%mm6,     %%mm1      \n\t""   \
+        ""movd     %%mm1,     24(%%edi)  \n\t""   \
+        ""psrlq    $32,       %%mm1      \n\t""   \
+        ""paddq    %%mm3,     %%mm1      \n\t""   \
+        ""movd     %%mm1,     28(%%edi)  \n\t""   \
+        ""addl     $32,       %%edi      \n\t""   \
+        ""addl     $32,       %%esi      \n\t""   \
+        ""psrlq    $32,       %%mm1      \n\t""   \
+        ""movd     %%mm1,     %%ecx      \n\t""")]
+    public void ReadMethodCannotReadDefineTest(string define)
+    {
+        var content = define.SplitNewLine();
+        var reader = new SymbolReader();
+        var actuals = reader.Read(DetectionType.Method, content, s => PREFIX + s);
+
+        actuals.Should().BeEmpty();
+    }
+
     // typdef
     [Theory]
     [InlineData(@"typedef uint64_t mbedtls_mpi_uint;", "mbedtls_mpi_uint", PREFIX + "mbedtls_mpi_uint")]
@@ -181,7 +343,7 @@ mbedtls_ssl_mode_t mbedtls_ssl_get_mode_from_transform(
             } mbedtls_rsa_alt_context;", "mbedtls_rsa_alt_context", PREFIX + "mbedtls_rsa_alt_context")]
     public void ReadTypedefTest(string define, string expectedSymbol, string expectedRenamedSymbol)
     {
-        var content = new[] { define };
+        var content = define.SplitNewLine();
         var reader = new SymbolReader();
         var actuals = reader.Read(DetectionType.Typedef, content, s => PREFIX + s);
 
@@ -205,7 +367,7 @@ mbedtls_ssl_mode_t mbedtls_ssl_get_mode_from_transform(
         } should_be_ignopre_typdef;")]
     public void ReadTypedefCommentTest(string define)
     {
-        var content = new[] { define };
+        var content = define.SplitNewLine();
         var reader = new SymbolReader();
         var actuals = reader.Read(DetectionType.Typedef, content, s => PREFIX + s);
 
@@ -223,7 +385,7 @@ mbedtls_ssl_mode_t mbedtls_ssl_get_mode_from_transform(
     [InlineData(@"typede uint64_t mbedtls_mpi_uint;")] // typede
     public void ReadTypedefInvalidTest(string define)
     {
-        var content = new[] { define };
+        var content = define.SplitNewLine();
         var reader = new SymbolReader();
         var actuals = reader.Read(DetectionType.Typedef, content, s => PREFIX + s);
 
@@ -239,7 +401,91 @@ mbedtls_ssl_mode_t mbedtls_ssl_get_mode_from_transform(
     [InlineData(@"    mbedtls_mpi_uint mbedtls_mpi_core_mla( mbedtls_mpi_uint *d, size_t d_len ,")]
     public void ReadTypedefCannotReadMethodTest(string define)
     {
-        var content = new[] { define };
+        var content = define.SplitNewLine();
+        var reader = new SymbolReader();
+        var actuals = reader.Read(DetectionType.Typedef, content, s => PREFIX + s);
+
+        actuals.Should().BeEmpty();
+    }
+
+    [Theory]
+    [InlineData(@"#define MBEDTLS_BYTES_TO_T_UINT_8( a, b, c, d, e, f, g, h ) \
+        MBEDTLS_BYTES_TO_T_UINT_4( a, b, c, d ),                \
+        MBEDTLS_BYTES_TO_T_UINT_4( e, f, g, h )")]
+    [InlineData(@"#define MBEDTLS_BYTES_TO_T_UINT_8( a, b, c, d, e, f, g, h )   \
+        ( (mbedtls_mpi_uint) (a) <<  0 ) |                        \
+        ( (mbedtls_mpi_uint) (b) <<  8 ) |                        \
+        ( (mbedtls_mpi_uint) (c) << 16 ) |                        \
+        ( (mbedtls_mpi_uint) (d) << 24 ) |                        \
+        ( (mbedtls_mpi_uint) (e) << 32 ) |                        \
+        ( (mbedtls_mpi_uint) (f) << 40 ) |                        \
+        ( (mbedtls_mpi_uint) (g) << 48 ) |                        \
+        ( (mbedtls_mpi_uint) (h) << 56 )")]
+    [InlineData(@"    #define MULADDC_X8_CORE                         \
+        ""movd     %%ecx,     %%mm1      \n\t""   \
+        ""movd     %%ebx,     %%mm0      \n\t""   \
+        ""movd     (%%edi),   %%mm3      \n\t""   \
+        ""paddq    %%mm3,     %%mm1      \n\t""   \
+        ""movd     (%%esi),   %%mm2      \n\t""   \
+        ""pmuludq  %%mm0,     %%mm2      \n\t""   \
+        ""movd     4(%%esi),  %%mm4      \n\t""   \
+        ""pmuludq  %%mm0,     %%mm4      \n\t""   \
+        ""movd     8(%%esi),  %%mm6      \n\t""   \
+        ""pmuludq  %%mm0,     %%mm6      \n\t""   \
+        ""movd     12(%%esi), %%mm7      \n\t""   \
+        ""pmuludq  %%mm0,     %%mm7      \n\t""   \
+        ""paddq    %%mm2,     %%mm1      \n\t""   \
+        ""movd     4(%%edi),  %%mm3      \n\t""   \
+        ""paddq    %%mm4,     %%mm3      \n\t""   \
+        ""movd     8(%%edi),  %%mm5      \n\t""   \
+        ""paddq    %%mm6,     %%mm5      \n\t""   \
+        ""movd     12(%%edi), %%mm4      \n\t""   \
+        ""paddq    %%mm4,     %%mm7      \n\t""   \
+        ""movd     %%mm1,     (%%edi)    \n\t""   \
+        ""movd     16(%%esi), %%mm2      \n\t""   \
+        ""pmuludq  %%mm0,     %%mm2      \n\t""   \
+        ""psrlq    $32,       %%mm1      \n\t""   \
+        ""movd     20(%%esi), %%mm4      \n\t""   \
+        ""pmuludq  %%mm0,     %%mm4      \n\t""   \
+        ""paddq    %%mm3,     %%mm1      \n\t""   \
+        ""movd     24(%%esi), %%mm6      \n\t""   \
+        ""pmuludq  %%mm0,     %%mm6      \n\t""   \
+        ""movd     %%mm1,     4(%%edi)   \n\t""   \
+        ""psrlq    $32,       %%mm1      \n\t""   \
+        ""movd     28(%%esi), %%mm3      \n\t""   \
+        ""pmuludq  %%mm0,     %%mm3      \n\t""   \
+        ""paddq    %%mm5,     %%mm1      \n\t""   \
+        ""movd     16(%%edi), %%mm5      \n\t""   \
+        ""paddq    %%mm5,     %%mm2      \n\t""   \
+        ""movd     %%mm1,     8(%%edi)   \n\t""   \
+        ""psrlq    $32,       %%mm1      \n\t""   \
+        ""paddq    %%mm7,     %%mm1      \n\t""   \
+        ""movd     20(%%edi), %%mm5      \n\t""   \
+        ""paddq    %%mm5,     %%mm4      \n\t""   \
+        ""movd     %%mm1,     12(%%edi)  \n\t""   \
+        ""psrlq    $32,       %%mm1      \n\t""   \
+        ""paddq    %%mm2,     %%mm1      \n\t""   \
+        ""movd     24(%%edi), %%mm5      \n\t""   \
+        ""paddq    %%mm5,     %%mm6      \n\t""   \
+        ""movd     %%mm1,     16(%%edi)  \n\t""   \
+        ""psrlq    $32,       %%mm1      \n\t""   \
+        ""paddq    %%mm4,     %%mm1      \n\t""   \
+        ""movd     28(%%edi), %%mm5      \n\t""   \
+        ""paddq    %%mm5,     %%mm3      \n\t""   \
+        ""movd     %%mm1,     20(%%edi)  \n\t""   \
+        ""psrlq    $32,       %%mm1      \n\t""   \
+        ""paddq    %%mm6,     %%mm1      \n\t""   \
+        ""movd     %%mm1,     24(%%edi)  \n\t""   \
+        ""psrlq    $32,       %%mm1      \n\t""   \
+        ""paddq    %%mm3,     %%mm1      \n\t""   \
+        ""movd     %%mm1,     28(%%edi)  \n\t""   \
+        ""addl     $32,       %%edi      \n\t""   \
+        ""addl     $32,       %%esi      \n\t""   \
+        ""psrlq    $32,       %%mm1      \n\t""   \
+        ""movd     %%mm1,     %%ecx      \n\t""")]
+    public void ReadTypedefCannotReadDefineTest(string define)
+    {
+        var content = define.SplitNewLine();
         var reader = new SymbolReader();
         var actuals = reader.Read(DetectionType.Typedef, content, s => PREFIX + s);
 
