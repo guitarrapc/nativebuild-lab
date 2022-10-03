@@ -56,7 +56,79 @@
     #  endif
     #endif
 
-/*
-* GCM multiplication: c = a times b in GF(2^128)
-* Based on [CLMUL-WP] algorithms 1 (with equation 27) and 5.
-*/
+
+    #define MBEDTLS_BYTES_TO_T_UINT_8( a, b, c, d, e, f, g, h ) \
+        MBEDTLS_BYTES_TO_T_UINT_4( a, b, c, d ),                \
+        MBEDTLS_BYTES_TO_T_UINT_4( e, f, g, h )
+
+    #define MBEDTLS_BYTES_TO_T_UINT_8( a, b, c, d, e, f, g, h )   \
+        ( (mbedtls_mpi_uint) (a) <<  0 ) |                        \
+        ( (mbedtls_mpi_uint) (b) <<  8 ) |                        \
+        ( (mbedtls_mpi_uint) (c) << 16 ) |                        \
+        ( (mbedtls_mpi_uint) (d) << 24 ) |                        \
+        ( (mbedtls_mpi_uint) (e) << 32 ) |                        \
+        ( (mbedtls_mpi_uint) (f) << 40 ) |                        \
+        ( (mbedtls_mpi_uint) (g) << 48 ) |                        \
+        ( (mbedtls_mpi_uint) (h) << 56 )
+
+    #define MULADDC_X8_CORE                         \
+        "movd     %%ecx,     %%mm1      \n\t"   \
+        "movd     %%ebx,     %%mm0      \n\t"   \
+        "movd     (%%edi),   %%mm3      \n\t"   \
+        "paddq    %%mm3,     %%mm1      \n\t"   \
+        "movd     (%%esi),   %%mm2      \n\t"   \
+        "pmuludq  %%mm0,     %%mm2      \n\t"   \
+        "movd     4(%%esi),  %%mm4      \n\t"   \
+        "pmuludq  %%mm0,     %%mm4      \n\t"   \
+        "movd     8(%%esi),  %%mm6      \n\t"   \
+        "pmuludq  %%mm0,     %%mm6      \n\t"   \
+        "movd     12(%%esi), %%mm7      \n\t"   \
+        "pmuludq  %%mm0,     %%mm7      \n\t"   \
+        "paddq    %%mm2,     %%mm1      \n\t"   \
+        "movd     4(%%edi),  %%mm3      \n\t"   \
+        "paddq    %%mm4,     %%mm3      \n\t"   \
+        "movd     8(%%edi),  %%mm5      \n\t"   \
+        "paddq    %%mm6,     %%mm5      \n\t"   \
+        "movd     12(%%edi), %%mm4      \n\t"   \
+        "paddq    %%mm4,     %%mm7      \n\t"   \
+        "movd     %%mm1,     (%%edi)    \n\t"   \
+        "movd     16(%%esi), %%mm2      \n\t"   \
+        "pmuludq  %%mm0,     %%mm2      \n\t"   \
+        "psrlq    $32,       %%mm1      \n\t"   \
+        "movd     20(%%esi), %%mm4      \n\t"   \
+        "pmuludq  %%mm0,     %%mm4      \n\t"   \
+        "paddq    %%mm3,     %%mm1      \n\t"   \
+        "movd     24(%%esi), %%mm6      \n\t"   \
+        "pmuludq  %%mm0,     %%mm6      \n\t"   \
+        "movd     %%mm1,     4(%%edi)   \n\t"   \
+        "psrlq    $32,       %%mm1      \n\t"   \
+        "movd     28(%%esi), %%mm3      \n\t"   \
+        "pmuludq  %%mm0,     %%mm3      \n\t"   \
+        "paddq    %%mm5,     %%mm1      \n\t"   \
+        "movd     16(%%edi), %%mm5      \n\t"   \
+        "paddq    %%mm5,     %%mm2      \n\t"   \
+        "movd     %%mm1,     8(%%edi)   \n\t"   \
+        "psrlq    $32,       %%mm1      \n\t"   \
+        "paddq    %%mm7,     %%mm1      \n\t"   \
+        "movd     20(%%edi), %%mm5      \n\t"   \
+        "paddq    %%mm5,     %%mm4      \n\t"   \
+        "movd     %%mm1,     12(%%edi)  \n\t"   \
+        "psrlq    $32,       %%mm1      \n\t"   \
+        "paddq    %%mm2,     %%mm1      \n\t"   \
+        "movd     24(%%edi), %%mm5      \n\t"   \
+        "paddq    %%mm5,     %%mm6      \n\t"   \
+        "movd     %%mm1,     16(%%edi)  \n\t"   \
+        "psrlq    $32,       %%mm1      \n\t"   \
+        "paddq    %%mm4,     %%mm1      \n\t"   \
+        "movd     28(%%edi), %%mm5      \n\t"   \
+        "paddq    %%mm5,     %%mm3      \n\t"   \
+        "movd     %%mm1,     20(%%edi)  \n\t"   \
+        "psrlq    $32,       %%mm1      \n\t"   \
+        "paddq    %%mm6,     %%mm1      \n\t"   \
+        "movd     %%mm1,     24(%%edi)  \n\t"   \
+        "psrlq    $32,       %%mm1      \n\t"   \
+        "paddq    %%mm3,     %%mm1      \n\t"   \
+        "movd     %%mm1,     28(%%edi)  \n\t"   \
+        "addl     $32,       %%edi      \n\t"   \
+        "addl     $32,       %%esi      \n\t"   \
+        "psrlq    $32,       %%mm1      \n\t"   \
