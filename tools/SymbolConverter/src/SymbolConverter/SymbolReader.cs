@@ -31,7 +31,6 @@ public class SymbolReader
         static bool IsCommentLine(string str) => str.StartsWith("//") || str.StartsWith("*");
         static bool IsDefinedLine(string str) => str.StartsWith("#"); // #if defined
 
-        // TODO: 数字のシンボル拾ってしまっている
         // TODO: defined を拾ってしまっている
         var methods = content
             .Select(x => x.TrimStart())
