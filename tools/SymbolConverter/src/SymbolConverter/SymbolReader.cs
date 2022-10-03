@@ -73,6 +73,7 @@ public class SymbolReader
         // `typedef enum {
         // } foo;`
         var typedefStartRegex = new Regex(@"^\s*typedef.*", RegexOptions.Compiled);
+        // `typedef <any>;` or `} foo;`
         var typedefEndRegex = new Regex($@"(\btypedef.*|}}\s+\w+){delimiter}", RegexOptions.Compiled);
         // `typedef uint64_t foo;`
         var typedefSinglelineRegex = new Regex($@"\btypedef\s+\w+\s+(?<type>\w+){delimiter}", RegexOptions.Compiled);
@@ -87,15 +88,40 @@ public class SymbolReader
             var sb = new StringBuilder();
             if (typedefStartRegex.IsMatch(line))
             {
+                // add first line
                 sb.AppendLine(line);
 
-                while (!typedefEndRegex.IsMatch(content[i]))
+                // is typedef single line?
+                if (!typedefEndRegex.IsMatch(line))
                 {
-                    i++;
-                    sb.AppendLine(content[i]);
+                    // typedef is multiline
+
+                    // add typedef element lines
+                    // stop when semi-colon not found, it is invalid typedef.
+                    // stop when new typedef line found, it means invalid typedef found.
+                    // stop when typedef last line found.
+                    var j = i;
+                    while (++j <= content.Length - 1 && !typedefStartRegex.IsMatch(content[j]) && !typedefEndRegex.IsMatch(content[j]))
+                    {
+                        sb.AppendLine(content[j]);
+                    }
+
+                    // add last line
+                    if (j <= content.Length - 1 && typedefEndRegex.IsMatch(content[j]))
+                    {
+                        sb.AppendLine(content[j]);
+                    }
+                    else
+                    {
+                        // it is invalid typedef, let's clear it.
+                        sb.Clear();
+                    }
                 }
 
-                typedefLines.Add(sb.ToString());
+                if (sb.Length > 0)
+                {
+                    typedefLines.Add(sb.ToString());
+                }
             }
         }
 

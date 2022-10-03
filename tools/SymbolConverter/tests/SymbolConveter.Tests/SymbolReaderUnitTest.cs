@@ -12,7 +12,7 @@ public class SymbolReaderUnitTest
 typedef uint64_t mbedtls_mpi_uint;
     typedef uint64_t piyopiyo;
 // typedef uint64_t should_be_ignopre_typdef;
-        
+
 typedef enum {
     MBEDTLS_SSL_MODE_STREAM = 0,
     MBEDTLS_SSL_MODE_CBC,
@@ -145,6 +145,23 @@ mbedtls_ssl_mode_t mbedtls_ssl_get_mode_from_transform(
         actuals.Should().BeEmpty();
     }
 
+    [Theory]
+    [InlineData(@"typedef uint64_t mbedtls_mpi_uint;")]
+    [InlineData(@"  typedef uint64_t piyopiyo;")]
+    [InlineData(@"typedef enum {
+            MBEDTLS_SSL_MODE_STREAM = 0,
+            MBEDTLS_SSL_MODE_CBC,
+            MBEDTLS_SSL_MODE_CBC_ETM,
+            MBEDTLS_SSL_MODE_AEAD
+        } mbedtls_ssl_mode_t;")]
+    public void ReadMethodCannotReadTypedefTest(string define)
+    {
+        var content = new[] { define };
+        var reader = new SymbolReader();
+        var actuals = reader.Read(DetectionType.Method, content, s => PREFIX + s);
+
+        actuals.Should().BeEmpty();
+    }
     // typdef
     [Theory]
     [InlineData(@"typedef uint64_t mbedtls_mpi_uint;", "mbedtls_mpi_uint", PREFIX + "mbedtls_mpi_uint")]
@@ -208,7 +225,23 @@ mbedtls_ssl_mode_t mbedtls_ssl_get_mode_from_transform(
     {
         var content = new[] { define };
         var reader = new SymbolReader();
-        var actuals = reader.Read(DetectionType.Method, content, s => PREFIX + s);
+        var actuals = reader.Read(DetectionType.Typedef, content, s => PREFIX + s);
+
+        actuals.Should().BeEmpty();
+    }
+
+    [Theory]
+    [InlineData(@"void foo();")]
+    [InlineData(@"   int mbedtls_ssl_write_client_hello( mbedtls_ssl_context *ssl );")]
+    [InlineData(@"FIBOLIB_API void natoka_hogemoge(sample_data_t *output);")]
+    [InlineData(@"  FIBOLIB_API int fugafuga(int n);")]
+    [InlineData(@"mbedtls_ssl_mode_t mbedtls_ssl_get_mode_from_transform(;        ")]
+    [InlineData(@"    mbedtls_mpi_uint mbedtls_mpi_core_mla( mbedtls_mpi_uint *d, size_t d_len ,")]
+    public void ReadTypedefCannotReadMethodTest(string define)
+    {
+        var content = new[] { define };
+        var reader = new SymbolReader();
+        var actuals = reader.Read(DetectionType.Typedef, content, s => PREFIX + s);
 
         actuals.Should().BeEmpty();
     }
