@@ -240,6 +240,7 @@ mbedtls_ssl_mode_t mbedtls_ssl_get_mode_from_transform(
 
         actuals.Should().BeEmpty();
     }
+
     [Theory]
     [InlineData(@"#define MBEDTLS_BYTES_TO_T_UINT_8( a, b, c, d, e, f, g, h ) \
         MBEDTLS_BYTES_TO_T_UINT_4( a, b, c, d ),                \
@@ -316,6 +317,54 @@ mbedtls_ssl_mode_t mbedtls_ssl_get_mode_from_transform(
         ""psrlq    $32,       %%mm1      \n\t""   \
         ""movd     %%mm1,     %%ecx      \n\t""")]
     public void ReadMethodCannotReadDefineTest(string define)
+    {
+        var content = define.SplitNewLine();
+        var reader = new SymbolReader();
+        var actuals = reader.Read(DetectionType.Method, content, s => PREFIX + s);
+
+        actuals.Should().BeEmpty();
+    }
+
+    [Theory]
+    [InlineData(@"struct foo
+    {
+        bar *next;  /*!< next handshake message(s)              */
+    };")]
+    public void ReadMethodCannotReadInlineCommentTest(string define)
+    {
+        var content = define.SplitNewLine();
+        var reader = new SymbolReader();
+        var actuals = reader.Read(DetectionType.Method, content, s => PREFIX + s);
+
+        actuals.Should().BeEmpty();
+    }
+
+    [Theory]
+    [InlineData(@"static inline int mbedtls_ssl_get_psk( const mbedtls_ssl_context *ssl,
+        const unsigned char **psk, size_t *psk_len )
+    {
+        if( ssl->handshake->psk != NULL && ssl->handshake->psk_len > 0 )
+        {
+            *psk = ssl->handshake->psk;
+            *psk_len = ssl->handshake->psk_len;
+        }
+
+        else if( ssl->conf->psk != NULL && ssl->conf->psk_len > 0 )
+        {
+            *psk = ssl->conf->psk;
+            *psk_len = ssl->conf->psk_len;
+        }
+
+        else
+        {
+            *psk = NULL;
+            *psk_len = 0;
+            return( MBEDTLS_ERR_SSL_PRIVATE_KEY_REQUIRED );
+        }
+
+        return( 0 );
+    }")]
+    public void ReadMethodCannotReadStaticInlineTest(string define)
     {
         var content = define.SplitNewLine();
         var reader = new SymbolReader();

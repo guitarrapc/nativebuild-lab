@@ -27,6 +27,8 @@ public class SymbolReader
         var methodRegex = new Regex($@"\b(?<type>\w+?)\s+(?<method>\w+?)\{delimiter}.*$", RegexOptions.Compiled);
         //content.Dump(path);
 
+        // TODO: static inline は除外する
+        // TODO: インラインコメントは除外する
         var methodLines = ExtractMethodLines(content);
         var methods = methodLines
             .Select(x => x.TrimStart())
