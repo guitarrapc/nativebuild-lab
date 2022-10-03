@@ -27,13 +27,17 @@ public class SymbolReader
         var regex = new Regex($@"\b(?<type>\w+?)\s+(?<method>\w+?)\{delimiter}.*$", RegexOptions.Compiled);
         //content.Dump(path);
 
+        static bool IsEmptyLine(string str) => string.IsNullOrWhiteSpace(str);
+        static bool IsCommentLine(string str) => str.StartsWith("//") || str.StartsWith("*");
+        static bool IsDefinedLine(string str) => str.StartsWith("#"); // #if defined
+
         // TODO: 数字のシンボル拾ってしまっている
         // TODO: defined を拾ってしまっている
         var methods = content
-            .Select(x => x.TrimStart()) // ` void foo()` -> `void foo()`
-            .Where(x => !string.IsNullOrWhiteSpace(x)) // empty line
-            .Where(x => !x.StartsWith("//")) // -> // void method(int foo);
-            .Where(x => !x.StartsWith("#"))  // -> #if defined
+            .Select(x => x.TrimStart())
+            .Where(x => !IsEmptyLine(x))
+            .Where(x => !IsCommentLine(x))
+            .Where(x => !IsDefinedLine(x))
             .Select(x =>
             {
                 var match = regex.Match(x);

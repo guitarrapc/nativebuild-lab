@@ -44,3 +44,8 @@ FIBOLIB_API void natoka_hogemoge(sample_data_t *output);
 #else
 #  define FIBOLIB_API FIBOLIB_VISIBILITY
 #endif
+
+/*
+* GCM multiplication: c = a times b in GF(2^128)
+* Based on [CLMUL-WP] algorithms 1 (with equation 27) and 5.
+*/
