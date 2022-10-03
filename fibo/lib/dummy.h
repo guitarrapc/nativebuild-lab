@@ -27,7 +27,7 @@ mbedtls_mpi_uint mbedtls_mpi_core_mla( mbedtls_mpi_uint *d, size_t d_len ,
 void foo();
 
 FIBOLIB_API void natoka_hogemoge(sample_data_t *output);
-FIBOLIB_API int fugafuga(int n);
+  FIBOLIB_API int fugafuga(int n);
 // void should_be_ignopre_method();
 
 #ifndef FIBOLIB_VISIBILITY
