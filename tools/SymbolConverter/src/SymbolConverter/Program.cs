@@ -1,5 +1,5 @@
 using SymbolConverter;
-using System.IO;
+using System.Diagnostics;
 
 var app = ConsoleApp.Create(args);
 app.AddCommands<SymbolApp>();
@@ -70,6 +70,8 @@ public static class SymbolOperation
         var list = new List<SymbolInfo?>();
         foreach (var file in headerFiles)
         {
+            Debug.WriteLine($"Reading file '{file}'");
+
             var content = await File.ReadAllLinesAsync(file);
             var externFields = reader.Read(DetectionType.ExternField, content, s => prefix + s, file);
             var methods = reader.Read(DetectionType.Method, content, s => prefix + s, file);
@@ -98,6 +100,8 @@ public static class SymbolOperation
         var writer = new SymbolWriter();
         foreach (var file in files)
         {
+            Debug.WriteLine($"Reading file '{file}'");
+
             var content = await File.ReadAllTextAsync(file);
             var result = writer.ReplaceSymbol(content, symbols.Select(x => x).ToArray());
 
