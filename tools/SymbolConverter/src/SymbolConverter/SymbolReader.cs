@@ -192,7 +192,7 @@ public class SymbolReader
             if (IsCommentLine(line)) continue;
             if (IsPragmaLine(line)) continue;
 
-            lines.Add(content[i]);
+            lines.Add(line);
         }
 
         return lines;
@@ -271,7 +271,7 @@ public class SymbolReader
                 continue;
             }
 
-            methodLines.Add(content[i]);
+            methodLines.Add(line);
         }
 
         return methodLines;
