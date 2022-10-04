@@ -9,7 +9,6 @@ public class SymbolWriter
         {
             if (symbol is not null)
             {
-                // TODO: 宣言以外の利用箇所で書き換えできてない
                 var from = symbol.Symbol + symbol.Delimiter;
                 var to = symbol.RenamedSymbol + symbol.Delimiter;
                 if (current.Contains(from))

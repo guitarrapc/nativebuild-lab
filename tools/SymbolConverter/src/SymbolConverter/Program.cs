@@ -44,19 +44,19 @@ public class SymbolApp : ConsoleAppBase
             implPath = headerPath;
         }
 
-        var list = await SymbolOperation.ListAsync(headerPath, prefix);
+        var symbols = await SymbolOperation.ListAsync(headerPath, prefix);
 
         // header
-        Console.WriteLine($@"Source directory: {headerPath}");
         Console.WriteLine();
+        Console.WriteLine($@"Header Source directory: {headerPath}");
         var headerFiles = Directory.EnumerateFiles(headerPath, "*.h", new EnumerationOptions { RecurseSubdirectories = true });
-        await SymbolOperation.ReplaceAsync(headerFiles, list, dryrun);
+        await SymbolOperation.ReplaceAsync(headerFiles, symbols, dryrun);
 
         // impl
-        Console.WriteLine($@"Source directory: {implPath}");
         Console.WriteLine();
+        Console.WriteLine($@"Impl Source directory: {implPath}");
         var implFiles = Directory.EnumerateFiles(implPath, "*.c", new EnumerationOptions { RecurseSubdirectories = true });
-        await SymbolOperation.ReplaceAsync(implFiles, list, dryrun);
+        await SymbolOperation.ReplaceAsync(implFiles, symbols, dryrun);
     }
 }
 
@@ -87,7 +87,7 @@ public static class SymbolOperation
         return list;
     }
 
-    public static async Task ReplaceAsync(IEnumerable<string> files, IReadOnlyList<SymbolInfo?> symbols, bool dryrun)
+    public static async Task ReplaceAsync(IEnumerable<string> files, IReadOnlyList<SymbolInfo?> symbols, bool dryrun, bool debug = false)
     {
         var writer = new SymbolWriter();
         foreach (var file in files)
@@ -96,27 +96,20 @@ public static class SymbolOperation
             var result = writer.ReplaceSymbol(content, symbols.Select(x => x).ToArray());
 
             var changed = !content.Equals(result);
-            if (dryrun)
+            Console.WriteLine($"{file} (changed: {changed})");
+            if (!dryrun)
             {
-                if (changed)
-                {
-                    Console.WriteLine("--------------");
-                    Console.WriteLine($"{file} (changed: {changed})");
-                    Console.WriteLine("--------------");
-                    Console.WriteLine(result);
-                }
-                else
-                {
-                    Console.WriteLine($"{file} (changed: {changed})");
-                }
-            }
-            else
-            {
-                Console.WriteLine($"{file} (changed: {changed})");
                 if (changed)
                 {
                     File.WriteAllText(file, result);
                 }
+            }
+
+            if (debug)
+            {
+                Console.WriteLine("--------------");
+                Console.WriteLine(result);
+                Console.WriteLine("--------------");
             }
         }
     }
