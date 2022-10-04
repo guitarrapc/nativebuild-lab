@@ -46,7 +46,36 @@ mbedtls_ssl_mode_t mbedtls_ssl_get_mode_from_transform(
     mbedtls_mpi_uint mbedtls_mpi_core_mla( mbedtls_mpi_uint *d, size_t d_len ,
                                         const mbedtls_mpi_uint *s, size_t s_len,
                                         mbedtls_mpi_uint b );        
-        
+    struct foo
+    {
+        bar *next;  /*!< next handshake message(s)              */
+    }
+
+    static inline int mbedtls_ssl_get_psk( const mbedtls_ssl_context *ssl,
+        const unsigned char **psk, size_t *psk_len )
+    {
+        if( ssl->handshake->psk != NULL && ssl->handshake->psk_len > 0 )
+        {
+            *psk = ssl->handshake->psk;
+            *psk_len = ssl->handshake->psk_len;
+        }
+
+        else if( ssl->conf->psk != NULL && ssl->conf->psk_len > 0 )
+        {
+            *psk = ssl->conf->psk;
+            *psk_len = ssl->conf->psk_len;
+        }
+
+        else
+        {
+            *psk = NULL;
+            *psk_len = 0;
+            return( MBEDTLS_ERR_SSL_PRIVATE_KEY_REQUIRED );
+        }
+
+        return( 0 );
+    }
+
 // void should_be_ignopre_method();
 // FIBOLIB_API void should_be_ignopre_method(sample_data_t *output);
 // mbedtls_ssl_mode_t should_be_ignopre_method(
