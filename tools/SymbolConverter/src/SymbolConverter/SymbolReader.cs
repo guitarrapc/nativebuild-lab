@@ -117,7 +117,11 @@ public class SymbolReader
         var defineContinueRegex = new Regex($@".*\\$", RegexOptions.Compiled);
 
         var structStartRegex = new Regex(@"\s*struct\s*\w+", RegexOptions.Compiled);
-        var structEndRegex = new Regex(@"\s*}", RegexOptions.Compiled);
+        var structEndRegex = new Regex(@"\s*}\s*$", RegexOptions.Compiled);
+
+        var staticInlineStartRegex = new Regex(@"\s*static\s+inline\s+\w+\s+\w+", RegexOptions.Compiled);
+        var staticInlineParenthesisStartRegex = new Regex(@"^\s*{", RegexOptions.Compiled);
+        var staticInlineEndRegex = new Regex(@"^\s*}", RegexOptions.Compiled);
 
         static bool IsEmptyLine(string str) => string.IsNullOrWhiteSpace(str);
         static bool IsCommentLine(string str) => str.StartsWith("//") || str.StartsWith("/*") || str.StartsWith("*/") || str.StartsWith("*");
@@ -131,6 +135,8 @@ public class SymbolReader
             if (IsCommentLine(line)) continue;
 
             var sb = new StringBuilder();
+
+            // skip "#define" block
             if (defineStartRegex.IsMatch(line))
             {
                 //sb.AppendLine(line);
@@ -155,32 +161,40 @@ public class SymbolReader
                 continue;
             }
 
+            // skip "struct" block
             if (structStartRegex.IsMatch(line))
             {
-                // add first line
-                //sb.AppendLine(line);
-
-                // is struct?
-                if (!structEndRegex.IsMatch(line))
+                while (++i <= content.Length - 1 && !structStartRegex.IsMatch(content[i]) && !structEndRegex.IsMatch(content[i]))
                 {
-                    while (++i <= content.Length - 1 && !structStartRegex.IsMatch(content[i]) && !structEndRegex.IsMatch(content[i]))
-                    {
-                        //sb.AppendLine(content[j]);
-                        continue;
-                    }
-
-                    // add last line
-                    if (i <= content.Length - 1 && structEndRegex.IsMatch(content[i]))
-                    {
-                        // sb.AppendLine(content[j]);
-                        continue;
-                    }
-                    else
-                    {
-                        // it is invalid typedef, clear it.
-                        sb.Clear();
-                    }
+                    continue;
                 }
+                if (i <= content.Length - 1 && structEndRegex.IsMatch(content[i]))
+                {
+                    continue;
+                }
+            }
+
+            // skip "static inline" block
+            if (staticInlineStartRegex.IsMatch(line))
+            {
+                var complete = false;
+                var rest = 0;
+                while (++i <= content.Length - 1 && !complete)
+                {
+                    // find parenthesis pair which close static inline method.
+                    var current = content[i];
+                    if (staticInlineParenthesisStartRegex.IsMatch(content[i]))
+                    {
+                        rest++;
+                    }
+                    if (staticInlineEndRegex.IsMatch(content[i]))
+                    {
+                        rest--;
+                        complete = rest == 0;
+                    }
+                    continue;
+                }
+                continue;
             }
 
             sb.AppendLine(line);
