@@ -15,6 +15,8 @@ extern void (*function_pointer_foo)( const char * test, int line, const char * f
   extern int ( *function_pointer_bar )();
 extern void* (function_pointer_piyo)( );
 // extern const int comment_out_field;
+extern FStar_UInt128_uint128
+(*FStar_UInt128_op_Greater_Greater_Hat)(FStar_UInt128_uint128 x0, uint32_t x1);
 
 typedef uint64_t mbedtls_mpi_uint;
     typedef uint64_t piyopiyo;
@@ -192,7 +194,7 @@ static inline int mbedtls_ssl_get_psk( const mbedtls_ssl_context *ssl,
         {
             var actual = reader.Read(DetectionType.ExternField, content, s => PREFIX + s);
             actual.Should().NotBeEmpty();
-            actual.Count().Should().Be(5);
+            actual.Count().Should().Be(6);
         }
 
         // method
@@ -217,6 +219,8 @@ static inline int mbedtls_ssl_get_psk( const mbedtls_ssl_context *ssl,
     [InlineData(@"extern void (*function_pointer_foo)( const char * test, int line, const char * file );", "function_pointer_foo", PREFIX + "function_pointer_foo")]
     [InlineData(@"  extern int ( *function_pointer_bar )();", "function_pointer_bar", PREFIX + "function_pointer_bar")]
     [InlineData(@"extern void* (function_pointer_piyo)( );", "function_pointer_piyo", PREFIX + "function_pointer_piyo")]
+    [InlineData(@"extern FStar_UInt128_uint128
+        (*FStar_UInt128_op_Greater_Greater_Hat)(FStar_UInt128_uint128 x0, uint32_t x1);", "FStar_UInt128_op_Greater_Greater_Hat", PREFIX + "FStar_UInt128_op_Greater_Greater_Hat")]
     public void ExternFieldReaderTest(string define, string expectedSymbol, string expectedRenamedSymbol)
     {
         var content = define.SplitNewLine();
@@ -268,6 +272,14 @@ static inline int mbedtls_ssl_get_psk( const mbedtls_ssl_context *ssl,
             MBEDTLS_SSL_MODE_CBC_ETM,
             MBEDTLS_SSL_MODE_AEAD
         } mbedtls_ssl_mode_t;")]
+    [InlineData(@"typedef struct
+    {
+        struct key_data
+        {
+            uint8_t *data;
+            size_t bytes;
+        } key;
+    } psa_key_slot_t;")]
     public void ExternFieldCannotReadTypedefTest(string define)
     {
         var content = define.SplitNewLine();
@@ -364,6 +376,14 @@ static inline int mbedtls_ssl_get_psk( const mbedtls_ssl_context *ssl,
         MBEDTLS_SSL_MODE_CBC_ETM,
         MBEDTLS_SSL_MODE_AEAD
     } mbedtls_ssl_mode_t;")]
+    [InlineData(@"typedef struct
+    {
+        struct key_data
+        {
+            uint8_t *data;
+            size_t bytes;
+        } key;
+    } psa_key_slot_t;")]
     public void MethodReaderCannotReadTypedefTest(string define)
     {
         var content = define.SplitNewLine();

@@ -30,8 +30,8 @@ public class SymbolReader
         // `extern void* (foo)( );`
         var fieldfunctionRegex = new Regex($@"^\s*extern\s+(?<type>\w+)(\*)?\s+\(\s*\*?(?<name>\w+)\s*\).*{delimiter}\s*$", RegexOptions.Compiled);
 
-        var externLines = ExtractExternFieldLines(content);
-        var symbols = externLines
+        var lines = ExtractExternFieldLines(content);
+        var symbols = lines
             .Select(x => x.TrimStart())
             .Select(x =>
             {
@@ -88,8 +88,8 @@ public class SymbolReader
         var methodRegex = new Regex($@"\b(?<type>\w+?)\s+(?<method>\w+?)\{delimiter}.*$", RegexOptions.Compiled);
         //content.Dump(path);
 
-        var methodLines = ExtractMethodLines(content);
-        var symbols = methodLines
+        var lines = ExtractMethodLines(content);
+        var symbols = lines
             .Select(x => x.TrimStart())
             .Select(x =>
             {
@@ -130,8 +130,8 @@ public class SymbolReader
         var typedefMultilineRegex = new Regex($@"\s*}}\s+(?<name>\w+){delimiter}", RegexOptions.Compiled);
 
         // Get typedef line in single string
-        var typedefLines = ExtractTypedefLines(content);
-        var symbols = typedefLines
+        var lines = ExtractTypedefLines(content);
+        var symbols = lines
             .Select(x => x.TrimStart())
             .Select(line =>
             {
@@ -180,6 +180,15 @@ public class SymbolReader
 
     private static IReadOnlyList<string> ExtractExternFieldLines(string[] content)
     {
+        const string delimiter = ";";
+        // `extern const int foo;`
+        // `extern void* (function_pointer)();`
+        // `extern foo
+        // (*piyo)(int x0, int x1);`
+        var externStartRegex = new Regex(@"^\s*extern.*", RegexOptions.Compiled);
+        // `typedef <any>;` or `} foo;`
+        var externEndRegex = new Regex($@".*{delimiter}", RegexOptions.Compiled);
+
         static bool IsEmptyLine(string str) => string.IsNullOrWhiteSpace(str);
         static bool IsCommentLine(string str) => str.StartsWith("//") || str.StartsWith("/*") || str.StartsWith("*/") || str.StartsWith("*");
         static bool IsPragmaLine(string str) => str.StartsWith("#");
@@ -192,7 +201,50 @@ public class SymbolReader
             if (IsCommentLine(line)) continue;
             if (IsPragmaLine(line)) continue;
 
-            lines.Add(line);
+            var sb = new StringBuilder();
+            if (externStartRegex.IsMatch(line))
+            {
+                // add first line
+                sb.AppendLine(line);
+
+                // is single line?
+                if (!externEndRegex.IsMatch(line))
+                {
+                    // is multiline
+
+                    // add extern element lines
+                    // stop when semi-colon not found, it is invalid.
+                    // stop when new extern line found, it means invalid.
+                    // stop when extern last line found.
+                    var j = i;
+                    while (++j <= content.Length - 1 && !externStartRegex.IsMatch(content[j]) && !externEndRegex.IsMatch(content[j]))
+                    {
+                        // {
+                        // void* key;
+                        // mbedtls_pk_rsa_alt_decrypt_func decrypt_func;
+                        // mbedtls_pk_rsa_alt_sign_func sign_func;
+                        // mbedtls_pk_rsa_alt_key_len_func key_len_func;
+                        sb.AppendLine(content[j]);
+                    }
+
+                    // add last line
+                    if (j <= content.Length - 1 && externEndRegex.IsMatch(content[j]))
+                    {
+                        // } mbedtls_rsa_alt_context;
+                        sb.AppendLine(content[j]);
+                    }
+                    else
+                    {
+                        // it is invalid, clear it.
+                        sb.Clear();
+                    }
+                }
+
+                if (sb.Length > 0)
+                {
+                    lines.Add(sb.ToString());
+                }
+            }
         }
 
         return lines;
@@ -308,14 +360,14 @@ public class SymbolReader
                 // add first line
                 sb.AppendLine(line);
 
-                // is typedef single line?
+                // is single line?
                 if (!typedefEndRegex.IsMatch(line))
                 {
-                    // typedef is multiline
+                    // is multiline
 
                     // add typedef element lines
-                    // stop when semi-colon not found, it is invalid typedef.
-                    // stop when new typedef line found, it means invalid typedef found.
+                    // stop when semi-colon not found, it is invalid.
+                    // stop when new typedef line found, it means invalid.
                     // stop when typedef last line found.
                     var j = i;
                     while (++j <= content.Length - 1 && !typedefStartRegex.IsMatch(content[j]) && !typedefEndRegex.IsMatch(content[j]))
@@ -336,7 +388,7 @@ public class SymbolReader
                     }
                     else
                     {
-                        // it is invalid typedef, clear it.
+                        // it is invalid, clear it.
                         sb.Clear();
                     }
                 }
@@ -351,3 +403,4 @@ public class SymbolReader
         return typedefLines;
     }
 }
+
