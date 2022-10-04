@@ -6,7 +6,7 @@ public class SymbolReaderUnitTest
 
     // complex
     [Fact]
-    public void ReadTest()
+    public void ComplexReaderTest()
     {
         var content = @"
 extern const foo_info_t foo_info;
@@ -207,7 +207,7 @@ static inline int mbedtls_ssl_get_psk( const mbedtls_ssl_context *ssl,
     [InlineData(@"  FIBOLIB_API int fugafuga(int n);", "fugafuga", PREFIX + "fugafuga")]
     [InlineData(@"mbedtls_ssl_mode_t mbedtls_ssl_get_mode_from_transform(;        ", "mbedtls_ssl_get_mode_from_transform", PREFIX + "mbedtls_ssl_get_mode_from_transform")]
     [InlineData(@"    mbedtls_mpi_uint mbedtls_mpi_core_mla( mbedtls_mpi_uint *d, size_t d_len ,", "mbedtls_mpi_core_mla", PREFIX + "mbedtls_mpi_core_mla")]
-    public void ReadMethodTest(string define, string expectedSymbol, string expectedRenamedSymbol)
+    public void MethodReaderTest(string define, string expectedSymbol, string expectedRenamedSymbol)
     {
         var content = define.SplitNewLine();
         var reader = new SymbolReader();
@@ -232,7 +232,7 @@ static inline int mbedtls_ssl_get_psk( const mbedtls_ssl_context *ssl,
      * GCM multiplication: c = a times b in GF(2^128)
      * Based on [CLMUL-WP] algorithms 1 (with equation 27) and 5.
      */")]
-    public void ReadMethodCommentTest(string define)
+    public void MethodReaderCommentTest(string define)
     {
         var content = define.SplitNewLine();
         var reader = new SymbolReader();
@@ -252,7 +252,7 @@ static inline int mbedtls_ssl_get_psk( const mbedtls_ssl_context *ssl,
     [InlineData(@"#    define FIBOLIB_VISIBILITY")]
     [InlineData(@"#  endif")]
     [InlineData(@"#endif")]
-    public void ReadMethodInvalidTest(string define)
+    public void MethodReaderInvalidTest(string define)
     {
         var content = define.SplitNewLine();
         var reader = new SymbolReader();
@@ -270,7 +270,7 @@ static inline int mbedtls_ssl_get_psk( const mbedtls_ssl_context *ssl,
             MBEDTLS_SSL_MODE_CBC_ETM,
             MBEDTLS_SSL_MODE_AEAD
         } mbedtls_ssl_mode_t;")]
-    public void ReadMethodCannotReadTypedefTest(string define)
+    public void MethodReaderCannotReadTypedefTest(string define)
     {
         var content = define.SplitNewLine();
         var reader = new SymbolReader();
@@ -354,7 +354,7 @@ static inline int mbedtls_ssl_get_psk( const mbedtls_ssl_context *ssl,
         ""addl     $32,       %%esi      \n\t""   \
         ""psrlq    $32,       %%mm1      \n\t""   \
         ""movd     %%mm1,     %%ecx      \n\t""")]
-    public void ReadMethodCannotReadDefineTest(string define)
+    public void MethodReaderCannotReadDefineTest(string define)
     {
         var content = define.SplitNewLine();
         var reader = new SymbolReader();
@@ -368,7 +368,7 @@ static inline int mbedtls_ssl_get_psk( const mbedtls_ssl_context *ssl,
     {
         bar *next;  /*!< next handshake message(s)              */
     };")]
-    public void ReadMethodCannotReadStructTest(string define)
+    public void MethodReaderCannotReadStructTest(string define)
     {
         var content = define.SplitNewLine();
         var reader = new SymbolReader();
@@ -402,7 +402,7 @@ static inline int mbedtls_ssl_get_psk( const mbedtls_ssl_context *ssl,
 
         return( 0 );
     }")]
-    public void ReadMethodCannotReadStaticInlineTest(string define)
+    public void MethodReaderCannotReadStaticInlineTest(string define)
     {
         var content = define.SplitNewLine();
         var reader = new SymbolReader();
@@ -428,7 +428,7 @@ static inline int mbedtls_ssl_get_psk( const mbedtls_ssl_context *ssl,
                 mbedtls_pk_rsa_alt_sign_func sign_func;
                 mbedtls_pk_rsa_alt_key_len_func key_len_func;
             } mbedtls_rsa_alt_context;", "mbedtls_rsa_alt_context", PREFIX + "mbedtls_rsa_alt_context")]
-    public void ReadTypedefTest(string define, string expectedSymbol, string expectedRenamedSymbol)
+    public void TypedefReaderTest(string define, string expectedSymbol, string expectedRenamedSymbol)
     {
         var content = define.SplitNewLine();
         var reader = new SymbolReader();
@@ -452,7 +452,7 @@ static inline int mbedtls_ssl_get_psk( const mbedtls_ssl_context *ssl,
             MBEDTLS_SSL_MODE_CBC_ETM,
             MBEDTLS_SSL_MODE_AEAD
         } should_be_ignopre_typdef;")]
-    public void ReadTypedefCommentTest(string define)
+    public void TypedefReaderCommentTest(string define)
     {
         var content = define.SplitNewLine();
         var reader = new SymbolReader();
@@ -470,7 +470,7 @@ static inline int mbedtls_ssl_get_psk( const mbedtls_ssl_context *ssl,
             MBEDTLS_SSL_MODE_AEAD
         } mbedtls_ssl_mode_t")] // missing end semi-colon
     [InlineData(@"typede uint64_t mbedtls_mpi_uint;")] // typede
-    public void ReadTypedefInvalidTest(string define)
+    public void TypedefReaderInvalidTest(string define)
     {
         var content = define.SplitNewLine();
         var reader = new SymbolReader();
@@ -486,7 +486,7 @@ static inline int mbedtls_ssl_get_psk( const mbedtls_ssl_context *ssl,
     [InlineData(@"  FIBOLIB_API int fugafuga(int n);")]
     [InlineData(@"mbedtls_ssl_mode_t mbedtls_ssl_get_mode_from_transform(;        ")]
     [InlineData(@"    mbedtls_mpi_uint mbedtls_mpi_core_mla( mbedtls_mpi_uint *d, size_t d_len ,")]
-    public void ReadTypedefCannotReadMethodTest(string define)
+    public void TypedefReaderCannotReadMethodTest(string define)
     {
         var content = define.SplitNewLine();
         var reader = new SymbolReader();
@@ -570,7 +570,7 @@ static inline int mbedtls_ssl_get_psk( const mbedtls_ssl_context *ssl,
         ""addl     $32,       %%esi      \n\t""   \
         ""psrlq    $32,       %%mm1      \n\t""   \
         ""movd     %%mm1,     %%ecx      \n\t""")]
-    public void ReadTypedefCannotReadDefineTest(string define)
+    public void TypedefReaderCannotReadDefineTest(string define)
     {
         var content = define.SplitNewLine();
         var reader = new SymbolReader();

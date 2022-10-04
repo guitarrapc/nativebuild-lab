@@ -27,10 +27,8 @@ public class SymbolReader
         var methodRegex = new Regex($@"\b(?<type>\w+?)\s+(?<method>\w+?)\{delimiter}.*$", RegexOptions.Compiled);
         //content.Dump(path);
 
-        // TODO: static inline は除外する
-        // TODO: インラインコメントは除外する
         var methodLines = ExtractMethodLines(content);
-        var methods = methodLines
+        var symbols = methodLines
             .Select(x => x.TrimStart())
             .Select(x =>
             {
@@ -40,12 +38,14 @@ public class SymbolReader
                     //match.Dump();
                     var line = match.Groups[0].Value;
                     var type = match.Groups["type"].Value;
-                    var method = match.Groups["method"].Value;
-                    metadata.TryAdd("ReturnType", type);
-                    return new SymbolInfo(line, DetectionType.Method, delimiter, method)
+                    var name = match.Groups["method"].Value;
+                    return new SymbolInfo(line, DetectionType.Method, delimiter, name)
                     {
-                        RenamedSymbol = RenameExpression.Invoke(method),
-                        Metadata = metadata,
+                        RenamedSymbol = RenameExpression.Invoke(name),
+                        Metadata = new Dictionary<string, string>(metadata)
+                        {
+                            {"ReturnType", type},
+                        },
                     };
                 }
                 else
@@ -57,20 +57,20 @@ public class SymbolReader
             .OrderByDescending(x => x?.Symbol.Length)
             .ToArray();
 
-        return methods;
+        return symbols;
     }
 
-    private IReadOnlyList<SymbolInfo?> ReadTypedefInfo(string[] content, Func<string, string> RenameExpression, Dictionary<string, string> metadata)
+    private IReadOnlyList<SymbolInfo?> ReadTypedefInfo(string[] content, Func<string, string> RenameExpression, IReadOnlyDictionary<string, string> metadata)
     {
         const string delimiter = ";";
         // `typedef uint64_t foo;`
-        var typedefSinglelineRegex = new Regex($@"\btypedef\s+\w+\s+(?<type>\w+){delimiter}", RegexOptions.Compiled);
+        var typedefSinglelineRegex = new Regex($@"\btypedef\s+(?<type>\w+)\s+(?<name>\w+){delimiter}", RegexOptions.Compiled);
         // `} foo;`
-        var typedefMultilineRegex = new Regex($@"\s*}}\s+(?<type>\w+){delimiter}", RegexOptions.Compiled);
+        var typedefMultilineRegex = new Regex($@"\s*}}\s+(?<name>\w+){delimiter}", RegexOptions.Compiled);
 
         // Get typedef line in single string
         var typedefLines = ExtractTypedefLines(content);
-        var typedefs = typedefLines
+        var symbols = typedefLines
             .Select(x => x.TrimStart())
             .Select(line =>
             {
@@ -78,11 +78,14 @@ public class SymbolReader
                 if (multilineMatch.Success)
                 {
                     //multilineMatch.Dump();
-                    var typeName = multilineMatch.Groups["type"].Value;
-                    return new SymbolInfo(line, DetectionType.Typedef, delimiter, typeName)
+                    var name = multilineMatch.Groups["name"].Value;
+                    return new SymbolInfo(line, DetectionType.Typedef, delimiter, name)
                     {
-                        RenamedSymbol = RenameExpression.Invoke(typeName),
-                        Metadata = metadata,
+                        RenamedSymbol = RenameExpression.Invoke(name),
+                        Metadata = new Dictionary<string, string>(metadata)
+                        {
+                            {"ReturnType", name}, // Alias Type
+                        },
                     };
                 }
                 else
@@ -91,11 +94,14 @@ public class SymbolReader
                     if (singlelineMatch.Success)
                     {
                         //singlelineMatch.Dump();
-                        var typeName = singlelineMatch.Groups["type"].Value;
-                        return new SymbolInfo(line, DetectionType.Typedef, delimiter, typeName)
+                        var name = singlelineMatch.Groups["name"].Value;
+                        return new SymbolInfo(line, DetectionType.Typedef, delimiter, name)
                         {
-                            RenamedSymbol = RenameExpression.Invoke(typeName),
-                            Metadata = metadata,
+                            RenamedSymbol = RenameExpression.Invoke(name),
+                            Metadata = new Dictionary<string, string>(metadata)
+                            {
+                                {"ReturnType", name}, // Alias Type
+                            },
                         };
                     }
                     else
@@ -108,13 +114,13 @@ public class SymbolReader
             .OrderByDescending(x => x?.Symbol.Length)
             .ToArray();
 
-        return typedefs;
+        return symbols;
     }
 
     private static IReadOnlyList<string> ExtractMethodLines(string[] content)
     {
-        var defineStartRegex = new Regex($@"\w*#\s*define\s+", RegexOptions.Compiled);
-        var defineContinueRegex = new Regex($@".*\\$", RegexOptions.Compiled);
+        var defineStartRegex = new Regex(@"\w*#\s*define\s+", RegexOptions.Compiled);
+        var defineContinueRegex = new Regex(@".*\\$", RegexOptions.Compiled);
 
         var structStartRegex = new Regex(@"\s*struct\s*\w+", RegexOptions.Compiled);
         var structEndRegex = new Regex(@"\s*};\s*$", RegexOptions.Compiled);
@@ -134,25 +140,12 @@ public class SymbolReader
             if (IsEmptyLine(line)) continue;
             if (IsCommentLine(line)) continue;
 
-            var sb = new StringBuilder();
-
             // skip "#define" block
             if (defineStartRegex.IsMatch(line))
             {
-                //sb.AppendLine(line);
-
-                var continued = false;
                 while (++i <= content.Length - 1 && defineContinueRegex.IsMatch(content[i]))
                 {
-                    //sb.AppendLine(content[i]);
-                    continued = true;
                 }
-
-                if (continued)
-                {
-                    //sb.AppendLine(content[i]);
-                }
-
                 continue;
             }
 
@@ -197,12 +190,7 @@ public class SymbolReader
                 continue;
             }
 
-            sb.AppendLine(line);
-
-            if (sb.Length > 0)
-            {
-                methodLines.Add(sb.ToString());
-            }
+            methodLines.Add(content[i]);
         }
 
         return methodLines;
