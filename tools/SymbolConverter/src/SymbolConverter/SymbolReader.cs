@@ -117,7 +117,7 @@ public class SymbolReader
         var defineContinueRegex = new Regex($@".*\\$", RegexOptions.Compiled);
 
         var structStartRegex = new Regex(@"\s*struct\s*\w+", RegexOptions.Compiled);
-        var structEndRegex = new Regex(@"\s*}\s*$", RegexOptions.Compiled);
+        var structEndRegex = new Regex(@"\s*};\s*$", RegexOptions.Compiled);
 
         var staticInlineStartRegex = new Regex(@"\s*static\s+inline\s+\w+\s+\w+", RegexOptions.Compiled);
         var staticInlineParenthesisStartRegex = new Regex(@"^\s*{", RegexOptions.Compiled);
