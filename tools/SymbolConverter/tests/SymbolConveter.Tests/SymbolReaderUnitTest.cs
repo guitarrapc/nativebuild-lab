@@ -359,7 +359,7 @@ mbedtls_ssl_mode_t mbedtls_ssl_get_mode_from_transform(
     {
         bar *next;  /*!< next handshake message(s)              */
     };")]
-    public void ReadMethodCannotReadInlineCommentTest(string define)
+    public void ReadMethodCannotReadStructTest(string define)
     {
         var content = define.SplitNewLine();
         var reader = new SymbolReader();

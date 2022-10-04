@@ -116,6 +116,9 @@ public class SymbolReader
         var defineStartRegex = new Regex($@"\w*#\s*define\s+", RegexOptions.Compiled);
         var defineContinueRegex = new Regex($@".*\\$", RegexOptions.Compiled);
 
+        var structStartRegex = new Regex(@"\s*struct\s*\w+", RegexOptions.Compiled);
+        var structEndRegex = new Regex(@"\s*}", RegexOptions.Compiled);
+
         static bool IsEmptyLine(string str) => string.IsNullOrWhiteSpace(str);
         static bool IsCommentLine(string str) => str.StartsWith("//") || str.StartsWith("/*") || str.StartsWith("*/") || str.StartsWith("*");
         static bool IsPragmaLine(string str) => str.StartsWith("#");
@@ -143,15 +146,44 @@ public class SymbolReader
                 {
                     //sb.AppendLine(content[i]);
                 }
+
+                continue;
             }
-            else if (IsPragmaLine(line))
+
+            if (IsPragmaLine(line))
             {
                 continue;
             }
-            else
+
+            if (structStartRegex.IsMatch(line))
             {
-                sb.AppendLine(line);
+                // add first line
+                //sb.AppendLine(line);
+
+                // is struct?
+                if (!structEndRegex.IsMatch(line))
+                {
+                    while (++i <= content.Length - 1 && !structStartRegex.IsMatch(content[i]) && !structEndRegex.IsMatch(content[i]))
+                    {
+                        //sb.AppendLine(content[j]);
+                        continue;
+                    }
+
+                    // add last line
+                    if (i <= content.Length - 1 && structEndRegex.IsMatch(content[i]))
+                    {
+                        // sb.AppendLine(content[j]);
+                        continue;
+                    }
+                    else
+                    {
+                        // it is invalid typedef, clear it.
+                        sb.Clear();
+                    }
+                }
             }
+
+            sb.AppendLine(line);
 
             if (sb.Length > 0)
             {
