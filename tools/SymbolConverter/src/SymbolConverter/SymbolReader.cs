@@ -111,7 +111,7 @@ public class SymbolReader
         return typedefs;
     }
 
-    private IReadOnlyList<string> ExtractMethodLines(string[] content)
+    private static IReadOnlyList<string> ExtractMethodLines(string[] content)
     {
         var defineStartRegex = new Regex($@"\w*#\s*define\s+", RegexOptions.Compiled);
         var defineContinueRegex = new Regex($@".*\\$", RegexOptions.Compiled);
@@ -208,7 +208,7 @@ public class SymbolReader
         return methodLines;
     }
 
-    private IReadOnlyList<string> ExtractTypedefLines(string[] content)
+    private static IReadOnlyList<string> ExtractTypedefLines(string[] content)
     {
         const string delimiter = ";";
         // `typedef uint64_t foo;`
