@@ -13,13 +13,74 @@ public class SymbolReader
         };
         return detectionType switch
         {
+            DetectionType.ExternField => ReadExternFieldInfo(content, RenameExpression, metadata),
             DetectionType.Method => ReadMethodInfo(content, RenameExpression, metadata),
             DetectionType.Typedef => ReadTypedefInfo(content, RenameExpression, metadata),
             _ => throw new NotSupportedException(),
         };
     }
 
-    private IReadOnlyList<SymbolInfo?> ReadMethodInfo(string[] content, Func<string, string> RenameExpression, Dictionary<string, string> metadata)
+    private IReadOnlyList<SymbolInfo?> ReadExternFieldInfo(string[] content, Func<string, string> RenameExpression, IReadOnlyDictionary<string, string> metadata)
+    {
+        const string delimiter = ";";
+        // `extern int foo;`
+        // `extern const foo_t foo;`
+        var fieldRegex = new Regex($@"^\s*extern\s+(const\s+)?(?<type>\w+)(\*)?\s+(?<name>\w+)\s*{delimiter}\s*$", RegexOptions.Compiled);
+        // `extern void (*foo)( p a );`
+        // `extern void* (foo)( );`
+        var fieldfunctionRegex = new Regex($@"^\s*extern\s+(?<type>\w+)(\*)?\s+\(\s*\*?(?<name>\w+)\s*\).*{delimiter}\s*$", RegexOptions.Compiled);
+
+        var externLines = ExtractExternFieldLines(content);
+        var symbols = externLines
+            .Select(x => x.TrimStart())
+            .Select(x =>
+            {
+                var matchFunctionPtr = fieldfunctionRegex.Match(x);
+                if (matchFunctionPtr.Success)
+                {
+                    //match.Dump();
+                    var line = matchFunctionPtr.Groups[0].Value;
+                    var type = matchFunctionPtr.Groups["type"].Value;
+                    var name = matchFunctionPtr.Groups["name"].Value;
+                    return new SymbolInfo(line, DetectionType.ExternField, delimiter, name)
+                    {
+                        RenamedSymbol = RenameExpression.Invoke(name),
+                        Metadata = new Dictionary<string, string>(metadata)
+                        {
+                            {"ReturnType", type},
+                        },
+                    };
+                }
+
+                var matchField = fieldRegex.Match(x);
+                if (matchField.Success)
+                {
+                    //match.Dump();
+                    var line = matchField.Groups[0].Value;
+                    var type = matchField.Groups["type"].Value;
+                    var name = matchField.Groups["name"].Value;
+                    return new SymbolInfo(line, DetectionType.ExternField, delimiter, name)
+                    {
+                        RenamedSymbol = RenameExpression.Invoke(name),
+                        Metadata = new Dictionary<string, string>(metadata)
+                        {
+                            {"ReturnType", type},
+                        },
+                    };
+                }
+                else
+                {
+                    return null;
+                }
+            })
+            .Where(x => x != null)
+            .OrderByDescending(x => x?.Symbol.Length)
+            .ToArray();
+
+        return symbols;
+    }
+
+    private IReadOnlyList<SymbolInfo?> ReadMethodInfo(string[] content, Func<string, string> RenameExpression, IReadOnlyDictionary<string, string> metadata)
     {
         const string delimiter = "(";
         // `foo bar(`
@@ -115,6 +176,26 @@ public class SymbolReader
             .ToArray();
 
         return symbols;
+    }
+
+    private static IReadOnlyList<string> ExtractExternFieldLines(string[] content)
+    {
+        static bool IsEmptyLine(string str) => string.IsNullOrWhiteSpace(str);
+        static bool IsCommentLine(string str) => str.StartsWith("//") || str.StartsWith("/*") || str.StartsWith("*/") || str.StartsWith("*");
+        static bool IsPragmaLine(string str) => str.StartsWith("#");
+
+        var lines = new List<string>();
+        for (var i = 0; i < content.Length; i++)
+        {
+            var line = content[i].TrimStart();
+            if (IsEmptyLine(line)) continue;
+            if (IsCommentLine(line)) continue;
+            if (IsPragmaLine(line)) continue;
+
+            lines.Add(content[i]);
+        }
+
+        return lines;
     }
 
     private static IReadOnlyList<string> ExtractMethodLines(string[] content)

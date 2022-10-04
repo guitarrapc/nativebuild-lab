@@ -1,5 +1,9 @@
 extern const foo_info_t foo_info;
-extern const bar_info_t bar_info;
+  extern int bar_int;
+extern void (*function_pointer_foo)( const char * test, int line, const char * file );
+  extern int ( *function_pointer_bar )();
+extern void* (function_pointer_piyo)( );
+// extern const int comment_out_field;
 
 typedef uint64_t mbedtls_mpi_uint;
     typedef uint64_t piyopiyo;

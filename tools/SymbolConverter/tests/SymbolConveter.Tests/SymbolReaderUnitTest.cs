@@ -10,7 +10,11 @@ public class SymbolReaderUnitTest
     {
         var content = @"
 extern const foo_info_t foo_info;
-extern const bar_info_t bar_info;
+  extern int bar_int;
+extern void (*function_pointer_foo)( const char * test, int line, const char * file );
+  extern int ( *function_pointer_bar )();
+extern void* (function_pointer_piyo)( );
+// extern const int comment_out_field;
 
 typedef uint64_t mbedtls_mpi_uint;
     typedef uint64_t piyopiyo;
@@ -184,6 +188,13 @@ static inline int mbedtls_ssl_get_psk( const mbedtls_ssl_context *ssl,
 
         var reader = new SymbolReader();
 
+        // externField
+        {
+            var actual = reader.Read(DetectionType.ExternField, content, s => PREFIX + s);
+            actual.Should().NotBeEmpty();
+            actual.Count().Should().Be(5);
+        }
+
         // method
         {
             var actual = reader.Read(DetectionType.Method, content, s => PREFIX + s);
@@ -197,6 +208,89 @@ static inline int mbedtls_ssl_get_psk( const mbedtls_ssl_context *ssl,
             actual.Should().NotBeEmpty();
             actual.Count().Should().Be(4);
         }
+    }
+
+    // extern field
+    [Theory]
+    [InlineData(@"extern const foo_info_t foo_info;", "foo_info", PREFIX + "foo_info")]
+    [InlineData(@"  extern int bar_int;", "bar_int", PREFIX + "bar_int")]
+    [InlineData(@"extern void (*function_pointer_foo)( const char * test, int line, const char * file );", "function_pointer_foo", PREFIX + "function_pointer_foo")]
+    [InlineData(@"  extern int ( *function_pointer_bar )();", "function_pointer_bar", PREFIX + "function_pointer_bar")]
+    [InlineData(@"extern void* (function_pointer_piyo)( );", "function_pointer_piyo", PREFIX + "function_pointer_piyo")]
+    public void ExternFieldReaderTest(string define, string expectedSymbol, string expectedRenamedSymbol)
+    {
+        var content = define.SplitNewLine();
+        var reader = new SymbolReader();
+        var actuals = reader.Read(DetectionType.ExternField, content, s => PREFIX + s);
+
+        actuals.Should().NotBeEmpty();
+        foreach (var actual in actuals)
+        {
+            actual.Should().NotBeNull();
+            actual!.Symbol.Should().Be(expectedSymbol);
+            actual!.RenamedSymbol.Should().Be(expectedRenamedSymbol);
+            actual!.Delimiter!.Should().Be(";");
+        }
+    }
+
+    [Theory]
+    [InlineData(@"// extern const int comment_out_field;")]
+    [InlineData(@"//  extern int bar_int;")]
+    public void ExternFieldReaderCommentTest(string define)
+    {
+        var content = define.SplitNewLine();
+        var reader = new SymbolReader();
+        var actuals = reader.Read(DetectionType.ExternField, content, s => PREFIX + s);
+
+        actuals.Should().BeEmpty();
+    }
+
+    [Theory]
+    [InlineData(@"extern const int invalid_field")]
+    [InlineData(@"extern void* (invalid_function)( )")]
+    [InlineData(@"externextern const foo_info_t do_not_read;")]
+    [InlineData(@"externextern void* (do_not_read_function)( );")]
+    public void ExternFieldReaderInvalidTest(string define)
+    {
+        var content = define.SplitNewLine();
+        var reader = new SymbolReader();
+        var actuals = reader.Read(DetectionType.ExternField, content, s => PREFIX + s);
+
+        actuals.Should().BeEmpty();
+    }
+
+    [Theory]
+    [InlineData(@"typedef uint64_t mbedtls_mpi_uint;")]
+    [InlineData(@"  typedef uint64_t piyopiyo;")]
+    [InlineData(@"typedef enum {
+            MBEDTLS_SSL_MODE_STREAM = 0,
+            MBEDTLS_SSL_MODE_CBC,
+            MBEDTLS_SSL_MODE_CBC_ETM,
+            MBEDTLS_SSL_MODE_AEAD
+        } mbedtls_ssl_mode_t;")]
+    public void ExternFieldCannotReadTypedefTest(string define)
+    {
+        var content = define.SplitNewLine();
+        var reader = new SymbolReader();
+        var actuals = reader.Read(DetectionType.ExternField, content, s => PREFIX + s);
+
+        actuals.Should().BeEmpty();
+    }
+
+    [Theory]
+    [InlineData(@"void foo();")]
+    [InlineData(@"   int mbedtls_ssl_write_client_hello( mbedtls_ssl_context *ssl );")]
+    [InlineData(@"FIBOLIB_API void natoka_hogemoge(sample_data_t *output);")]
+    [InlineData(@"  FIBOLIB_API int fugafuga(int n);")]
+    [InlineData(@"mbedtls_ssl_mode_t mbedtls_ssl_get_mode_from_transform(;        ")]
+    [InlineData(@"    mbedtls_mpi_uint mbedtls_mpi_core_mla( mbedtls_mpi_uint *d, size_t d_len ,")]
+    public void ExternFieldReaderCannotReadMethodTest(string define)
+    {
+        var content = define.SplitNewLine();
+        var reader = new SymbolReader();
+        var actuals = reader.Read(DetectionType.ExternField, content, s => PREFIX + s);
+
+        actuals.Should().BeEmpty();
     }
 
     // method

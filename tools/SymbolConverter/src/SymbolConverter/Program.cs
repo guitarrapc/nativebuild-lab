@@ -71,8 +71,14 @@ public static class SymbolOperation
         foreach (var file in headerFiles)
         {
             var content = await File.ReadAllLinesAsync(file);
+            var externFields = reader.Read(DetectionType.ExternField, content, s => prefix + s, file);
             var methods = reader.Read(DetectionType.Method, content, s => prefix + s, file);
             var typedefs = reader.Read(DetectionType.Typedef, content, s => prefix + s, file);
+
+            if (externFields.Any())
+            {
+                list.AddRange(externFields);
+            }
 
             if (methods.Any())
             {
