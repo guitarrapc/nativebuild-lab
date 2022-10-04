@@ -200,14 +200,15 @@ public class SymbolReader
 
     private static IReadOnlyList<string> ExtractMethodLines(string[] content)
     {
+        var parenthesisStartRegex = new Regex(@"^\s*{", RegexOptions.Compiled);
+
         var defineStartRegex = new Regex(@"\w*#\s*define\s+", RegexOptions.Compiled);
         var defineContinueRegex = new Regex(@".*\\$", RegexOptions.Compiled);
 
-        var structStartRegex = new Regex(@"\s*struct\s*\w+", RegexOptions.Compiled);
-        var structEndRegex = new Regex(@"\s*};\s*$", RegexOptions.Compiled);
+        var structStartRegex = new Regex(@"^\s*struct\s*\w+", RegexOptions.Compiled);
+        var structEndRegex = new Regex(@"^\s*};\s*$", RegexOptions.Compiled);
 
         var staticInlineStartRegex = new Regex(@"\s*static\s+inline\s+\w+\s+\w+", RegexOptions.Compiled);
-        var staticInlineParenthesisStartRegex = new Regex(@"^\s*{", RegexOptions.Compiled);
         var staticInlineEndRegex = new Regex(@"^\s*}", RegexOptions.Compiled);
 
         static bool IsEmptyLine(string str) => string.IsNullOrWhiteSpace(str);
@@ -238,14 +239,24 @@ public class SymbolReader
             // skip "struct" block
             if (structStartRegex.IsMatch(line))
             {
-                while (++i <= content.Length - 1 && !structStartRegex.IsMatch(content[i]) && !structEndRegex.IsMatch(content[i]))
+                var complete = false;
+                var rest = 0;
+                while (++i <= content.Length - 1 && !complete)
                 {
+                    // find parenthesis pair which close static inline method.
+                    var current = content[i];
+                    if (parenthesisStartRegex.IsMatch(content[i]))
+                    {
+                        rest++;
+                    }
+                    if (structEndRegex.IsMatch(content[i]))
+                    {
+                        rest--;
+                        complete = rest == 0;
+                    }
                     continue;
                 }
-                if (i <= content.Length - 1 && structEndRegex.IsMatch(content[i]))
-                {
-                    continue;
-                }
+                continue;
             }
 
             // skip "static inline" block
@@ -257,7 +268,7 @@ public class SymbolReader
                 {
                     // find parenthesis pair which close static inline method.
                     var current = content[i];
-                    if (staticInlineParenthesisStartRegex.IsMatch(content[i]))
+                    if (parenthesisStartRegex.IsMatch(content[i]))
                     {
                         rest++;
                     }

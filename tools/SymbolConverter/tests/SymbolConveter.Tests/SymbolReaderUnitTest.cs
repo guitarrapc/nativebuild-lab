@@ -359,11 +359,11 @@ static inline int mbedtls_ssl_get_psk( const mbedtls_ssl_context *ssl,
     [InlineData(@"typedef uint64_t mbedtls_mpi_uint;")]
     [InlineData(@"  typedef uint64_t piyopiyo;")]
     [InlineData(@"typedef enum {
-            MBEDTLS_SSL_MODE_STREAM = 0,
-            MBEDTLS_SSL_MODE_CBC,
-            MBEDTLS_SSL_MODE_CBC_ETM,
-            MBEDTLS_SSL_MODE_AEAD
-        } mbedtls_ssl_mode_t;")]
+        MBEDTLS_SSL_MODE_STREAM = 0,
+        MBEDTLS_SSL_MODE_CBC,
+        MBEDTLS_SSL_MODE_CBC_ETM,
+        MBEDTLS_SSL_MODE_AEAD
+    } mbedtls_ssl_mode_t;")]
     public void MethodReaderCannotReadTypedefTest(string define)
     {
         var content = define.SplitNewLine();
