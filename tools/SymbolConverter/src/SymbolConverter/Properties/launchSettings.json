@@ -17,7 +17,7 @@
     },
     "prefix(mbedtls)": {
       "commandName": "Project",
-      "commandLineArgs": "prefix --header-path C:\\git\\guitarrapc\\nativebuild-lab\\mbedtls\\library --prefix nantoka_ --dryrun true"
+      "commandLineArgs": "prefix --header-path C:\\git\\guitarrapc\\nativebuild-lab\\mbedtls\\library --prefix nantoka_ --dryrun false"
     }
   }
 }
