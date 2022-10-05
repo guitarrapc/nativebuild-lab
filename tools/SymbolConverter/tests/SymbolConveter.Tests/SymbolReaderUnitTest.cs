@@ -4,11 +4,7 @@ public class SymbolReaderUnitTest
 {
     const string PREFIX = "THISIS_PREFIX_";
 
-    // complex
-    [Fact]
-    public void ComplexReaderTest()
-    {
-        var content = @"
+    private static readonly string[] Contents = @"
 // extern
 // extern const int comment_out_field;
 externextern const foo_info_t do_not_read;
@@ -233,25 +229,56 @@ static inline int mbedtls_ssl_get_psk( const mbedtls_ssl_context *ssl,
 
 ".SplitNewLine();
 
-        var reader = new SymbolReader();
+    // complex
+    [Fact]
+    public void ComplexReaderTest()
+    {
+        var reader = new SymbolReader(new SymbolReaderOption(DistinctSymbol: false));
 
         // externField
         {
-            var actual = reader.Read(DetectionType.ExternField, content, s => PREFIX + s);
+            var actual = reader.Read(DetectionType.ExternField, Contents, s => PREFIX + s);
             actual.Should().NotBeEmpty();
             actual.Count().Should().Be(6);
         }
 
         // method
         {
-            var actual = reader.Read(DetectionType.Method, content, s => PREFIX + s);
+            var actual = reader.Read(DetectionType.Method, Contents, s => PREFIX + s);
             actual.Should().NotBeEmpty();
             actual.Count().Should().Be(8);
         }
 
         // typedef
         {
-            var actual = reader.Read(DetectionType.Typedef, content, s => PREFIX + s);
+            var actual = reader.Read(DetectionType.Typedef, Contents, s => PREFIX + s);
+            actual.Should().NotBeEmpty();
+            actual.Count().Should().Be(7);
+        }
+    }
+
+    [Fact]
+    public void ComplexReaderDistinctTest()
+    {
+        var reader = new SymbolReader(new SymbolReaderOption(DistinctSymbol: true));
+
+        // externField
+        {
+            var actual = reader.Read(DetectionType.ExternField, Contents, s => PREFIX + s);
+            actual.Should().NotBeEmpty();
+            actual.Count().Should().Be(6);
+        }
+
+        // method
+        {
+            var actual = reader.Read(DetectionType.Method, Contents, s => PREFIX + s);
+            actual.Should().NotBeEmpty();
+            actual.Count().Should().Be(7);
+        }
+
+        // typedef
+        {
+            var actual = reader.Read(DetectionType.Typedef, Contents, s => PREFIX + s);
             actual.Should().NotBeEmpty();
             actual.Count().Should().Be(7);
         }

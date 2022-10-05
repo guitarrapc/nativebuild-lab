@@ -3,8 +3,21 @@ using System.Text;
 
 namespace SymbolConverter;
 
+public record SymbolReaderOption(bool DistinctSymbol = true, bool Sort = true);
+
 public class SymbolReader
 {
+    private readonly SymbolReaderOption _option;
+
+    public SymbolReader() : this(option: new SymbolReaderOption(DistinctSymbol: true, Sort: true))
+    {
+    }
+
+    public SymbolReader(SymbolReaderOption option)
+    {
+        _option = option;
+    }
+
     public IReadOnlyList<SymbolInfo?> Read(DetectionType detectionType, string[] content, Func<string, string> RenameExpression, string? file = null)
     {
         var metadata = new Dictionary<string, string>
@@ -13,14 +26,14 @@ public class SymbolReader
         };
         return detectionType switch
         {
-            DetectionType.ExternField => ReadExternFieldInfo(content, RenameExpression, metadata),
-            DetectionType.Method => ReadMethodInfo(content, RenameExpression, metadata),
-            DetectionType.Typedef => ReadTypedefInfo(content, RenameExpression, metadata),
+            DetectionType.ExternField => ReadExternFieldInfo(content, RenameExpression, metadata, _option),
+            DetectionType.Method => ReadMethodInfo(content, RenameExpression, metadata, _option),
+            DetectionType.Typedef => ReadTypedefInfo(content, RenameExpression, metadata, _option),
             _ => throw new NotSupportedException(),
         };
     }
 
-    private IReadOnlyList<SymbolInfo?> ReadExternFieldInfo(string[] content, Func<string, string> RenameExpression, IReadOnlyDictionary<string, string> metadata)
+    private IReadOnlyList<SymbolInfo?> ReadExternFieldInfo(string[] content, Func<string, string> RenameExpression, IReadOnlyDictionary<string, string> metadata, SymbolReaderOption option)
     {
         const string delimiter = ";";
         // `extern int foo;`
@@ -73,14 +86,22 @@ public class SymbolReader
                     return null;
                 }
             })
-            .Where(x => x != null)
-            .OrderByDescending(x => x?.Symbol.Length)
-            .ToArray();
+            .Where(x => x != null);
 
-        return symbols;
+        if (option.DistinctSymbol)
+        {
+            symbols = symbols.DistinctBy(x => x!.Symbol);
+        }
+
+        if (option.Sort)
+        {
+            symbols = symbols.OrderByDescending(x => x!.Symbol.Length);
+        }
+
+        return symbols.ToArray();
     }
 
-    private IReadOnlyList<SymbolInfo?> ReadMethodInfo(string[] content, Func<string, string> RenameExpression, IReadOnlyDictionary<string, string> metadata)
+    private IReadOnlyList<SymbolInfo?> ReadMethodInfo(string[] content, Func<string, string> RenameExpression, IReadOnlyDictionary<string, string> metadata, SymbolReaderOption option)
     {
         const string delimiter = "(";
         // `foo bar(`
@@ -114,14 +135,22 @@ public class SymbolReader
                     return null;
                 }
             })
-            .Where(x => x != null)
-            .OrderByDescending(x => x?.Symbol.Length)
-            .ToArray();
+            .Where(x => x != null);
 
-        return symbols;
+        if (option.DistinctSymbol)
+        {
+            symbols = symbols.DistinctBy(x => x!.Symbol);
+        }
+
+        if (option.Sort)
+        {
+            symbols = symbols.OrderByDescending(x => x!.Symbol.Length);
+        }
+
+        return symbols.ToArray();
     }
 
-    private IReadOnlyList<SymbolInfo?> ReadTypedefInfo(string[] content, Func<string, string> RenameExpression, IReadOnlyDictionary<string, string> metadata)
+    private IReadOnlyList<SymbolInfo?> ReadTypedefInfo(string[] content, Func<string, string> RenameExpression, IReadOnlyDictionary<string, string> metadata, SymbolReaderOption option)
     {
         const string delimiter = ";";
         // `typedef uint64_t foo;`
@@ -171,11 +200,19 @@ public class SymbolReader
                     }
                 }
             })
-            .Where(x => x != null)
-            .OrderByDescending(x => x?.Symbol.Length)
-            .ToArray();
+            .Where(x => x != null);
 
-        return symbols;
+        if (option.DistinctSymbol)
+        {
+            symbols = symbols.DistinctBy(x => x!.Symbol);
+        }
+
+        if (option.Sort)
+        {
+            symbols = symbols.OrderByDescending(x => x!.Symbol.Length);
+        }
+
+        return symbols.ToArray();
     }
 
     private static IReadOnlyList<string> ExtractExternFieldLines(string[] content)
