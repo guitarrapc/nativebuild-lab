@@ -96,6 +96,11 @@ mbedtls_ssl_mode_t mbedtls_ssl_get_mode_from_transform(
                                         const mbedtls_mpi_uint *s, size_t s_len,
                                         mbedtls_mpi_uint b );
 
+int same_function_name( size_t foo,
+                     const unsigned char *data );
+int same_function_name( bar_context_t *ctx,
+                     const unsigned char *add_data );
+
 // ignores
 struct foo_struct
 {
@@ -240,7 +245,7 @@ static inline int mbedtls_ssl_get_psk( const mbedtls_ssl_context *ssl,
         {
             var actual = reader.Read(DetectionType.Method, content, s => PREFIX + s);
             actual.Should().NotBeEmpty();
-            actual.Count().Should().Be(10);
+            actual.Count().Should().Be(9);
         }
 
         // typedef
