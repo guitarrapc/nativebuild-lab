@@ -311,8 +311,10 @@ static inline int mbedtls_ssl_get_psk( const mbedtls_ssl_context *ssl,
     [InlineData(@"   int mbedtls_ssl_write_client_hello( mbedtls_ssl_context *ssl );", "mbedtls_ssl_write_client_hello", PREFIX + "mbedtls_ssl_write_client_hello")]
     [InlineData(@"FIBOLIB_API void natoka_hogemoge(sample_data_t *output);", "natoka_hogemoge", PREFIX + "natoka_hogemoge")]
     [InlineData(@"  FIBOLIB_API int fugafuga(int n);", "fugafuga", PREFIX + "fugafuga")]
-    [InlineData(@"mbedtls_ssl_mode_t mbedtls_ssl_get_mode_from_transform(;        ", "mbedtls_ssl_get_mode_from_transform", PREFIX + "mbedtls_ssl_get_mode_from_transform")]
-    [InlineData(@"    mbedtls_mpi_uint mbedtls_mpi_core_mla( mbedtls_mpi_uint *d, size_t d_len ,", "mbedtls_mpi_core_mla", PREFIX + "mbedtls_mpi_core_mla")]
+    [InlineData(@"mbedtls_ssl_mode_t mbedtls_ssl_get_mode_from_transform();        ", "mbedtls_ssl_get_mode_from_transform", PREFIX + "mbedtls_ssl_get_mode_from_transform")]
+    [InlineData(@"    mbedtls_mpi_uint mbedtls_mpi_core_mla( mbedtls_mpi_uint *d, size_t d_len ,
+                                           const mbedtls_mpi_uint *s, size_t s_len,
+                                           mbedtls_mpi_uint b );        ", "mbedtls_mpi_core_mla", PREFIX + "mbedtls_mpi_core_mla")]
     public void MethodReaderTest(string define, string expectedSymbol, string expectedRenamedSymbol)
     {
         var content = define.SplitNewLine();

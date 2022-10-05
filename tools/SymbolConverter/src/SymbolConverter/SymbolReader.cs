@@ -85,7 +85,7 @@ public class SymbolReader
         const string delimiter = "(";
         // `foo bar(`
         // ` foo bar(  foo`
-        var methodRegex = new Regex($@"\b(?<type>\w+?)\s+(?<method>\w+?)\{delimiter}.*$", RegexOptions.Compiled);
+        var methodRegex = new Regex($@"(?<pre>.*\s)?\s?(?<type>\w+)\s+(?<method>\w+)\{delimiter}(?<post>.*)", RegexOptions.Compiled | RegexOptions.Multiline);
         //content.Dump(path);
 
         var lines = ExtractMethodLines(content);
@@ -254,12 +254,14 @@ public class SymbolReader
     {
         var parenthesisStartRegex = new Regex(@"^\s*{", RegexOptions.Compiled);
 
+        // `foo bar(`
+        // ` foo bar(  foo`
+        var methodStartRegex = new Regex($@"^(\s|\w)*(?<type>\w+?)\s+(?<method>\w+?)\(.*$", RegexOptions.Compiled);
+        // `<any>)`
+        var methodEndRegex = new Regex($@".*\)", RegexOptions.Compiled);
+
         var defineStartRegex = new Regex(@"\w*#\s*define\s+", RegexOptions.Compiled);
         var defineContinueRegex = new Regex(@".*\\$", RegexOptions.Compiled);
-
-        var structStartRegex = new Regex(@"^\s*struct\s*\w+", RegexOptions.Compiled);
-        var structEndRegex = new Regex(@"^\s*};\s*$", RegexOptions.Compiled);
-
         var staticInlineStartRegex = new Regex(@"\s*static\s+inline\s+\w+\s+\w+", RegexOptions.Compiled);
         var staticInlineEndRegex = new Regex(@"^\s*}", RegexOptions.Compiled);
 
@@ -267,49 +269,12 @@ public class SymbolReader
         static bool IsCommentLine(string str) => str.StartsWith("//") || str.StartsWith("/*") || str.StartsWith("*/") || str.StartsWith("*");
         static bool IsPragmaLine(string str) => str.StartsWith("#");
 
-        var methodLines = new List<string>();
+        var lines = new List<string>();
         for (var i = 0; i < content.Length; i++)
         {
             var line = content[i].TrimStart();
             if (IsEmptyLine(line)) continue;
             if (IsCommentLine(line)) continue;
-
-            // skip "#define" block
-            if (defineStartRegex.IsMatch(line))
-            {
-                while (++i <= content.Length - 1 && defineContinueRegex.IsMatch(content[i]))
-                {
-                }
-                continue;
-            }
-
-            if (IsPragmaLine(line))
-            {
-                continue;
-            }
-
-            // skip "struct" block
-            if (structStartRegex.IsMatch(line))
-            {
-                var complete = false;
-                var rest = 0;
-                while (++i <= content.Length - 1 && !complete)
-                {
-                    // find parenthesis pair which close static inline method.
-                    var current = content[i];
-                    if (parenthesisStartRegex.IsMatch(content[i]))
-                    {
-                        rest++;
-                    }
-                    if (structEndRegex.IsMatch(content[i]))
-                    {
-                        rest--;
-                        complete = rest == 0;
-                    }
-                    continue;
-                }
-                continue;
-            }
 
             // skip "static inline" block
             if (staticInlineStartRegex.IsMatch(line))
@@ -334,10 +299,58 @@ public class SymbolReader
                 continue;
             }
 
-            methodLines.Add(line);
+            // skip "#define" block
+            if (defineStartRegex.IsMatch(line))
+            {
+                while (++i <= content.Length - 1 && defineContinueRegex.IsMatch(content[i]))
+                {
+                }
+                continue;
+            }
+
+            if (IsPragmaLine(line)) continue;
+
+            var sb = new StringBuilder();
+            if (methodStartRegex.IsMatch(line))
+            {
+                // add first line
+                sb.AppendLine(line);
+
+                // is single line?
+                if (!methodEndRegex.IsMatch(line))
+                {
+                    // is multiline
+
+                    // add method element lines
+                    // stop when ) not found, it is invalid.
+                    // stop when new method line found, it means invalid.
+                    // stop when method last line found.
+                    var j = i;
+                    while (++j <= content.Length - 1 && !methodStartRegex.IsMatch(content[j]) && !methodEndRegex.IsMatch(content[j]))
+                    {
+                        sb.AppendLine(content[j]);
+                    }
+
+                    // add last line
+                    if (j <= content.Length - 1 && methodEndRegex.IsMatch(content[j]))
+                    {
+                        sb.AppendLine(content[j]);
+                    }
+                    else
+                    {
+                        // it is invalid, clear it.
+                        sb.Clear();
+                    }
+                }
+
+                if (sb.Length > 0)
+                {
+                    lines.Add(sb.ToString());
+                }
+            }
         }
 
-        return methodLines;
+        return lines;
     }
 
     private static IReadOnlyList<string> ExtractTypedefLines(string[] content)
