@@ -363,6 +363,9 @@ public class SymbolReader
         // `typedef <any>;` or `} foo;`
         var typedefEndRegex = new Regex($@"(\btypedef.*|}}\s+\w+){delimiter}", RegexOptions.Compiled);
 
+        var typedefContainsParethesis = new Regex(@"^\s*typedef\s*\w+\s*{", RegexOptions.Compiled);
+        var parenthesisStartRegex = new Regex(@"^\s*{", RegexOptions.Compiled);
+
         var typedefLines = new List<string>();
         for (var i = 0; i < content.Length; i++)
         {
@@ -377,31 +380,44 @@ public class SymbolReader
                 if (!typedefEndRegex.IsMatch(line))
                 {
                     // is multiline
-
-                    // add typedef element lines
-                    // stop when semi-colon not found, it is invalid.
-                    // stop when new typedef line found, it means invalid.
-                    // stop when typedef last line found.
-                    var j = i;
-                    while (++j <= content.Length - 1 && !typedefStartRegex.IsMatch(content[j]) && !typedefEndRegex.IsMatch(content[j]))
+                    var complete = false;
+                    var invalid = false;
+                    var rest = typedefContainsParethesis.IsMatch(line) ? 1 : 0;
+                    while (++i <= content.Length - 1 && !complete)
                     {
-                        // {
-                        // void* key;
-                        // mbedtls_pk_rsa_alt_decrypt_func decrypt_func;
-                        // mbedtls_pk_rsa_alt_sign_func sign_func;
-                        // mbedtls_pk_rsa_alt_key_len_func key_len_func;
-                        sb.AppendLine(content[j]);
+                        // find parenthesis pair which close static inline method.
+                        var current = content[i];
+                        if (typedefStartRegex.IsMatch(content[i]))
+                        {
+                            --i; // reverse index to previous (before increment on while)
+                            invalid = true;
+                            break;
+                        }
+                        if (parenthesisStartRegex.IsMatch(content[i]))
+                        {
+                            if (rest == 0)
+                            {
+                                // add `{`
+                                sb.AppendLine(current);
+                            }
+                            rest++;
+                        }
+                        if (typedefEndRegex.IsMatch(content[i]))
+                        {
+                            rest--;
+                            complete = rest == 0;
+                            if (rest == 0)
+                            {
+                                // add `} foo_t;`
+                                sb.AppendLine(current);
+                            }
+                        }
+                        continue;
                     }
 
-                    // add last line
-                    if (j <= content.Length - 1 && typedefEndRegex.IsMatch(content[j]))
+                    // invalid data, clear it.
+                    if (invalid)
                     {
-                        // } mbedtls_rsa_alt_context;
-                        sb.AppendLine(content[j]);
-                    }
-                    else
-                    {
-                        // it is invalid, clear it.
                         sb.Clear();
                     }
                 }

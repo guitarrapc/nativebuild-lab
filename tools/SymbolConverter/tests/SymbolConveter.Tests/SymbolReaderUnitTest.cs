@@ -586,6 +586,9 @@ static inline int mbedtls_ssl_get_psk( const mbedtls_ssl_context *ssl,
             MBEDTLS_SSL_MODE_CBC_ETM,
             MBEDTLS_SSL_MODE_AEAD
         } should_be_ignopre_typdef;")]
+    [InlineData(@"// typedef enum {
+            // MBEDTLS_SSL_MODE_STREAM = 0,
+        // } should_be_ignopre_typdef;")]
     public void TypedefReaderCommentTest(string define)
     {
         var content = define.SplitNewLine();
