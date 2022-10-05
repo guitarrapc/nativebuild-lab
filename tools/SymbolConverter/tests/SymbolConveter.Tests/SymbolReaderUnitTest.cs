@@ -9,45 +9,23 @@ public class SymbolReaderUnitTest
     public void ComplexReaderTest()
     {
         var content = @"
-extern const foo_info_t foo_info;
-  extern int bar_int;
-extern void (*function_pointer_foo)( const char * test, int line, const char * file );
-  extern int ( *function_pointer_bar )();
-extern void* (function_pointer_piyo)( );
+// extern
 // extern const int comment_out_field;
+externextern const foo_info_t do_not_read;
+externextern void* (do_not_read_function)( );
+
+extern const foo_info_t foo_info;
+    extern int bar_int;
+extern void (*function_pointer_foo)( const char * test, int line, const char * file );
+    extern int ( *function_pointer_bar )();
+extern void* (function_pointer_piyo)( );
 extern FStar_UInt128_uint128
 (*FStar_UInt128_op_Greater_Greater_Hat)(FStar_UInt128_uint128 x0, uint32_t x1);
 
-typedef uint64_t mbedtls_mpi_uint;
-    typedef uint64_t piyopiyo;
+
+// typedef
 // typedef uint64_t should_be_ignopre_typdef;
-
-typedef uint64_t mbedtls_mpi_uint
-
-typedef enum {
-    MBEDTLS_SSL_MODE_STREAM = 0,
-    MBEDTLS_SSL_MODE_CBC,
-    MBEDTLS_SSL_MODE_CBC_ETM,
-    MBEDTLS_SSL_MODE_AEAD
-} mbedtls_ssl_mode_t;
-
-    typedef struct
-    {
-        struct key_data
-        {
-            uint8_t *data;
-            size_t bytes;
-        } inside;
-    } nested_t;
-
-    typedef struct
-    {
-        void *key;
-        mbedtls_pk_rsa_alt_decrypt_func decrypt_func;
-        mbedtls_pk_rsa_alt_sign_func sign_func;
-        mbedtls_pk_rsa_alt_key_len_func key_len_func;
-    } mbedtls_rsa_alt_context;
-
+typedef uint64_t should_be_ignore_missing_semicolon
 // typedef enum {
     MBEDTLS_SSL_MODE_STREAM = 0,
     MBEDTLS_SSL_MODE_CBC,
@@ -55,6 +33,57 @@ typedef enum {
     MBEDTLS_SSL_MODE_AEAD
 } should_be_ignopre_typdef;
 
+typedef uint64_t simple_t;
+    typedef uint64_t simple_space_t;
+
+typedef enum {
+    MBEDTLS_SSL_MODE_STREAM = 0,
+    MBEDTLS_SSL_MODE_CBC,
+    MBEDTLS_SSL_MODE_CBC_ETM,
+    MBEDTLS_SSL_MODE_AEAD
+} enum_t;
+
+typedef struct mbedtls_aes_contextZ
+{
+    int MBEDTLS_PRIVATE(nr);                     /*!< The number of rounds. */
+    uint32_t *MBEDTLS_PRIVATE(rk);               /*!< AES round keys. */
+    uint32_t MBEDTLS_PRIVATE(buf)[68];           /*!< Unaligned data buffer. This buffer can
+                                        hold 32 extra Bytes, which can be used for
+                                        one of the following purposes:
+                                        <ul><li>Alignment if VIA padlock is
+                                                used.</li>
+                                        <li>Simplifying key expansion in the 256-bit
+                                            case by generating an extra round key.
+                                            </li></ul> */
+}
+multiline_next_t;
+
+typedef struct mbedtls_aes_xts_context
+{
+    mbedtls_aes_context MBEDTLS_PRIVATE(crypt); /*!< The AES context to use for AES block
+                                        encryption or decryption. */
+    mbedtls_aes_context MBEDTLS_PRIVATE(tweak); /*!< The AES context used for tweak
+                                        computation. */
+} multiline_t;
+
+typedef struct
+{
+    struct key_data
+    {
+        uint8_t *data;
+        size_t bytes;
+    } inside;
+} nested_t;
+
+    typedef struct
+    {
+        void *key;
+        mbedtls_pk_rsa_alt_decrypt_func decrypt_func;
+        mbedtls_pk_rsa_alt_sign_func sign_func;
+        mbedtls_pk_rsa_alt_key_len_func key_len_func;
+    } spaces_multiline_t;
+
+// method
 void foo();
     int mbedtls_ssl_write_client_hello( mbedtls_ssl_context *ssl );
 
@@ -67,6 +96,7 @@ mbedtls_ssl_mode_t mbedtls_ssl_get_mode_from_transform(
                                         const mbedtls_mpi_uint *s, size_t s_len,
                                         mbedtls_mpi_uint b );
 
+// ignores
 struct foo_struct
 {
     unsigned char *p;       /*!< message, including handshake headers   */
@@ -210,14 +240,14 @@ static inline int mbedtls_ssl_get_psk( const mbedtls_ssl_context *ssl,
         {
             var actual = reader.Read(DetectionType.Method, content, s => PREFIX + s);
             actual.Should().NotBeEmpty();
-            actual.Count().Should().Be(6);
+            actual.Count().Should().Be(10);
         }
 
         // typedef
         {
             var actual = reader.Read(DetectionType.Typedef, content, s => PREFIX + s);
             actual.Should().NotBeEmpty();
-            actual.Count().Should().Be(5);
+            actual.Count().Should().Be(6);
         }
     }
 
@@ -538,30 +568,50 @@ static inline int mbedtls_ssl_get_psk( const mbedtls_ssl_context *ssl,
 
     // typdef
     [Theory]
-    [InlineData(@"typedef uint64_t mbedtls_mpi_uint;", "mbedtls_mpi_uint", PREFIX + "mbedtls_mpi_uint")]
-    [InlineData(@"  typedef uint64_t piyopiyo;", "piyopiyo", PREFIX + "piyopiyo")]
+    [InlineData(@"typedef uint64_t simple_t;", "simple_t", PREFIX + "simple_t")]
+    [InlineData(@"  typedef uint64_t simple_space_t;", "simple_space_t", PREFIX + "simple_space_t")]
     [InlineData(@"typedef enum {
-            MBEDTLS_SSL_MODE_STREAM = 0,
-            MBEDTLS_SSL_MODE_CBC,
-            MBEDTLS_SSL_MODE_CBC_ETM,
-            MBEDTLS_SSL_MODE_AEAD
-        } mbedtls_ssl_mode_t;", "mbedtls_ssl_mode_t", PREFIX + "mbedtls_ssl_mode_t")]
-    [InlineData(@"    typedef struct
-            {
-                void *key;
-                mbedtls_pk_rsa_alt_decrypt_func decrypt_func;
-                mbedtls_pk_rsa_alt_sign_func sign_func;
-                mbedtls_pk_rsa_alt_key_len_func key_len_func;
-            } mbedtls_rsa_alt_context;", "mbedtls_rsa_alt_context", PREFIX + "mbedtls_rsa_alt_context")]
-    [InlineData(@"    typedef struct
+        MBEDTLS_SSL_MODE_STREAM = 0,
+        MBEDTLS_SSL_MODE_CBC,
+        MBEDTLS_SSL_MODE_CBC_ETM,
+        MBEDTLS_SSL_MODE_AEAD
+    } enum_t;", "enum_t", PREFIX + "enum_t")]
+    [InlineData(@"typedef struct mbedtls_aes_contextZ
+    {
+        int MBEDTLS_PRIVATE(nr);                     /*!< The number of rounds. */
+        uint32_t *MBEDTLS_PRIVATE(rk);               /*!< AES round keys. */
+        uint32_t MBEDTLS_PRIVATE(buf)[68];           /*!< Unaligned data buffer. This buffer can
+                                            hold 32 extra Bytes, which can be used for
+                                            one of the following purposes:
+                                            <ul><li>Alignment if VIA padlock is
+                                                    used.</li>
+                                            <li>Simplifying key expansion in the 256-bit
+                                                case by generating an extra round key.
+                                                </li></ul> */
+    }
+    multiline_next_t;", "multiline_next_t", PREFIX + "multiline_next_t")]
+    [InlineData(@"typedef struct mbedtls_aes_xts_context
+    {
+        mbedtls_aes_context MBEDTLS_PRIVATE(crypt); /*!< The AES context to use for AES block
+                                            encryption or decryption. */
+        mbedtls_aes_context MBEDTLS_PRIVATE(tweak); /*!< The AES context used for tweak
+                                            computation. */
+    } multiline_t;", "multiline_t", PREFIX + "multiline_t")]
+    [InlineData(@"typedef struct
     {
         struct key_data
         {
             uint8_t *data;
             size_t bytes;
         } inside;
-    } nested_t;
-", "nested_t", PREFIX + "nested_t")]
+    } nested_t;", "nested_t", PREFIX + "nested_t")]
+    [InlineData(@"    typedef struct
+        {
+            void *key;
+            mbedtls_pk_rsa_alt_decrypt_func decrypt_func;
+            mbedtls_pk_rsa_alt_sign_func sign_func;
+            mbedtls_pk_rsa_alt_key_len_func key_len_func;
+        } spaces_multiline_t;", "spaces_multiline_t", PREFIX + "spaces_multiline_t")]
     public void TypedefReaderTest(string define, string expectedSymbol, string expectedRenamedSymbol)
     {
         var content = define.SplitNewLine();
