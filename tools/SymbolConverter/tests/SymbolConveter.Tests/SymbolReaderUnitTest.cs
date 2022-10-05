@@ -33,6 +33,15 @@ typedef enum {
 
     typedef struct
     {
+        struct key_data
+        {
+            uint8_t *data;
+            size_t bytes;
+        } inside;
+    } nested_t;
+
+    typedef struct
+    {
         void *key;
         mbedtls_pk_rsa_alt_decrypt_func decrypt_func;
         mbedtls_pk_rsa_alt_sign_func sign_func;
@@ -208,7 +217,7 @@ static inline int mbedtls_ssl_get_psk( const mbedtls_ssl_context *ssl,
         {
             var actual = reader.Read(DetectionType.Typedef, content, s => PREFIX + s);
             actual.Should().NotBeEmpty();
-            actual.Count().Should().Be(4);
+            actual.Count().Should().Be(5);
         }
     }
 
@@ -544,6 +553,15 @@ static inline int mbedtls_ssl_get_psk( const mbedtls_ssl_context *ssl,
                 mbedtls_pk_rsa_alt_sign_func sign_func;
                 mbedtls_pk_rsa_alt_key_len_func key_len_func;
             } mbedtls_rsa_alt_context;", "mbedtls_rsa_alt_context", PREFIX + "mbedtls_rsa_alt_context")]
+    [InlineData(@"    typedef struct
+    {
+        struct key_data
+        {
+            uint8_t *data;
+            size_t bytes;
+        } inside;
+    } nested_t;
+", "nested_t", PREFIX + "nested_t")]
     public void TypedefReaderTest(string define, string expectedSymbol, string expectedRenamedSymbol)
     {
         var content = define.SplitNewLine();

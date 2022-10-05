@@ -20,6 +20,15 @@ typedef enum {
 
     typedef struct
     {
+        struct key_data
+        {
+            uint8_t *data;
+            size_t bytes;
+        } inside;
+    } nested_t;
+
+    typedef struct
+    {
         void *key;
         mbedtls_pk_rsa_alt_decrypt_func decrypt_func;
         mbedtls_pk_rsa_alt_sign_func sign_func;
@@ -32,6 +41,15 @@ typedef enum {
     MBEDTLS_SSL_MODE_CBC_ETM,
     MBEDTLS_SSL_MODE_AEAD
 } should_be_ignopre_typdef;
+
+typedef struct
+{
+    struct key_data
+    {
+        uint8_t *data;
+        size_t bytes;
+    } key;
+} psa_key_slot_t;
 
 void foo();
     int mbedtls_ssl_write_client_hello( mbedtls_ssl_context *ssl );
