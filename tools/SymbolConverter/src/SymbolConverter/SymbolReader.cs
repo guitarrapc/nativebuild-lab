@@ -362,14 +362,22 @@ public class SymbolReader
         var typedefStartRegex = new Regex(@"^\s*typedef.*", RegexOptions.Compiled);
         // `typedef <any>;` or `} foo;`
         var typedefEndRegex = new Regex($@"(\btypedef.*|}}\s+\w+){delimiter}", RegexOptions.Compiled);
+        var typedefEndExceptionalRegex = new Regex($@"\s*{delimiter}", RegexOptions.Compiled);
 
-        var typedefContainsParethesis = new Regex(@"^\s*typedef\s*\w+\s*{", RegexOptions.Compiled);
+        var typedefContainsParethesis = new Regex(@"^\s*typedef\s+\w+\s*{", RegexOptions.Compiled);
         var parenthesisStartRegex = new Regex(@"^\s*{", RegexOptions.Compiled);
+        var parenthesisEndRegex = new Regex(@"^\s*}", RegexOptions.Compiled);
+
+        static bool IsEmptyLine(string str) => string.IsNullOrWhiteSpace(str);
+        static bool IsCommentLine(string str) => str.StartsWith("//") || str.StartsWith("/*") || str.StartsWith("*/") || str.StartsWith("*");
 
         var typedefLines = new List<string>();
         for (var i = 0; i < content.Length; i++)
         {
             var line = content[i];
+            if (IsEmptyLine(line)) continue;
+            if (IsCommentLine(line)) continue;
+
             var sb = new StringBuilder();
             if (typedefStartRegex.IsMatch(line))
             {
@@ -380,20 +388,22 @@ public class SymbolReader
                 if (!typedefEndRegex.IsMatch(line))
                 {
                     // is multiline
+
+                    // find `{` and `;` to complete typedef.
                     var complete = false;
                     var invalid = false;
                     var rest = typedefContainsParethesis.IsMatch(line) ? 1 : 0;
                     while (++i <= content.Length - 1 && !complete)
                     {
-                        // find parenthesis pair which close static inline method.
                         var current = content[i];
-                        if (typedefStartRegex.IsMatch(content[i]))
+                        if (typedefStartRegex.IsMatch(current))
                         {
+                            // not completed but new typedef line started.
                             --i; // reverse index to previous (before increment on while)
                             invalid = true;
                             break;
                         }
-                        if (parenthesisStartRegex.IsMatch(content[i]))
+                        if (parenthesisStartRegex.IsMatch(current))
                         {
                             if (rest == 0)
                             {
@@ -402,16 +412,37 @@ public class SymbolReader
                             }
                             rest++;
                         }
-                        if (typedefEndRegex.IsMatch(content[i]))
+                        if (parenthesisEndRegex.IsMatch(current))
                         {
                             rest--;
-                            complete = rest == 0;
                             if (rest == 0)
                             {
                                 // add `} foo_t;`
                                 sb.AppendLine(current);
                             }
+
+                            if (rest < 0)
+                            {
+                                // missing { but } reached.
+                                invalid = true;
+                                break;
+                            }
                         }
+
+                        if (rest == 0)
+                        {
+                            if (typedefEndRegex.IsMatch(current))
+                            {
+                                complete = true;
+                            }
+                            else if (typedefEndExceptionalRegex.IsMatch(current))
+                            {
+                                // add `;`
+                                sb.AppendLine(current);
+                                complete = true;
+                            }
+                        }
+
                         continue;
                     }
 
