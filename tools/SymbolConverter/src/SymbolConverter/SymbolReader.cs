@@ -253,6 +253,7 @@ public class SymbolReader
     private static IReadOnlyList<string> ExtractMethodLines(string[] content)
     {
         var parenthesisStartRegex = new Regex(@"^\s*{", RegexOptions.Compiled);
+        var parenthesisEndRegex = new Regex(@"^\s*}", RegexOptions.Compiled);
 
         // `foo bar(`
         // ` foo bar(  foo`
@@ -263,7 +264,7 @@ public class SymbolReader
         var defineStartRegex = new Regex(@"\w*#\s*define\s+", RegexOptions.Compiled);
         var defineContinueRegex = new Regex(@".*\\$", RegexOptions.Compiled);
         var staticInlineStartRegex = new Regex(@"\s*static\s+inline\s+\w+\s+\w+", RegexOptions.Compiled);
-        var staticInlineEndRegex = new Regex(@"^\s*}", RegexOptions.Compiled);
+        var structStartRegex = new Regex(@"\s*struct\s+\.*", RegexOptions.Compiled);
 
         static bool IsEmptyLine(string str) => string.IsNullOrWhiteSpace(str);
         static bool IsCommentLine(string str) => str.StartsWith("//") || str.StartsWith("/*") || str.StartsWith("*/") || str.StartsWith("*");
@@ -289,7 +290,30 @@ public class SymbolReader
                     {
                         rest++;
                     }
-                    if (staticInlineEndRegex.IsMatch(content[i]))
+                    if (parenthesisEndRegex.IsMatch(content[i]))
+                    {
+                        rest--;
+                        complete = rest == 0;
+                    }
+                    continue;
+                }
+                continue;
+            }
+
+            // skip "struct" block
+            if (structStartRegex.IsMatch(line))
+            {
+                var complete = false;
+                var rest = 0;
+                while (++i <= content.Length - 1 && !complete)
+                {
+                    // find parenthesis pair which close static inline method.
+                    var current = content[i];
+                    if (parenthesisStartRegex.IsMatch(content[i]))
+                    {
+                        rest++;
+                    }
+                    if (parenthesisEndRegex.IsMatch(content[i]))
                     {
                         rest--;
                         complete = rest == 0;

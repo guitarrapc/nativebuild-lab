@@ -92,6 +92,7 @@ FIBOLIB_API void get_sample_data(sample_data_t *output);
 
 mbedtls_ssl_mode_t mbedtls_ssl_get_mode_from_transform(
         const mbedtls_ssl_transform *transform );
+
     mbedtls_mpi_uint mbedtls_mpi_core_mla( mbedtls_mpi_uint *d, size_t d_len ,
                                         const mbedtls_mpi_uint *s, size_t s_len,
                                         mbedtls_mpi_uint b );
@@ -245,7 +246,7 @@ static inline int mbedtls_ssl_get_psk( const mbedtls_ssl_context *ssl,
         {
             var actual = reader.Read(DetectionType.Method, content, s => PREFIX + s);
             actual.Should().NotBeEmpty();
-            actual.Count().Should().Be(9);
+            actual.Count().Should().Be(8);
         }
 
         // typedef
