@@ -23,27 +23,27 @@ extern FStar_UInt128_uint128
 // typedef uint64_t should_be_ignopre_typdef;
 typedef uint64_t should_be_ignore_missing_semicolon
 // typedef enum {
-    MBEDTLS_SSL_MODE_STREAM = 0,
-    MBEDTLS_SSL_MODE_CBC,
-    MBEDTLS_SSL_MODE_CBC_ETM,
-    MBEDTLS_SSL_MODE_AEAD
+    VAL_1 = 0,
+    VAL_2,
+    VAL_3,
+    VAL_4
 } should_be_ignopre_typdef;
 
 typedef uint64_t simple_t;
     typedef uint64_t simple_space_t;
 
 typedef enum {
-    MBEDTLS_SSL_MODE_STREAM = 0,
-    MBEDTLS_SSL_MODE_CBC,
-    MBEDTLS_SSL_MODE_CBC_ETM,
-    MBEDTLS_SSL_MODE_AEAD
+    VAL_1 = 0,
+    VAL_2,
+    VAL_3,
+    VAL_4
 } enum_t;
 
-typedef struct mbedtls_aes_contextZ
+typedef struct inline_commennt_struct
 {
-    int MBEDTLS_PRIVATE(nr);                     /*!< The number of rounds. */
-    uint32_t *MBEDTLS_PRIVATE(rk);               /*!< AES round keys. */
-    uint32_t MBEDTLS_PRIVATE(buf)[68];           /*!< Unaligned data buffer. This buffer can
+    int struct_method(nr);                     /*!< The number of rounds. */
+    uint32_t *struct_method(rk);               /*!< AES round keys. */
+    uint32_t struct_method(buf)[68];           /*!< Unaligned data buffer. This buffer can
                                         hold 32 extra Bytes, which can be used for
                                         one of the following purposes:
                                         <ul><li>Alignment if VIA padlock is
@@ -54,11 +54,11 @@ typedef struct mbedtls_aes_contextZ
 }
 multiline_next_t;
 
-typedef struct mbedtls_aes_xts_context
+typedef struct include_methods_comment
 {
-    mbedtls_aes_context MBEDTLS_PRIVATE(crypt); /*!< The AES context to use for AES block
+    mbedtls_aes_context typedef_struct_method(crypt); /*!< The AES context to use for AES block
                                         encryption or decryption. */
-    mbedtls_aes_context MBEDTLS_PRIVATE(tweak); /*!< The AES context used for tweak
+    mbedtls_aes_context typedef_struct_method(tweak); /*!< The AES context used for tweak
                                         computation. */
 } multiline_t;
 
@@ -79,25 +79,39 @@ typedef struct
         mbedtls_pk_rsa_alt_key_len_func key_len_func;
     } spaces_multiline_t;
 
+typedef struct
+{
+    foo_t struct_method(alg);
+    union
+    {
+        unsigned struct_method(dummy); /* Make the union non-empty even with no supported algorithms. */
+#if defined(PIYO) || defined(PIYO_TEST)
+        foo_t struct_method(hmac);
+#endif /* PIYO */
+#if defined(PIYO_FOO) || defined(PIYO_TEST)
+        bar_t struct_method(cmac);
+#endif /* PIYO_FOO */
+    } struct_method(ctx);
+} include_method_t;
+
 // method
 void foo();
-    int mbedtls_ssl_write_client_hello( mbedtls_ssl_context *ssl );
+    int foo_spaced( foo_context *ssl );
 
 FIBOLIB_API void get_sample_data(sample_data_t *output);
     FIBOLIB_API int fibo(int n);
 
-mbedtls_ssl_mode_t mbedtls_ssl_get_mode_from_transform(
-        const mbedtls_ssl_transform *transform );
-
-    mbedtls_mpi_uint mbedtls_mpi_core_mla( mbedtls_mpi_uint *d, size_t d_len ,
-                                        const mbedtls_mpi_uint *s, size_t s_len,
-                                        mbedtls_mpi_uint b );
-
+foo_bar_t foo_bar_method(
+        const foo_piyo *transform );
+    foo_uint foo_spacing_method( abc *d, size_t d_len ,
+                                        const efg *s, size_t s_len,
+                                        hij b );
+                                            
 int same_function_name( size_t foo,
-                     const unsigned char *data );
+                        const unsigned char *data );
 int same_function_name( bar_context_t *ctx,
-                     const unsigned char *add_data );
-
+                        const unsigned char *add_data );
+    
 // ignores
 struct foo_struct
 {
@@ -107,7 +121,7 @@ struct foo_struct
     mbedtls_ssl_flight_item *next;  /*!< next handshake message(s)              */
 };
 
-static inline int mbedtls_ssl_get_psk( const mbedtls_ssl_context *ssl,
+static inline int static_inline_method( const foo_context *ssl,
     const unsigned char **psk, size_t *psk_len )
 {
     if( ssl->handshake->psk != NULL && ssl->handshake->psk_len > 0 )
@@ -134,8 +148,8 @@ static inline int mbedtls_ssl_get_psk( const mbedtls_ssl_context *ssl,
 
 // void should_be_ignopre_method();
 // FIBOLIB_API void should_be_ignopre_method(sample_data_t *output);
-// mbedtls_ssl_mode_t should_be_ignopre_method(
-        const mbedtls_ssl_transform *transform );
+// foo_mode_t should_be_ignopre_method(
+        const foo_transform_transform *transform );
 
 /*
     * GCM multiplication: c = a times b in GF(2^128)
@@ -150,19 +164,19 @@ static inline int mbedtls_ssl_get_psk( const mbedtls_ssl_context *ssl,
 #  endif
 #endif
 
-#define MBEDTLS_BYTES_TO_T_UINT_8( a, b, c, d, e, f, g, h ) \
-    MBEDTLS_BYTES_TO_T_UINT_4( a, b, c, d ),                \
-    MBEDTLS_BYTES_TO_T_UINT_4( e, f, g, h )
+#define FOO_BYTES_TO_T_UINT_8( a, b, c, d, e, f, g, h ) \
+    FOO_BYTES_TO_T_UINT_4( a, b, c, d ),                \
+    FOO_BYTES_TO_T_UINT_4( e, f, g, h )
 
-#define MBEDTLS_BYTES_TO_T_UINT_8( a, b, c, d, e, f, g, h )   \
-    ( (mbedtls_mpi_uint) (a) <<  0 ) |                        \
-    ( (mbedtls_mpi_uint) (b) <<  8 ) |                        \
-    ( (mbedtls_mpi_uint) (c) << 16 ) |                        \
-    ( (mbedtls_mpi_uint) (d) << 24 ) |                        \
-    ( (mbedtls_mpi_uint) (e) << 32 ) |                        \
-    ( (mbedtls_mpi_uint) (f) << 40 ) |                        \
-    ( (mbedtls_mpi_uint) (g) << 48 ) |                        \
-    ( (mbedtls_mpi_uint) (h) << 56 )
+#define FOO_BYTES_TO_T_UINT_8( a, b, c, d, e, f, g, h )   \
+    ( (foo_uint) (a) <<  0 ) |                        \
+    ( (foo_uint) (b) <<  8 ) |                        \
+    ( (foo_uint) (c) << 16 ) |                        \
+    ( (foo_uint) (d) << 24 ) |                        \
+    ( (foo_uint) (e) << 32 ) |                        \
+    ( (foo_uint) (f) << 40 ) |                        \
+    ( (foo_uint) (g) << 48 ) |                        \
+    ( (foo_uint) (h) << 56 )
 
 #define MULADDC_X8_CORE                         \
     ""movd     %%ecx,     %%mm1      \n\t""   \
@@ -253,7 +267,7 @@ static inline int mbedtls_ssl_get_psk( const mbedtls_ssl_context *ssl,
         {
             var actual = reader.Read(DetectionType.Typedef, Contents, s => PREFIX + s);
             actual.Should().NotBeEmpty();
-            actual.Count().Should().Be(7);
+            actual.Count().Should().Be(8);
         }
     }
 
@@ -280,7 +294,7 @@ static inline int mbedtls_ssl_get_psk( const mbedtls_ssl_context *ssl,
         {
             var actual = reader.Read(DetectionType.Typedef, Contents, s => PREFIX + s);
             actual.Should().NotBeEmpty();
-            actual.Count().Should().Be(7);
+            actual.Count().Should().Be(8);
         }
     }
 
@@ -458,6 +472,20 @@ static inline int mbedtls_ssl_get_psk( const mbedtls_ssl_context *ssl,
             size_t bytes;
         } key;
     } psa_key_slot_t;")]
+    [InlineData(@"typedef struct
+{
+    foo_t struct_method(alg);
+    union
+    {
+        unsigned struct_method(dummy); /* Make the union non-empty even with no supported algorithms. */
+#if defined(PIYO) || defined(PIYO_TEST)
+        foo_t struct_method(hmac);
+#endif /* PIYO */
+#if defined(PIYO_FOO) || defined(PIYO_TEST)
+        bar_t struct_method(cmac);
+#endif /* PIYO_FOO */
+    } struct_method(ctx);
+} include_method_t;")]
     public void MethodReaderCannotReadTypedefTest(string define)
     {
         var content = define.SplitNewLine();

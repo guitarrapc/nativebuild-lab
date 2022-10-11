@@ -303,6 +303,11 @@ public class SymbolReader
         var staticInlineStartRegex = new Regex(@"\s*static\s+inline\s+\w+\s+\w+", RegexOptions.Compiled);
         var structStartRegex = new Regex(@"\s*struct\s+\.*", RegexOptions.Compiled);
 
+        var typedefStartRegex = new Regex(@"^\s*typedef.*", RegexOptions.Compiled);
+        var typedefEndRegex = new Regex(@"(\btypedef.*|}\s+\w+);", RegexOptions.Compiled);
+        var typedefEndExceptionalRegex = new Regex(@"\s*;", RegexOptions.Compiled);
+        var typedefContainsParethesis = new Regex(@"^\s*typedef\s+\w+\s*{", RegexOptions.Compiled);
+
         static bool IsEmptyLine(string str) => string.IsNullOrWhiteSpace(str);
         static bool IsCommentLine(string str) => str.StartsWith("//") || str.StartsWith("/*") || str.StartsWith("*/") || str.StartsWith("*");
         static bool IsPragmaLine(string str) => str.StartsWith("#");
@@ -367,6 +372,79 @@ public class SymbolReader
                 {
                 }
                 continue;
+            }
+
+            // skip typedef block
+            if (typedefStartRegex.IsMatch(line))
+            {
+                var j = i;
+                if (typedefEndRegex.IsMatch(line))
+                {
+                    // sigle line
+                    continue;
+                }
+                else
+                {
+                    // multi line
+                    var complete = false;
+                    var invalid = false;
+                    var rest = typedefContainsParethesis.IsMatch(line) ? 1 : 0;
+                    while (++j <= content.Length - 1 && !complete)
+                    {
+                        var current = content[j];
+                        if (typedefStartRegex.IsMatch(current))
+                        {
+                            // not completed but new typedef line started.
+                            --j; // reverse index to previous (before increment on while)
+                            invalid = true;
+                            break;
+                        }
+                        if (parenthesisStartRegex.IsMatch(current))
+                        {
+                            if (rest == 0)
+                            {
+                                // add `{`
+                            }
+                            rest++;
+                        }
+                        if (parenthesisEndRegex.IsMatch(current))
+                        {
+                            rest--;
+                            if (rest == 0)
+                            {
+                                // add `} foo_t;`
+                            }
+
+                            if (rest < 0)
+                            {
+                                // missing { but } reached.
+                                invalid = true;
+                                break;
+                            }
+                        }
+
+                        if (rest == 0)
+                        {
+                            if (typedefEndRegex.IsMatch(current))
+                            {
+                                complete = true;
+                                continue;
+                            }
+                            else if (typedefEndExceptionalRegex.IsMatch(current))
+                            {
+                                // add `;`
+                                complete = true;
+                                continue;
+                            }
+                        }
+                    }
+
+
+                    if (!invalid)
+                    {
+                        i = j;
+                    }
+                }
             }
 
             if (IsPragmaLine(line)) continue;
