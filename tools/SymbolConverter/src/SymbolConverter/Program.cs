@@ -44,7 +44,10 @@ public class SymbolApp : ConsoleAppBase
             implPaths = headerPaths;
         }
 
-        var symbols = await SymbolOperation.ListAsync(headerPaths, prefix);
+        var list = await SymbolOperation.ListAsync(headerPaths, prefix);
+
+        // remove duplicate symbols
+        var symbols = list.DistinctBy(x => x.Symbol).ToArray();
 
         // header
         Console.WriteLine();

@@ -3,7 +3,7 @@ using System.Text;
 
 namespace SymbolConverter;
 
-public record SymbolReaderOption(bool DistinctSymbol = true, bool Sort = true);
+public record SymbolReaderOption(bool DistinctSymbol = bool, bool Sort = true);
 
 public class SymbolReader
 {
