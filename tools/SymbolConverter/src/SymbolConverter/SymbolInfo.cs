@@ -11,3 +11,10 @@ public record SymbolInfo(string Line, DetectionType DetectionType, IReadOnlyList
         return Metadata["file"];
     }
 };
+
+public static class SymbolDelimiters
+{
+    public static readonly IReadOnlyList<string> MethodDelimiters = new[] { "(", " ", ")", "," };
+    public static readonly IReadOnlyList<string> TypedefDelimiters = new[] { ";", " " };
+    public static readonly IReadOnlyList<string> ExternDelimiters = new[] { ";", " " };
+}

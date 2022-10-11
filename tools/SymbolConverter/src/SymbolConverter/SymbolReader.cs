@@ -55,7 +55,7 @@ public class SymbolReader
                     var line = matchFunctionPtr.Groups[0].Value;
                     var type = matchFunctionPtr.Groups["type"].Value;
                     var name = matchFunctionPtr.Groups["name"].Value;
-                    return new SymbolInfo(line, DetectionType.ExternField, new[] { delimiter }, name)
+                    return new SymbolInfo(line, DetectionType.ExternField, SymbolDelimiters.ExternDelimiters, name)
                     {
                         RenamedSymbol = RenameExpression.Invoke(name),
                         Metadata = new Dictionary<string, string>(metadata)
@@ -72,7 +72,7 @@ public class SymbolReader
                     var line = matchField.Groups[0].Value;
                     var type = matchField.Groups["type"].Value;
                     var name = matchField.Groups["name"].Value;
-                    return new SymbolInfo(line, DetectionType.ExternField, new[] { delimiter }, name)
+                    return new SymbolInfo(line, DetectionType.ExternField, SymbolDelimiters.ExternDelimiters, name)
                     {
                         RenamedSymbol = RenameExpression.Invoke(name),
                         Metadata = new Dictionary<string, string>(metadata)
@@ -121,7 +121,7 @@ public class SymbolReader
                     var line = match.Groups[0].Value;
                     var type = match.Groups["type"].Value;
                     var name = match.Groups["method"].Value;
-                    return new SymbolInfo(line, DetectionType.Method, new[] { delimiter, " ", ")", "," }, name)
+                    return new SymbolInfo(line, DetectionType.Method, SymbolDelimiters.MethodDelimiters, name)
                     {
                         RenamedSymbol = RenameExpression.Invoke(name),
                         Metadata = new Dictionary<string, string>(metadata)
@@ -170,7 +170,7 @@ public class SymbolReader
                 {
                     //multilineMatch.Dump();
                     var name = multilineMatch.Groups["name"].Value;
-                    return new SymbolInfo(line, DetectionType.Typedef, new[] { delimiter, " "}, name)
+                    return new SymbolInfo(line, DetectionType.Typedef, SymbolDelimiters.TypedefDelimiters, name)
                     {
                         RenamedSymbol = RenameExpression.Invoke(name),
                         Metadata = new Dictionary<string, string>(metadata)
@@ -186,7 +186,7 @@ public class SymbolReader
                     {
                         //singlelineMatch.Dump();
                         var name = singlelineMatch.Groups["name"].Value;
-                        return new SymbolInfo(line, DetectionType.Typedef, new[] { delimiter, " " }, name)
+                        return new SymbolInfo(line, DetectionType.Typedef, SymbolDelimiters.TypedefDelimiters, name)
                         {
                             RenamedSymbol = RenameExpression.Invoke(name),
                             Metadata = new Dictionary<string, string>(metadata)
