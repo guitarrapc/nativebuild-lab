@@ -343,38 +343,6 @@ public class SymbolReader
                 continue;
             }
 
-            // skip "struct" block
-            if (structStartRegex.IsMatch(line))
-            {
-                var complete = false;
-                var rest = 0;
-                while (++i <= content.Length - 1 && !complete)
-                {
-                    // find parenthesis pair which close static inline method.
-                    var current = content[i];
-                    if (parenthesisStartRegex.IsMatch(content[i]))
-                    {
-                        rest++;
-                    }
-                    if (parenthesisEndRegex.IsMatch(content[i]))
-                    {
-                        rest--;
-                        complete = rest == 0;
-                    }
-                    continue;
-                }
-                continue;
-            }
-
-            // skip "#define" block
-            if (defineStartRegex.IsMatch(line))
-            {
-                while (++i <= content.Length - 1 && defineContinueRegex.IsMatch(content[i]))
-                {
-                }
-                continue;
-            }
-
             // skip typedef block
             if (typedefStartRegex.IsMatch(line))
             {
@@ -446,6 +414,38 @@ public class SymbolReader
                         i = j;
                     }
                 }
+            }
+
+            // skip "struct" block
+            if (structStartRegex.IsMatch(line))
+            {
+                var complete = false;
+                var rest = 0;
+                while (++i <= content.Length - 1 && !complete)
+                {
+                    // find parenthesis pair which close static inline method.
+                    var current = content[i];
+                    if (parenthesisStartRegex.IsMatch(content[i]))
+                    {
+                        rest++;
+                    }
+                    if (parenthesisEndRegex.IsMatch(content[i]))
+                    {
+                        rest--;
+                        complete = rest == 0;
+                    }
+                    continue;
+                }
+                continue;
+            }
+
+            // skip "#define" block
+            if (defineStartRegex.IsMatch(line))
+            {
+                while (++i <= content.Length - 1 && defineContinueRegex.IsMatch(content[i]))
+                {
+                }
+                continue;
             }
 
             if (IsPragmaLine(line)) continue;
