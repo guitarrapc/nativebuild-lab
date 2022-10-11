@@ -9,7 +9,7 @@
     },
     "prefix(fibo)": {
       "commandName": "Project",
-      "commandLineArgs": "prefix --header-paths C:/git/guitarrapc/nativebuild-lab/fibo/lib --prefix nantoka_ --dryrun true"
+      "commandLineArgs": "prefix --header-paths C:/git/guitarrapc/nativebuild-lab/fibo/lib --prefix nantoka_ --dryrun false"
     },
     "list(mbedtls)": {
       "commandName": "Project",
