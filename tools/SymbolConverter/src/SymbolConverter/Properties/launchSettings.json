@@ -11,19 +11,11 @@
       "commandName": "Project",
       "commandLineArgs": "prefix --header-paths C:/git/guitarrapc/nativebuild-lab/fibo/lib --prefix nantoka_ --dryrun true"
     },
-    "list(mbedtls lib)": {
+    "list(mbedtls)": {
       "commandName": "Project",
       "commandLineArgs": "list --header-paths C:/git/guitarrapc/mbedtls/library,C:/git/guitarrapc/mbedtls/include"
     },
-    "prefix(mbedtls lib)": {
-      "commandName": "Project",
-      "commandLineArgs": "prefix --header-paths C:/git/guitarrapc/mbedtls/library,C:/git/guitarrapc/mbedtls/include --prefix nantoka_ --dryrun false"
-    },
-    "list(mbedtls inc)": {
-      "commandName": "Project",
-      "commandLineArgs": "list --header-paths C:/git/guitarrapc/mbedtls/library,C:/git/guitarrapc/mbedtls/include"
-    },
-    "prefix(mbedtls inc)": {
+    "prefix(mbedtls)": {
       "commandName": "Project",
       "commandLineArgs": "prefix --header-paths C:/git/guitarrapc/mbedtls/library,C:/git/guitarrapc/mbedtls/include --prefix nantoka_ --dryrun false"
     }

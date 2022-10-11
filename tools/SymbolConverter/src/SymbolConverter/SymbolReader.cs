@@ -9,7 +9,7 @@ public class SymbolReader
 {
     private readonly SymbolReaderOption _option;
 
-    public SymbolReader() : this(option: new SymbolReaderOption(DistinctSymbol: true, Sort: true))
+    public SymbolReader() : this(option: new SymbolReaderOption())
     {
     }
 
