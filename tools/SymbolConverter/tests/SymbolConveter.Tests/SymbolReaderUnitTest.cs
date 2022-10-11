@@ -20,6 +20,8 @@ extern FStar_UInt128_uint128
 
 
 // typedef
+typedef struct singleline_typedef_struct_s singleline_typedef_struct_t;
+
 // typedef uint64_t should_be_ignopre_typdef;
 typedef uint64_t should_be_ignore_missing_semicolon
 // typedef enum {
@@ -267,7 +269,7 @@ static inline int static_inline_method( const foo_context *ssl,
         {
             var actual = reader.Read(DetectionType.Typedef, Contents, s => PREFIX + s);
             actual.Should().NotBeEmpty();
-            actual.Count().Should().Be(8);
+            actual.Count().Should().Be(9);
         }
     }
 
@@ -294,7 +296,7 @@ static inline int static_inline_method( const foo_context *ssl,
         {
             var actual = reader.Read(DetectionType.Typedef, Contents, s => PREFIX + s);
             actual.Should().NotBeEmpty();
-            actual.Count().Should().Be(8);
+            actual.Count().Should().Be(9);
         }
     }
 
@@ -673,6 +675,7 @@ static inline int static_inline_method( const foo_context *ssl,
             mbedtls_pk_rsa_alt_sign_func sign_func;
             mbedtls_pk_rsa_alt_key_len_func key_len_func;
         } spaces_multiline_t;", "spaces_multiline_t", PREFIX + "spaces_multiline_t")]
+    [InlineData("typedef struct singleline_typedef_struct_s singleline_typedef_struct_t;", "singleline_typedef_struct_t", PREFIX + "singleline_typedef_struct_t")]
     public void TypedefReaderTest(string define, string expectedSymbol, string expectedRenamedSymbol)
     {
         var content = define.SplitNewLine();

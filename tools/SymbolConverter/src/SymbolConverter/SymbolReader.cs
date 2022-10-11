@@ -154,7 +154,8 @@ public class SymbolReader
     {
         const string delimiter = ";";
         // `typedef uint64_t foo;`
-        var typedefSinglelineRegex = new Regex($@"\btypedef\s+(?<type>\w+)\s+(?<name>\w+){delimiter}", RegexOptions.Compiled);
+        // `typedef struct uint64 bar;`
+        var typedefSinglelineRegex = new Regex($@"\btypedef(\s+\w+)?\s+(?<type>\w+)\s+(?<name>\w+){delimiter}", RegexOptions.Compiled);
         // `} foo;`
         var typedefMultilineRegex = new Regex($@"\s*}}\s+(?<name>\w+){delimiter}", RegexOptions.Compiled);
 
