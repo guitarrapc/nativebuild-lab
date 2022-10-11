@@ -319,7 +319,7 @@ static inline int static_inline_method( const foo_context *ssl,
             actual.Should().NotBeNull();
             actual!.Symbol.Should().Be(expectedSymbol);
             actual!.RenamedSymbol.Should().Be(expectedRenamedSymbol);
-            actual!.Delimiter!.Should().Be(";");
+            actual!.Delimiters!.Should().Equal(new[] { ";"});
         }
     }
 
@@ -413,7 +413,7 @@ static inline int static_inline_method( const foo_context *ssl,
             actual.Should().NotBeNull();
             actual!.Symbol.Should().Be(expectedSymbol);
             actual!.RenamedSymbol.Should().Be(expectedRenamedSymbol);
-            actual!.Delimiter!.Should().Be("(");
+            actual!.Delimiters!.Should().Equal(new[] { "(" });
         }
     }
 
@@ -685,7 +685,7 @@ static inline int static_inline_method( const foo_context *ssl,
             actual.Should().NotBeNull();
             actual!.Symbol.Should().Be(expectedSymbol);
             actual!.RenamedSymbol.Should().Be(expectedRenamedSymbol);
-            actual!.Delimiter!.Should().Be(";");
+            actual!.Delimiters!.Should().Equal(new[] { ";", " " });
         }
     }
 

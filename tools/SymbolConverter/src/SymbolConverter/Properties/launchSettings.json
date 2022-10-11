@@ -5,11 +5,11 @@
     },
     "list(fibo)": {
       "commandName": "Project",
-      "commandLineArgs": "list --header-paths C:/git/guitarrapc/nativebuild-lab/fibo/lib"
+      "commandLineArgs": "list --header-paths C:/git/guitarrapc/nativebuild-lab/fibo/lib,C:/git/guitarrapc/nativebuild-lab/fibo/programs"
     },
     "prefix(fibo)": {
       "commandName": "Project",
-      "commandLineArgs": "prefix --header-paths C:/git/guitarrapc/nativebuild-lab/fibo/lib --prefix nantoka_ --dryrun false"
+      "commandLineArgs": "prefix --header-paths C:/git/guitarrapc/nativebuild-lab/fibo/lib,C:/git/guitarrapc/nativebuild-lab/fibo/programs --prefix nantoka_ --dryrun false"
     },
     "list(mbedtls)": {
       "commandName": "Project",

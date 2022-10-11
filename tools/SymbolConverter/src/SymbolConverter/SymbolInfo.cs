@@ -1,8 +1,8 @@
 namespace SymbolConverter;
 
-public record SymbolInfo(string Line, DetectionType DetectionType, string Delimiter, string Symbol)
+public record SymbolInfo(string Line, DetectionType DetectionType, IReadOnlyList<string> Delimiters, string Symbol)
 {
-    public string? RenamedSymbol { get; set; }
+    public string? RenamedSymbol { get; init; }
     public IReadOnlyDictionary<string, string>? Metadata { get; set; }
 
     public string GetSourceFile()
