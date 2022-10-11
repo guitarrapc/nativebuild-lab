@@ -121,7 +121,7 @@ public class SymbolReader
                     var line = match.Groups[0].Value;
                     var type = match.Groups["type"].Value;
                     var name = match.Groups["method"].Value;
-                    return new SymbolInfo(line, DetectionType.Method, new[] { delimiter, " ", ")" }, name)
+                    return new SymbolInfo(line, DetectionType.Method, new[] { delimiter, " ", ")", "," }, name)
                     {
                         RenamedSymbol = RenameExpression.Invoke(name),
                         Metadata = new Dictionary<string, string>(metadata)
