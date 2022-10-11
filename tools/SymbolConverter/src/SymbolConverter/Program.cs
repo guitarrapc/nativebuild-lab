@@ -46,25 +46,28 @@ public class SymbolApp : ConsoleAppBase
 
         var list = await SymbolOperation.ListAsync(headerPaths, prefix);
 
-        // remove duplicate symbols
-        var symbols = list.DistinctBy(x => x.Symbol).ToArray();
-
-        // header
-        Console.WriteLine();
-        Console.WriteLine($@"Header Source directory: {string.Join(",", headerPaths)}");
-        foreach (var headerPath in headerPaths)
+        if (list.Any())
         {
-            var headerFiles = Directory.EnumerateFiles(headerPath, "*.h", new EnumerationOptions { RecurseSubdirectories = true });
-            await SymbolOperation.ReplaceAsync(headerFiles, symbols, dryrun);
-        }
+            // remove duplicate symbols
+            var symbols = list.DistinctBy(x => x!.Symbol).ToArray();
 
-        // impl
-        Console.WriteLine();
-        Console.WriteLine($@"Impl Source directory: {string.Join(",", implPaths)}");
-        foreach (var implPath in implPaths)
-        {
-            var implFiles = Directory.EnumerateFiles(implPath, "*.c", new EnumerationOptions { RecurseSubdirectories = true });
-            await SymbolOperation.ReplaceAsync(implFiles, symbols, dryrun);
+            // header
+            Console.WriteLine();
+            Console.WriteLine($@"Header Source directory: {string.Join(",", headerPaths)}");
+            foreach (var headerPath in headerPaths)
+            {
+                var headerFiles = Directory.EnumerateFiles(headerPath, "*.h", new EnumerationOptions { RecurseSubdirectories = true });
+                await SymbolOperation.ReplaceAsync(headerFiles, symbols, dryrun);
+            }
+
+            // impl
+            Console.WriteLine();
+            Console.WriteLine($@"Impl Source directory: {string.Join(",", implPaths)}");
+            foreach (var implPath in implPaths)
+            {
+                var implFiles = Directory.EnumerateFiles(implPath, "*.c", new EnumerationOptions { RecurseSubdirectories = true });
+                await SymbolOperation.ReplaceAsync(implFiles, symbols, dryrun);
+            }
         }
     }
 }
@@ -115,7 +118,7 @@ public static class SymbolOperation
             Debug.WriteLine($"Reading file '{file}'");
 
             var content = await File.ReadAllTextAsync(file);
-            var result = writer.ReplaceSymbol(content, symbols.Select(x => x).ToArray());
+            var result = writer.ReplaceSymbol(content, symbols);
 
             var changed = !content.Equals(result);
             Console.WriteLine($"{file} (changed: {changed})");
