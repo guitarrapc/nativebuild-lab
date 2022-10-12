@@ -3,7 +3,7 @@ using System.Text;
 
 namespace SymbolConverter;
 
-public record SymbolReaderOption(bool DistinctSymbol = false, bool Sort = true)
+public record SymbolReaderOption(bool DistinctSymbol = false, bool Sort = false)
 {
     /// <summary>
     /// Macro identify regex. Value must contain name parameter like '(?<name>foo)'
@@ -355,7 +355,7 @@ public class SymbolReader
 
     private static IReadOnlyList<string> ExtractMethodLines(string[] content)
     {
-        var parenthesisStartRegex = new Regex(@"^\s*{", RegexOptions.Compiled);
+        var parenthesisStartRegex = new Regex(@"^\s*(\w+\s+)?{", RegexOptions.Compiled);
         var parenthesisEndRegex = new Regex(@"^\s*}", RegexOptions.Compiled);
 
         // `foo bar(`
