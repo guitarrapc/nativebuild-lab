@@ -49,7 +49,7 @@ public class SymbolApp : ConsoleAppBase
         if (list.Any())
         {
             // remove duplicate symbols
-            var symbols = list.DistinctBy(x => x!.Symbol).Take(300).ToArray();
+            var symbols = list.DistinctBy(x => x!.Symbol).Take(400).ToArray();
             Console.WriteLine("Replace following symbols...");
             foreach (var symbol in symbols)
             {
