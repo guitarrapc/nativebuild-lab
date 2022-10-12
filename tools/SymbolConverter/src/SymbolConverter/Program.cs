@@ -9,11 +9,12 @@ public class SymbolApp : ConsoleAppBase
 {
     [Command("list", "List symbols from header files (.h)")]
     public async Task List(
-        [Option("header-paths", "libary directory path to search header files.")] string[] headerPaths,
-        [Option("macro-paths", "imple directory path to search macro.")] string[]? macroPaths = null
+        [Option("header-paths", "Libary directory path to search header files.")] string[] headerPaths,
+        [Option("macro-paths", "Implement directory path to search macro.")] string[]? macroPaths = null,
+        [Option("sort", "Sort symbols for each files.")] bool sort = false
     )
     {
-        var operation = new SymbolOperation(new SymbolReaderOption());
+        var operation = new SymbolOperation(new SymbolReaderOption(Sort: sort));
         var listMacros = macroPaths is not null ? await operation.ListMacrosAsync(macroPaths) : Array.Empty<SymbolInfo>();
         var listSymbols = await operation.ListSymbolsAsync(headerPaths);
         var symbolLookup = listMacros.Concat(listSymbols).ToLookup(x => x!.GetSourceFile());
