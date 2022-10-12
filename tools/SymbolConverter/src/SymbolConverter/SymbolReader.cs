@@ -3,7 +3,27 @@ using System.Text;
 
 namespace SymbolConverter;
 
-public record SymbolReaderOption(bool DistinctSymbol = false, bool Sort = true);
+public record SymbolReaderOption(bool DistinctSymbol = false, bool Sort = true)
+{
+    /// <summary>
+    /// Macro identify regex. Value must contain name parameter like '(?<name>foo)'
+    /// </summary>
+    public IReadOnlyList<string>? MacroRegexes { get; init; } = Environment.GetEnvironmentVariable("SYMBOL_CONVERTER_MACRO_REGEXES")?.Split(",") ?? null;
+
+    public void Validate()
+    {
+        if (MacroRegexes is not null)
+        {
+            foreach (var regex in MacroRegexes)
+            {
+                if (!regex.Contains("(?<name>"))
+                {
+                    throw new ArgumentException($"MacroRegexes must contains parameter group 'name', like '(?<name>foobar)' . But '{regex}' doesn't contain parameter.");
+                }
+            }
+        }
+    }
+};
 
 public class SymbolReader
 {
@@ -29,6 +49,7 @@ public class SymbolReader
             DetectionType.ExternField => ReadExternFieldInfo(content, RenameExpression, metadata, _option),
             DetectionType.Method => ReadMethodInfo(content, RenameExpression, metadata, _option),
             DetectionType.Typedef => ReadTypedefInfo(content, RenameExpression, metadata, _option),
+            DetectionType.Macro => ReadMacroInfo(content, RenameExpression, metadata, _option),
             _ => throw new NotSupportedException(),
         };
     }
@@ -200,6 +221,55 @@ public class SymbolReader
                         return null;
                     }
                 }
+            })
+            .Where(x => x != null);
+
+        if (option.DistinctSymbol)
+        {
+            symbols = symbols.DistinctBy(x => x!.Symbol);
+        }
+
+        if (option.Sort)
+        {
+            symbols = symbols.OrderByDescending(x => x!.Symbol.Length);
+        }
+
+        return symbols.ToArray();
+    }
+
+    private IReadOnlyList<SymbolInfo?> ReadMacroInfo(string[] content, Func<string, string> RenameExpression, IReadOnlyDictionary<string, string> metadata, SymbolReaderOption option)
+    {
+        if (_option.MacroRegexes is null || !_option.MacroRegexes.Any())
+        {
+            return Array.Empty<SymbolInfo>();
+        }
+
+        var regexes = _option.MacroRegexes.Select(x => new Regex(x, RegexOptions.Compiled)).ToArray();
+
+        // Get typedef line in single string
+        var lines = ExtractMacroLines(content);
+        var symbols = lines
+            .Select(x => x.TrimStart())
+            .SelectMany(line =>
+            {
+                return regexes.Select(x =>
+                {
+                    var match = x.Match(line);
+                    if (match.Success)
+                    {
+                        var name = match.Groups["name"].Value;
+                        return new SymbolInfo(line, DetectionType.Macro, SymbolDelimiters.MacroDelimiters, name)
+                        {
+                            RenamedSymbol = RenameExpression.Invoke(name),
+                            Metadata = new Dictionary<string, string>(metadata)
+                            {
+                                {"ReturnType", name}, // Alias Type
+                            },
+                        };
+                    }
+                    return null;
+                })
+                .ToArray();
             })
             .Where(x => x != null);
 
@@ -601,6 +671,41 @@ public class SymbolReader
         }
 
         return typedefLines;
+    }
+
+    private static IReadOnlyList<string> ExtractMacroLines(string[] content)
+    {
+        var parenthesisStartRegex = new Regex(@"^\s*{", RegexOptions.Compiled);
+        var parenthesisEndRegex = new Regex(@"^\s*}", RegexOptions.Compiled);
+
+        var defineStartRegex = new Regex(@"\w*#\s*define\s+", RegexOptions.Compiled);
+        var defineContinueRegex = new Regex(@".*\\$", RegexOptions.Compiled);
+
+        static bool IsEmptyLine(string str) => string.IsNullOrWhiteSpace(str);
+        static bool IsCommentLine(string str) => str.StartsWith("//") || str.StartsWith("/*") || str.StartsWith("*/") || str.StartsWith("*");
+
+        var lines = new List<string>();
+        for (var i = 0; i < content.Length; i++)
+        {
+            var line = content[i].TrimStart();
+            if (IsEmptyLine(line)) continue;
+            if (IsCommentLine(line)) continue;
+
+            var sb = new StringBuilder();
+            if (defineStartRegex.IsMatch(line))
+            {
+                // add first line
+                sb.AppendLine(line);
+
+                while (++i <= content.Length - 1 && defineContinueRegex.IsMatch(content[i]))
+                {
+                    sb.AppendLine(content[i]);
+                }
+                lines.Add(sb.ToString());
+            }
+        }
+
+        return lines;
     }
 }
 

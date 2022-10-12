@@ -5,4 +5,5 @@ public enum DetectionType
     ExternField,
     Method,
     Typedef,
+    Macro,
 }

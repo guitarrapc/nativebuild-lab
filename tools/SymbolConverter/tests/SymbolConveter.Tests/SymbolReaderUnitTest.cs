@@ -113,7 +113,17 @@ int same_function_name( size_t foo,
                         const unsigned char *data );
 int same_function_name( bar_context_t *ctx,
                         const unsigned char *add_data );
-    
+
+// macros
+#define ALLOC( type )                                                   \
+    do {                                                                \
+        ctx->md_ctx = mbedtls_calloc( 1, sizeof( mbedtls_##type##_context ) ); \
+        if( ctx->md_ctx == NULL )                                       \
+            return( MBEDTLS_ERR_MD_ALLOC_FAILED );                      \
+        mbedtls_##type##_init( ctx->md_ctx );                           \
+    }                                                                   \
+    while( 0 )
+
 // ignores
 struct foo_struct
 {
@@ -245,11 +255,38 @@ static inline int static_inline_method( const foo_context *ssl,
 
 ".SplitNewLine();
 
+    [Fact]
+    public void ReaderMissingMacroRegexesTest()
+    {
+        var option = new SymbolReaderOption();
+        option.Validate();
+    }
+
+    [Fact]
+    public void ReaderEmptyMacroRegexesShouldFailTest()
+    {
+        var option = new SymbolReaderOption
+        {
+            MacroRegexes = new string[]
+            {
+              "",
+            },
+        };
+        Assert.Throws<ArgumentException>(() => option.Validate());
+    }
+
     // complex
     [Fact]
     public void ComplexReaderTest()
     {
-        var reader = new SymbolReader(new SymbolReaderOption(DistinctSymbol: false));
+        var reader = new SymbolReader(new SymbolReaderOption(DistinctSymbol: false)
+        {
+            MacroRegexes = new string[]
+            {
+              ".*(?<name>mbedtls_##type##_context).*",
+              ".*(?<name>mbedtls_##type##_init).*",
+            },
+        });
 
         // externField
         {
@@ -271,12 +308,26 @@ static inline int static_inline_method( const foo_context *ssl,
             actual.Should().NotBeEmpty();
             actual.Count().Should().Be(9);
         }
+
+        // macro
+        {
+            var actual = reader.Read(DetectionType.Macro, Contents, s => PREFIX + s);
+            actual.Should().NotBeEmpty();
+            actual.Count().Should().Be(2);
+        }
     }
 
     [Fact]
     public void ComplexReaderDistinctTest()
     {
-        var reader = new SymbolReader(new SymbolReaderOption(DistinctSymbol: true));
+        var reader = new SymbolReader(new SymbolReaderOption(DistinctSymbol: true)
+        {
+            MacroRegexes = new string[]
+            {
+              ".*(?<name>mbedtls_##type##_context).*",
+              ".*(?<name>mbedtls_##type##_init).*",
+            },
+        });
 
         // externField
         {
@@ -297,6 +348,13 @@ static inline int static_inline_method( const foo_context *ssl,
             var actual = reader.Read(DetectionType.Typedef, Contents, s => PREFIX + s);
             actual.Should().NotBeEmpty();
             actual.Count().Should().Be(9);
+        }
+
+        // macro
+        {
+            var actual = reader.Read(DetectionType.Macro, Contents, s => PREFIX + s);
+            actual.Should().NotBeEmpty();
+            actual.Count().Should().Be(2);
         }
     }
 
@@ -321,7 +379,6 @@ static inline int static_inline_method( const foo_context *ssl,
             actual.Should().NotBeNull();
             actual!.Symbol.Should().Be(expectedSymbol);
             actual!.RenamedSymbol.Should().Be(expectedRenamedSymbol);
-            actual!.Delimiters!.Should().Equal(new[] { ";"});
         }
     }
 
@@ -415,7 +472,6 @@ static inline int static_inline_method( const foo_context *ssl,
             actual.Should().NotBeNull();
             actual!.Symbol.Should().Be(expectedSymbol);
             actual!.RenamedSymbol.Should().Be(expectedRenamedSymbol);
-            actual!.Delimiters!.Should().Equal(new[] { "(" });
         }
     }
 
@@ -688,7 +744,6 @@ static inline int static_inline_method( const foo_context *ssl,
             actual.Should().NotBeNull();
             actual!.Symbol.Should().Be(expectedSymbol);
             actual!.RenamedSymbol.Should().Be(expectedRenamedSymbol);
-            actual!.Delimiters!.Should().Equal(new[] { ";", " " });
         }
     }
 
@@ -826,6 +881,61 @@ static inline int static_inline_method( const foo_context *ssl,
         var content = define.SplitNewLine();
         var reader = new SymbolReader();
         var actuals = reader.Read(DetectionType.Typedef, content, s => PREFIX + s);
+
+        actuals.Should().BeEmpty();
+    }
+
+
+    // macro
+    [Theory]
+    [InlineData(@"#define ALLOC( type )                                                   \
+        do {                                                                \
+            ctx->md_ctx = mbedtls_calloc( 1, sizeof( mbedtls_##type##_context ) ); \
+        }                                                                   \
+        while( 0 )", "mbedtls_##type##_context", PREFIX + "mbedtls_##type##_context")]
+    [InlineData(@"#define ALLOC( type )                                                   \
+        do {                                                                \
+            mbedtls_##type##_init( foo );                           \
+        }                                                                   \
+        while( 0 )", "mbedtls_##type##_init", PREFIX + "mbedtls_##type##_init")]
+    public void MacroReaderTest(string define, string expectedSymbol, string expectedRenamedSymbol)
+    {
+        var content = define.SplitNewLine();
+        var reader = new SymbolReader(new SymbolReaderOption
+        {
+            MacroRegexes = new string[]
+            {
+              ".*(?<name>mbedtls_##type##_context).*",
+              ".*(?<name>mbedtls_##type##_init).*",
+            },
+        });
+        var actuals = reader.Read(DetectionType.Macro, content, s => PREFIX + s);
+
+        actuals.Should().NotBeEmpty();
+        foreach (var actual in actuals)
+        {
+            actual.Should().NotBeNull();
+            actual!.Symbol.Should().Be(expectedSymbol);
+            actual!.RenamedSymbol.Should().Be(expectedRenamedSymbol);
+        }
+    }
+
+    [Theory]
+    [InlineData(@"#define FOO_BYTES_TO_T_UINT_8( a, b, c, d, e, f, g, h ) \
+        FOO_BYTES_TO_T_UINT_4( a, b, c, d ),                \
+        FOO_BYTES_TO_T_UINT_4( e, f, g, h )")]
+    public void MacroReaderCommentTest(string define)
+    {
+        var content = define.SplitNewLine();
+        var reader = new SymbolReader(new SymbolReaderOption
+        {
+            MacroRegexes = new string[]
+            {
+              ".*(?<name>mbedtls_##type##_context).*",
+              ".*(?<name>mbedtls_##type##_init).*",
+            },
+        });
+        var actuals = reader.Read(DetectionType.Macro, content, s => PREFIX + s);
 
         actuals.Should().BeEmpty();
     }
