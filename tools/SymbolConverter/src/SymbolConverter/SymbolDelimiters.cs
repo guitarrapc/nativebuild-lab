@@ -29,6 +29,8 @@ public static class SymbolDelimiters
         " ",
         "(", // method
         ")", // prt ... (*foo)
+        ",", // use in parameter ... foo,
+        "\"", // dlsym call ... dlsym( bar_so, "foo" )
     };
 
     public static readonly IReadOnlyList<string> MacroDelimiters = new[]
