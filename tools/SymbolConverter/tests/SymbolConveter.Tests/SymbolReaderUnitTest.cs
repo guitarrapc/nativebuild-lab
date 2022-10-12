@@ -107,6 +107,17 @@ typedef struct include_union_sameline
 }
 include_union_sameline;
 
+typedef struct
+{
+    enum {
+        none,
+        parent,
+    } FOO_PRIVATE(in_progress);  /* none if no operation is in progress */
+    int FOO_PRIVATE(self_cnt);
+    bar FOO_PRIVATE(ver_chain);
+
+} include_enum_method;
+
 typedef struct inline_2
 {
     uint32_t MBEDTLS_PRIVATE(total)[2];          /*!< number of bytes processed  */
@@ -325,7 +336,7 @@ static inline int static_inline_method( const foo_context *ssl,
         {
             var actual = reader.Read(DetectionType.Typedef, Contents, s => PREFIX + s);
             actual.Should().NotBeEmpty();
-            actual.Count().Should().Be(11);
+            actual.Count().Should().Be(12);
         }
 
         // macro
@@ -366,7 +377,7 @@ static inline int static_inline_method( const foo_context *ssl,
         {
             var actual = reader.Read(DetectionType.Typedef, Contents, s => PREFIX + s);
             actual.Should().NotBeEmpty();
-            actual.Count().Should().Be(11);
+            actual.Count().Should().Be(12);
         }
 
         // macro
@@ -563,6 +574,17 @@ static inline int static_inline_method( const foo_context *ssl,
 #endif /* PIYO_FOO */
     } struct_method(ctx);
 } include_method_t;")]
+    [InlineData(@"typedef struct
+    {
+        enum {
+            none,
+            parent,
+        } FOO_PRIVATE(in_progress);  /* none if no operation is in progress */
+        int FOO_PRIVATE(self_cnt);
+        bar FOO_PRIVATE(ver_chain);
+
+    } include_enum_method;
+")]
     public void MethodReaderCannotReadTypedefTest(string define)
     {
         var content = define.SplitNewLine();
@@ -761,6 +783,17 @@ static inline int static_inline_method( const foo_context *ssl,
         san; /**< A union of the supported SAN types */
     }
     include_union_sameline;", "include_union_sameline", PREFIX + "include_union_sameline")]
+    [InlineData(@"    typedef struct
+    {
+        enum {
+            none,
+            parent,
+        } FOO_PRIVATE(in_progress);  /* none if no operation is in progress */
+        int FOO_PRIVATE(self_cnt);
+        bar FOO_PRIVATE(ver_chain);
+
+    } include_enum_method;
+", "include_enum_method", PREFIX + "include_enum_method")]
     public void TypedefReaderTest(string define, string expectedSymbol, string expectedRenamedSymbol)
     {
         var content = define.SplitNewLine();
