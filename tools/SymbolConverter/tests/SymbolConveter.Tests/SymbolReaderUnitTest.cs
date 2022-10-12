@@ -96,6 +96,14 @@ typedef struct
     } struct_method(ctx);
 } include_method_t;
 
+typedef struct inline_2
+{
+    uint32_t MBEDTLS_PRIVATE(total)[2];          /*!< number of bytes processed  */
+    uint32_t MBEDTLS_PRIVATE(state)[4];          /*!< intermediate digest state  */
+    unsigned char MBEDTLS_PRIVATE(buffer)[64];   /*!< data block being processed */
+}
+inline2;
+
 // method
 void foo();
     int foo_spaced( foo_context *ssl );
@@ -306,7 +314,7 @@ static inline int static_inline_method( const foo_context *ssl,
         {
             var actual = reader.Read(DetectionType.Typedef, Contents, s => PREFIX + s);
             actual.Should().NotBeEmpty();
-            actual.Count().Should().Be(9);
+            actual.Count().Should().Be(10);
         }
 
         // macro
@@ -347,7 +355,7 @@ static inline int static_inline_method( const foo_context *ssl,
         {
             var actual = reader.Read(DetectionType.Typedef, Contents, s => PREFIX + s);
             actual.Should().NotBeEmpty();
-            actual.Count().Should().Be(9);
+            actual.Count().Should().Be(10);
         }
 
         // macro
