@@ -563,7 +563,7 @@ public class SymbolReader
         var typedefEndExceptionalRegex = new Regex($@"\s*{delimiter}", RegexOptions.Compiled);
 
         var typedefContainsParethesis = new Regex(@"^\s*typedef\s+\w+\s*{", RegexOptions.Compiled);
-        var parenthesisStartRegex = new Regex(@"^\s*{", RegexOptions.Compiled);
+        var parenthesisStartRegex = new Regex(@"^\s*(\w+\s+)?{", RegexOptions.Compiled);
         var parenthesisEndRegex = new Regex(@"^\s*}", RegexOptions.Compiled);
 
         var typedefLines = new List<string>();
