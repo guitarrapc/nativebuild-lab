@@ -297,26 +297,21 @@ public class SymbolReader
         // `typedef <any>;` or `} foo;`
         var externEndRegex = new Regex($@".*{delimiter}", RegexOptions.Compiled);
 
-        static bool IsEmptyLine(string str) => string.IsNullOrWhiteSpace(str);
-        static bool IsCommentLine(string str) => str.StartsWith("//") || str.StartsWith("/*") || str.StartsWith("*/") || str.StartsWith("*");
-        static bool IsPragmaLine(string str) => str.StartsWith("#");
-
         var lines = new List<string>();
         for (var i = 0; i < content.Length; i++)
         {
-            var line = content[i].TrimStart();
-            if (IsEmptyLine(line)) continue;
-            if (IsCommentLine(line)) continue;
-            if (IsPragmaLine(line)) continue;
+            if (IsEmptyLine(content[i])) continue;
+            if (IsCommentLine(content[i])) continue;
+            if (IsPragmaLine(content[i])) continue;
 
             var sb = new StringBuilder();
-            if (externStartRegex.IsMatch(line))
+            if (externStartRegex.IsMatch(content[i]))
             {
                 // add first line
-                sb.AppendLine(line);
+                sb.AppendLine(content[i]);
 
                 // is single line?
-                if (!externEndRegex.IsMatch(line))
+                if (!externEndRegex.IsMatch(content[i]))
                 {
                     // is multiline
 
@@ -379,19 +374,14 @@ public class SymbolReader
         var typedefEndExceptionalRegex = new Regex(@"\s*;", RegexOptions.Compiled);
         var typedefContainsParethesis = new Regex(@"^\s*typedef\s+\w+\s*{", RegexOptions.Compiled);
 
-        static bool IsEmptyLine(string str) => string.IsNullOrWhiteSpace(str);
-        static bool IsCommentLine(string str) => str.StartsWith("//") || str.StartsWith("/*") || str.StartsWith("*/") || str.StartsWith("*");
-        static bool IsPragmaLine(string str) => str.StartsWith("#");
-
         var lines = new List<string>();
         for (var i = 0; i < content.Length; i++)
         {
-            var line = content[i].TrimStart();
-            if (IsEmptyLine(line)) continue;
-            if (IsCommentLine(line)) continue;
+            if (IsEmptyLine(content[i].TrimStart())) continue;
+            if (IsCommentLine(content[i].TrimStart())) continue;
 
             // skip "static inline" block
-            if (staticInlineStartRegex.IsMatch(line))
+            if (staticInlineStartRegex.IsMatch(content[i]))
             {
                 var complete = false;
                 var rest = 0;
@@ -414,10 +404,10 @@ public class SymbolReader
             }
 
             // skip typedef block
-            if (typedefStartRegex.IsMatch(line))
+            if (typedefStartRegex.IsMatch(content[i]))
             {
                 var j = i;
-                if (typedefEndRegex.IsMatch(line))
+                if (typedefEndRegex.IsMatch(content[i]))
                 {
                     // sigle line
                     continue;
@@ -427,7 +417,7 @@ public class SymbolReader
                     // multi line
                     var complete = false;
                     var invalid = false;
-                    var rest = typedefContainsParethesis.IsMatch(line) ? 1 : 0;
+                    var rest = typedefContainsParethesis.IsMatch(content[i]) ? 1 : 0;
                     while (++j <= content.Length - 1 && !complete)
                     {
                         var current = content[j];
@@ -467,17 +457,16 @@ public class SymbolReader
                             if (typedefEndRegex.IsMatch(current))
                             {
                                 complete = true;
-                                continue;
+                                break;
                             }
                             else if (typedefEndExceptionalRegex.IsMatch(current))
                             {
                                 // add `;`
                                 complete = true;
-                                continue;
+                                break;
                             }
                         }
                     }
-
 
                     if (!invalid)
                     {
@@ -487,14 +476,13 @@ public class SymbolReader
             }
 
             // skip "struct" block
-            if (structStartRegex.IsMatch(line))
+            if (structStartRegex.IsMatch(content[i]))
             {
                 var complete = false;
                 var rest = 0;
                 while (++i <= content.Length - 1 && !complete)
                 {
                     // find parenthesis pair which close static inline method.
-                    var current = content[i];
                     if (parenthesisStartRegex.IsMatch(content[i]))
                     {
                         rest++;
@@ -510,7 +498,7 @@ public class SymbolReader
             }
 
             // skip "#define" block
-            if (defineStartRegex.IsMatch(line))
+            if (defineStartRegex.IsMatch(content[i]))
             {
                 while (++i <= content.Length - 1 && defineContinueRegex.IsMatch(content[i]))
                 {
@@ -518,16 +506,16 @@ public class SymbolReader
                 continue;
             }
 
-            if (IsPragmaLine(line)) continue;
+            if (IsPragmaLine(content[i])) continue;
 
             var sb = new StringBuilder();
-            if (methodStartRegex.IsMatch(line))
+            if (methodStartRegex.IsMatch(content[i]))
             {
                 // add first line
-                sb.AppendLine(line);
+                sb.AppendLine(content[i]);
 
                 // is single line?
-                if (!methodEndRegex.IsMatch(line))
+                if (!methodEndRegex.IsMatch(content[i]))
                 {
                     // is multiline
 
@@ -578,31 +566,27 @@ public class SymbolReader
         var parenthesisStartRegex = new Regex(@"^\s*{", RegexOptions.Compiled);
         var parenthesisEndRegex = new Regex(@"^\s*}", RegexOptions.Compiled);
 
-        static bool IsEmptyLine(string str) => string.IsNullOrWhiteSpace(str);
-        static bool IsCommentLine(string str) => str.StartsWith("//") || str.StartsWith("/*") || str.StartsWith("*/") || str.StartsWith("*");
-
         var typedefLines = new List<string>();
         for (var i = 0; i < content.Length; i++)
         {
-            var line = content[i];
-            if (IsEmptyLine(line)) continue;
-            if (IsCommentLine(line)) continue;
+            if (IsEmptyLine(content[i])) continue;
+            if (IsCommentLine(content[i])) continue;
 
             var sb = new StringBuilder();
-            if (typedefStartRegex.IsMatch(line))
+            if (typedefStartRegex.IsMatch(content[i]))
             {
                 // add first line
-                sb.AppendLine(line);
+                sb.AppendLine(content[i]);
 
                 // is single line?
-                if (!typedefEndRegex.IsMatch(line))
+                if (!typedefEndRegex.IsMatch(content[i]))
                 {
                     // is multiline
 
                     // find `{` and `;` to complete typedef.
                     var complete = false;
                     var invalid = false;
-                    var rest = typedefContainsParethesis.IsMatch(line) ? 1 : 0;
+                    var rest = typedefContainsParethesis.IsMatch(content[i]) ? 1 : 0;
                     while (++i <= content.Length - 1 && !complete)
                     {
                         var current = content[i];
@@ -707,5 +691,13 @@ public class SymbolReader
 
         return lines;
     }
+
+    private static bool IsEmptyLine(string str) => string.IsNullOrWhiteSpace(str.TrimStart());
+    private static bool IsCommentLine(string str)
+    {
+        var s = str.TrimStart();
+        return s.StartsWith("//") || s.StartsWith("/*") || s.StartsWith("*/") || s.StartsWith("*");
+    }
+    private static bool IsPragmaLine(string str) => str.TrimStart().StartsWith("#");
 }
 
