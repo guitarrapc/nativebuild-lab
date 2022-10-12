@@ -13,11 +13,11 @@
     },
     "list(mbedtls)": {
       "commandName": "Project",
-      "commandLineArgs": "list --header-paths C:/git/guitarrapc/nativebuild-lab/mbedtls/library,C:/git/guitarrapc/nativebuild-lab/mbedtls/include,C:/git/guitarrapc/nativebuild-lab/mbedtls/tests/include"
+      "commandLineArgs": "list --header-paths C:/git/guitarrapc/nativebuild-lab/mbedtls/library,C:/git/guitarrapc/nativebuild-lab/mbedtls/include,C:/git/guitarrapc/nativebuild-lab/mbedtls/tests/include,C:/git/guitarrapc/nativebuild-lab/mbedtls/tests/include"
     },
     "prefix(mbedtls)": {
       "commandName": "Project",
-      "commandLineArgs": "prefix --header-paths C:/git/guitarrapc/nativebuild-lab/mbedtls/library,C:/git/guitarrapc/nativebuild-lab/mbedtls/include,C:/git/guitarrapc/nativebuild-lab/mbedtls/tests/include --prefix nantoka_ --dryrun false"
+      "commandLineArgs": "prefix --header-paths C:/git/guitarrapc/nativebuild-lab/mbedtls/library,C:/git/guitarrapc/nativebuild-lab/mbedtls/include,C:/git/guitarrapc/nativebuild-lab/mbedtls/tests/include,C:/git/guitarrapc/nativebuild-lab/mbedtls/tests/include --impl-paths C:/git/guitarrapc/nativebuild-lab/mbedtls/library,C:/git/guitarrapc/nativebuild-lab/mbedtls/tests/src --prefix nantoka_ --dryrun false"
     },
     "list(mbedtls-repo)": {
       "commandName": "Project",
