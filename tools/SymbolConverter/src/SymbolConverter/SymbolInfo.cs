@@ -19,7 +19,8 @@ public static class SymbolDelimiters
         "(", // method
         " ",
         ")",
-        ","
+        ",",
+        "}", // mapping ... {aes, foo_aes}
     };
     public static readonly IReadOnlyList<string> TypedefDelimiters = new[]
     {
