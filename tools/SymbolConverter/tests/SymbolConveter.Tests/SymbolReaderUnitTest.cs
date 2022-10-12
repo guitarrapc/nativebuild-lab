@@ -96,6 +96,17 @@ typedef struct
     } struct_method(ctx);
 } include_method_t;
 
+typedef struct include_union_sameline
+{
+    int type;                              /**< The SAN type, value of MBEDTLS_X509_SAN_XXX. */
+    union {
+        foo_name other_name; /**< The otherName supported type. */
+        foo_buf   unstructured_name; /**< The buffer for the un constructed types. Only dnsName currently supported */
+    }
+    san; /**< A union of the supported SAN types */
+}
+include_union_sameline;
+
 typedef struct inline_2
 {
     uint32_t MBEDTLS_PRIVATE(total)[2];          /*!< number of bytes processed  */
@@ -314,7 +325,7 @@ static inline int static_inline_method( const foo_context *ssl,
         {
             var actual = reader.Read(DetectionType.Typedef, Contents, s => PREFIX + s);
             actual.Should().NotBeEmpty();
-            actual.Count().Should().Be(10);
+            actual.Count().Should().Be(11);
         }
 
         // macro
@@ -355,7 +366,7 @@ static inline int static_inline_method( const foo_context *ssl,
         {
             var actual = reader.Read(DetectionType.Typedef, Contents, s => PREFIX + s);
             actual.Should().NotBeEmpty();
-            actual.Count().Should().Be(10);
+            actual.Count().Should().Be(11);
         }
 
         // macro
@@ -740,6 +751,16 @@ static inline int static_inline_method( const foo_context *ssl,
             mbedtls_pk_rsa_alt_key_len_func key_len_func;
         } spaces_multiline_t;", "spaces_multiline_t", PREFIX + "spaces_multiline_t")]
     [InlineData("typedef struct singleline_typedef_struct_s singleline_typedef_struct_t;", "singleline_typedef_struct_t", PREFIX + "singleline_typedef_struct_t")]
+    [InlineData(@"typedef struct include_union_sameline
+    {
+        int type;                              /**< The SAN type, value of MBEDTLS_X509_SAN_XXX. */
+        union {
+            foo_name other_name; /**< The otherName supported type. */
+            foo_buf   unstructured_name; /**< The buffer for the un constructed types. Only dnsName currently supported */
+        }
+        san; /**< A union of the supported SAN types */
+    }
+    include_union_sameline;", "include_union_sameline", PREFIX + "include_union_sameline")]
     public void TypedefReaderTest(string define, string expectedSymbol, string expectedRenamedSymbol)
     {
         var content = define.SplitNewLine();
