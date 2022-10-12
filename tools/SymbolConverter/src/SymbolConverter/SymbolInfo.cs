@@ -20,7 +20,7 @@ public static class SymbolDelimiters
         " ",
         ")",
         ",",
-        "}", // mapping ... {aes, foo_aes}
+        "}", // mapping ... {bar, foo_bar}
     };
     public static readonly IReadOnlyList<string> TypedefDelimiters = new[]
     {
@@ -29,11 +29,13 @@ public static class SymbolDelimiters
         ")", // inside sizeof ... sizeof(foo)
         "*", // ptr ... (foo*)
         "\n", "\r\n", // new line after ... struct foo\n{
+        ",", // parameter type ... FOO(bar, hoge)
     };
     public static readonly IReadOnlyList<string> ExternDelimiters = new[]
     {
         ";",
         " ",
         "(", // method
+        ")", // prt ... (*foo)
     };
 }
