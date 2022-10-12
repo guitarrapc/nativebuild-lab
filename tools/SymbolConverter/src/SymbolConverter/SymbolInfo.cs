@@ -14,7 +14,25 @@ public record SymbolInfo(string Line, DetectionType DetectionType, IReadOnlyList
 
 public static class SymbolDelimiters
 {
-    public static readonly IReadOnlyList<string> MethodDelimiters = new[] { "(", " ", ")", "," };
-    public static readonly IReadOnlyList<string> TypedefDelimiters = new[] { ";", " " };
-    public static readonly IReadOnlyList<string> ExternDelimiters = new[] { ";", " ", "(" };
+    public static readonly IReadOnlyList<string> MethodDelimiters = new[]
+    {
+        "(", // method
+        " ",
+        ")",
+        ","
+    };
+    public static readonly IReadOnlyList<string> TypedefDelimiters = new[]
+    {
+        ";",
+        " ",
+        ")", // inside sizeof ... sizeof(foo)
+        "*", // ptr ... (foo*)
+        "\n", "\r\n", // new line after ... struct foo\n{
+    };
+    public static readonly IReadOnlyList<string> ExternDelimiters = new[]
+    {
+        ";",
+        " ",
+        "(", // method
+    };
 }
