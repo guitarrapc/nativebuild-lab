@@ -202,7 +202,7 @@ jobs:
         working-directory: ${{ env.app }}
         shell: cmd
         if: ${{ matrix.patch != '' }}
-      - run: echo "path=$(`"${{ github.workspace }}`".Replace('\','/'))" >> "$GITHUB_OUTPUT"
+      - run: echo "path=$(`"${{ github.workspace }}`".Replace('\','/'))" >> "$env:GITHUB_OUTPUT"
         id: workspace
       - name: SymbolConverter
         run: dotnet run --project ./tools/SymbolConverter/src/SymbolConverter/SymbolConverter.csproj prefix --header-paths ${{ github.steps.workspace.outputs.path }}/mbedtls/library,${{ github.steps.workspace.outputs.path }}/mbedtls/include,${{ github.steps.workspace.outputs.path }}/mbedtls/tests/include,${{ github.steps.workspace.outputs.path }}/mbedtls/programs --impl-paths ${{ github.steps.workspace.outputs.path }}/mbedtls/library,${{ github.steps.workspace.outputs.path }}/mbedtls/tests/src,${{ github.steps.workspace.outputs.path }}/mbedtls/programs --macro-paths ${{ github.steps.workspace.outputs.path }}/mbedtls/library --prefix nantoka_ --dryrun false
