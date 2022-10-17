@@ -202,12 +202,10 @@ jobs:
         working-directory: ${{ env.app }}
         shell: cmd
         if: ${{ matrix.patch != '' }}
-      - run: |
-          echo "path=$(`"${{ github.workspace }}`".Replace('\','/'))" >> "$env:GITHUB_OUTPUT"
-          echo "path=$(`"${{ github.workspace }}`".Replace('\','/'))"
+      - run: echo "WORKSPACE=$(`"${{ github.workspace }}`".Replace('\','/'))" >> "$env:GITHUB_ENV"
         id: workspace
       - name: SymbolConverter
-        run: dotnet run --project ./tools/SymbolConverter/src/SymbolConverter/SymbolConverter.csproj prefix --header-paths ${{ github.steps.workspace.outputs.path }}/mbedtls/library,${{ github.steps.workspace.outputs.path }}/mbedtls/include,${{ github.steps.workspace.outputs.path }}/mbedtls/tests/include,${{ github.steps.workspace.outputs.path }}/mbedtls/programs --impl-paths ${{ github.steps.workspace.outputs.path }}/mbedtls/library,${{ github.steps.workspace.outputs.path }}/mbedtls/tests/src,${{ github.steps.workspace.outputs.path }}/mbedtls/programs --macro-paths ${{ github.steps.workspace.outputs.path }}/mbedtls/library --prefix nantoka_ --dryrun false
+        run: dotnet run --project ./tools/SymbolConverter/src/SymbolConverter/SymbolConverter.csproj prefix --header-paths ${{ env.WORKSPACE }}/mbedtls/library,${{ env.WORKSPACE }}/mbedtls/include,${{ env.WORKSPACE }}/mbedtls/tests/include,${{ env.WORKSPACE }}/mbedtls/programs --impl-paths ${{ env.WORKSPACE }}/mbedtls/library,${{ env.WORKSPACE }}/mbedtls/tests/src,${{ env.WORKSPACE }}/mbedtls/programs --macro-paths ${{ env.WORKSPACE }}/mbedtls/library --prefix nantoka_ --dryrun false
         env:
           SYMBOL_CONVERTER_MACRO_REGEXES: ".*(?<name>mbedtls_##type##_context).*,.*(?<name>mbedtls_##type##_init).*"
         if: ${{ matrix.symbol-convert == 'true' }}
