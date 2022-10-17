@@ -198,7 +198,7 @@ jobs:
         shell: cmd
         if: ${{ matrix.patch != '' }}
       - name: Patch Windows shared symbol output
-        run: IF EXIST "..\builder\mbedtls\patch\wrapper.patch" git apply --ignore-space-change --ignore-whitespace --whitespace=nowarn ..\builder\mbedtls\patch\windows.patch
+        run: IF EXIST "..\builder\mbedtls\patch\windows.patch" git apply --ignore-space-change --ignore-whitespace --whitespace=nowarn ..\builder\mbedtls\patch\windows.patch
         working-directory: ${{ env.app }}
         shell: cmd
         if: ${{ matrix.patch != '' }}
