@@ -10,8 +10,8 @@ ANDROID_NDK=${ANDROID_NDK:=android-ndk-r23c}
 ANDROID_PLATFORM=${ANDROID_PLATFORM:=21}
 ANDROID_URL=https://dl.google.com/android/repository/${ANDROID_NDK}-linux.zip
 
-ZLIB=${ZLIB:=1.2.12}
-ZLIB_URL=https://zlib.net/zlib-${ZLIB}.tar.gz
+ZLIB=${ZLIB:=1.2.13}
+ZLIB_URL=https://github.com/madler/zlib/releases/download/v${ZLIB}/zlib-${ZLIB}.tar.gz
 
 XZ=${XZ:=5.2.5}
 XZ_URL=https://downloads.sourceforge.net/project/lzmautils/xz-${XZ}.tar.gz
