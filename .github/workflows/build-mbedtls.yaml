@@ -34,6 +34,7 @@ jobs:
       matrix:
         target: ["x86", "x64", "arm", "arm64"]
         patch: ["", "-patch"]
+        symbol-convert: ["", "true"]
     env:
       OUTPUT_DIR: _out/android-${{ matrix.target }}${{ matrix.patch }}
     runs-on: ubuntu-latest
@@ -48,6 +49,14 @@ jobs:
         run: if [[ -f ../builder/mbedtls/wrapper.patch ]]; then patch -p1 < ../builder/mbedtls/wrapper.patch; fi
         working-directory: ${{ env.app }}
         if: ${{ matrix.patch != '' }}
+      - uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: "6.0.x"
+      - name: SymbolConverter
+        run: dotnet run --project ./tools/SymbolConverter/src/SymbolConverter/SymbolConverter.csproj prefix --header-paths ${{ github.workspace }}/mbedtls/library,${{ github.workspace }}/mbedtls/include,${{ github.workspace }}/mbedtls/tests/include,${{ github.workspace }}/mbedtls/programs --impl-paths ${{ github.workspace }}/mbedtls/library,${{ github.workspace }}/mbedtls/tests/src,${{ github.workspace }}/mbedtls/programs --macro-paths ${{ github.workspace }}/mbedtls/library --prefix nantoka_ --dryrun false
+        env:
+          SYMBOL_CONVERTER_MACRO_REGEXES: ".*(?<name>mbedtls_##type##_context).*,.*(?<name>mbedtls_##type##_init).*"
+        if: ${{ matrix.symbol-convert == 'true' }}
       - name: Build
         run: bash ./builder/${{ env.app }}/${{ env.app }}-android-${{ matrix.target }}.sh
       - name: show generated files
@@ -64,6 +73,7 @@ jobs:
       matrix:
         target: ["arm64"]
         patch: ["", "-patch"]
+        symbol-convert: ["", "true"]
     env:
       OUTPUT_DIR: _out/ios-${{ matrix.target }}${{ matrix.patch }}
     runs-on: macos-latest
@@ -78,6 +88,11 @@ jobs:
         run: if [[ -f ../builder/mbedtls/wrapper.patch ]]; then patch -p1 < ../builder/mbedtls/wrapper.patch; fi
         working-directory: ${{ env.app }}
         if: ${{ matrix.patch != '' }}
+      - name: SymbolConverter
+        run: dotnet run --project ./tools/SymbolConverter/src/SymbolConverter/SymbolConverter.csproj prefix --header-paths ${{ github.workspace }}/mbedtls/library,${{ github.workspace }}/mbedtls/include,${{ github.workspace }}/mbedtls/tests/include,${{ github.workspace }}/mbedtls/programs --impl-paths ${{ github.workspace }}/mbedtls/library,${{ github.workspace }}/mbedtls/tests/src,${{ github.workspace }}/mbedtls/programs --macro-paths ${{ github.workspace }}/mbedtls/library --prefix nantoka_ --dryrun false
+        env:
+          SYMBOL_CONVERTER_MACRO_REGEXES: ".*(?<name>mbedtls_##type##_context).*,.*(?<name>mbedtls_##type##_init).*"
+        if: ${{ matrix.symbol-convert == 'true' }}
       - name: Build
         run: bash ./builder/${{ env.app }}/${{ env.app }}-ios-arm64.sh
       - name: show generated files
@@ -94,6 +109,7 @@ jobs:
       matrix:
         target: ["x64", "arm64"]
         patch: ["", "-patch"]
+        symbol-convert: ["", "true"]
     env:
       OUTPUT_DIR: _out/linux-${{ matrix.target }}${{ matrix.patch }}
     runs-on: ubuntu-latest
@@ -108,6 +124,11 @@ jobs:
         run: if [[ -f ../builder/mbedtls/wrapper.patch ]]; then patch -p1 < ../builder/mbedtls/wrapper.patch; fi
         working-directory: ${{ env.app }}
         if: ${{ matrix.patch != '' }}
+      - name: SymbolConverter
+        run: dotnet run --project ./tools/SymbolConverter/src/SymbolConverter/SymbolConverter.csproj prefix --header-paths ${{ github.workspace }}/mbedtls/library,${{ github.workspace }}/mbedtls/include,${{ github.workspace }}/mbedtls/tests/include,${{ github.workspace }}/mbedtls/programs --impl-paths ${{ github.workspace }}/mbedtls/library,${{ github.workspace }}/mbedtls/tests/src,${{ github.workspace }}/mbedtls/programs --macro-paths ${{ github.workspace }}/mbedtls/library --prefix nantoka_ --dryrun false
+        env:
+          SYMBOL_CONVERTER_MACRO_REGEXES: ".*(?<name>mbedtls_##type##_context).*,.*(?<name>mbedtls_##type##_init).*"
+        if: ${{ matrix.symbol-convert == 'true' }}
       - name: Build
         run: bash ./builder/${{ env.app }}/${{ env.app }}-linux-${{ matrix.target }}.sh
       - name: show generated files
@@ -124,6 +145,7 @@ jobs:
       matrix:
         target: ["x64", "arm64"]
         patch: ["", "-patch"]
+        symbol-convert: ["", "true"]
     env:
       OUTPUT_DIR: _out/osx-${{ matrix.target }}${{ matrix.patch }}
     runs-on: macos-latest
@@ -138,6 +160,11 @@ jobs:
         run: if [[ -f ../builder/mbedtls/wrapper.patch ]]; then patch -p1 < ../builder/mbedtls/wrapper.patch; fi
         working-directory: ${{ env.app }}
         if: ${{ matrix.patch != '' }}
+      - name: SymbolConverter
+        run: dotnet run --project ./tools/SymbolConverter/src/SymbolConverter/SymbolConverter.csproj prefix --header-paths ${{ github.workspace }}/mbedtls/library,${{ github.workspace }}/mbedtls/include,${{ github.workspace }}/mbedtls/tests/include,${{ github.workspace }}/mbedtls/programs --impl-paths ${{ github.workspace }}/mbedtls/library,${{ github.workspace }}/mbedtls/tests/src,${{ github.workspace }}/mbedtls/programs --macro-paths ${{ github.workspace }}/mbedtls/library --prefix nantoka_ --dryrun false
+        env:
+          SYMBOL_CONVERTER_MACRO_REGEXES: ".*(?<name>mbedtls_##type##_context).*,.*(?<name>mbedtls_##type##_init).*"
+        if: ${{ matrix.symbol-convert == 'true' }}
       - name: Build
         run: bash ./builder/${{ env.app }}/${{ env.app }}-darwin-${{ matrix.target }}.sh
       - name: show generated files
@@ -154,6 +181,7 @@ jobs:
       matrix:
         target: ["x64", "x86", "arm64"]
         patch: ["", "-patch"]
+        symbol-convert: ["", "true"]
     env:
       OUTPUT_DIR: _out\win-${{ matrix.target }}${{ matrix.patch }}
     runs-on: windows-2022
@@ -174,6 +202,11 @@ jobs:
         working-directory: ${{ env.app }}
         shell: cmd
         if: ${{ matrix.patch != '' }}
+      - name: SymbolConverter
+        run: dotnet run --project ./tools/SymbolConverter/src/SymbolConverter/SymbolConverter.csproj prefix --header-paths ${{ github.workspace }}/mbedtls/library,${{ github.workspace }}/mbedtls/include,${{ github.workspace }}/mbedtls/tests/include,${{ github.workspace }}/mbedtls/programs --impl-paths ${{ github.workspace }}/mbedtls/library,${{ github.workspace }}/mbedtls/tests/src,${{ github.workspace }}/mbedtls/programs --macro-paths ${{ github.workspace }}/mbedtls/library --prefix nantoka_ --dryrun false
+        env:
+          SYMBOL_CONVERTER_MACRO_REGEXES: ".*(?<name>mbedtls_##type##_context).*,.*(?<name>mbedtls_##type##_init).*"
+        if: ${{ matrix.symbol-convert == 'true' }}
       - name: Add MSBuild to PATH
         uses: microsoft/setup-msbuild@v1.1
       - name: Build
