@@ -37,10 +37,11 @@ This repository indicate build native binaries for following.
   - [Linux](#linux-2)
   - [macOS](#macos-2)
   - [Windows](#windows-2)
-- [REF](#ref)
+- [TIPS](#tips)
   - [CMake](#cmake)
   - [mingw-w64](#mingw-w64)
   - [Rename Shared Lib after build](#rename-shared-lib-after-build)
+  - [cmd and bash redirection](#cmd-and-bash-redirection)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
