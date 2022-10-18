@@ -7,20 +7,34 @@ app.Run();
 
 public class SymbolApp : ConsoleAppBase
 {
+    private static readonly string[] defaultHeaderExtensions = new[] { "*.h" };
+    private static readonly string[] defaultImplExtensions = new[] { "*.c" };
+    private static readonly string[] defaultMacroExtensions = new[] { "*.h", "*.c" };
+
     [Command("list", "List symbols from header files (.h)")]
     public async Task List(
         [Option("header-paths", "Libary directory path to search header files.")] string[] headerPaths,
         [Option("macro-paths", "Implement directory path to search macro.")] string[]? macroPaths = null,
+        [Option("header-extensions", "Header file extensions. (default: *.h)")] string[]? headerExtensions = null,
+        [Option("macro-extensions",  "Macro file extensions. (default: *.h,*.c)")] string[]? macroExtensions = null,
         [Option("sort", "Sort symbols for each files.")] bool sort = false
     )
     {
+        var macroDir = macroPaths ?? Array.Empty<string>();
+        var headerExt = headerExtensions ?? defaultHeaderExtensions;
+        var macroExt = macroExtensions ?? defaultMacroExtensions;
+
+        Debug.WriteLine($@"Listing symbols.");
+        Debug.WriteLine($@"  Header directory: {headerPaths.ToJoinedString()}");
+        Debug.WriteLine($@"  Header extexntions: {headerExt.ToJoinedString()}");
+        Debug.WriteLine($@"  Macro directory: {macroDir.ToJoinedString()}");
+        Debug.WriteLine($@"  Macro extexntions: {macroExt.ToJoinedString()}");
+
         var operation = new SymbolOperation(new SymbolReaderOption(Sort: sort));
-        var listMacros = macroPaths is not null ? await operation.ListMacrosAsync(macroPaths) : Array.Empty<SymbolInfo>();
-        var listSymbols = await operation.ListSymbolsAsync(headerPaths);
+        var listMacros = macroPaths is not null ? await operation.ListMacrosAsync(macroPaths, macroExt) : Array.Empty<SymbolInfo>();
+        var listSymbols = await operation.ListSymbolsAsync(headerPaths, headerExt);
         var symbolLookup = listMacros.Concat(listSymbols).ToLookup(x => x!.GetSourceFile());
 
-        Console.WriteLine($@"Source directory: {string.Join(",", headerPaths)}");
-        Console.WriteLine();
         foreach (var symbols in symbolLookup)
         {
             Console.WriteLine($"File: {symbols.Key}");
@@ -38,21 +52,28 @@ public class SymbolApp : ConsoleAppBase
 
     [Command("prefix", "Add prefix to header and implemataion files.")]
     public async Task Prefix(
-        [Option("header-paths", "Directory path contains header files.")] string[] headerPaths,
         [Option("prefix", "Prefix to add.")] string prefix,
+        [Option("header-paths", "Directory path contains header files.")] string[] headerPaths,
         [Option("impl-paths", "Directory path contains implementaion files. (Default: Use headerPath)")] string[]? implPaths = null,
         [Option("macro-paths", "imple directory path to search macro.")] string[]? macroPaths = null,
+        [Option("header-extensions", "Header file extensions. (default: *.h)")] string[]? headerExtensions = null,
+        [Option("impl-extensions", "Header file extensions. (default: *.c)")] string[]? implExtensions = null,
+        [Option("macro-extensions", "Macro file extensions. (default: *.h,*.c)")] string[]? macroExtensions = null,
         [Option("dryrun", "True to dry-run. false to apply changes.")] bool dryrun = true
     )
     {
+        var macroDir = macroPaths ?? Array.Empty<string>();
+        var headerExt = headerExtensions ?? defaultHeaderExtensions;
+        var implExt = implExtensions ?? defaultImplExtensions;
+        var macroExt = macroExtensions ?? defaultMacroExtensions;
         if (implPaths is null)
         {
             implPaths = headerPaths;
         }
 
         var operation = new SymbolOperation(new SymbolReaderOption());
-        var listMacros = macroPaths is not null ? await operation.ListMacrosAsync(macroPaths, prefix) : Array.Empty<SymbolInfo>();
-        var listSymbols = await operation.ListSymbolsAsync(headerPaths, prefix);
+        var listMacros = macroPaths is not null ? await operation.ListMacrosAsync(macroPaths, macroExt, prefix) : Array.Empty<SymbolInfo>();
+        var listSymbols = await operation.ListSymbolsAsync(headerPaths, headerExt);
         var list = listMacros.Concat(listSymbols).ToArray();
 
         if (list.Any())
@@ -69,22 +90,19 @@ public class SymbolApp : ConsoleAppBase
             // header
             Console.WriteLine();
             Console.WriteLine($@"Header Source directory: {string.Join(",", headerPaths)}");
-            foreach (var headerPath in headerPaths)
-            {
-                var headerFiles = Directory.EnumerateFiles(headerPath, "*.h", new EnumerationOptions { RecurseSubdirectories = true });
-                await operation.ReplaceAsync(headerFiles, symbols, dryrun);
-            }
+            await operation.ReplaceAsync(headerPaths, headerExt, symbols, dryrun);
 
             // impl
             Console.WriteLine();
             Console.WriteLine($@"Impl Source directory: {string.Join(",", implPaths)}");
-            foreach (var implPath in implPaths)
-            {
-                var implFiles = Directory.EnumerateFiles(implPath, "*.c", new EnumerationOptions { RecurseSubdirectories = true });
-                await operation.ReplaceAsync(implFiles, symbols, dryrun);
-            }
+            await operation.ReplaceAsync(implPaths, implExt, symbols, dryrun);
         }
     }
+}
+
+public static class EnumerableExtensions
+{
+    public static string ToJoinedString(this IEnumerable<string> values, string separator = ",") => string.Join(separator, values);
 }
 
 public class SymbolOperation
@@ -96,13 +114,17 @@ public class SymbolOperation
         _option = option;
     }
 
-    public async Task<IReadOnlyList<SymbolInfo?>> ListSymbolsAsync(string[] headerPaths, string prefix = "")
+    public async Task<IReadOnlyList<SymbolInfo?>> ListSymbolsAsync(string[] paths, string[] extensions, string prefix = "")
     {
         var list = new List<SymbolInfo?>();
         var reader = new SymbolReader(_option);
-        foreach (var headerPath in headerPaths)
+        foreach (var path in paths)
         {
-            var files = Directory.EnumerateFiles(headerPath, "*.h", new EnumerationOptions { RecurseSubdirectories = true });
+            var files = Enumerable.Empty<string>();
+            foreach (var extension in extensions)
+            {
+                files = files.Concat(Directory.EnumerateFiles(path, extension, new EnumerationOptions { RecurseSubdirectories = true }));
+            }
 
             foreach (var file in files)
             {
@@ -132,15 +154,17 @@ public class SymbolOperation
         return list;
     }
 
-    public async Task<IReadOnlyList<SymbolInfo?>> ListMacrosAsync(string[] macroPaths, string prefix = "")
+    public async Task<IReadOnlyList<SymbolInfo?>> ListMacrosAsync(string[] paths, string[] extensions, string prefix = "")
     {
         var list = new List<SymbolInfo?>();
         var reader = new SymbolReader(_option);
-        foreach (var headerPath in macroPaths)
+        foreach (var path in paths)
         {
-            var cfiles = Directory.EnumerateFiles(headerPath, "*.c", new EnumerationOptions { RecurseSubdirectories = true });
-            var hfiles = Directory.EnumerateFiles(headerPath, "*.h", new EnumerationOptions { RecurseSubdirectories = true });
-            var files = cfiles.Concat(hfiles);
+            var files = Enumerable.Empty<string>();
+            foreach (var extension in extensions)
+            {
+                files = files.Concat(Directory.EnumerateFiles(path, extension, new EnumerationOptions { RecurseSubdirectories = true }));
+            }
 
             foreach (var file in files)
             {
@@ -158,31 +182,40 @@ public class SymbolOperation
         return list;
     }
 
-    public async Task ReplaceAsync(IEnumerable<string> files, IReadOnlyList<SymbolInfo?> symbols, bool dryrun, bool debug = false)
+    public async Task ReplaceAsync(string[] paths, string[] extensions, IReadOnlyList<SymbolInfo?> symbols, bool dryrun, bool debug = false)
     {
         var writer = new SymbolWriter();
-        foreach (var file in files)
+        foreach (var path in paths)
         {
-            Debug.WriteLine($"Reading file '{file}'");
-
-            var content = await File.ReadAllTextAsync(file);
-            var result = writer.ReplaceSymbol(content, symbols);
-
-            var changed = !content.Equals(result);
-            Console.WriteLine($"{file} (changed: {changed})");
-            if (!dryrun)
+            var files = Enumerable.Empty<string>();
+            foreach (var extension in extensions)
             {
-                if (changed)
-                {
-                    File.WriteAllText(file, result);
-                }
+                files = files.Concat(Directory.EnumerateFiles(path, extension, new EnumerationOptions { RecurseSubdirectories = true }));
             }
 
-            if (debug)
+            foreach (var file in files)
             {
-                Console.WriteLine("--------------");
-                Console.WriteLine(result);
-                Console.WriteLine("--------------");
+                Debug.WriteLine($"Reading file '{file}'");
+
+                var content = await File.ReadAllTextAsync(file);
+                var result = writer.ReplaceSymbol(content, symbols);
+
+                var changed = !content.Equals(result);
+                Console.WriteLine($"{file} (changed: {changed})");
+                if (!dryrun)
+                {
+                    if (changed)
+                    {
+                        File.WriteAllText(file, result);
+                    }
+                }
+
+                if (debug)
+                {
+                    Console.WriteLine("--------------");
+                    Console.WriteLine(result);
+                    Console.WriteLine("--------------");
+                }
             }
         }
     }
