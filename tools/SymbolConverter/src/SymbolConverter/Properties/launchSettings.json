@@ -20,7 +20,7 @@
     },
     "prefix(mbedtls)": {
       "commandName": "Project",
-      "commandLineArgs": "prefix --header-paths C:/git/guitarrapc/nativebuild-lab/mbedtls/library,C:/git/guitarrapc/nativebuild-lab/mbedtls/include,C:/git/guitarrapc/nativebuild-lab/mbedtls/tests/include,C:/git/guitarrapc/nativebuild-lab/mbedtls/programs --impl-paths C:/git/guitarrapc/nativebuild-lab/mbedtls/library,C:/git/guitarrapc/nativebuild-lab/mbedtls/tests/src,C:/git/guitarrapc/nativebuild-lab/mbedtls/programs --macro-paths C:/git/guitarrapc/nativebuild-lab/mbedtls/library --prefix nantoka_ --dryrun false",
+      "commandLineArgs": "prefix --prefix nantoka_ --header-paths C:/git/guitarrapc/nativebuild-lab/mbedtls/library,C:/git/guitarrapc/nativebuild-lab/mbedtls/include,C:/git/guitarrapc/nativebuild-lab/mbedtls/tests/include,C:/git/guitarrapc/nativebuild-lab/mbedtls/programs --impl-paths C:/git/guitarrapc/nativebuild-lab/mbedtls/library,C:/git/guitarrapc/nativebuild-lab/mbedtls/tests/src,C:/git/guitarrapc/nativebuild-lab/mbedtls/programs --macro-paths C:/git/guitarrapc/nativebuild-lab/mbedtls/library --dryrun false",
       "environmentVariables": {
         "SYMBOL_CONVERTER_MACRO_REGEXES": ".*(?<name>mbedtls_##type##_context).*,.*(?<name>mbedtls_##type##_init).*"
       }
@@ -34,7 +34,7 @@
     },
     "prefix(mbedtls-repo)": {
       "commandName": "Project",
-      "commandLineArgs": "prefix --header-paths C:/git/guitarrapc/mbedtls/library,C:/git/guitarrapc/mbedtls/include,C:/git/guitarrapc/mbedtls/tests/include,C:/git/guitarrapc/mbedtls/programs --impl-paths C:/git/guitarrapc/mbedtls/library,C:/git/guitarrapc/mbedtls/tests/src,C:/git/guitarrapc/mbedtls/programs --macro-paths C:/git/guitarrapc/mbedtls/library --prefix nantoka_ --dryrun false",
+      "commandLineArgs": "prefix --prefix nantoka_ --header-paths C:/git/guitarrapc/mbedtls/library,C:/git/guitarrapc/mbedtls/include,C:/git/guitarrapc/mbedtls/tests/include,C:/git/guitarrapc/mbedtls/programs --impl-paths C:/git/guitarrapc/mbedtls/library,C:/git/guitarrapc/mbedtls/tests/src,C:/git/guitarrapc/mbedtls/programs --macro-paths C:/git/guitarrapc/mbedtls/library --dryrun false",
       "environmentVariables": {
         "SYMBOL_CONVERTER_MACRO_REGEXES": ".*(?<name>mbedtls_##type##_context).*,.*(?<name>mbedtls_##type##_init).*"
       }

@@ -73,7 +73,7 @@ public class SymbolApp : ConsoleAppBase
 
         var operation = new SymbolOperation(new SymbolReaderOption());
         var listMacros = macroPaths is not null ? await operation.ListMacrosAsync(macroPaths, macroExt, prefix) : Array.Empty<SymbolInfo>();
-        var listSymbols = await operation.ListSymbolsAsync(headerPaths, headerExt);
+        var listSymbols = await operation.ListSymbolsAsync(headerPaths, headerExt, prefix);
         var list = listMacros.Concat(listSymbols).ToArray();
 
         if (list.Any())
