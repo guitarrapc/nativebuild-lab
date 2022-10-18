@@ -589,7 +589,7 @@ builder\zstd\zstd-windows-arm64-mingw.bat
 bash ./builder/zstd/zstd-windows-arm64-mingw.sh
 ```
 
-# REF
+# TIPS
 
 ## CMake
 
@@ -627,3 +627,13 @@ Other way to build.
 When link .dylib and create staticlib .a, use `install_name_tool -id libmylib.dylib libmylib.dylib` if required.
 
 > [macos \- Why can't I rename a shared library after it's been built? \- Stack Overflow](https://stackoverflow.com/questions/42877686/why-cant-i-rename-a-shared-library-after-its-been-built)
+
+
+## cmd and bash redirection
+
+Redirect output to check what happen with log.
+
+```bash
+foo.bat > error.log 2>&1
+foo.bash > error.log 2>&1
+```
