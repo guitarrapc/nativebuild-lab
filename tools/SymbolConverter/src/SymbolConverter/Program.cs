@@ -59,6 +59,10 @@ public class SymbolApp : ConsoleAppBase
         [Option("header-extensions", "Header file extensions. (default: *.h)")] string[]? headerExtensions = null,
         [Option("impl-extensions", "Header file extensions. (default: *.c)")] string[]? implExtensions = null,
         [Option("macro-extensions", "Macro file extensions. (default: *.h,*.c)")] string[]? macroExtensions = null,
+        [Option("method-delimiters", "Additional delimiters for method.")] string[]? methodDelimiters = null,
+        [Option("typedef-delimiters", "Additional delimiters for typedef.")] string[]? typedefDelimiters = null,
+        [Option("extern-delimiters", "Additional delimiters for extern.")] string[]? externDelimiters = null,
+        [Option("macro-delimiters", "Additional delimiters for macro.")] string[]? macroDelimiters = null,
         [Option("dryrun", "True to dry-run. false to apply changes.")] bool dryrun = true
     )
     {
@@ -70,6 +74,7 @@ public class SymbolApp : ConsoleAppBase
         {
             implPaths = headerPaths;
         }
+        SymbolDelimiters.AddDelimiters(methodDelimiters, typedefDelimiters, externDelimiters, macroDelimiters);
 
         var operation = new SymbolOperation(new SymbolReaderOption());
         var listMacros = macroPaths is not null ? await operation.ListMacrosAsync(macroPaths, macroExt, prefix) : Array.Empty<SymbolInfo>();
