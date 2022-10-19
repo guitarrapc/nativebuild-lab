@@ -118,6 +118,10 @@ typedef struct
 
 } include_enum_method;
 
+typedef int (*ptr_name)( void *p_ctx,
+                                        const unsigned char *p,
+                                        const unsigned char *end );
+
 typedef struct inline_2
 {
     uint32_t MBEDTLS_PRIVATE(total)[2];          /*!< number of bytes processed  */
@@ -336,7 +340,7 @@ static inline int static_inline_method( const foo_context *ssl,
         {
             var actual = reader.Read(DetectionType.Typedef, Contents, s => PREFIX + s);
             actual.Should().NotBeEmpty();
-            actual.Count().Should().Be(12);
+            actual.Count().Should().Be(13);
         }
 
         // macro
@@ -377,7 +381,7 @@ static inline int static_inline_method( const foo_context *ssl,
         {
             var actual = reader.Read(DetectionType.Typedef, Contents, s => PREFIX + s);
             actual.Should().NotBeEmpty();
-            actual.Count().Should().Be(12);
+            actual.Count().Should().Be(13);
         }
 
         // macro
@@ -794,6 +798,9 @@ static inline int static_inline_method( const foo_context *ssl,
 
     } include_enum_method;
 ", "include_enum_method", PREFIX + "include_enum_method")]
+    [InlineData(@"typedef int (*ptr_name)( void *p_ctx,
+    const unsigned char *p,
+    const unsigned char *end );", "ptr_name", PREFIX + "ptr_name")]
     public void TypedefReaderTest(string define, string expectedSymbol, string expectedRenamedSymbol)
     {
         var content = define.SplitNewLine();
