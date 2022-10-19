@@ -11,15 +11,24 @@ public class Program
     {
         //var prefix = "nantoka_";
         var prefix = "";
+        var arch = RuntimeInformation.OSArchitecture.ToString().ToLower();
+
+        var mbedtls = RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? $@"C:\git\guitarrapc\nativebuild-lab\artifact\mbedtls\win-{arch}-patch\mbedtls.dll" : @"/mnt/c/git/guitarrapc/nativebuild-lab/mbedtls/cmake/build.dir/library/libmbedtls.so.3.2.1";
+        var mbedx509 = RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? $@"C:\git\guitarrapc\nativebuild-lab\artifact\mbedtls\win-{arch}-patch\mbedx509.dll" : @"/mnt/c/git/guitarrapc/nativebuild-lab/mbedtls/cmake/build.dir/library/libmbedx509.so.3.2.1";
+
+        if (!File.Exists(mbedtls)) throw new FileNotFoundException(mbedtls);
+        if (!File.Exists(mbedx509)) throw new FileNotFoundException(mbedx509);
 
         var handleMbedtls = IntPtr.Zero;
         var handleMbedx509 = IntPtr.Zero;
+        var f = NativeLibrary.TryLoad(mbedtls, out handleMbedtls);
         try
         {
             if (
-                NativeLibrary.TryLoad(@"C:\git\guitarrapc\nativebuild-lab\pkg\mbedtls\v3.2.1\windows\x64\mbedtls.dll", out handleMbedtls) &&
-                NativeLibrary.TryLoad(@"C:\git\guitarrapc\nativebuild-lab\pkg\mbedtls\v3.2.1\windows\x64\mbedx509.dll", out handleMbedx509)
-            )
+                //NativeLibrary.TryLoad(@"C:\git\guitarrapc\nativebuild-lab\pkg\mbedtls\v3.2.1\windows\x64\mbedtls.dll", out handleMbedtls) &&
+                //NativeLibrary.TryLoad(@"C:\git\guitarrapc\nativebuild-lab\pkg\mbedtls\v3.2.1\windows\x64\mbedx509.dll", out handleMbedx509)
+                NativeLibrary.TryLoad(mbedtls, out handleMbedtls) &&
+                NativeLibrary.TryLoad(mbedx509, out handleMbedx509))
             {
                 var wrapper_init = Marshal.GetDelegateForFunctionPointer<MbedTlsNative.wrapper_init>(NativeLibrary.GetExport(handleMbedtls, "wrapper_init"));
                 var wrapper_free = Marshal.GetDelegateForFunctionPointer<MbedTlsNative.wrapper_free>(NativeLibrary.GetExport(handleMbedtls, "wrapper_free"));
