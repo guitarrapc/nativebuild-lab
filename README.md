@@ -265,7 +265,7 @@ Please apply following patch before build. (Run patch on git shell)
 
 ```bash
 cd mbedtls
-patch -p1 < ../builder/mbedtls/patch/windows.patch
+git apply ../builder/mbedtls/patch/windows.patch
 ```
 
 TIPS. To create patch, spply changes to submodule then run following command.
@@ -287,7 +287,7 @@ Please apply following patch before build. (Run patch on git shell)
 
 ```bash
 cd mbedtls
-patch -p1 < ../builder/mbedtls/patch/wrapper.patch
+git apply ../builder/mbedtls/patch/wrapper.patch
 ```
 
 TIPS. To create patch, spply changes to submodule then run following command.
@@ -300,15 +300,15 @@ git diff > ../builder/mbedtls/patch/wrapper.patch
 
 <hr/>
 
-**(Notice) Prefix Patch**
+**(Notice) Filename Prefix Patch**
 
-We need patch to prefix support.
+We need patch to support file name prefix.
 https://github.com/Mbed-TLS/mbedtls/pull/3407 supports mbedtls to output shared lib with prefix, however missing static output.
 Therefore static build will failed to reference `<prefix>mbedcrypto` on building mbedx509.
 
 ```bash
 cd mbedtls
-git apply ../builder/mbedtls/patch/wrapper.patch
+git apply ../builder/mbedtls/patch/prefix.patch
 ```
 
 TIPS. To create patch, spply changes to submodule then run following command.
@@ -379,6 +379,16 @@ builder\mbedtls\mbedtls-linux-x64.bat
 
 # linux
 bash ./builder/mbedtls/mbedtls-linux-x64.sh
+```
+
+### Linux (arm64)
+
+```bash
+# windows
+builder\mbedtls\mbedtls-linux-arm64.bat
+
+# linux
+bash ./builder/mbedtls/mbedtls-linux-arm64.sh
 ```
 
 ## macOS
