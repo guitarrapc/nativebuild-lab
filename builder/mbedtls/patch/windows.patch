@@ -1,5 +1,5 @@
 diff --git a/include/mbedtls/x509_crt.h b/include/mbedtls/x509_crt.h
-index aa4595706..d43f2a17b 100644
+index aa45957061..d43f2a17be 100644
 --- a/include/mbedtls/x509_crt.h
 +++ b/include/mbedtls/x509_crt.h
 @@ -374,6 +374,11 @@ typedef void mbedtls_x509_crt_restart_ctx;
@@ -27,7 +27,7 @@ index aa4595706..d43f2a17b 100644
  
  /**
 diff --git a/library/CMakeLists.txt b/library/CMakeLists.txt
-index 0884f57ae..7420e3a5e 100644
+index 0884f57ae3..7420e3a5e1 100644
 --- a/library/CMakeLists.txt
 +++ b/library/CMakeLists.txt
 @@ -288,6 +288,9 @@ if(USE_SHARED_MBEDTLS_LIBRARY)
@@ -41,7 +41,7 @@ index 0884f57ae..7420e3a5e 100644
  
  foreach(target IN LISTS target_libraries)
 diff --git a/library/ssl_tls.c b/library/ssl_tls.c
-index e60b82fa5..de8bcbbda 100644
+index e60b82fa5f..de8bcbbda0 100644
 --- a/library/ssl_tls.c
 +++ b/library/ssl_tls.c
 @@ -21,6 +21,7 @@
@@ -53,7 +53,7 @@ index e60b82fa5..de8bcbbda 100644
  
  #if defined(MBEDTLS_SSL_TLS_C)
 diff --git a/programs/ssl/ssl_client2.c b/programs/ssl/ssl_client2.c
-index d6724dfb1..141386927 100644
+index d6724dfb11..141386927e 100644
 --- a/programs/ssl/ssl_client2.c
 +++ b/programs/ssl/ssl_client2.c
 @@ -17,6 +17,7 @@
@@ -65,7 +65,7 @@ index d6724dfb1..141386927 100644
  
  #include "ssl_test_lib.h"
 diff --git a/programs/ssl/ssl_server2.c b/programs/ssl/ssl_server2.c
-index 8e432bde8..6cc84927b 100644
+index 8e432bde89..6cc84927b3 100644
 --- a/programs/ssl/ssl_server2.c
 +++ b/programs/ssl/ssl_server2.c
 @@ -17,6 +17,7 @@
