@@ -26,7 +26,6 @@ on:
 
 env:
   app: mbedtls
-  PREFIX: nantoka_
 
 jobs:
   android:
@@ -47,7 +46,7 @@ jobs:
       - run: git fetch --tags
         working-directory: ${{ env.app }}
       - name: Patch wrapper class
-        run: git apply ../builder/mbedtls/patch/wrapper.patch
+        run: if [[ -f ../builder/mbedtls/patch/wrapper.patch ]]; then git apply ../builder/mbedtls/patch/wrapper.patch; fi
         working-directory: ${{ env.app }}
         if: ${{ matrix.patch != '' }}
       - uses: actions/setup-dotnet@v3
@@ -55,7 +54,7 @@ jobs:
           dotnet-version: "6.0.x"
       - name: SymbolConverter
         run: |
-          dotnet run --project ./tools/SymbolConverter/src/SymbolConverter/SymbolConverter.csproj prefix --prefix ${{ env.PREFIX }} --header-paths ${{ github.workspace }}/mbedtls/library,${{ github.workspace }}/mbedtls/include,${{ github.workspace }}/mbedtls/tests/include,${{ github.workspace }}/mbedtls/programs --impl-paths ${{ github.workspace }}/mbedtls/library,${{ github.workspace }}/mbedtls/tests,${{ github.workspace }}/mbedtls/programs --macro-paths ${{ github.workspace }}/mbedtls/library --impl-extensions *.c,*.function,*.data --method-delimiters : --dryrun false
+          dotnet run --project ./tools/SymbolConverter/src/SymbolConverter/SymbolConverter.csproj prefix --prefix nantoka_ --header-paths ${{ github.workspace }}/mbedtls/library,${{ github.workspace }}/mbedtls/include,${{ github.workspace }}/mbedtls/tests/include,${{ github.workspace }}/mbedtls/programs --impl-paths ${{ github.workspace }}/mbedtls/library,${{ github.workspace }}/mbedtls/tests,${{ github.workspace }}/mbedtls/programs --macro-paths ${{ github.workspace }}/mbedtls/library --impl-extensions *.c,*.function,*.data --method-delimiters : --dryrun false
         env:
           SYMBOL_CONVERTER_MACRO_REGEXES: ".*(?<name>mbedtls_##type##_context).*,.*(?<name>mbedtls_##type##_init).*"
         if: ${{ matrix.symbol-convert == '' }}
@@ -87,12 +86,12 @@ jobs:
       - run: git fetch --tags
         working-directory: ${{ env.app }}
       - name: Patch wrapper class
-        run: git apply ../builder/mbedtls/patch/wrapper.patch
+        run: if [[ -f ../builder/mbedtls/patch/wrapper.patch ]]; then git apply ../builder/mbedtls/patch/wrapper.patch; fi
         working-directory: ${{ env.app }}
         if: ${{ matrix.patch != '' }}
       - name: SymbolConverter
         run: |
-          dotnet run --project ./tools/SymbolConverter/src/SymbolConverter/SymbolConverter.csproj prefix --prefix ${{ env.PREFIX }} --header-paths ${{ github.workspace }}/mbedtls/library,${{ github.workspace }}/mbedtls/include,${{ github.workspace }}/mbedtls/tests/include,${{ github.workspace }}/mbedtls/programs --impl-paths ${{ github.workspace }}/mbedtls/library,${{ github.workspace }}/mbedtls/tests,${{ github.workspace }}/mbedtls/programs --macro-paths ${{ github.workspace }}/mbedtls/library --impl-extensions *.c,*.function,*.data --method-delimiters : --dryrun false
+          dotnet run --project ./tools/SymbolConverter/src/SymbolConverter/SymbolConverter.csproj prefix --prefix nantoka_ --header-paths ${{ github.workspace }}/mbedtls/library,${{ github.workspace }}/mbedtls/include,${{ github.workspace }}/mbedtls/tests/include,${{ github.workspace }}/mbedtls/programs --impl-paths ${{ github.workspace }}/mbedtls/library,${{ github.workspace }}/mbedtls/tests,${{ github.workspace }}/mbedtls/programs --macro-paths ${{ github.workspace }}/mbedtls/library --impl-extensions *.c,*.function,*.data --method-delimiters : --dryrun false
         env:
           SYMBOL_CONVERTER_MACRO_REGEXES: ".*(?<name>mbedtls_##type##_context).*,.*(?<name>mbedtls_##type##_init).*"
         if: ${{ matrix.symbol-convert == '' }}
@@ -124,12 +123,12 @@ jobs:
       - run: git fetch --tags
         working-directory: ${{ env.app }}
       - name: Patch wrapper class
-        run: git apply ../builder/mbedtls/patch/wrapper.patch
+        run: if [[ -f ../builder/mbedtls/patch/wrapper.patch ]]; then git apply ../builder/mbedtls/patch/wrapper.patch; fi
         working-directory: ${{ env.app }}
         if: ${{ matrix.patch != '' }}
       - name: SymbolConverter
         run: |
-          dotnet run --project ./tools/SymbolConverter/src/SymbolConverter/SymbolConverter.csproj prefix --prefix ${{ env.PREFIX }} --header-paths ${{ github.workspace }}/mbedtls/library,${{ github.workspace }}/mbedtls/include,${{ github.workspace }}/mbedtls/tests/include,${{ github.workspace }}/mbedtls/programs --impl-paths ${{ github.workspace }}/mbedtls/library,${{ github.workspace }}/mbedtls/tests,${{ github.workspace }}/mbedtls/programs --macro-paths ${{ github.workspace }}/mbedtls/library --impl-extensions *.c,*.function,*.data --method-delimiters : --dryrun false
+          dotnet run --project ./tools/SymbolConverter/src/SymbolConverter/SymbolConverter.csproj prefix --prefix nantoka_ --header-paths ${{ github.workspace }}/mbedtls/library,${{ github.workspace }}/mbedtls/include,${{ github.workspace }}/mbedtls/tests/include,${{ github.workspace }}/mbedtls/programs --impl-paths ${{ github.workspace }}/mbedtls/library,${{ github.workspace }}/mbedtls/tests,${{ github.workspace }}/mbedtls/programs --macro-paths ${{ github.workspace }}/mbedtls/library --impl-extensions *.c,*.function,*.data --method-delimiters : --dryrun false
         env:
           SYMBOL_CONVERTER_MACRO_REGEXES: ".*(?<name>mbedtls_##type##_context).*,.*(?<name>mbedtls_##type##_init).*"
         if: ${{ matrix.symbol-convert != '' }}
@@ -161,12 +160,12 @@ jobs:
       - run: git fetch --tags
         working-directory: ${{ env.app }}
       - name: Patch wrapper class
-        run: git apply ../builder/mbedtls/patch/wrapper.patch
+        run: if [[ -f ../builder/mbedtls/patch/wrapper.patch ]]; then git apply ../builder/mbedtls/patch/wrapper.patch; fi
         working-directory: ${{ env.app }}
         if: ${{ matrix.patch != '' }}
       - name: SymbolConverter
         run: |
-          dotnet run --project ./tools/SymbolConverter/src/SymbolConverter/SymbolConverter.csproj prefix --prefix ${{ env.PREFIX }} --header-paths ${{ github.workspace }}/mbedtls/library,${{ github.workspace }}/mbedtls/include,${{ github.workspace }}/mbedtls/tests/include,${{ github.workspace }}/mbedtls/programs --impl-paths ${{ github.workspace }}/mbedtls/library,${{ github.workspace }}/mbedtls/tests,${{ github.workspace }}/mbedtls/programs --macro-paths ${{ github.workspace }}/mbedtls/library --impl-extensions *.c,*.function,*.data --method-delimiters : --dryrun false
+          dotnet run --project ./tools/SymbolConverter/src/SymbolConverter/SymbolConverter.csproj prefix --prefix nantoka_ --header-paths ${{ github.workspace }}/mbedtls/library,${{ github.workspace }}/mbedtls/include,${{ github.workspace }}/mbedtls/tests/include,${{ github.workspace }}/mbedtls/programs --impl-paths ${{ github.workspace }}/mbedtls/library,${{ github.workspace }}/mbedtls/tests,${{ github.workspace }}/mbedtls/programs --macro-paths ${{ github.workspace }}/mbedtls/library --impl-extensions *.c,*.function,*.data --method-delimiters : --dryrun false
         env:
           SYMBOL_CONVERTER_MACRO_REGEXES: ".*(?<name>mbedtls_##type##_context).*,.*(?<name>mbedtls_##type##_init).*"
         if: ${{ matrix.symbol-convert == '' }}
@@ -198,12 +197,12 @@ jobs:
       - run: git fetch --tags
         working-directory: ${{ env.app }}
       - name: Patch wrapper class
-        run: git apply ..\builder\mbedtls\patch\wrapper.patch
+        run: IF EXIST "..\builder\mbedtls\patch\wrapper.patch" git apply --ignore-space-change --ignore-whitespace --whitespace=nowarn ..\builder\mbedtls\patch\wrapper.patch
         working-directory: ${{ env.app }}
         shell: cmd
         if: ${{ matrix.patch != '' }}
       - name: Patch Windows shared symbol output
-        run: git apply ..\builder\mbedtls\patch\windows.patch
+        run: IF EXIST "..\builder\mbedtls\patch\windows.patch" git apply --ignore-space-change --ignore-whitespace --whitespace=nowarn ..\builder\mbedtls\patch\windows.patch
         working-directory: ${{ env.app }}
         shell: cmd
         if: ${{ matrix.patch != '' }}
@@ -211,7 +210,7 @@ jobs:
         id: workspace
       - name: SymbolConverter
         run: |
-          dotnet run --project ./tools/SymbolConverter/src/SymbolConverter/SymbolConverter.csproj prefix --prefix ${{ env.PREFIX }} --header-paths ${{ env.workspace }}/mbedtls/library,${{ env.workspace }}/mbedtls/include,${{ env.workspace }}/mbedtls/tests/include,${{ env.workspace }}/mbedtls/programs --impl-paths ${{ env.workspace }}/mbedtls/library,${{ env.workspace }}/mbedtls/tests,${{ env.workspace }}/mbedtls/programs --macro-paths ${{ env.workspace }}/mbedtls/library --impl-extensions *.c,*.function,*.data --method-delimiters : --dryrun false
+          dotnet run --project ./tools/SymbolConverter/src/SymbolConverter/SymbolConverter.csproj prefix --prefix nantoka_ --header-paths ${{ env.workspace }}/mbedtls/library,${{ env.workspace }}/mbedtls/include,${{ env.workspace }}/mbedtls/tests/include,${{ env.workspace }}/mbedtls/programs --impl-paths ${{ env.workspace }}/mbedtls/library,${{ env.workspace }}/mbedtls/tests,${{ env.workspace }}/mbedtls/programs --macro-paths ${{ env.workspace }}/mbedtls/library --impl-extensions *.c,*.function,*.data --method-delimiters : --dryrun false
         env:
           SYMBOL_CONVERTER_MACRO_REGEXES: ".*(?<name>mbedtls_##type##_context).*,.*(?<name>mbedtls_##type##_init).*"
         if: ${{ matrix.symbol-convert == '' }}
