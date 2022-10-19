@@ -179,6 +179,8 @@ public class SymbolReader
         var typedefSinglelineRegex = new Regex($@"\btypedef(\s+\w+)?\s+(?<type>\w+)\s+(?<name>\w+){delimiter}", RegexOptions.Compiled);
         // `} foo;`
         var typedefMultilineRegex = new Regex($@"\s*}}\s+(?<name>\w+){delimiter}", RegexOptions.Compiled);
+        // `typedef int (*ptr_name)( void *p_ctx,`
+        var typedefPtrlineRegex = new Regex($@"\btypedef\s+(?<type>\w+)\s+\(\*?(?<name>\w+)\)\(.*,", RegexOptions.Compiled);
 
         // Get typedef line in single string
         var lines = ExtractTypedefLines(content);
@@ -200,27 +202,38 @@ public class SymbolReader
                         },
                     };
                 }
-                else
+
+                var singlelineMatch = typedefSinglelineRegex.Match(line);
+                if (singlelineMatch.Success)
                 {
-                    var singlelineMatch = typedefSinglelineRegex.Match(line);
-                    if (singlelineMatch.Success)
+                    //singlelineMatch.Dump();
+                    var name = singlelineMatch.Groups["name"].Value;
+                    return new SymbolInfo(line, DetectionType.Typedef, SymbolDelimiters.TypedefDelimiters, name)
                     {
-                        //singlelineMatch.Dump();
-                        var name = singlelineMatch.Groups["name"].Value;
-                        return new SymbolInfo(line, DetectionType.Typedef, SymbolDelimiters.TypedefDelimiters, name)
+                        RenamedSymbol = RenameExpression.Invoke(name),
+                        Metadata = new Dictionary<string, string>(metadata)
                         {
-                            RenamedSymbol = RenameExpression.Invoke(name),
-                            Metadata = new Dictionary<string, string>(metadata)
-                            {
-                                {"ReturnType", name}, // Alias Type
-                            },
-                        };
-                    }
-                    else
-                    {
-                        return null;
-                    }
+                            {"ReturnType", name}, // Alias Type
+                        },
+                    };
                 }
+
+                var ptrlineMatch = typedefPtrlineRegex.Match(line);
+                if (ptrlineMatch.Success)
+                {
+                    //ptrlineMatch.Dump();
+                    var name = ptrlineMatch.Groups["name"].Value;
+                    return new SymbolInfo(line, DetectionType.Typedef, SymbolDelimiters.TypedefDelimiters, name)
+                    {
+                        RenamedSymbol = RenameExpression.Invoke(name),
+                        Metadata = new Dictionary<string, string>(metadata)
+                        {
+                            {"ReturnType", name}, // Alias Type
+                        },
+                    };
+                }
+
+                return null;
             })
             .Where(x => x != null);
 
