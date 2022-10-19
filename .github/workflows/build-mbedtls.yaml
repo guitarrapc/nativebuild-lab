@@ -46,7 +46,7 @@ jobs:
       - run: git fetch --tags
         working-directory: ${{ env.app }}
       - name: Patch wrapper class
-        run: if [[ -f ../builder/mbedtls/wrapper.patch ]]; then git apply ../builder/mbedtls/wrapper.patch; fi
+        run: if [[ -f ../builder/mbedtls/patch/wrapper.patch ]]; then git apply ../builder/mbedtls/patch/wrapper.patch; fi
         working-directory: ${{ env.app }}
         if: ${{ matrix.patch != '' }}
       - uses: actions/setup-dotnet@v3
@@ -86,7 +86,7 @@ jobs:
       - run: git fetch --tags
         working-directory: ${{ env.app }}
       - name: Patch wrapper class
-        run: if [[ -f ../builder/mbedtls/wrapper.patch ]]; then git apply ../builder/mbedtls/wrapper.patch; fi
+        run: if [[ -f ../builder/mbedtls/patch/wrapper.patch ]]; then git apply ../builder/mbedtls/patch/wrapper.patch; fi
         working-directory: ${{ env.app }}
         if: ${{ matrix.patch != '' }}
       - name: SymbolConverter
@@ -123,7 +123,7 @@ jobs:
       - run: git fetch --tags
         working-directory: ${{ env.app }}
       - name: Patch wrapper class
-        run: if [[ -f ../builder/mbedtls/wrapper.patch ]]; then git apply ../builder/mbedtls/wrapper.patch; fi
+        run: if [[ -f ../builder/mbedtls/patch/wrapper.patch ]]; then git apply ../builder/mbedtls/patch/wrapper.patch; fi
         working-directory: ${{ env.app }}
         if: ${{ matrix.patch != '' }}
       - name: SymbolConverter
@@ -160,7 +160,7 @@ jobs:
       - run: git fetch --tags
         working-directory: ${{ env.app }}
       - name: Patch wrapper class
-        run: if [[ -f ../builder/mbedtls/wrapper.patch ]]; then git apply ../builder/mbedtls/wrapper.patch; fi
+        run: if [[ -f ../builder/mbedtls/patch/wrapper.patch ]]; then git apply ../builder/mbedtls/patch/wrapper.patch; fi
         working-directory: ${{ env.app }}
         if: ${{ matrix.patch != '' }}
       - name: SymbolConverter
