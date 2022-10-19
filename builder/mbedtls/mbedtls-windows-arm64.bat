@@ -16,8 +16,8 @@ if errorlevel 1 (
 )
 
 :: confirm
-dir %CMAKE_LIB%\*.lib
-dir %CMAKE_LIB%\*.dll
+dir %CMAKE_LIB%\Release\*.lib
+dir %CMAKE_LIB%\Release\*.dll
 
 :: copy
 mkdir %OUTPUT_DIR%
