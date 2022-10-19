@@ -12,7 +12,7 @@ index 0884f57ae3..5f75f4d94c 100644
  if(GEN_FILES)
 diff --git a/library/mbedtls_wrapper.c b/library/mbedtls_wrapper.c
 new file mode 100644
-index 0000000000..43b6eea8f1
+index 0000000000..9874d913ba
 --- /dev/null
 +++ b/library/mbedtls_wrapper.c
 @@ -0,0 +1,61 @@
@@ -32,7 +32,7 @@ index 0000000000..43b6eea8f1
 +	mbedtls_x509_crt_init(&ctx->cacert);
 +
 +	const char* pers = "_wrapper";
-+	if (mbedtls_ctr_drbg_seed(&ctx->ctr_drbg, mbedtls_entropy_func, &ctx->entropy, pers, strlen(pers)) != 0)
++	if (mbedtls_ctr_drbg_seed(&ctx->ctr_drbg, mbedtls_entropy_func, &ctx->entropy, (const unsigned char *)pers, strlen(pers)) != 0)
 +	{
 +		return 1;
 +	}
@@ -79,7 +79,7 @@ index 0000000000..43b6eea8f1
 +}
 diff --git a/library/mbedtls_wrapper.h b/library/mbedtls_wrapper.h
 new file mode 100644
-index 0000000000..d03889ad3f
+index 0000000000..01144dcc94
 --- /dev/null
 +++ b/library/mbedtls_wrapper.h
 @@ -0,0 +1,22 @@
@@ -104,4 +104,4 @@ index 0000000000..d03889ad3f
 +
 +extern void wrapper_free(struct wrapper_context* ctx);
 +
-+extern int wrapper_sizeof_wrapper_context();
++extern int wrapper_sizeof_wrapper_context(void);
