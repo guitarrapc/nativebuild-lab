@@ -11,6 +11,7 @@ public static class SymbolDelimiters
         "}", // mapping ... {bar, foo_bar}
         ";", // delegate ... foo->bar_init = piyo_bar_init;
         "\n", "\r\n", // new line after ... #define foo_c      foo
+        ":", // for python generator
     };
 
     public static readonly IReadOnlyList<string> TypedefDelimiters = new[]

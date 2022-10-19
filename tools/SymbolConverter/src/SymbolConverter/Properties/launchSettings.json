@@ -20,7 +20,7 @@
     },
     "prefix(mbedtls)": {
       "commandName": "Project",
-      "commandLineArgs": "prefix --prefix nantoka_ --header-paths C:/git/guitarrapc/nativebuild-lab/mbedtls/library,C:/git/guitarrapc/nativebuild-lab/mbedtls/include,C:/git/guitarrapc/nativebuild-lab/mbedtls/tests/include,C:/git/guitarrapc/nativebuild-lab/mbedtls/programs --impl-paths C:/git/guitarrapc/nativebuild-lab/mbedtls/library,C:/git/guitarrapc/nativebuild-lab/mbedtls/tests,C:/git/guitarrapc/nativebuild-lab/mbedtls/programs --macro-paths C:/git/guitarrapc/nativebuild-lab/mbedtls/library --impl-extensions *.c,*.function --dryrun false",
+      "commandLineArgs": "prefix --prefix nantoka_ --header-paths C:/git/guitarrapc/nativebuild-lab/mbedtls/library,C:/git/guitarrapc/nativebuild-lab/mbedtls/include,C:/git/guitarrapc/nativebuild-lab/mbedtls/tests/include,C:/git/guitarrapc/nativebuild-lab/mbedtls/programs --impl-paths C:/git/guitarrapc/nativebuild-lab/mbedtls/library,C:/git/guitarrapc/nativebuild-lab/mbedtls/tests,C:/git/guitarrapc/nativebuild-lab/mbedtls/programs --macro-paths C:/git/guitarrapc/nativebuild-lab/mbedtls/library --impl-extensions *.c,*.function,*.data --dryrun false",
       "environmentVariables": {
         "SYMBOL_CONVERTER_MACRO_REGEXES": ".*(?<name>mbedtls_##type##_context).*,.*(?<name>mbedtls_##type##_init).*"
       }
