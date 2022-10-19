@@ -21,7 +21,8 @@ public class Program
 
         var handleMbedtls = IntPtr.Zero;
         var handleMbedx509 = IntPtr.Zero;
-        var f = NativeLibrary.TryLoad(mbedtls, out handleMbedtls);
+        // System.DllNotFoundException: 'Unable to load shared library '/mnt/c/git/guitarrapc/nativebuild-lab/mbedtls/cmake/build.dir/library/libmbedtls.so.3.2.1' or one of its dependencies. In order to help diagnose loading problems, consider setting the LD_DEBUG environment variable: libmbedx509.so.4: cannot open shared object file: No such file or directory'
+        NativeLibrary.Load(mbedtls);
         try
         {
             if (
