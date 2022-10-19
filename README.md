@@ -308,7 +308,7 @@ Therefore static build will failed to reference `<prefix>mbedcrypto` on building
 
 ```bash
 cd mbedtls
-patch -p1 < ../builder/mbedtls/patch/wrapper.patch
+git apply ../builder/mbedtls/patch/wrapper.patch
 ```
 
 TIPS. To create patch, spply changes to submodule then run following command.
