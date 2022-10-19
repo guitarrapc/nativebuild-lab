@@ -1,5 +1,5 @@
 diff --git a/library/CMakeLists.txt b/library/CMakeLists.txt
-index 0884f57ae3..141c0b3b9f 100644
+index 0884f57ae3..5f75f4d94c 100644
 --- a/library/CMakeLists.txt
 +++ b/library/CMakeLists.txt
 @@ -110,6 +110,7 @@ set(src_tls
@@ -10,16 +10,6 @@ index 0884f57ae3..141c0b3b9f 100644
  )
  
  if(GEN_FILES)
-@@ -288,6 +289,9 @@ if(USE_SHARED_MBEDTLS_LIBRARY)
-     add_library(${mbedtls_target} SHARED ${src_tls})
-     set_target_properties(${mbedtls_target} PROPERTIES VERSION 3.2.1 SOVERSION 18)
-     target_link_libraries(${mbedtls_target} PUBLIC ${libs} ${mbedx509_target})
-+
-+    set_target_properties(${mbedtls_target} PROPERTIES WINDOWS_EXPORT_ALL_SYMBOLS true)
-+    set_target_properties(${mbedx509_target} PROPERTIES WINDOWS_EXPORT_ALL_SYMBOLS true)
- endif(USE_SHARED_MBEDTLS_LIBRARY)
- 
- foreach(target IN LISTS target_libraries)
 diff --git a/library/mbedtls_wrapper.c b/library/mbedtls_wrapper.c
 new file mode 100644
 index 0000000000..43b6eea8f1
