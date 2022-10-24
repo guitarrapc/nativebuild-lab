@@ -1,26 +1,25 @@
 using System.Net.Sockets;
-using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Text;
 
-public class Program
+namespace Mbedtls;
+
+public class NativeLib
 {
     static Dictionary<IntPtr, Stream> _streamByPointer = new Dictionary<System.IntPtr, System.IO.Stream>();
 
-    public static unsafe void Main(string[] args)
+    public static unsafe void LoadAndRun(string prefix = "")
     {
-        var prefix = "nantoka_";
-        //var prefix = "";
         var arch = RuntimeInformation.OSArchitecture.ToString().ToLower();
 
         //var mbedtls = RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? $@"C:\git\guitarrapc\nativebuild-lab\artifact\mbedtls\win-{arch}-patch\mbedtls.dll" : @"/mnt/c/git/guitarrapc/nativebuild-lab/mbedtls/cmake/build.dir/library/libmbedtls.so.3.2.1";
         //var mbedx509 = RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? $@"C:\git\guitarrapc\nativebuild-lab\artifact\mbedtls\win-{arch}-patch\mbedx509.dll" : @"/mnt/c/git/guitarrapc/nativebuild-lab/mbedtls/cmake/build.dir/library/libmbedx509.so.3.2.1";
-        var mbedtls = @"native/libmbedtls.so.3.2.1";
-        var mbedx509 = $@"native/libmbedx509.so.3.2.1";
+        var mbedtls = @"runtimes/linux-x64/native/libmbedtls.so.3.2.1";
+        var mbedx509 = $@"runtimes/linux-x64/native/libmbedx509.so.3.2.1";
 
-        if (!File.Exists(mbedtls)) throw new FileNotFoundException(mbedtls);
-        if (!File.Exists(mbedx509)) throw new FileNotFoundException(mbedx509);
+        //if (!File.Exists(mbedtls)) throw new FileNotFoundException(mbedtls);
+        //if (!File.Exists(mbedx509)) throw new FileNotFoundException(mbedx509);
 
         var handleMbedtls = IntPtr.Zero;
         var handleMbedx509 = IntPtr.Zero;
@@ -190,7 +189,7 @@ public class Program
                 NativeLibrary.Free(handleMbedtls);
             }
             if (handleMbedx509 != IntPtr.Zero)
-            { 
+            {
                 NativeLibrary.Free(handleMbedx509);
             }
         }
