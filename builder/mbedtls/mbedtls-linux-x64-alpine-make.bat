@@ -8,7 +8,7 @@ set PLATFORM=x64
 if not defined OUTPUT_DIR (set OUTPUT_DIR=pkg\%SRC_DIR%\%GIT_VERSION%\%OS%\%PLATFORM%)
 
 :: build
-docker run --rm -v "%SCRIPT_DIR%/core:/builder" -v "%cd%/%SRC_DIR%:/src" alpine:latest /bin/sh /builder/builder-linux-x64-make.sh
+docker run --rm -v "%SCRIPT_DIR%/core:/builder" -v "%cd%/%SRC_DIR%:/src" alpine:latest /bin/sh /builder/builder-linux-x64-alpine-make.sh
 if errorlevel 1 (
   echo build failed.
   exit /b %errorlevel%
