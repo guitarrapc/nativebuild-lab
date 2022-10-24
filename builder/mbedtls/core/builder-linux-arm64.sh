@@ -1,10 +1,10 @@
 #!/bin/bash
 set -eu
 
-aptt update
-aptt install -yq --no-install-suggests --no-install-recommends make gcc libc-dev cmake file
-aptt install -yq --no-install-suggests --no-install-recommends python3 perl python3-pip
-aptt install -yq --no-install-suggests --no-install-recommends gcc-aarch64-linux-gnu g++-aarch64-linux-gnu
+apt update
+apt install -yq --no-install-suggests --no-install-recommends make gcc libc-dev cmake file
+apt install -yq --no-install-suggests --no-install-recommends python3 perl python3-pip
+apt install -yq --no-install-suggests --no-install-recommends gcc-aarch64-linux-gnu g++-aarch64-linux-gnu
 pip3 install jinja2
 
 SRC_DIR="/src"
