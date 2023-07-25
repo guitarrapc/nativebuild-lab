@@ -5,10 +5,12 @@ SCRIPT_DIR=$(cd $(dirname $0); pwd)
 source $SCRIPT_DIR/settings.sh
 OS=darwin
 PLATFORM=arm64
+TARGET=arm64-apple-macos11
+ARCH=arm64
 OUTPUT_DIR=${OUTPUT_DIR:=pkg/${SRC_DIR}/${GIT_VERSION}/${OS}/${PLATFORM}/}
 
 # build
-. $SCRIPT_DIR/core/builder-darwin-arm64.sh
+. $SCRIPT_DIR/core/builder-darwin.sh
 
 # confirm
 ls $MAKE_LIB/$LIBNAME.a

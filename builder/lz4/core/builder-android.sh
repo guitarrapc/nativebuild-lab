@@ -57,7 +57,7 @@ __install_required_packages() {
 
   run apt-get update
   run apt-get install -yq --no-install-suggests --no-install-recommends build-essential pkg-config curl libssl-dev bsdmainutils patchelf
-  run apt-get install -yq --no-install-suggests --no-install-recommends unzip cmake ccache
+  run apt-get install -yq --no-install-suggests --no-install-recommends unzip cmake ccache file
 }
 
 __install_android_ndk() {
@@ -89,21 +89,25 @@ __find_abi_kind() {
         SYSTEM_PROCESSOR=armv7-a
         ABI_SHORT=armv7a
         SYSTEM_LIB_ARCH=arm
+        BINARY_ARCH=ARM
         CC_ABI=androideabi;;
     "arm64-v8a")
         SYSTEM_PROCESSOR=aarch64
         ABI_SHORT=aarch64
         SYSTEM_LIB_ARCH=aarch64
+        BINARY_ARCH="ARM aarch64"
         CC_ABI=android;;
     "x86")
         SYSTEM_PROCESSOR=i686
         ABI_SHORT=i686
         SYSTEM_LIB_ARCH=i686
+        BINARY_ARCH="Intel 80386"
         CC_ABI=android;;
     "x86_64")
         SYSTEM_PROCESSOR=x86_64
         ABI_SHORT=x86_64
         SYSTEM_LIB_ARCH=x86_64
+        BINARY_ARCH=x86-64
         CC_ABI=android;;
     *)
         die "${ABI} is out of range."
@@ -205,6 +209,13 @@ __install() {
       AR=\"${AR}\" \
       BUILD_STATIC=yes \
       BUILD_SHARED=yes
+
+  # generate file test
+  if ! file "$(readlink -f $BUILD_DIR/lib/liblz4.so)" | grep "$BINARY_ARCH,"; then
+    file "$(readlink -f $BUILD_DIR/lib/liblz4.so)"
+    echo "file generation arch not desired."
+    exit 1
+  fi
 
   # cleanup
   unset PACKAGE_INCLUDES

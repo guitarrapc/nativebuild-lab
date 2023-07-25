@@ -146,6 +146,13 @@ __install_lz4() {
 
   popd > /dev/null 2>&1
 
+  # generate file test
+  if ! file "$(readlink -f $BUILD_DIR/lib/liblz4.dylib)" | grep "$IOS_ARCH"; then
+    file "$(readlink -f $BUILD_DIR/lib/liblz4.dylib)"
+    echo "file generation arch not desired."
+    exit 1
+  fi
+
   # cleanup
   unset BUILD_DIR
   unset PACKAGE_INCLUDES
