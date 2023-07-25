@@ -39,7 +39,7 @@ jobs:
     env:
       OUTPUT_DIR: _out/android-${{ matrix.target }}${{ matrix.patch }}${{ matrix.symbol-convert }}
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v3
         with:
@@ -79,7 +79,7 @@ jobs:
     env:
       OUTPUT_DIR: _out/ios-${{ matrix.target }}${{ matrix.patch }}${{ matrix.symbol-convert }}
     runs-on: macos-latest
-    timeout-minutes: 10
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v3
         with:
@@ -116,7 +116,7 @@ jobs:
     env:
       OUTPUT_DIR: _out/linux-${{ matrix.target }}${{ matrix.patch }}${{ matrix.symbol-convert }}
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v3
         with:
@@ -153,7 +153,7 @@ jobs:
     env:
       OUTPUT_DIR: _out/osx-${{ matrix.target }}${{ matrix.patch }}${{ matrix.symbol-convert }}
     runs-on: macos-latest
-    timeout-minutes: 10
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v3
         with:
@@ -190,7 +190,7 @@ jobs:
     env:
       OUTPUT_DIR: _out\win-${{ matrix.target }}${{ matrix.patch }}${{ matrix.symbol-convert }}
     runs-on: windows-2022
-    timeout-minutes: 10
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v3
         with:
