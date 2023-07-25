@@ -19,3 +19,10 @@ pushd $BUILD_DIR
   cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_TOOLCHAIN_FILE="${CMAKE_TOOLCHAIN}" ..
   cmake --build . --config Release
 popd
+
+# generate file test
+if ! file "$(readlink -f $BUILD_DIR/lib/libzstd.so)" | grep "x86-64"; then
+  file "$(readlink -f $BUILD_DIR/lib/libzstd.so)"
+  echo "file generation arch not desired."
+  exit 1
+fi

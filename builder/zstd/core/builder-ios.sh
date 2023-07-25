@@ -248,6 +248,13 @@ __install_zstd() {
     run cmake --install "${BUILD_DIR}"
   popd > /dev/null 2>&1
 
+  # generate file test
+  if ! file "$(readlink -f $BUILD_DIR/lib/lizstd.dylib)" | grep "$IOS_ARCH"; then
+    file "$(readlink -f $BUILD_DIR/lib/lizstd.dylib)"
+    echo "file generation arch not desired."
+    exit 1
+  fi
+
   # cleanup
   unset BUILD_DIR
   unset PACKAGE_INCLUDES

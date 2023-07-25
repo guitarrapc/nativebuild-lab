@@ -6,10 +6,11 @@ source $SCRIPT_DIR/settings.sh
 OS=darwin
 PLATFORM=arm64
 TARGET=x86_64-apple-macos12.6
+ARCH=arm64
 OUTPUT_DIR=${OUTPUT_DIR:=pkg/${SRC_DIR}/${GIT_VERSION}/${OS}/${PLATFORM}/}
 
 # build
-. $SCRIPT_DIR/core/builder-darwin-arm64-make.sh
+. $SCRIPT_DIR/core/builder-darwin-make.sh
 
 # confirm
 ls $MAKE_LIB/$LIBNAME.a
