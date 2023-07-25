@@ -17,9 +17,9 @@ if errorlevel 1 (
 
 :: confirm
 dir %CMAKE_LIB%\Release\%EXENAME%*
-dir %CMAKE_PROGRAM%\Release\%EXENAME%.exe
+dir %CMAKE_PROGRAMS%\Release\%EXENAME%.exe
 
 :: copy
 mkdir %OUTPUT_DIR%
 cp %CMAKE_LIB%\Release\%EXENAME%.dll .\%OUTPUT_DIR%\%EXENAME%.dll
-cp %CMAKE_PROGRAM%\Release\%EXENAME%.exe .\%OUTPUT_DIR%\%EXENAME%.exe
+cp %CMAKE_PROGRAMS%\Release\%EXENAME%.exe .\%OUTPUT_DIR%\%EXENAME%.exe
