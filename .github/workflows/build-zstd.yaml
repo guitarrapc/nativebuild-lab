@@ -96,7 +96,7 @@ jobs:
       - run: git fetch --tags
         working-directory: ${{ env.app }}
       - name: Build
-        run: bash ./builder/${{ env.app }}/${{ env.app }}-linux-${{ matrix.target }}-make.sh
+        run: bash ./builder/${{ env.app }}/${{ env.app }}-linux-${{ matrix.target }}.sh
       - name: show generated files
         run: git ls-files --other --modified --exclude-standard
       - uses: actions/upload-artifact@v3

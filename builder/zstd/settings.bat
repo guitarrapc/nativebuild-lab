@@ -2,7 +2,7 @@ set SRC_DIR=zstd
 set MAKE_LIB=%SRC_DIR%\lib
 set MAKE_PROGRAMS=%SRC_DIR%\programs
 set CMAKE_LIB=%SRC_DIR%\build\cmake\build\lib
-set CMAKE_PROGRAM=%SRC_DIR%\build\cmake\build\programs
+set CMAKE_PROGRAMS=%SRC_DIR%\build\cmake\build\programs
 
 set LIBNAME=libzstd
 set EXENAME=zstd

@@ -4,11 +4,11 @@ set -e
 SCRIPT_DIR=$(cd $(dirname $0); pwd)
 source $SCRIPT_DIR/settings.sh
 OS=linux
-PLATFORM=x64
+PLATFORM=arm64
 OUTPUT_DIR=${OUTPUT_DIR:=pkg/${SRC_DIR}/${GIT_VERSION}/${OS}/${PLATFORM}/}
 
 # build
-docker run --rm -v "$SCRIPT_DIR/core:/builder" -v "$PWD/$SRC_DIR:/src" ubuntu:22.04 /bin/bash /builder/builder-linux-x64.sh
+docker run --rm -v "$SCRIPT_DIR/core:/builder" -v "$PWD/$SRC_DIR:/src" ubuntu:22.04 /bin/bash /builder/builder-linux-arm64.sh
 
 # confirm
 ls $CMAKE_LIB/$LIBNAME.a
