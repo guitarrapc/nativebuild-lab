@@ -105,7 +105,7 @@ Windows | x86         | Windows | Windows | CMake | [builder\lz4\lz4-windows-x86
 
 ## mbedtls
 
-> CI: GitHub Actions [build-lz4](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/build-mbedtls.yaml)
+> CI: GitHub Actions [build-mbedtls](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/build-mbedtls.yaml)
 
 OS | Architecture | Execute | Build Env| Builder | Build Script
 ---- | ---- | ---- | ---- | ---- | ----
