@@ -124,7 +124,7 @@ jobs:
       - run: brew uninstall --ignore-dependencies lz4 xz
         if: ${{ matrix.target == 'arm64' }}
       - name: Build
-        run: bash ./builder/${{ env.app }}/${{ env.app }}-darwin-${{ matrix.target }}-make.sh
+        run: bash ./builder/${{ env.app }}/${{ env.app }}-darwin-${{ matrix.target }}.sh
       - name: show generated files
         run: git ls-files --other --modified --exclude-standard
       - uses: actions/upload-artifact@v3
