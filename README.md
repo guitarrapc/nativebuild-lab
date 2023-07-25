@@ -14,7 +14,6 @@ This repository indicate build native binaries for following.
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-
 **Table of Contents**
 
 - [Build policy](#build-policy)
@@ -24,23 +23,14 @@ This repository indicate build native binaries for following.
   - [mbedtls](#mbedtls)
   - [zstd](#zstd)
 - [lz4](#lz4-1)
-  - [Android](#android)
-  - [iOS](#ios)
-  - [Linux](#linux)
-  - [macOS](#macos)
-  - [Windows](#windows)
+  - [(Notice) Windows Build](#notice-windows-build)
 - [mbedtls](#mbedtls-1)
-  - [Android](#android-1)
-  - [iOS](#ios-1)
-  - [Linux](#linux-1)
-  - [macOS](#macos-1)
-  - [Windows](#windows-1)
+  - [(Notice) Windows Build](#notice-windows-build-1)
+  - [(Notice) Windows Patch](#notice-windows-patch)
+  - [(Notice) Wrapper Patch](#notice-wrapper-patch)
+  - [(Notice) Filename Prefix Patch](#notice-filename-prefix-patch)
 - [zstd](#zstd-1)
-  - [Android](#android-2)
-  - [iOS](#ios-2)
-  - [Linux](#linux-2)
-  - [macOS](#macos-2)
-  - [Windows](#windows-2)
+  - [(Notice) Windows Build](#notice-windows-build-2)
 - [TIPS](#tips)
   - [CMake](#cmake)
   - [mingw-w64](#mingw-w64)
