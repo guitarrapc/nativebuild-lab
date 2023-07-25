@@ -13,3 +13,10 @@ pip3 install jinja2
 cd /src
 make clean
 make SHARED=1 CC=aarch64-linux-gnu-gcc CFLAGS="-O2 -Werror" lib
+
+# generate file test
+if ! file "$(readlink -f /src/library/libmbedcrypto.so)" | grep "ARM aarch64"; then
+  file "$(readlink -f /src/library/libmbedcrypto.so)"
+  echo "file generation arch not desired."
+  exit 1
+fi
