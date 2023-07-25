@@ -1,0 +1,6 @@
+C:/git/guitarrapc/nativebuild-lab/mbedtls_wrapper/cmake/build/CMakeFiles/wrapper_shared.dir
+C:/git/guitarrapc/nativebuild-lab/mbedtls_wrapper/cmake/build/CMakeFiles/wrapper_static.dir
+C:/git/guitarrapc/nativebuild-lab/mbedtls_wrapper/cmake/build/CMakeFiles/INSTALL.dir
+C:/git/guitarrapc/nativebuild-lab/mbedtls_wrapper/cmake/build/CMakeFiles/ALL_BUILD.dir
+C:/git/guitarrapc/nativebuild-lab/mbedtls_wrapper/cmake/build/CMakeFiles/ZERO_CHECK.dir
+C:/git/guitarrapc/nativebuild-lab/mbedtls_wrapper/cmake/build/cmake/mbedtls/include/CMakeFiles/INSTALL.dir

@@ -1,0 +1,14 @@
+{
+  "profiles": {
+    "MbedtlsNuGetReader": {
+      "commandName": "Project"
+    },
+    "WSL": {
+      "commandName": "WSL2",
+      "distributionName": "",
+      "environmentVariables": {
+        "LD_LIBRARY_PATH": "/mnt/c/git/guitarrapc/nativebuild-lab/tools/MbedtlsReader/MbedtlsNuGetReader/bin/Debug/net6.0/runtimes/linux-x64/native"
+      }
+    }
+  }
+}

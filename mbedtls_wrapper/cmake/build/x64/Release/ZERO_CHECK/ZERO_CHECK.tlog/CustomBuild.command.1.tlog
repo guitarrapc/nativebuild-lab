@@ -1,0 +1,10 @@
+^C:\GIT\GUITARRAPC\NATIVEBUILD-LAB\MBEDTLS_WRAPPER\CMAKE\BUILD\CMAKEFILES\F5EB5BC56ED89F67C91F97D88337C712\GENERATE.STAMP.RULE
+setlocal
+C:\Users\S07671\scoop\apps\cmake\3.24.0\bin\cmake.exe -SC:/git/guitarrapc/nativebuild-lab/mbedtls_wrapper -BC:/git/guitarrapc/nativebuild-lab/mbedtls_wrapper/cmake/build --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file C:/git/guitarrapc/nativebuild-lab/mbedtls_wrapper/cmake/build/wrapper.sln
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

@@ -1,0 +1,78 @@
+diff --git a/include/mbedtls/x509_crt.h b/include/mbedtls/x509_crt.h
+index aa45957061..d43f2a17be 100644
+--- a/include/mbedtls/x509_crt.h
++++ b/include/mbedtls/x509_crt.h
+@@ -374,6 +374,11 @@ typedef void mbedtls_x509_crt_restart_ctx;
+  * new algorithms are added to the library. New minor versions of Mbed TLS will
+  * not reduce this profile unless serious security concerns require it.
+  */
++#ifdef __IMPORT
++__declspec (dllimport)
++#else
++__declspec (dllexport)
++#endif
+ extern const mbedtls_x509_crt_profile mbedtls_x509_crt_profile_default;
+ 
+ /**
+@@ -386,6 +391,11 @@ extern const mbedtls_x509_crt_profile mbedtls_x509_crt_profile_next;
+ /**
+  * NSA Suite B profile.
+  */
++#ifdef __IMPORT
++__declspec (dllimport)
++#else
++__declspec (dllexport)
++#endif
+ extern const mbedtls_x509_crt_profile mbedtls_x509_crt_profile_suiteb;
+ 
+ /**
+diff --git a/library/CMakeLists.txt b/library/CMakeLists.txt
+index 0884f57ae3..7420e3a5e1 100644
+--- a/library/CMakeLists.txt
++++ b/library/CMakeLists.txt
+@@ -288,6 +288,9 @@ if(USE_SHARED_MBEDTLS_LIBRARY)
+     add_library(${mbedtls_target} SHARED ${src_tls})
+     set_target_properties(${mbedtls_target} PROPERTIES VERSION 3.2.1 SOVERSION 18)
+     target_link_libraries(${mbedtls_target} PUBLIC ${libs} ${mbedx509_target})
++
++    set_target_properties(${mbedtls_target} PROPERTIES WINDOWS_EXPORT_ALL_SYMBOLS true)
++    set_target_properties(${mbedx509_target} PROPERTIES WINDOWS_EXPORT_ALL_SYMBOLS true)
+ endif(USE_SHARED_MBEDTLS_LIBRARY)
+ 
+ foreach(target IN LISTS target_libraries)
+diff --git a/library/ssl_tls.c b/library/ssl_tls.c
+index e60b82fa5f..de8bcbbda0 100644
+--- a/library/ssl_tls.c
++++ b/library/ssl_tls.c
+@@ -21,6 +21,7 @@
+  *  http://www.ietf.org/rfc/rfc4346.txt
+  */
+ 
++#define __IMPORT
+ #include "common.h"
+ 
+ #if defined(MBEDTLS_SSL_TLS_C)
+diff --git a/programs/ssl/ssl_client2.c b/programs/ssl/ssl_client2.c
+index d6724dfb11..141386927e 100644
+--- a/programs/ssl/ssl_client2.c
++++ b/programs/ssl/ssl_client2.c
+@@ -17,6 +17,7 @@
+  *  limitations under the License.
+  */
+ 
++#define __IMPORT
+ #define MBEDTLS_ALLOW_PRIVATE_ACCESS
+ 
+ #include "ssl_test_lib.h"
+diff --git a/programs/ssl/ssl_server2.c b/programs/ssl/ssl_server2.c
+index 8e432bde89..6cc84927b3 100644
+--- a/programs/ssl/ssl_server2.c
++++ b/programs/ssl/ssl_server2.c
+@@ -17,6 +17,7 @@
+  *  limitations under the License.
+  */
+ 
++#define __IMPORT
+ #define MBEDTLS_ALLOW_PRIVATE_ACCESS
+ 
+ #include "ssl_test_lib.h"
