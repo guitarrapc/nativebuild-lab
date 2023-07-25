@@ -12,12 +12,12 @@ OUTPUT_DIR=${OUTPUT_DIR:=pkg/${SRC_DIR}/${GIT_VERSION}/${OS}/${PLATFORM}/}
 docker run --rm -v "$SCRIPT_DIR/core:/builder" -v "$PWD/$SRC_DIR:/src" -e "ABI=$ABI" ubuntu:22.04 /bin/bash /builder/builder-android.sh
 
 # confirm
-ls $SRC_DIR/build/cmake/build/lib/$LIBNAME.a
-ls $SRC_DIR/build/cmake/build/lib/$LIBNAME.so*
-ls $SRC_DIR/build/cmake/build/programs/$EXENAME
+ls $CMAKE_LIB/$LIBNAME.a
+ls $CMAKE_LIB/$LIBNAME.so*
+ls $CMAKE_PROGRAMS/$EXENAME
 
 # copy
 mkdir -p "./${OUTPUT_DIR}/"
-cp ./$SRC_DIR/build/cmake/build/lib/$LIBNAME.a "./${OUTPUT_DIR}/."
-cp ./$SRC_DIR/build/cmake/build/lib/$LIBNAME.so "./${OUTPUT_DIR}/."
-cp ./$SRC_DIR/build/cmake/build/programs/$EXENAME "./${OUTPUT_DIR}/."
+cp ./$CMAKE_LIB/$LIBNAME.a "./${OUTPUT_DIR}/."
+cp ./$CMAKE_LIB/$LIBNAME.so "./${OUTPUT_DIR}/."
+cp ./$CMAKE_PROGRAMS/$EXENAME "./${OUTPUT_DIR}/."

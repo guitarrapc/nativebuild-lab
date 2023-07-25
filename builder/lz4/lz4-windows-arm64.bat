@@ -16,10 +16,10 @@ if errorlevel 1 (
 )
 
 :: confirm
-dir %SRC_DIR%\build\cmake\build\Release\%EXENAME%*
-dir %SRC_DIR%\build\cmake\build\Release\%EXENAME%.exe
+dir %CMAKE_LIB%\%EXENAME%*
+dir %CMAKE_LIB%\%EXENAME%.exe
 
 :: copy
 mkdir %OUTPUT_DIR%
-cp %SRC_DIR%\build\cmake\build\Release\%EXENAME%.dll .\%OUTPUT_DIR%\%EXENAME%.dll
-cp %SRC_DIR%\build\cmake\build\Release\%EXENAME%.exe .\%OUTPUT_DIR%\%EXENAME%.exe
+cp %CMAKE_LIB%\%EXENAME%.dll .\%OUTPUT_DIR%\%EXENAME%.dll
+cp %CMAKE_LIB%\%EXENAME%.exe .\%OUTPUT_DIR%\%EXENAME%.exe

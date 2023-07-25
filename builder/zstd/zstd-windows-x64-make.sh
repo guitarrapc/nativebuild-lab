@@ -12,10 +12,10 @@ docker run --rm -v "$SCRIPT_DIR/core:/builder" -v "$PWD/$SRC_DIR:/src" ubuntu:22
 # docker run --rm -v "$SCRIPT_DIR/core:/builder" -v "$PWD/$SRC_DIR:/src" guitarrapc/ubuntu-mingw-w64:22.04.1 /bin/bash /builder/builder-windows-x64-mingw.sh
 
 # confirm
-ls $SRC_DIR/lib/dll/$LIBNAME.dll
-ls $SRC_DIR/programs/$EXENAME.exe
+ls $MAKE_LIB/dll/$LIBNAME.dll
+ls $MAKE_PROGRAMS/$EXENAME.exe
 
 # copy
 mkdir -p "./${OUTPUT_DIR}/mingw"
-cp ./$SRC_DIR/lib/dll/$LIBNAME.dll "./${OUTPUT_DIR}/mingw/."
-cp "./$SRC_DIR/programs/$EXENAME.exe" "./${OUTPUT_DIR}/mingw/."
+cp ./$MAKE_LIB/dll/$LIBNAME.dll "./${OUTPUT_DIR}/mingw/."
+cp "./$MAKE_PROGRAMS/$EXENAME.exe" "./${OUTPUT_DIR}/mingw/."

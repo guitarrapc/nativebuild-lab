@@ -2,6 +2,11 @@
 set -eu
 
 SRC_DIR=zstd
+MAKE_LIB=${SRC_DIR}/lib
+MAKE_PROGRAMS=${SRC_DIR}/programs
+CMAKE_LIB=${SRC_DIR}/build/cmake/build/lib
+CMAKE_PROGRAMS=${SRC_DIR}/build/cmake/build/programs
+
 LIBNAME=libzstd
 EXENAME=zstd
 

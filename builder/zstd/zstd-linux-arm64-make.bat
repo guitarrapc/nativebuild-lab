@@ -15,12 +15,12 @@ if errorlevel 1 (
 )
 
 :: confirm
-dir %SRC_DIR%\lib\%LIBNAME%.a
-dir %SRC_DIR%\lib\%LIBNAME%.so*
-dir %SRC_DIR%\%EXENAME%
+dir %MAKE_LIB%\%LIBNAME%.a
+dir %MAKE_LIB%\%LIBNAME%.so*
+dir %MAKE_PROGRAMS%\%EXENAME%
 
 :: copy
 mkdir %OUTPUT_DIR%
-cp .\%SRC_DIR%\lib\%LIBNAME%.a .\%OUTPUT_DIR%\%LIBNAME%.a
-cp .\%SRC_DIR%\lib\%LIBNAME%.so.%FILE_VERSION% .\%OUTPUT_DIR%\%LIBNAME%.so
-cp .\%SRC_DIR%\programs\%EXENAME% .\%OUTPUT_DIR%\%EXENAME%
+cp .\%MAKE_LIB%\%LIBNAME%.a .\%OUTPUT_DIR%\%LIBNAME%.a
+cp .\%MAKE_LIB%\%LIBNAME%.so.%FILE_VERSION% .\%OUTPUT_DIR%\%LIBNAME%.so
+cp .\%MAKE_PROGRAMS%\%EXENAME% .\%OUTPUT_DIR%\%EXENAME%

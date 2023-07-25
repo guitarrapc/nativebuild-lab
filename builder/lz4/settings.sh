@@ -2,6 +2,9 @@
 set -eu
 
 SRC_DIR=lz4
+MAKE_LIB=${SRC_DIR}/lib
+MAKE_PROGRAMS=${SRC_DIR}/programs
+
 LIBNAME=liblz4
 EXENAME=lz4
 

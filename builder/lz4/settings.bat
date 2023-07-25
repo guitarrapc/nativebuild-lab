@@ -1,4 +1,8 @@
 set SRC_DIR=lz4
+set MAKE_LIB=%SRC_DIR%\lib
+set MAKE_PROGRAMS=%SRC_DIR%\programs
+set CMAKE_LIB=%SRC_DIR%\build\cmake\build\Release
+
 set LIBNAME=liblz4
 set EXENAME=lz4
 

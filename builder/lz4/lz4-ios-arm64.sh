@@ -11,10 +11,10 @@ OUTPUT_DIR=${OUTPUT_DIR:=pkg/${SRC_DIR}/${GIT_VERSION}/${OS}/${PLATFORM}/}
 . ./builder/$SRC_DIR/core/builder-ios.sh
 
 # confirm
-ls -l $SRC_DIR/lib/$LIBNAME.a
-ls -l $SRC_DIR/lib/$LIBNAME.*dylib
+ls -l $MAKE_LIB/$LIBNAME.a
+ls -l $MAKE_LIB/$LIBNAME.*dylib
 
 # copy
 mkdir -p "./${OUTPUT_DIR}/"
-cp $SRC_DIR/lib/$LIBNAME.a "./${OUTPUT_DIR}/."
-cp "$SRC_DIR/lib/$LIBNAME.${FILE_VERSION}.dylib" "./${OUTPUT_DIR}/$LIBNAME.dylib"
+cp $MAKE_LIB/$LIBNAME.a "./${OUTPUT_DIR}/."
+cp "$MAKE_LIB/$LIBNAME.${FILE_VERSION}.dylib" "./${OUTPUT_DIR}/$LIBNAME.dylib"

@@ -16,10 +16,10 @@ if errorlevel 1 (
 )
 
 :: confirm
-dir %SRC_DIR%\lib\dll\%LIBNAME%.dll
-dir %SRC_DIR%\programs\%EXENAME%.exe
+dir %MAKE_LIB%\dll\%LIBNAME%.dll
+dir %MAKE_PROGRAMS%\%EXENAME%.exe
 
 :: copy
 mkdir %OUTPUT_DIR%\mingw
-cp .\%SRC_DIR%\lib\dll\%LIBNAME%.dll .\%OUTPUT_DIR%\mingw\%LIBNAME%.dll
-cp .\%SRC_DIR%\programs\%EXENAME%.exe .\%OUTPUT_DIR%\mingw\%EXENAME%.exe
+cp .\%MAKE_LIB%\dll\%LIBNAME%.dll .\%OUTPUT_DIR%\mingw\%LIBNAME%.dll
+cp .\%MAKE_PROGRAMS%\%EXENAME%.exe .\%OUTPUT_DIR%\mingw\%EXENAME%.exe

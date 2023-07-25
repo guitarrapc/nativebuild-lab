@@ -16,12 +16,12 @@ if errorlevel 1 (
 )
 
 :: confirm
-dir %SRC_DIR%\build\cmake\build\lib\%LIBNAME%.a
-dir %SRC_DIR%\build\cmake\build\lib\%LIBNAME%.so
-dir %SRC_DIR%\build\cmake\build\programs\%EXENAME%
+dir %CMAKE_LIB%\%LIBNAME%.a
+dir %CMAKE_LIB%\%LIBNAME%.so
+dir %CMAKE_PROGRAM%\%EXENAME%
 
 :: copy
 mkdir %OUTPUT_DIR%
-cp .\%SRC_DIR%\build\cmake\build\lib\%LIBNAME%.a .\%OUTPUT_DIR%\%LIBNAME%.a
-cp .\%SRC_DIR%\build\cmake\build\lib\%LIBNAME%.so .\%OUTPUT_DIR%\%LIBNAME%.so
-cp .\%SRC_DIR%\build\cmake\build\programs\%EXENAME% .\%OUTPUT_DIR%\%EXENAME%
+cp .\%CMAKE_LIB%\%LIBNAME%.a .\%OUTPUT_DIR%\%LIBNAME%.a
+cp .\%CMAKE_LIB%\%LIBNAME%.so .\%OUTPUT_DIR%\%LIBNAME%.so
+cp .\%CMAKE_PROGRAM%\%EXENAME% .\%OUTPUT_DIR%\%EXENAME%

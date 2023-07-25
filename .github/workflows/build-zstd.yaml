@@ -96,7 +96,7 @@ jobs:
       - run: git fetch --tags
         working-directory: ${{ env.app }}
       - name: Build
-        run: bash ./builder/${{ env.app }}/${{ env.app }}-linux-${{ matrix.target }}.sh
+        run: bash ./builder/${{ env.app }}/${{ env.app }}-linux-${{ matrix.target }}-make.sh
       - name: show generated files
         run: git ls-files --other --modified --exclude-standard
       - uses: actions/upload-artifact@v3
@@ -124,7 +124,7 @@ jobs:
       - run: brew uninstall --ignore-dependencies lz4 xz
         if: ${{ matrix.target == 'arm64' }}
       - name: Build
-        run: bash ./builder/${{ env.app }}/${{ env.app }}-darwin-${{ matrix.target }}.sh
+        run: bash ./builder/${{ env.app }}/${{ env.app }}-darwin-${{ matrix.target }}-make.sh
       - name: show generated files
         run: git ls-files --other --modified --exclude-standard
       - uses: actions/upload-artifact@v3
@@ -162,7 +162,7 @@ jobs:
         if: ${{ inputs.create-pullrequest == true }}
 
   # no upload.
-  windows-mingw:
+  windows-make:
     strategy:
       fail-fast: false
       matrix:
@@ -178,7 +178,7 @@ jobs:
       - run: git fetch --tags
         working-directory: ${{ env.app }}
       - name: Build
-        run: bash builder/${{ env.app }}/${{ env.app }}-windows-${{ matrix.target }}-mingw.sh
+        run: bash builder/${{ env.app }}/${{ env.app }}-windows-${{ matrix.target }}-make.sh
       - name: show generated files
         run: git ls-files --other --modified --exclude-standard
 
