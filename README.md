@@ -160,13 +160,13 @@ macOS   | arm64       | Mac(Intel/AppleSilicon) | macOS | CMake | []()
 macOS   | x64         | Mac(Intel/AppleSilicon) | macOS | make  | [`bash ./builder/zstd/zstd-darwin-x64.sh`](https://github.com/guitarrapc/nativebuild-lab/blob/main/builder/zstd/zstd-darwin-x64.sh)
 macOS   | x64         | Mac(Intel/AppleSilicon) | macOS | CMake | []()
 Windows | arm64       | Windows | Windows | CMake | [`builder\zstd\zstd-windows-arm64.bat`](https://github.com/guitarrapc/nativebuild-lab/blob/main/builder/zstd/zstd-windows-arm64.bat)
-Windows | arm64       | Linux   | Docker  | make  | [`bash ./builder/zstd/zstd-windows-arm64-mingw.sh`](https://github.com/guitarrapc/nativebuild-lab/blob/main/builder/zstd/zstd-windows-arm64-mingw.sh)
+Windows | arm64       | Linux   | Docker  | make  | [`bash ./builder/zstd/zstd-windows-arm64-make.sh`](https://github.com/guitarrapc/nativebuild-lab/blob/main/builder/zstd/zstd-windows-arm64-make.sh)
 Windows | arm64       | Windows | Docker  | make  | [`builder\zstd\zstd-windows-arm64-mingw.bat`](https://github.com/guitarrapc/nativebuild-lab/blob/main/builder/zstd/zstd-windows-arm64-mingw.bat)
 Windows | x64         | Windows | Windows | CMake | [`builder\zstd\zstd-windows-x64.bat`](https://github.com/guitarrapc/nativebuild-lab/blob/main/builder/zstd/zstd-windows-x64.bat)
-Windows | x64         | Linux   | Docker  | make  | [`bash ./builder/zstd/zstd-windows-x64-mingw.sh`](https://github.com/guitarrapc/nativebuild-lab/blob/main/builder/zstd/zstd-windows-x64-mingw.sh)
+Windows | x64         | Linux   | Docker  | make  | [`bash ./builder/zstd/zstd-windows-x64-make.sh`](https://github.com/guitarrapc/nativebuild-lab/blob/main/builder/zstd/zstd-windows-x64-make.sh)
 Windows | x64         | Windows | Docker  | make  | [`builder\zstd\zstd-windows-x64-mingw.bat`](https://github.com/guitarrapc/nativebuild-lab/blob/main/builder/zstd/zstd-windows-x64-mingw.bat)
 Windows | x86         | Windows | Windows | CMake | [`builder\zstd\zstd-windows-x86.bat`](https://github.com/guitarrapc/nativebuild-lab/blob/main/builder/zstd/zstd-windows-x86.bat)
-Windows | x86         | Linux   | Docker  | make  | [`bash ./builder/zstd/zstd-windows-x86-mingw.sh`](https://github.com/guitarrapc/nativebuild-lab/blob/main/builder/zstd/zstd-windows-x86-mingw.sh)
+Windows | x86         | Linux   | Docker  | make  | [`bash ./builder/zstd/zstd-windows-x86-make.sh`](https://github.com/guitarrapc/nativebuild-lab/blob/main/builder/zstd/zstd-windows-x86-make.sh)
 Windows | x86         | Windows | Docker  | make  | [`builder\zstd\zstd-windows-x86-mingw.bat`](https://github.com/guitarrapc/nativebuild-lab/blob/main/builder/zstd/zstd-windows-x86-mingw.bat)
 
 # lz4
@@ -604,7 +604,7 @@ builder\zstd\zstd-windows-x64.bat
 builder\zstd\zstd-windows-x64-mingw.bat
 
 # linux
-bash ./builder/zstd/zstd-windows-x64-mingw.sh
+bash ./builder/zstd/zstd-windows-x64-make.sh
 ```
 
 ### Windows (x86)
@@ -622,7 +622,7 @@ builder\zstd\zstd-windows-x86.bat
 builder\zstd\zstd-windows-x86-mingw.bat
 
 # linux
-bash ./builder/zstd/zstd-windows-x86-mingw.sh
+bash ./builder/zstd/zstd-windows-x86-make.sh
 ```
 
 ### Windows (arm64)
@@ -640,7 +640,7 @@ builder\zstd\zstd-windows-arm64.bat
 builder\zstd\zstd-windows-arm64-mingw.bat
 
 # linux
-bash ./builder/zstd/zstd-windows-arm64-mingw.sh
+bash ./builder/zstd/zstd-windows-arm64-make.sh
 ```
 
 # TIPS
