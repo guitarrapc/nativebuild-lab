@@ -6,7 +6,7 @@ apt update
 apt install -yq --no-install-suggests --no-install-recommends make gcc libc-dev
 apt install -yq --no-install-suggests --no-install-recommends python3 perl python3-pip
 apt install -yq --no-install-suggests --no-install-recommends gnutls-bin doxygen graphviz
-apt install -yq --no-install-suggests --no-install-recommends gcc-aarch64-linux-gnu
+apt install -yq --no-install-suggests --no-install-recommends gcc-aarch64-linux-gnu libc6-dev-arm64-cross
 pip3 install jinja2
 
 # build
