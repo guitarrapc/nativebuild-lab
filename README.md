@@ -63,10 +63,10 @@ git submodule update --init --recursive
 
 > **Note**
 >
-> Local Machine OS many have limit with...
+> Local Machine OS many have limit with BuildEnv.
 >
-> - Linux and Windows can build without macOS & iOS platform.
-> - macOS can build for all platform.
+> - Linux and Windows can build without BuildEnv `macOS`.
+> - macOS can build without BuildEnv `Windows`.
 
 # Summary
 
