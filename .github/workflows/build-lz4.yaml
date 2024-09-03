@@ -175,7 +175,7 @@ jobs:
       - run: echo "::set-output name=value::$(git tag --points-at HEAD -l -n0 | grep "v" | tr -d '[:space:]')"
         id: version
         working-directory: ${{ env.app }}
-      - uses: actions/download-artifact@v3
+      - uses: actions/download-artifact@v4.1.7
         with:
           name: artifact
           path: _tmp
