@@ -63,7 +63,7 @@ jobs:
         run: bash ./builder/${{ env.app }}/${{ env.app }}-android-${{ matrix.target }}.sh
       - name: show generated files
         run: git ls-files --other --modified --exclude-standard
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
           name: artifact
           path: _out
@@ -100,7 +100,7 @@ jobs:
         run: bash ./builder/${{ env.app }}/${{ env.app }}-ios-arm64.sh
       - name: show generated files
         run: git ls-files --other --modified --exclude-standard
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
           name: artifact
           path: _out
@@ -137,7 +137,7 @@ jobs:
         run: bash ./builder/${{ env.app }}/${{ env.app }}-linux-${{ matrix.target }}.sh
       - name: show generated files
         run: git ls-files --other --modified --exclude-standard
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
           name: artifact
           path: _out
@@ -174,7 +174,7 @@ jobs:
         run: bash ./builder/${{ env.app }}/${{ env.app }}-darwin-${{ matrix.target }}.sh
       - name: show generated files
         run: git ls-files --other --modified --exclude-standard
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
           name: artifact
           path: _out
@@ -222,7 +222,7 @@ jobs:
         shell: cmd
       - name: show generated files
         run: git ls-files --other --modified --exclude-standard
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
           name: artifact
           path: _out
