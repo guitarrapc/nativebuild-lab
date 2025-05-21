@@ -39,6 +39,8 @@ jobs:
         symbol-convert: ["", "-symbol"]
     env:
       OUTPUT_DIR: _out/android-${{ matrix.target }}${{ matrix.patch }}${{ matrix.symbol-convert }}
+    permissions:
+      contents: read
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     steps:
@@ -80,6 +82,8 @@ jobs:
         symbol-convert: ["", "-symbol"]
     env:
       OUTPUT_DIR: _out/ios-${{ matrix.target }}${{ matrix.patch }}${{ matrix.symbol-convert }}
+    permissions:
+      contents: read
     runs-on: macos-15
     timeout-minutes: 15
     steps:
@@ -118,6 +122,8 @@ jobs:
         symbol-convert: ["", "-symbol"]
     env:
       OUTPUT_DIR: _out/linux-${{ matrix.target }}${{ matrix.patch }}${{ matrix.symbol-convert }}
+    permissions:
+      contents: read
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     steps:
@@ -156,6 +162,8 @@ jobs:
         symbol-convert: ["", "-symbol"]
     env:
       OUTPUT_DIR: _out/osx-${{ matrix.target }}${{ matrix.patch }}${{ matrix.symbol-convert }}
+    permissions:
+      contents: read
     runs-on: macos-15
     timeout-minutes: 15
     steps:
@@ -194,6 +202,8 @@ jobs:
         symbol-convert: ["", "-symbol"]
     env:
       OUTPUT_DIR: _out\win-${{ matrix.target }}${{ matrix.patch }}${{ matrix.symbol-convert }}
+    permissions:
+      contents: read
     runs-on: windows-2022
     timeout-minutes: 15
     steps:
@@ -237,6 +247,9 @@ jobs:
   pr:
     if: ${{ inputs.create-pullrequest == true }}
     needs: [android, ios, linux, macos, windows]
+    permissions:
+      contents: write
+      pull-requests: write
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     steps:

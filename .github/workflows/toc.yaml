@@ -6,9 +6,12 @@ on:
     branches: [main]
 
 jobs:
-  generateTOC:
+  toc:
     name: TOC Generator
+    permissions:
+      contents: write
     runs-on: ubuntu-24.04
+    timeout-minutes: 10
     steps:
       - uses: technote-space/toc-generator@9e238e7974de5fcf7b17b7acc54c896160dda0a3 # v4.3.1
         with:

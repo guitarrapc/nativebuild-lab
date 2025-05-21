@@ -36,6 +36,8 @@ jobs:
         target: ["x64", "arm64"]
     env:
       OUTPUT_DIR: _out/linux-${{ matrix.target }}
+    permissions:
+      contents: read
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     steps:
@@ -50,6 +52,7 @@ jobs:
         with:
           name: artifact
           path: _out
+          retention-days: 1
         if: ${{ inputs.create-pullrequest == true }}
 
   windows:
@@ -57,6 +60,8 @@ jobs:
       fail-fast: false
       matrix:
         target: ["x64", "x86", "arm64"]
+    permissions:
+      contents: read
     env:
       OUTPUT_DIR: _out\win-${{ matrix.target }}
     runs-on: windows-2022
@@ -76,11 +81,15 @@ jobs:
         with:
           name: artifact
           path: _out
+          retention-days: 1
         if: ${{ inputs.create-pullrequest == true }}
 
   pr:
     if: ${{ inputs.create-pullrequest == true }}
     needs: [linux, windows]
+    permissions:
+      contents: write
+      pull-requests: write
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     steps:

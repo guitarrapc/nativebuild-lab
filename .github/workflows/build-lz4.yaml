@@ -36,6 +36,8 @@ jobs:
         target: ["x86", "x64", "arm", "arm64"]
     env:
       OUTPUT_DIR: _out/android-${{ matrix.target }}
+    permissions:
+      contents: read
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     steps:
@@ -64,6 +66,8 @@ jobs:
             os: macos-15
     env:
       OUTPUT_DIR: _out/ios-${{ matrix.target }}
+    permissions:
+      contents: read
     runs-on: ${{ matrix.os }}
     timeout-minutes: 10
     steps:
@@ -90,6 +94,8 @@ jobs:
         target: ["x64", "arm64"]
     env:
       OUTPUT_DIR: _out/linux-${{ matrix.target }}
+    permissions:
+      contents: read
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     steps:
@@ -116,6 +122,8 @@ jobs:
         target: ["x64", "arm64"]
     env:
       OUTPUT_DIR: _out/osx-${{ matrix.target }}
+    permissions:
+      contents: read
     runs-on: macos-15
     timeout-minutes: 10
     steps:
@@ -145,6 +153,8 @@ jobs:
         target: ["x64", "x86", "arm64"]
     env:
       OUTPUT_DIR: _out\win-${{ matrix.target }}
+    permissions:
+      contents: read
     runs-on: windows-2022
     timeout-minutes: 10
     steps:
@@ -170,6 +180,9 @@ jobs:
   pr:
     if: ${{ inputs.create-pullrequest == true }}
     needs: [android, ios, linux, macos, windows]
+    permissions:
+      contents: write
+      pull-requests: write
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     steps:
