@@ -107,7 +107,7 @@ jobs:
           cp -fR ./_tmp/* ./artifact/${{ env.app }}
       - name: Check for modified files
         id: git-check
-        run: echo "::set-output name=modified::$(if [[ "$(git status --porcelain=v1 2>/dev/null | wc -l)" == "0" ]]; then echo "false"; else echo "true"; fi)"
+        run: echo "name=modified::$(if [[ "$(git status --porcelain=v1 2>/dev/null | wc -l)" == "0" ]]; then echo "false"; else echo "true"; fi)" | tee -a "$GITHUB_OUTPUT"
       - if: steps.git-check.outputs.modified == 'true'
         name: Create PullRequest
         uses: peter-evans/create-pull-request@38e0b6e68b4c852a5500a94740f0e535e0d7ba54 # v4.2.4
