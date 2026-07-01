@@ -250,8 +250,8 @@ __install_zstd() {
   popd > /dev/null 2>&1
 
   # generate file test
-  if ! file "${BUILD_DIR}/library/$(readlink ${BUILD_DIR}/library/lib${PREFIX}mbedcrypto.dylib)" | grep -i "$IOS_ARCH"; then
-    file "${BUILD_DIR}/library/$(readlink ${BUILD_DIR}/library/lib${PREFIX}mbedcrypto.dylib)"
+  if ! file "${BUILD_DIR}/library/$(readlink ${BUILD_DIR}/library/libtfpsacrypto.dylib)" | grep -i "$IOS_ARCH"; then
+    file "${BUILD_DIR}/library/$(readlink ${BUILD_DIR}/library/libtfpsacrypto.dylib)"
     echo "file generation arch not desired."
     exit 1
   fi

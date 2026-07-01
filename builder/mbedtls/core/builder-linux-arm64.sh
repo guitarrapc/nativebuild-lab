@@ -24,8 +24,8 @@ cd $BUILD_DIR
   cmake --build . --config Release
 
 # generate file test
-if ! file "$(readlink -f $BUILD_DIR/library/lib${PREFIX}mbedcrypto.so)" | grep "ARM aarch64"; then
-  file "$(readlink -f $BUILD_DIR/library/lib${PREFIX}mbedcrypto.so)"
+if ! file "$(readlink -f $BUILD_DIR/library/libtfpsacrypto.so)" | grep "ARM aarch64"; then
+  file "$(readlink -f $BUILD_DIR/library/libtfpsacrypto.so)"
   echo "file generation arch not desired."
   exit 1
 fi

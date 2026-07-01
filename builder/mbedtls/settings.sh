@@ -6,7 +6,7 @@ MAKE_LIB=${SRC_DIR}/library
 CMAKE_LIB=${SRC_DIR}/cmake/build.dir/library
 
 PREFIX=${PREFIX:=""}
-LIBNAME_CRYPTO=lib${PREFIX}mbedcrypto
+LIBNAME_CRYPTO=libtfpsacrypto
 LIBNAME_TLS=lib${PREFIX}mbedtls
 LIBNAME_X509=lib${PREFIX}mbedx509
 

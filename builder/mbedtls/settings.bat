@@ -3,10 +3,10 @@ set MAKE_LIB=%SRC_DIR%\library
 set CMAKE_LIB=%SRC_DIR%\cmake\build.dir\library
 
 if not defined PREFIX (set PREFIX=)
-set LIBNAME_CRYPTO=lib%PREFIX%mbedcrypto
+set LIBNAME_CRYPTO=libtfpsacrypto
 set LIBNAME_TLS=lib%PREFIX%mbedtls
 set LIBNAME_X509=lib%PREFIX%mbedx509
-set WIN_LIBNAME_CRYPTO=%PREFIX%mbedcrypto
+set WIN_LIBNAME_CRYPTO=tfpsacrypto
 set WIN_LIBNAME_TLS=%PREFIX%mbedtls
 set WIN_LIBNAME_X509=%PREFIX%mbedx509
 

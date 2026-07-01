@@ -10,8 +10,8 @@ make clean
 make SHARED=1 lib
 
 # generate file test
-if ! file "$(readlink -f /src/library/libmbedcrypto.so)" | grep "x86-64"; then
-  file "$(readlink -f /src/library/libmbedcrypto.so)"
+if ! file "$(readlink -f /src/library/libtfpsacrypto.so)" | grep "x86-64"; then
+  file "$(readlink -f /src/library/libtfpsacrypto.so)"
   echo "file generation arch not desired."
   exit 1
 fi
