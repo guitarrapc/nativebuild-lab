@@ -21,7 +21,7 @@ This repository indicate build native binaries for following.
 - [lz4](#lz4-1)
   - [(Notice) Windows Build](#notice-windows-build)
 - [zstd](#zstd-1)
-  - [(Notice) Windows Build](#notice-windows-build-2)
+  - [(Notice) Windows Build](#notice-windows-build-1)
 - [TIPS](#tips)
   - [CMake](#cmake)
   - [mingw-w64](#mingw-w64)
