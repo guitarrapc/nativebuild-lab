@@ -54,9 +54,9 @@ jobs:
         run: git apply ../builder/mbedtls/patch/wrapper.patch
         working-directory: ${{ env.APP }}
         if: ${{ matrix.patch != '' }}
-      - uses: actions/setup-dotnet@55ec9447dda3d1cf6bd587150f3262f30ee10815 # v3.4.2
+      - uses: actions/setup-dotnet@9a946fdbd5fb07b82b2f5a4466058b876ab72bb2 # v5.3.0
         with:
-          dotnet-version: "6.0.x"
+          dotnet-version: "10.0.x"
       - name: SymbolConverter
         run: |
           dotnet run --project ./tools/SymbolConverter/src/SymbolConverter/SymbolConverter.csproj prefix --prefix ${SYMBOL_PREFIX} --header-paths ${{ github.workspace }}/mbedtls/library,${{ github.workspace }}/mbedtls/include,${{ github.workspace }}/mbedtls/tests/include,${{ github.workspace }}/mbedtls/programs --impl-paths ${{ github.workspace }}/mbedtls/library,${{ github.workspace }}/mbedtls/tests,${{ github.workspace }}/mbedtls/programs --macro-paths ${{ github.workspace }}/mbedtls/library --impl-extensions ./*.c,./*.function,./*.data --method-delimiters : --dryrun false
@@ -97,6 +97,9 @@ jobs:
         run: git apply ../builder/mbedtls/patch/wrapper.patch
         working-directory: ${{ env.APP }}
         if: ${{ matrix.patch != '' }}
+      - uses: actions/setup-dotnet@9a946fdbd5fb07b82b2f5a4466058b876ab72bb2 # v5.3.0
+        with:
+          dotnet-version: "10.0.x"
       - name: SymbolConverter
         run: |
           dotnet run --project ./tools/SymbolConverter/src/SymbolConverter/SymbolConverter.csproj prefix --prefix ${SYMBOL_PREFIX} --header-paths ${{ github.workspace }}/mbedtls/library,${{ github.workspace }}/mbedtls/include,${{ github.workspace }}/mbedtls/tests/include,${{ github.workspace }}/mbedtls/programs --impl-paths ${{ github.workspace }}/mbedtls/library,${{ github.workspace }}/mbedtls/tests,${{ github.workspace }}/mbedtls/programs --macro-paths ${{ github.workspace }}/mbedtls/library --impl-extensions ./*.c,./*.function,./*.data --method-delimiters : --dryrun false
@@ -137,6 +140,9 @@ jobs:
         run: git apply ../builder/mbedtls/patch/wrapper.patch
         working-directory: ${{ env.APP }}
         if: ${{ matrix.patch != '' }}
+      - uses: actions/setup-dotnet@9a946fdbd5fb07b82b2f5a4466058b876ab72bb2 # v5.3.0
+        with:
+          dotnet-version: "10.0.x"
       - name: SymbolConverter
         run: |
           dotnet run --project ./tools/SymbolConverter/src/SymbolConverter/SymbolConverter.csproj prefix --prefix ${SYMBOL_PREFIX} --header-paths ${{ github.workspace }}/mbedtls/library,${{ github.workspace }}/mbedtls/include,${{ github.workspace }}/mbedtls/tests/include,${{ github.workspace }}/mbedtls/programs --impl-paths ${{ github.workspace }}/mbedtls/library,${{ github.workspace }}/mbedtls/tests,${{ github.workspace }}/mbedtls/programs --macro-paths ${{ github.workspace }}/mbedtls/library --impl-extensions ./*.c,./*.function,./*.data --method-delimiters : --dryrun false
@@ -177,6 +183,9 @@ jobs:
         run: git apply ../builder/mbedtls/patch/wrapper.patch
         working-directory: ${{ env.APP }}
         if: ${{ matrix.patch != '' }}
+      - uses: actions/setup-dotnet@9a946fdbd5fb07b82b2f5a4466058b876ab72bb2 # v5.3.0
+        with:
+          dotnet-version: "10.0.x"
       - name: SymbolConverter
         run: |
           dotnet run --project ./tools/SymbolConverter/src/SymbolConverter/SymbolConverter.csproj prefix --prefix ${SYMBOL_PREFIX} --header-paths ${{ github.workspace }}/mbedtls/library,${{ github.workspace }}/mbedtls/include,${{ github.workspace }}/mbedtls/tests/include,${{ github.workspace }}/mbedtls/programs --impl-paths ${{ github.workspace }}/mbedtls/library,${{ github.workspace }}/mbedtls/tests,${{ github.workspace }}/mbedtls/programs --macro-paths ${{ github.workspace }}/mbedtls/library --impl-extensions ./*.c,./*.function,./*.data --method-delimiters : --dryrun false
@@ -223,6 +232,9 @@ jobs:
         working-directory: ${{ env.APP }}
         shell: cmd
         if: ${{ matrix.patch != '' }}
+      - uses: actions/setup-dotnet@9a946fdbd5fb07b82b2f5a4466058b876ab72bb2 # v5.3.0
+        with:
+          dotnet-version: "10.0.x"
       - run: echo "value=$(`"${{ github.workspace }}`".Replace('\','/'))" >> "$env:GITHUB_OUTPUT"
         id: workspace
       - name: SymbolConverter
