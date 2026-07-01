@@ -26,7 +26,7 @@ on:
 # android-x64, ios-arm64, linux-x64, osx-x64, win-x64
 
 env:
-  app: mbedtls
+  APP: mbedtls
   SYMBOL_PREFIX: nantoka_
 
 jobs:
@@ -49,22 +49,22 @@ jobs:
           submodules: true
           persist-credentials: false
       - run: git fetch --tags
-        working-directory: ${{ env.app }}
+        working-directory: ${{ env.APP }}
       - name: Patch wrapper class
         run: git apply ../builder/mbedtls/patch/wrapper.patch
-        working-directory: ${{ env.app }}
+        working-directory: ${{ env.APP }}
         if: ${{ matrix.patch != '' }}
       - uses: actions/setup-dotnet@55ec9447dda3d1cf6bd587150f3262f30ee10815 # v3.4.2
         with:
           dotnet-version: "6.0.x"
       - name: SymbolConverter
         run: |
-          dotnet run --project ./tools/SymbolConverter/src/SymbolConverter/SymbolConverter.csproj prefix --prefix ${{ env.SYMBOL_PREFIX }} --header-paths ${{ github.workspace }}/mbedtls/library,${{ github.workspace }}/mbedtls/include,${{ github.workspace }}/mbedtls/tests/include,${{ github.workspace }}/mbedtls/programs --impl-paths ${{ github.workspace }}/mbedtls/library,${{ github.workspace }}/mbedtls/tests,${{ github.workspace }}/mbedtls/programs --macro-paths ${{ github.workspace }}/mbedtls/library --impl-extensions ./*.c,./*.function,./*.data --method-delimiters : --dryrun false
+          dotnet run --project ./tools/SymbolConverter/src/SymbolConverter/SymbolConverter.csproj prefix --prefix ${SYMBOL_PREFIX} --header-paths ${{ github.workspace }}/mbedtls/library,${{ github.workspace }}/mbedtls/include,${{ github.workspace }}/mbedtls/tests/include,${{ github.workspace }}/mbedtls/programs --impl-paths ${{ github.workspace }}/mbedtls/library,${{ github.workspace }}/mbedtls/tests,${{ github.workspace }}/mbedtls/programs --macro-paths ${{ github.workspace }}/mbedtls/library --impl-extensions ./*.c,./*.function,./*.data --method-delimiters : --dryrun false
         env:
           SYMBOL_CONVERTER_MACRO_REGEXES: ".*(?<name>mbedtls_##type##_context).*,.*(?<name>mbedtls_##type##_init).*"
         if: ${{ matrix.symbol-convert != '' }}
       - name: Build
-        run: bash ./builder/${{ env.app }}/${{ env.app }}-android-${{ matrix.target }}.sh
+        run: bash ./builder/${APP}/${APP}-android-${{ matrix.target }}.sh
       - name: show generated files
         run: git ls-files --other --modified --exclude-standard
       - uses: actions/upload-artifact@4cec3d8aa04e39d1a68397de0c4cd6fb9dce8ec1 # v4.6.1
@@ -92,19 +92,19 @@ jobs:
           submodules: true
           persist-credentials: false
       - run: git fetch --tags
-        working-directory: ${{ env.app }}
+        working-directory: ${{ env.APP }}
       - name: Patch wrapper class
         run: git apply ../builder/mbedtls/patch/wrapper.patch
-        working-directory: ${{ env.app }}
+        working-directory: ${{ env.APP }}
         if: ${{ matrix.patch != '' }}
       - name: SymbolConverter
         run: |
-          dotnet run --project ./tools/SymbolConverter/src/SymbolConverter/SymbolConverter.csproj prefix --prefix ${{ env.SYMBOL_PREFIX }} --header-paths ${{ github.workspace }}/mbedtls/library,${{ github.workspace }}/mbedtls/include,${{ github.workspace }}/mbedtls/tests/include,${{ github.workspace }}/mbedtls/programs --impl-paths ${{ github.workspace }}/mbedtls/library,${{ github.workspace }}/mbedtls/tests,${{ github.workspace }}/mbedtls/programs --macro-paths ${{ github.workspace }}/mbedtls/library --impl-extensions ./*.c,./*.function,./*.data --method-delimiters : --dryrun false
+          dotnet run --project ./tools/SymbolConverter/src/SymbolConverter/SymbolConverter.csproj prefix --prefix ${SYMBOL_PREFIX} --header-paths ${{ github.workspace }}/mbedtls/library,${{ github.workspace }}/mbedtls/include,${{ github.workspace }}/mbedtls/tests/include,${{ github.workspace }}/mbedtls/programs --impl-paths ${{ github.workspace }}/mbedtls/library,${{ github.workspace }}/mbedtls/tests,${{ github.workspace }}/mbedtls/programs --macro-paths ${{ github.workspace }}/mbedtls/library --impl-extensions ./*.c,./*.function,./*.data --method-delimiters : --dryrun false
         env:
           SYMBOL_CONVERTER_MACRO_REGEXES: ".*(?<name>mbedtls_##type##_context).*,.*(?<name>mbedtls_##type##_init).*"
         if: ${{ matrix.symbol-convert != '' }}
       - name: Build
-        run: bash ./builder/${{ env.app }}/${{ env.app }}-ios-arm64.sh
+        run: bash ./builder/${APP}/${APP}-ios-arm64.sh
       - name: show generated files
         run: git ls-files --other --modified --exclude-standard
       - uses: actions/upload-artifact@4cec3d8aa04e39d1a68397de0c4cd6fb9dce8ec1 # v4.6.1
@@ -132,19 +132,19 @@ jobs:
           submodules: true
           persist-credentials: false
       - run: git fetch --tags
-        working-directory: ${{ env.app }}
+        working-directory: ${{ env.APP }}
       - name: Patch wrapper class
         run: git apply ../builder/mbedtls/patch/wrapper.patch
-        working-directory: ${{ env.app }}
+        working-directory: ${{ env.APP }}
         if: ${{ matrix.patch != '' }}
       - name: SymbolConverter
         run: |
-          dotnet run --project ./tools/SymbolConverter/src/SymbolConverter/SymbolConverter.csproj prefix --prefix ${{ env.SYMBOL_PREFIX }} --header-paths ${{ github.workspace }}/mbedtls/library,${{ github.workspace }}/mbedtls/include,${{ github.workspace }}/mbedtls/tests/include,${{ github.workspace }}/mbedtls/programs --impl-paths ${{ github.workspace }}/mbedtls/library,${{ github.workspace }}/mbedtls/tests,${{ github.workspace }}/mbedtls/programs --macro-paths ${{ github.workspace }}/mbedtls/library --impl-extensions ./*.c,./*.function,./*.data --method-delimiters : --dryrun false
+          dotnet run --project ./tools/SymbolConverter/src/SymbolConverter/SymbolConverter.csproj prefix --prefix ${SYMBOL_PREFIX} --header-paths ${{ github.workspace }}/mbedtls/library,${{ github.workspace }}/mbedtls/include,${{ github.workspace }}/mbedtls/tests/include,${{ github.workspace }}/mbedtls/programs --impl-paths ${{ github.workspace }}/mbedtls/library,${{ github.workspace }}/mbedtls/tests,${{ github.workspace }}/mbedtls/programs --macro-paths ${{ github.workspace }}/mbedtls/library --impl-extensions ./*.c,./*.function,./*.data --method-delimiters : --dryrun false
         env:
           SYMBOL_CONVERTER_MACRO_REGEXES: ".*(?<name>mbedtls_##type##_context).*,.*(?<name>mbedtls_##type##_init).*"
         if: ${{ matrix.symbol-convert != '' }}
       - name: Build
-        run: bash ./builder/${{ env.app }}/${{ env.app }}-linux-${{ matrix.target }}.sh
+        run: bash ./builder/${APP}/${APP}-linux-${{ matrix.target }}.sh
       - name: show generated files
         run: git ls-files --other --modified --exclude-standard
       - uses: actions/upload-artifact@4cec3d8aa04e39d1a68397de0c4cd6fb9dce8ec1 # v4.6.1
@@ -172,19 +172,19 @@ jobs:
           submodules: true
           persist-credentials: false
       - run: git fetch --tags
-        working-directory: ${{ env.app }}
+        working-directory: ${{ env.APP }}
       - name: Patch wrapper class
         run: git apply ../builder/mbedtls/patch/wrapper.patch
-        working-directory: ${{ env.app }}
+        working-directory: ${{ env.APP }}
         if: ${{ matrix.patch != '' }}
       - name: SymbolConverter
         run: |
-          dotnet run --project ./tools/SymbolConverter/src/SymbolConverter/SymbolConverter.csproj prefix --prefix ${{ env.SYMBOL_PREFIX }} --header-paths ${{ github.workspace }}/mbedtls/library,${{ github.workspace }}/mbedtls/include,${{ github.workspace }}/mbedtls/tests/include,${{ github.workspace }}/mbedtls/programs --impl-paths ${{ github.workspace }}/mbedtls/library,${{ github.workspace }}/mbedtls/tests,${{ github.workspace }}/mbedtls/programs --macro-paths ${{ github.workspace }}/mbedtls/library --impl-extensions ./*.c,./*.function,./*.data --method-delimiters : --dryrun false
+          dotnet run --project ./tools/SymbolConverter/src/SymbolConverter/SymbolConverter.csproj prefix --prefix ${SYMBOL_PREFIX} --header-paths ${{ github.workspace }}/mbedtls/library,${{ github.workspace }}/mbedtls/include,${{ github.workspace }}/mbedtls/tests/include,${{ github.workspace }}/mbedtls/programs --impl-paths ${{ github.workspace }}/mbedtls/library,${{ github.workspace }}/mbedtls/tests,${{ github.workspace }}/mbedtls/programs --macro-paths ${{ github.workspace }}/mbedtls/library --impl-extensions ./*.c,./*.function,./*.data --method-delimiters : --dryrun false
         env:
           SYMBOL_CONVERTER_MACRO_REGEXES: ".*(?<name>mbedtls_##type##_context).*,.*(?<name>mbedtls_##type##_init).*"
         if: ${{ matrix.symbol-convert != '' }}
       - name: Build
-        run: bash ./builder/${{ env.app }}/${{ env.app }}-darwin-${{ matrix.target }}.sh
+        run: bash ./builder/${APP}/${APP}-darwin-${{ matrix.target }}.sh
       - name: show generated files
         run: git ls-files --other --modified --exclude-standard
       - uses: actions/upload-artifact@4cec3d8aa04e39d1a68397de0c4cd6fb9dce8ec1 # v4.6.1
@@ -212,29 +212,29 @@ jobs:
           submodules: true
           persist-credentials: false
       - run: git fetch --tags
-        working-directory: ${{ env.app }}
+        working-directory: ${{ env.APP }}
       - name: Patch wrapper class
         run: git apply --ignore-space-change --ignore-whitespace --whitespace=nowarn ..\builder\mbedtls\patch\wrapper.patch
-        working-directory: ${{ env.app }}
+        working-directory: ${{ env.APP }}
         shell: cmd
         if: ${{ matrix.patch != '' }}
       - name: Patch Windows shared symbol output
         run: git apply --ignore-space-change --ignore-whitespace --whitespace=nowarn ..\builder\mbedtls\patch\windows.patch
-        working-directory: ${{ env.app }}
+        working-directory: ${{ env.APP }}
         shell: cmd
         if: ${{ matrix.patch != '' }}
-      - run: echo "WORKSPACE=$(`"${{ github.workspace }}`".Replace('\','/'))" >> "$env:GITHUB_ENV"
+      - run: echo "value=$(`"${{ github.workspace }}`".Replace('\','/'))" >> "$env:GITHUB_OUTPUT"
         id: workspace
       - name: SymbolConverter
         run: |
-          dotnet run --project ./tools/SymbolConverter/src/SymbolConverter/SymbolConverter.csproj prefix --prefix ${{ env.SYMBOL_PREFIX }} --header-paths ${{ env.workspace }}/mbedtls/library,${{ env.workspace }}/mbedtls/include,${{ env.workspace }}/mbedtls/tests/include,${{ env.workspace }}/mbedtls/programs --impl-paths ${{ env.workspace }}/mbedtls/library,${{ env.workspace }}/mbedtls/tests,${{ env.workspace }}/mbedtls/programs --macro-paths ${{ env.workspace }}/mbedtls/library --impl-extensions *.c,*.function,*.data --method-delimiters : --dryrun false
+          dotnet run --project ./tools/SymbolConverter/src/SymbolConverter/SymbolConverter.csproj prefix --prefix ${SYMBOL_PREFIX} --header-paths ${workspace}/mbedtls/library,${workspace}/mbedtls/include,${workspace}/mbedtls/tests/include,${workspace}/mbedtls/programs --impl-paths ${workspace}/mbedtls/library,${workspace}/mbedtls/tests,${workspace}/mbedtls/programs --macro-paths ${{ steps.workspace.outputs.value }}/mbedtls/library --impl-extensions *.c,*.function,*.data --method-delimiters : --dryrun false
         env:
           SYMBOL_CONVERTER_MACRO_REGEXES: ".*(?<name>mbedtls_##type##_context).*,.*(?<name>mbedtls_##type##_init).*"
         if: ${{ matrix.symbol-convert != '' }}
       - name: Add MSBuild to PATH
         uses: microsoft/setup-msbuild@34cfbaee7f672c76950673338facd8a73f637506 # v1.1.3
       - name: Build
-        run: builder\${{ env.app }}\${{ env.app }}-windows-${{ matrix.target }}.bat
+        run: builder\${APP}\${APP}-windows-${{ matrix.target }}.bat
         shell: cmd
       - name: show generated files
         run: git ls-files --other --modified --exclude-standard
@@ -258,33 +258,33 @@ jobs:
           submodules: true
           persist-credentials: false
       - run: git fetch --tags
-        working-directory: ${{ env.app }}
+        working-directory: ${{ env.APP }}
       - run: echo "name=value::$(git tag --points-at HEAD -l -n0 | grep "v" | tr -d '[:space:]')" | tee -a "$GITHUB_OUTPUT"
         id: version
-        working-directory: ${{ env.app }}
+        working-directory: ${{ env.APP }}
       - uses: actions/download-artifact@65a9edc5881444af0b9093a5e628f2fe47ea3b2e # v4.1.7
         with:
           name: artifact
           path: _tmp
       - name: Copy to artifact
         run: |
-          rm -rf ./artifact/${{ env.app }}
-          mkdir -p ./artifact/${{ env.app }}
-          cp -fR ./_tmp/* ./artifact/${{ env.app }}
+          rm -rf ./artifact/${APP}
+          mkdir -p ./artifact/${APP}
+          cp -fR ./_tmp/* ./artifact/${APP}
       - name: Check for modified files
         id: git-check
         run: echo "name=modified::$(if [[ "$(git status --porcelain=v1 2>/dev/null | wc -l)" == "0" ]]; then echo "false"; else echo "true"; fi)" | tee -a "$GITHUB_OUTPUT"
-      - if: steps.git-check.outputs.modified == 'true'
+      - if: ${{ steps.git-check.outputs.modified == 'true' }}
         name: Create PullRequest
         uses: peter-evans/create-pull-request@38e0b6e68b4c852a5500a94740f0e535e0d7ba54 # v4.2.4
         with:
           base: "main"
-          branch: "auto/${{ env.app }}_tmp"
+          branch: "auto/${{ env.APP }}_tmp"
           author: github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>
           committer: github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>
           delete-branch: true
-          title: "[${{ env.app }}] Update artifacts ${{ steps.version.outputs.value }}"
+          title: "[${{ env.APP }}] Update artifacts ${{ steps.version.outputs.value }}"
           body: |
-            Update ${{ env.app }} artifacts for ${{ steps.version.outputs.value }} 🚀
+            Update ${{ env.APP }} artifacts for ${{ steps.version.outputs.value }} 🚀
           labels: |
             automated pr
