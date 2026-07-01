@@ -63,7 +63,8 @@ __install_required_packages() {
 
   run apt-get update
   run apt-get install -yq --no-install-suggests --no-install-recommends build-essential pkg-config curl libssl-dev zlib1g-dev
-  run apt-get install -yq --no-install-suggests --no-install-recommends unzip cmake ccache file
+  run apt-get install -yq --no-install-suggests --no-install-recommends unzip cmake ccache file perl python3 python3-pip
+  run pip3 install -r /src/scripts/basic.requirements.txt
 }
 
 __install_android_ndk() {

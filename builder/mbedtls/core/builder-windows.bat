@@ -9,14 +9,24 @@ set BUILD_DIR=%SRC_DIR%\cmake\build.dir
 rmdir /S /Q %BUILD_DIR%
 mkdir %BUILD_DIR%
 
+:: pre-generate source files because GEN_FILES defaults to OFF on Windows hosts
+pushd %SRC_DIR%
+  set CC=cl
+  set HOSTCC=cl
+  python -m pip install -r scripts\basic.requirements.txt
+  if errorlevel 1 (
+    popd
+    exit /b %errorlevel%
+  )
+  call scripts\make_generated_files.bat
+  if errorlevel 1 (
+    popd
+    exit /b %errorlevel%
+  )
+popd
+
 :: build
 pushd %BUILD_DIR%
   cmake -DCMAKE_BUILD_TYPE=Release -DMBEDTLS_TARGET_PREFIX="%PREFIX%" -DUSE_SHARED_MBEDTLS_LIBRARY=On -G "Visual Studio 17 2022" -A %ARCH% ..\..\
-  cmake --build . --config Release --target "%PREFIX%mbedcrypto_static"
-  cmake --build . --config Release --target "%PREFIX%mbedx509_static"
-  cmake --build . --config Release --target "%PREFIX%mbedtls_static"
-  cmake --build . --config Release --target "%PREFIX%mbedcrypto"
-  cmake --build . --config Release --target "%PREFIX%mbedx509"
-  cmake --build . --config Release --target "%PREFIX%mbedtls"
   cmake --build . --config Release
 popd

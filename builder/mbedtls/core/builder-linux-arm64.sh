@@ -5,7 +5,7 @@ apt update
 apt install -yq --no-install-suggests --no-install-recommends make gcc libc-dev cmake file
 apt install -yq --no-install-suggests --no-install-recommends python3 perl python3-pip
 apt install -yq --no-install-suggests --no-install-recommends gcc-aarch64-linux-gnu g++-aarch64-linux-gnu
-pip3 install jinja2
+pip3 install -r /src/scripts/basic.requirements.txt
 
 SRC_DIR="/src"
 BUILD_DIR=$SRC_DIR/cmake/build.dir
@@ -21,12 +21,6 @@ EOF
 
 cd $BUILD_DIR
   cmake -DCMAKE_BUILD_TYPE=Release -DMBEDTLS_TARGET_PREFIX="$PREFIX" -DUSE_SHARED_MBEDTLS_LIBRARY=On -DCMAKE_TOOLCHAIN_FILE="$CMAKE_TOOLCHAIN" ../../
-  cmake --build . --config Release --target "${PREFIX}mbedcrypto_static"
-  cmake --build . --config Release --target "${PREFIX}mbedx509_static"
-  cmake --build . --config Release --target "${PREFIX}mbedtls_static"
-  cmake --build . --config Release --target "${PREFIX}mbedcrypto"
-  cmake --build . --config Release --target "${PREFIX}mbedx509"
-  cmake --build . --config Release --target "${PREFIX}mbedtls"
   cmake --build . --config Release
 
 # generate file test
