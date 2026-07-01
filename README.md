@@ -1,6 +1,4 @@
-[![Build mbedtls](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/build-fibo.yaml/badge.svg)](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/build-fibo.yaml)
 [![Build lz4](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/build-lz4.yaml/badge.svg)](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/build-lz4.yaml)
-[![Build mbedtls](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/build-mbedtls.yaml/badge.svg)](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/build-mbedtls.yaml)
 [![Build zstd](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/build-zstd.yaml/badge.svg)](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/build-zstd.yaml)
 
 # nativebuild-lab
@@ -8,7 +6,6 @@
 This repository indicate build native binaries for following.
 
 - lz4
-- mbedtls
 - zstd
 - (upcoming....)
 
@@ -20,14 +17,9 @@ This repository indicate build native binaries for following.
 - [Getting started](#getting-started)
 - [Summary](#summary)
   - [lz4](#lz4)
-  - [mbedtls](#mbedtls)
   - [zstd](#zstd)
 - [lz4](#lz4-1)
   - [(Notice) Windows Build](#notice-windows-build)
-- [mbedtls](#mbedtls-1)
-  - [(Notice) Windows Build](#notice-windows-build-1)
-  - [(Notice) Windows Patch](#notice-windows-patch)
-  - [(Notice) Wrapper Patch](#notice-wrapper-patch)
 - [zstd](#zstd-1)
   - [(Notice) Windows Build](#notice-windows-build-2)
 - [TIPS](#tips)
@@ -94,35 +86,6 @@ git submodule update --init --recursive
 | Windows | x64          | Windows                   | Windows   | CMake   | [builder\lz4\lz4-windows-x64.bat](https://github.com/guitarrapc/nativebuild-lab/blob/main/builder/lz4/lz4-windows-x64.bat)            |
 | Windows | x86          | Windows                   | Windows   | CMake   | [builder\lz4\lz4-windows-x86.bat](https://github.com/guitarrapc/nativebuild-lab/blob/main/builder/lz4/lz4-windows-x86.bat)            |
 
-## mbedtls
-
-> CI: GitHub Actions [build-mbedtls](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/build-mbedtls.yaml)
-
-| OS      | Architecture | Build Machine             | Build Env | Builder | Build Script                                                                                                                                                          |
-| ------- | ------------ | ------------------------- | --------- | ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Android | armeabi-v7a  | Linux/macOS               | Docker    | CMake   | [`bash ./builder/mbedtls/mbedtls-android-arm.sh`](https://github.com/guitarrapc/nativebuild-lab/blob/main/builder/mbedtls/mbedtls-android-arm.sh)                     |
-| Android | armeabi-v7a  | Windows                   | Docker    | CMake   | [`builder\mbedtls\\mbedtls-android-arm.bat`](https://github.com/guitarrapc/nativebuild-lab/blob/main/builder/mbedtls/mbedtls-android-arm.bat)                         |
-| Android | arm64-v8a    | Linux/macOS               | Docker    | CMake   | [`bash ./builder/mbedtls/mbedtls-android-arm64.sh`](https://github.com/guitarrapc/nativebuild-lab/blob/main/builder/mbedtls/mbedtls-android-arm64.sh)                 |
-| Android | arm64-v8a    | Windows                   | Docker    | CMake   | [`builder\mbedtls\mbedtls-android-arm64.bat`](https://github.com/guitarrapc/nativebuild-lab/blob/main/builder/mbedtls/mbedtls-android-arm64.bat)                      |
-| Android | x86          | Linux/macOS               | Docker    | CMake   | [`bash ./builder/mbedtls/mbedtls-android-x86.sh`](https://github.com/guitarrapc/nativebuild-lab/blob/main/builder/mbedtls/mbedtls-android-x86.sh)                     |
-| Android | x86          | Windows                   | Docker    | CMake   | [`builder\mbedtls\mbedtls-android-x86.bat`](https://github.com/guitarrapc/nativebuild-lab/blob/main/builder/mbedtls/mbedtls-android-x86.bat)                          |
-| Android | x86_64       | Linux/macOS               | Docker    | CMake   | [`bash ./builder/mbedtls/mbedtls-android-x64.sh`](https://github.com/guitarrapc/nativebuild-lab/blob/main/builder/mbedtls/mbedtls-android-x64.sh)                     |
-| Android | x86_64       | Windows                   | Docker    | CMake   | [`builder\mbedtls\mbedtls-android-x64.bat`](https://github.com/guitarrapc/nativebuild-lab/blob/main/builder/mbedtls/mbedtls-android-x64.bat)                          |
-| iOS     | arm64        | macOS(Intel/AppleSilicon) | macOS     | CMake   | [`bash ./builder/mbedtls/mbedtls-ios-arm64.sh`](https://github.com/guitarrapc/nativebuild-lab/blob/main/builder/mbedtls/mbedtls-ios-arm64.sh)                         |
-| Linux   | arm64        | Linux/macOS               | Docker    | CMake   | [`bash ./builder/mbedtls/mbedtls-linux-arm64.sh`](https://github.com/guitarrapc/nativebuild-lab/blob/main/builder/mbedtls/mbedtls-linux-arm64.sh)                     |
-| Linux   | arm64        | Windows                   | Docker    | CMake   | [`builder\mbedtls\mbedtls-linux-arm64.bat`](https://github.com/guitarrapc/nativebuild-lab/blob/main/builder/mbedtls/mbedtls-linux-arm64.bat)                          |
-| Linux   | arm64        | Linux/macOS               | Docker    | make    | [`bash ./builder/mbedtls-linux-arm64-make.sh`](https://github.com/guitarrapc/nativebuild-lab/blob/main/builder/mbedtls/mbedtls-linux-arm64-alpine-make.sh)            |
-| Linux   | arm64        | Windows                   | Docker    | make    | [`builder\mbedtls\mbedtls-linux-arm64-make.bat`](https://github.com/guitarrapc/nativebuild-lab/blob/main/builder/mbedtls/mbedtls-linux-arm64-alpine-make.bat)         |
-| Linux   | x64          | Linux/macOS               | Docker    | CMake   | [`bash ./builder/mbedtls/mbedtls-linux-x64.sh`](https://github.com/guitarrapc/nativebuild-lab/blob/main/builder/mbedtls/mbedtls-linux-x64.sh)                         |
-| Linux   | x64          | Windows                   | Docker    | CMake   | [`builder\mbedtls\mbedtls/mbedtls-linux-x64.bat`](https://github.com/guitarrapc/nativebuild-lab/blob/main/builder/mbedtls/mbedtls-linux-x64.bat)                      |
-| Linux   | x64          | Linux/macOS               | Docker    | make    | [`bash ./builder/mbedtls/mbedtls-linux-x64-alpine-make.sh`](https://github.com/guitarrapc/nativebuild-lab/blob/main/builder/mbedtls/mbedtls-linux-x64-alpine-make.sh) |
-| Linux   | x64          | Windows                   | Docker    | make    | [`builder\mbedtls\mbedtls-linux-x64-alpine-make.bat`](https://github.com/guitarrapc/nativebuild-lab/blob/main/builder/mbedtls/mbedtls-linux-x64-alpine-make.bat)      |
-| macOS   | arm64        | macOS(Intel/AppleSilicon) | macOS     | CMake   | [`bash ./builder/mbedtls/mbedtls-darwin-arm64.sh`](https://github.com/guitarrapc/nativebuild-lab/blob/main/builder/mbedtls/mbedtls-darwin-arm64.sh)                   |
-| macOS   | x64          | macOS(Intel/AppleSilicon) | macOS     | CMake   | [`bash ./builder/mbedtls/mbedtls-darwin-x64.sh`](https://github.com/guitarrapc/nativebuild-lab/blob/main/builder/mbedtls/mbedtls-darwin-x64.sh)                       |
-| Windows | arm64        | Windows                   | Windows   | CMake   | [`builder\mbedtls\mbedtls-windows-arm64.bat`](https://github.com/guitarrapc/nativebuild-lab/blob/main/builder/mbedtls/mbedtls-windows-arm64.bat)                      |
-| Windows | x64          | Windows                   | Windows   | CMake   | [`builder\mbedtls\mbedtls-windows-x64.bat`](https://github.com/guitarrapc/nativebuild-lab/blob/main/builder/mbedtls/mbedtls-windows-x64.bat)                          |
-| Windows | x86          | Windows                   | Windows   | CMake   | [`builder\mbedtls\mbedtls-windows-x86.bat`](https://github.com/guitarrapc/nativebuild-lab/blob/main/builder/mbedtls/mbedtls-windows-x86.bat)                          |
-
 ## zstd
 
 > CI: GitHub Actions [build-zstd](https://github.com/guitarrapc/nativebuild-lab/actions/workflows/build-zstd.yaml)
@@ -167,60 +130,6 @@ Building [lz4](https://github.com/lz4/lz4) for following environment.
 ## (Notice) Windows Build
 
 Windows binaries are named `lz4*`. Please install Visual Studio 2022 `C++ Desktop Experience` package and `MSVC v143 - VS 2022 C++ ARM64 build tools` for cmake.
-
-# mbedtls
-
-Building [mbedtls](https://github.com/Mbed-TLS/mbedtls#make) for following environment.
-
-<hr/>
-
-## (Notice) Windows Build
-
-Windows binaries are named `tfpsacrypto`, `mbedtls`, and `mbedx509`. Please install Visual Studio 2022 `C++ Desktop Experience` package and `MSVC v143 - VS 2022 C++ ARM64 build tools` for cmake.
-
-## (Notice) Windows Patch
-
-We need patch to build Shared Lib with export symbol on Windows.
-Please apply following patch before build. (Run patch on git shell)
-
-> **Note**: This patch contains `__declspec` to access from other Programing language through Windows Shared Lib, dll.
-
-```bash
-cd mbedtls
-git apply ../builder/mbedtls/patch/windows.patch
-```
-
-TIPS. To create patch, spply changes to submodule then run following command.
-
-```bash
-cd mbedtls
-git add -N .
-git diff > ../builder/mbedtls/patch/windows.patch
-```
-
-<hr/>
-
-## (Notice) Wrapper Patch
-
-We need patch to add wrapper class.
-Please apply following patch before build. (Run patch on git shell)
-
-> **Note**: This patch contains `mbedtls_wrapper.c` to access from other Programing language through Shared Lib.
-
-```bash
-cd mbedtls
-git apply ../builder/mbedtls/patch/wrapper.patch
-```
-
-TIPS. To create patch, spply changes to submodule then run following command.
-
-```bash
-cd mbedtls
-git add -N .
-git diff > ../builder/mbedtls/patch/wrapper.patch
-```
-
-<hr/>
 
 # zstd
 
